@@ -86,11 +86,20 @@ import Layout from "../layouts/Layout.astro";
       row.precio_promocional != null && row.precio_promocional < (row.precio_usd ?? Infinity)
         ? `<span class="promo">${formatPrice(row.precio_promocional)}</span>`
         : "";
+    // OJO: precio_techo_usd es por unidad (ver Boveda Farmacia/Conceptos/
+    // Precio techo.md) y precio_usd es por presentación completa (caja) —
+    // NO son comparables directamente todavía (falta extraer unidades por
+    // presentación). No se muestra ningún aviso de sobreprecio aquí hasta
+    // resolver esa normalización, para no acusar de sobreprecio a una
+    // farmacia que en realidad cumple.
+    const nombreHtml = row.drug_slug
+      ? `<a href="/medicamento/${row.drug_slug}">${escapeHtml(row.nombre_en_tienda ?? "(sin nombre)")}</a>`
+      : escapeHtml(row.nombre_en_tienda ?? "(sin nombre)");
     return `
       <article class="card ${isCheapest ? "cheapest" : ""}">
         ${isCheapest ? '<span class="badge">Precio más bajo de esta búsqueda</span>' : ""}
         <div class="card-main">
-          <h3>${escapeHtml(row.nombre_en_tienda ?? "(sin nombre)")}</h3>
+          <h3>${nombreHtml}</h3>
           <p class="pharmacy">${escapeHtml(pharmacyLabel)}</p>
         </div>
         <div class="card-side">

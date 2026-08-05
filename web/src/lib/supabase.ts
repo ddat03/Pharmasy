@@ -11,29 +11,77 @@ export type LatestPriceRow = {
   nombre_en_tienda: string;
   url: string | null;
   drug_id: string | null;
+  drug_slug: string | null;
+  precio_techo_usd: number | null;
   precio_usd: number | null;
   precio_promocional: number | null;
   en_stock: boolean | null;
   fecha: string;
 };
 
-export async function searchProducts(term: string, limit = 30): Promise<LatestPriceRow[]> {
-  const params = new URLSearchParams({
-    select: "pharmacy_product_id,pharmacy,nombre_en_tienda,url,drug_id,precio_usd,precio_promocional,en_stock,fecha",
-    nombre_en_tienda: `ilike.*${term}*`,
-    order: "precio_usd.asc",
-    limit: String(limit),
-  });
-  const resp = await fetch(`${SUPABASE_URL}/rest/v1/latest_prices?${params.toString()}`, {
+async function supabaseGet<T>(table: string, params: Record<string, string>): Promise<T> {
+  const qs = new URLSearchParams(params);
+  const resp = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${qs.toString()}`, {
     headers: {
       apikey: SUPABASE_ANON_KEY,
       Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
     },
   });
   if (!resp.ok) {
-    throw new Error(`Supabase respondió ${resp.status}`);
+    throw new Error(`Supabase respondió ${resp.status} consultando ${table}`);
   }
   return resp.json();
+}
+
+const LATEST_PRICE_COLUMNS =
+  "pharmacy_product_id,pharmacy,nombre_en_tienda,url,drug_id,drug_slug,precio_techo_usd,precio_usd,precio_promocional,en_stock,fecha";
+
+export async function searchProducts(term: string, limit = 30): Promise<LatestPriceRow[]> {
+  return supabaseGet<LatestPriceRow[]>("latest_prices", {
+    select: LATEST_PRICE_COLUMNS,
+    nombre_en_tienda: `ilike.*${term}*`,
+    order: "precio_usd.asc",
+    limit: String(limit),
+  });
+}
+
+export type Drug = {
+  id: string;
+  slug: string;
+  principio_activo: string;
+  concentracion: string | null;
+  forma_farmaceutica: string | null;
+  presentacion: string | null;
+  nombre_comercial: string | null;
+  laboratorio: string | null;
+  es_generico: boolean;
+  precio_techo_usd: number | null;
+};
+
+export async function getAllDrugs(): Promise<Drug[]> {
+  return supabaseGet<Drug[]>("drugs", {
+    select:
+      "id,slug,principio_activo,concentracion,forma_farmaceutica,presentacion,nombre_comercial,laboratorio,es_generico,precio_techo_usd",
+    order: "principio_activo.asc",
+    limit: "2000",
+  });
+}
+
+export async function getPricesForDrug(drugId: string): Promise<LatestPriceRow[]> {
+  return supabaseGet<LatestPriceRow[]>("latest_prices", {
+    select: LATEST_PRICE_COLUMNS,
+    drug_id: `eq.${drugId}`,
+    order: "precio_usd.asc",
+  });
+}
+
+export function slugifyPrincipio(text: string): string {
+  return text
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export const PHARMACY_LABELS: Record<string, string> = {

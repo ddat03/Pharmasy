@@ -2,5 +2,6 @@ httpx
 requests
 python-dotenv
 openai
+openpyxl
 python-telegram-bot
 playwright

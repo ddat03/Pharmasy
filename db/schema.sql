@@ -158,11 +158,14 @@ select
   pp.nombre_en_tienda,
   pp.url,
   pp.drug_id,
+  d.slug as drug_slug,
+  d.precio_techo_usd,
   ps.precio_usd,
   ps.precio_promocional,
   ps.en_stock,
   ps.fecha
 from pharmacy_products pp
+left join drugs d on d.id = pp.drug_id
 join lateral (
   select *
   from price_snapshots ps2

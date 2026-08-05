@@ -120,6 +120,18 @@ def supabase_select(table, params, timeout=30):
     return resp.json()
 
 
+def supabase_patch(table, params, patch, timeout=30):
+    """UPDATE parcial vía PostgREST, filtrado por `params` (ej.
+    {"slug": "eq.<slug>"}). A diferencia de supabase_upsert, no requiere
+    incluir columnas NOT NULL que no cambian (Postgres sí las exige en un
+    INSERT ... ON CONFLICT DO UPDATE aunque termine resolviendo por UPDATE)."""
+    base_url = os.environ["SUPABASE_URL"]
+    url = f"{base_url}/rest/v1/{table}"
+    resp = requests.patch(url, headers=_supabase_headers(), params=params, json=patch, timeout=timeout)
+    resp.raise_for_status()
+    return resp.json() if resp.text else []
+
+
 def supabase_delete(table, params, timeout=30):
     """DELETE vía PostgREST filtrado por `params`, ej. {"id": "eq.<uuid>"}."""
     base_url = os.environ["SUPABASE_URL"]
