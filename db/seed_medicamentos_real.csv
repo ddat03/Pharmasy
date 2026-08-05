@@ -1,0 +1,902 @@
+principio_activo_buscado,categoria,producto_nombre_real,marca,farmacias_disponible,n_farmacias,precio_min,precio_max,url_ejemplo
+Acido acetilsalicilico,analgesico_antiinflamatorio,Analgésico y antiinflamatorio acido acetilsalicilico 100mg tableta x 100,Acido Acetilsalicilico,cruzazul|pharmacys,2,16.0,16.0,https://www.pharmacys.com.ec/analgesico-y-antiinflamatorio-acido-acetilsalicilico-100mg-tableta-x-100/p
+Acido acetilsalicilico,analgesico_antiinflamatorio,Aspirina 100 mg Caja con 100 Tabletas,ASPIRINA,medicity,1,0.17,0.17,https://www.farmaciasmedicity.com/aspirina-100-mg-caja-con-100-tabletas/p
+Acido acetilsalicilico,analgesico_antiinflamatorio,Cardio-Aspirina Tabletas Recubiertas 100 mg Caja Con 30 Unidades,CARDIO-ASPIRINA,medicity,1,0.23,0.23,https://www.farmaciasmedicity.com/cardio-aspirina-tabletas-recubiertas-100-mg-caja-con-30-unidades/p
+Acido acetilsalicilico,analgesico_antiinflamatorio,Cardionil 81mg alianza quimica ariston comprimido recubierto,Cardionil,cruzazul|pharmacys,2,8.28,8.28,https://www.pharmacys.com.ec/cardionil-81mg-alianza-quimica-ariston-comprimido-recubierto/p
+Acido acetilsalicilico,analgesico_antiinflamatorio,Eclamp Tableta Recubierta 150 mg Caja 30 Unidades,ECLAMP,medicity,1,0.37,0.37,https://www.farmaciasmedicity.com/eclamp-tableta-recubierta-150-mg-caja-30-unidades-1/p
+Celecoxib,analgesico_antiinflamatorio,Celebrex Cápsulas 200 mg Caja 30 Unidades,CELEBREX,medicity,1,1.63,1.63,https://www.farmaciasmedicity.com/celebrex-capsulas-200-mg-caja-con-30-unidades/p
+Celecoxib,analgesico_antiinflamatorio,Celebrex Cápsulas 200 mg Caja Con 10 Unidades,CELEBREX,medicity,1,1.63,1.63,https://www.farmaciasmedicity.com/celebrex-capsulas-200-mg-caja-con-10-unidades/p
+Celecoxib,analgesico_antiinflamatorio,Celecoxib 200mg dyvenpro ecuagen cápsulas,Celecoxib,cruzazul|pharmacys,2,9.0,9.0,https://www.pharmacys.com.ec/celecoxib-200mg-dyvenpro-ecuagen-capsulas/p
+Celecoxib,analgesico_antiinflamatorio,Celecoxib 200mg garcos - nifa genericos cápsulas,Celecoxib,cruzazul|pharmacys,2,8.4,8.4,https://www.pharmacys.com.ec/celecoxib-200mg-garcos-nifa-genericos-capsulas/p
+Celecoxib,analgesico_antiinflamatorio,Celecoxib 200mg portugal - generico cápsulas,Celecoxib,cruzazul|pharmacys,2,50.0,50.0,https://www.pharmacys.com.ec/celecoxib-200mg-portugal-generico-capsulas/p
+Celecoxib,analgesico_antiinflamatorio,Celecoxib 200mg tecnoquimicas - genericos cápsulas,Celecoxib,cruzazul|pharmacys,2,7.4,7.4,https://www.pharmacys.com.ec/bloqueador-hawaiian-tropic-sheer-touch-en-crema-fps-50-120-ml/p
+Celecoxib,analgesico_antiinflamatorio,Celecoxib Nifa Cápsulas 200 mg Caja Con 10 Unidades,NIFA,medicity,1,0.77,0.77,https://www.farmaciasmedicity.com/celecoxib-nifa-capsulas-200-mg-caja-con-10-unidades/p
+Celecoxib,analgesico_antiinflamatorio,Colcibra 200mg dyvenpro farma comercial 2 cápsulas,Colcibra,cruzazul|pharmacys,2,15.0,15.0,https://www.pharmacys.com.ec/colcibra-200mg-dyvenpro-farma-comercial-2-capsulas/p
+Celecoxib,analgesico_antiinflamatorio,Gesix 200mg ecuaquimica - saval cápsulas,Gesix,cruzazul|pharmacys,2,11.5,11.5,https://www.pharmacys.com.ec/gesix-200mg-ecuaquimica-saval-capsulas/p
+Dexketoprofeno,analgesico_antiinflamatorio,Merlix 25mg leterago - unipharm tableta,Merlix,cruzazul|pharmacys,2,7.04,8.8,https://www.pharmacys.com.ec/merlix-25mg-leterago-unipharm-tableta/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco Genfar Emulgel 1 Tubo con 50 g,GENFAR,medicity,1,5.52,5.52,https://www.farmaciasmedicity.com/diclofenaco-genfar-emulgel-1-tubo-con-50-g/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco Genfar Tabletas Recubierto 50 mg 30 Unidades,GENFAR,medicity,1,0.13,0.13,https://www.farmaciasmedicity.com/diclofenaco-genfar-tabletas-recubierto-50-mg-30-unidades-1/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco Retard Mk Cápsula 100 mg Caja 20 Unidades,DICLOFENACO RETARD,medicity,1,0.44,0.44,https://www.farmaciasmedicity.com/diclofenaco-retard-mk-capsula-100-mg-caja-20-unidades-1/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco emu-gelx1%x50mg genf,Diclofenaco Sodico,cruzazul|pharmacys,2,4.8,6.0,https://www.pharmacys.com.ec/diclofenaco-emu-gelx1-x50mg-genf/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco gelx1%x20gr ngen,Diclofenaco Sodico,cruzazul|pharmacys,2,2.0,2.0,https://www.pharmacys.com.ec/diclofenaco-sodico-1-portugal-generico-gel-106484/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco gelx1%x50gr mk,Diclofenaco Sodico,cruzazul|pharmacys,2,6.65,8.31,https://www.pharmacys.com.ec/diclofenaco-gelx1-x50gr-mk/p
+Diclofenaco,analgesico_antiinflamatorio,Diclofenaco gelx1%x50gr ngen,Diclofenaco Sodico,cruzazul|pharmacys,2,3.5,3.5,https://www.pharmacys.com.ec/diclofenaco-sodico-1-portugal-generico-gel/p
+Diclofenaco,analgesico_antiinflamatorio,Dolo-Neurobión Forte con Diclofenaco Tabletas 30 Unidades,DOLO-NEUROBION,medicity,1,0.7,0.7,https://www.farmaciasmedicity.com/dolo-neurobion-forte-tabletas-con-30-unidades/p
+Diclofenaco,analgesico_antiinflamatorio,Genfar Diclofenaco Solución Inyectable 75mg/3ml Caja 10 Unidades,GENFAR,medicity,1,0.55,0.55,https://www.farmaciasmedicity.com/genfar-diclofenaco-solucion-inyectable-75mg-3ml-caja-10-unidades-1/p
+Diclofenaco,analgesico_antiinflamatorio,Genfar Diclofenaco Tabletas De Liberación Prolongada 100 mg Caja 20 Unidades,GENFAR,medicity,1,0.28,0.28,https://www.farmaciasmedicity.com/genfar-diclofenaco-tabletas-de-liberacion-prolongada-100-mg-caja-20-unidades-1/p
+Diclofenaco,analgesico_antiinflamatorio,Voltaren Emulgel Gel Forte Tubo 100g,VOLTAREN,medicity,1,23.92,23.92,https://www.farmaciasmedicity.com/voltaren-emulgel-gel-forte-tubo-100g/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco Santé Cápsulas 100 mg Liberación Prolongada Con 20 Unidades,LA SANTE,medicity,1,0.24,0.24,https://www.farmaciasmedicity.com/diclofenaco-sante-capsulas-100-mg-liberacion-prolongada-con-20-unidades/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 1% kronos genericos gel,Diclofenaco Sodico,cruzazul|pharmacys,2,3.0,3.0,https://www.pharmacys.com.ec/diclofenaco-sodico-1-kronos-genericos-gel/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 100mg dyvenpro ecuagen cápsulas,Diclofenaco Sodico,cruzazul|pharmacys,2,5.2,5.2,https://www.pharmacys.com.ec/diclofenaco-sodico-100mg-dyvenpro-ecuagen-capsulas/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 100mg ecuaquimica - mintlab cápsulas,Diclofenaco Sodico,cruzazul|pharmacys,2,1.63,1.63,https://www.pharmacys.com.ec/diclofenaco-sodico-100mg-ecuaquimica-mintlab-capsulas/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 100mg tecnoquimicas - genericos cápsulas,Diclofenaco Sodico,cruzazul|pharmacys,2,9.6,9.6,https://www.pharmacys.com.ec/diclofenaco-sodico-100mg-tecnoquimicas-genericos-capsulas/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 50mg dyvenpro ecuagen tableta recubierta,Diclofenaco Sodico,cruzazul|pharmacys,2,2.75,2.75,https://www.pharmacys.com.ec/diclofenaco-sodico-50mg-dyvenpro-ecuagen-tableta-recubierta/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 50mg labovida tabletas recubiertas,Diclofenaco Sodico,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/diclofenaco-sodico-50mg-labovida-tabletas-recubiertas/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 75mg dyvenpro ecuagen solución inyectable,Diclofenaco Sodico,cruzazul|pharmacys,2,3.3,3.3,https://www.pharmacys.com.ec/diclofenaco-sodico-75mg-dyvenpro-ecuagen-solucion-inyectable/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 75mg genamerica generico ampollas inyectables,Diclofenaco Sodico,cruzazul|pharmacys,2,5.32,5.32,https://www.pharmacys.com.ec/diclofenaco-sodico-75mg-genamerica-generico-ampollas-inyectables/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 75mg kronos genericos ampolla inyectable,Diclofenaco Sodico,cruzazul|pharmacys,2,5.8,5.8,https://www.pharmacys.com.ec/diclofenaco-sodico-75mg-kronos-genericos-ampolla-inyectable/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Diclofenaco sodico 75mg labvitalis ampolla inyectable,Diclofenaco Sodico,cruzazul|pharmacys,2,22.0,22.0,https://www.pharmacys.com.ec/diclofenaco-sodico-75mg-labvitalis-ampolla-inyectable-107587/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Dolo-Medox Solución Inyectable (Sol I+ Sol Ii) Caja Con 1 Unidad,DOLO-MEDOX,medicity,1,4.14,4.14,https://www.farmaciasmedicity.com/dolo-medox-solucion-inyectable-sol-i-sol-ii-caja-con-1-unidad/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Dolo-Neurobión DC Diclofenaco Sódico Jeringa 3 Unidades,DOLO-NEUROBION,medicity,1,6.41,6.41,https://www.farmaciasmedicity.com/dolo-neurobion-dc-solucion-inyectable-prellena-3-ml-con-3-unidades/p
+Diclofenaco sodico,analgesico_antiinflamatorio,Voltaren Sr Tabletas Recubiertas 75 mg Caja Con 10 Unidades,VOLTAREN,medicity,1,0.65,0.65,https://www.farmaciasmedicity.com/voltaren-sr-tabletas-recubiertas-75-mg-caja-con-10-unidades/p
+Diclofenaco/Vitaminas B1-B6-B12,analgesico_antiinflamatorio,Dolo-neurobion 1/100mg alianza procter &amp; gamble tabletas recubiertas retard,Dolo-neurobion,cruzazul|pharmacys,2,27.08,27.08,https://www.pharmacys.com.ec/dolo-neurobion-1-100mg-alianza-procter-gamble-tabletas-recubiertas-retard/p
+Diclofenaco/Vitaminas B1-B6-B12,analgesico_antiinflamatorio,Dolo-neurobion 50/1mg alianza procter &amp; gamble tableta forte,Dolo-neurobion,cruzazul|pharmacys,2,25.08,25.08,https://www.pharmacys.com.ec/dolo-neurobion-50-1mg-alianza-procter-gamble-tableta-forte/p
+Etoricoxib,analgesico_antiinflamatorio,Arcoxia Comprimido Recubierto 90 mg Caja 28 Unidades,ARCOXIA,medicity,1,1.45,1.45,https://www.farmaciasmedicity.com/arcoxia-comprimido-recubierto-caja-con-28-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Arcoxia Comprimidos Recubiertos Caja Con 28 Unidades,ARCOXIA,medicity,1,1.57,1.57,https://www.farmaciasmedicity.com/arcoxia-comprimidos-recubiertos-caja-con-28-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Davintex Comprimidos 10 Unidades,DAVINTEX,medicity,1,1.56,1.56,https://www.farmaciasmedicity.com/davintex-comprimidos-recubiertos-caja-con-10-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Davintex Comprimidos 120 mg 10 Unidades,DAVINTEX,medicity,1,2.48,2.48,https://www.farmaciasmedicity.com/davintex-comprimidos-recubiertos-120-mg-caja-con-10-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Doltrex 60mg dyvenpro farma comercial 1 comprimidos,Doltrex,cruzazul|pharmacys,2,16.6,16.6,https://www.pharmacys.com.ec/doltrex-60mg-dyvenpro-farma-comercial-1-comprimidos/p
+Etoricoxib,analgesico_antiinflamatorio,Doltrex 90mg dyvenpro farma comercial 1 comprimidos,Doltrex,cruzazul|pharmacys,2,17.76,17.76,https://www.pharmacys.com.ec/doltrex-90mg-dyvenpro-farma-comercial-1-comprimidos/p
+Etoricoxib,analgesico_antiinflamatorio,Dolux Comprimidos Recubiertos Caja Con 10 Unidades,DOLUX,medicity,1,2.48,2.48,https://www.farmaciasmedicity.com/dolux-comprimidos-recubiertos-caja-con-10-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Etoricox 120mg eurofarma marcas tableta,Etoricox,cruzazul|pharmacys,2,38.08,38.08,https://www.pharmacys.com.ec/etoricox-120mg-eurofarma-marcas-tableta/p
+Etoricoxib,analgesico_antiinflamatorio,Etoricox 90mg eurofarma marcas tableta,Etoricox,cruzazul|pharmacys,2,25.34,25.34,https://www.pharmacys.com.ec/etoricox-90mg-eurofarma-marcas-tableta/p
+Etoricoxib,analgesico_antiinflamatorio,Etoricoxib 120mg tecnoquimicas - genericos tabletas cubiertas,Etoricoxib,cruzazul|pharmacys,2,11.4,11.4,https://www.pharmacys.com.ec/etoricoxib-120mg-tecnoquimicas-genericos-tabletas-cubiertas/p
+Etoricoxib,analgesico_antiinflamatorio,Etoricoxib 60mg tecnoquimicas - genericos tabletas cubiertas,Etoricoxib,cruzazul|pharmacys,2,14.4,14.4,https://www.pharmacys.com.ec/etoricoxib-60mg-tecnoquimicas-genericos-tabletas-cubiertas/p
+Etoricoxib,analgesico_antiinflamatorio,Etoricoxib 90mg tecnoquimicas - genericos tabletas cubiertas,Etoricoxib,cruzazul|pharmacys,2,15.2,15.2,https://www.pharmacys.com.ec/etoricoxib-90mg-tecnoquimicas-genericos-tabletas-cubiertas/p
+Etoricoxib,analgesico_antiinflamatorio,Etoricoxib Mk Tabletas Recubiertas 120 mg Caja Con 7 Unidades,MK,medicity,1,1.5,1.5,https://www.farmaciasmedicity.com/etoricoxib-mk-tabletas-recubiertas-120-mg-caja-con-7-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Flogocox Comprimidos Recubiertos 120 mg Caja 7 Unidades,FLOGOCOX,medicity,1,2.18,2.18,https://www.farmaciasmedicity.com/flogocox-comprimidos-recubiertos-120-mg-caja-con-7-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Flogocox Comprimidos Recubiertos Caja 14 Unidades,FLOGOCOX,medicity,1,1.37,1.37,https://www.farmaciasmedicity.com/flogocox-comprimidos-recubiertos-caja-con-14-unidades/p
+Etoricoxib,analgesico_antiinflamatorio,Xumer 120mg quifatex dist medicamenta comprimidos recubiertos,Xumer,cruzazul|pharmacys,2,19.04,19.04,https://www.pharmacys.com.ec/xumer-120mg-quifatex-dist-medicamenta-comprimidos-recubiertos/p
+Etoricoxib,analgesico_antiinflamatorio,Xumer 60mg quifatex dist medicamenta comprimidos recubiertos,Xumer,cruzazul|pharmacys,2,23.94,23.94,https://www.pharmacys.com.ec/xumer-60mg-quifatex-dist-medicamenta-comprimidos-recubiertos/p
+Etoricoxib,analgesico_antiinflamatorio,Xumer 90mg quifatex dist medicamenta comprimidos recubiertos,Xumer,cruzazul|pharmacys,2,25.34,25.34,https://www.pharmacys.com.ec/xumer-90mg-quifatex-dist-medicamenta-comprimidos-recubiertos/p
+Etoricoxib,analgesico_antiinflamatorio,Xumer Comprimidos Recubiertos 120 mg Caja 7 Unidades,XUMER,medicity,1,2.07,2.07,https://www.farmaciasmedicity.com/xumer-comprimidos-recubiertos-120-mg-caja-con-7-unidades/p
+Ibuprofeno,analgesico_antiinflamatorio,Buprex Flex Comprimido Recubierto 4/600mg Caja 10 Unidades,BUPREX,medicity,1,1.55,1.55,https://www.farmaciasmedicity.com/buprex-flex-comprimido-recubierto-4-600mg-caja-con-10-unidades-1/p
+Ibuprofeno,analgesico_antiinflamatorio,Dolorgesic Relax Cápsulas Blandas 600mg+4mg Caja 15 Unidades,DOLORGESIC,medicity,1,1.53,1.53,https://www.farmaciasmedicity.com/dolorgesic-relax-capsulas-blandas-600mg-4mg-caja-15-unidades-1/p
+Ibuprofeno,analgesico_antiinflamatorio,Femen Cápsulas Blandas 200 mg Caja 10 Unidades,FEMEN,medicity,1,0.35,0.35,https://www.farmaciasmedicity.com/femen-capsulas-blandas-200-mg-caja-con-10-unidades/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibufen 4% Suspensión 200mg/5ml Frasco Con 200 ml,IBUFEN,medicity,1,9.05,9.05,https://www.farmaciasmedicity.com/ibufen-4-suspension-200mg-5ml-frasco-con-200-ml/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 200mg genamerica generico comprimidos,Ibuprofeno,cruzazul|pharmacys,2,2.08,2.6,https://www.pharmacys.com.ec/ibuprofeno-200mg-genamerica-generico-comprimidos/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 200mg raserpharm,Ibuprofeno,cruzazul|pharmacys,2,12.0,12.0,https://www.pharmacys.com.ec/raserdol-cap-blax400mgx30/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 200mg/5ml labovida suspensión,Ibuprofeno,cruzazul|pharmacys,2,3.06,3.06,https://www.pharmacys.com.ec/ibuprofeno-200mg-5ml-labovida-suspension/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 400mg fresenius kabi hospitalario,Ibuprofeno,cruzazul|pharmacys,2,69.0,69.0,https://www.pharmacys.com.ec/ibuprofeno-400mg-fresenius-kabi-hospitalario/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 400mg labovida tableta,Ibuprofeno,cruzazul|pharmacys,2,7.0,7.0,https://www.pharmacys.com.ec/ibuprofeno-400mg-labovida-tableta/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 400mg leterago - genfar,Ibuprofeno,cruzazul|pharmacys,2,7.0,7.0,https://www.pharmacys.com.ec/ibuprofeno-400mg-leterago-genfar/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 4mg fresenius kabi hospitalario,Ibuprofeno,cruzazul|pharmacys,2,5.95,5.95,https://www.pharmacys.com.ec/ibuprofeno-4mg-fresenius-kabi-hospitalario/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 600mg braun medical,Ibuprofeno,cruzazul|pharmacys,2,5.81,7.26,https://www.pharmacys.com.ec/ibuprofeno-600mg-braun-medical/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 600mg genamerica generico comprimidos,Ibuprofeno,cruzazul|pharmacys,2,5.4,5.4,https://www.pharmacys.com.ec/ibuprofeno-600mg-genamerica-generico-comprimidos/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno 600mg la sante cápsulas,Ibuprofeno,cruzazul|pharmacys,2,6.0,6.0,https://www.pharmacys.com.ec/ibuprofeno-600mg-la-sante-capsulas/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno Genfar Tabletas Recubiertas 800 mg Con 50 Unidades,GENFAR,medicity,1,0.12,0.12,https://www.farmaciasmedicity.com/ibuprofeno-genfar-tabletas-recubiertas-800-mg-con-50-unidades/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno Genfar Tabletas Recubiertas Con 100 Unidades,GENFAR,medicity,1,0.05,0.05,https://www.farmaciasmedicity.com/ibuprofeno-genfar-tabletas-recubiertas-con-100-unidades/p
+Ibuprofeno,analgesico_antiinflamatorio,Ibuprofeno Santé Tabletas Recubiertas 600 mg Caja Con 50 Unidades,LA SANTE,medicity,1,0.11,0.11,https://www.farmaciasmedicity.com/ibuprofeno-sante-tabletas-recubiertas-600-mg-caja-con-50-unidades/p
+Ibuprofeno,analgesico_antiinflamatorio,Tenvalin 100mg/5ml Frasco 100 ml,TENVALIN,medicity,1,4.6,4.6,https://www.farmaciasmedicity.com/tenvalin-100mg-5ml-frasco-100-ml/p
+Ibuprofeno,analgesico_antiinflamatorio,Tenvalin Flu Forte Frasco 100 ml,TENVALIN,medicity,1,11.25,11.25,https://www.farmaciasmedicity.com/tenvalin-flu-forte-suspension-frasco-100-ml-1/p
+Ibuprofeno/Paracetamol,analgesico_antiinflamatorio,Dolocheck Forte Cap-bl x500/200mg x24,Dolocheck,cruzazul|pharmacys,2,10.8,14.4,https://www.pharmacys.com.ec/dolocheck-forte-cap-bl-x500-200mg-x24/p
+Ibuprofeno/Paracetamol,analgesico_antiinflamatorio,Paralgen plus tab-rec x 325/200 mg x20,Paralgen,cruzazul|pharmacys,2,4.48,4.48,https://www.pharmacys.com.ec/analgesico-paralgen-200-mg-x-325-mg-tableta-x-20/p
+Ibuprofeno/Paracetamol,analgesico_antiinflamatorio,Rufen 400/325mg globalmax s.a. tableta forte,Rufen,cruzazul|pharmacys,2,4.8,4.8,https://www.pharmacys.com.ec/rufen-400-325mg-globalmax-sa-tableta-forte/p
+Indometacina,analgesico_antiinflamatorio,Elmetacin Solución Tópica 1% Frasco Con 50 mL,ELMETACIN,medicity,1,11.1,11.1,https://www.farmaciasmedicity.com/elmetacin-solucion-topica-1-frasco-con-50-ml/p
+Ketoprofeno,analgesico_antiinflamatorio,Fastum Gel 2.5% Tubo 50 g,FASTUM,medicity,1,11.96,11.96,https://www.farmaciasmedicity.com/fastum-gel-2-5-tubo-50-g/p
+Ketorolaco,analgesico_antiinflamatorio,Altrom Advance Cápsulas 10/25 mg Caja 10 Unidades,ALTROM,medicity,1,0.66,0.66,https://www.farmaciasmedicity.com/altrom-advance-capsulas-1025-mg-caja-con-10-unidades/p
+Ketorolaco,analgesico_antiinflamatorio,Dolgenal Comprimidos Recubiertos Caja 10 Unidades,DOLGENAL,medicity,1,0.46,0.46,https://www.farmaciasmedicity.com/dolgenal-comprimidos-recubiertos-caja-con-10-unidades/p
+Ketorolaco,analgesico_antiinflamatorio,Dolgenal Duo Cápsula Rígida 10/25mg Caja 10 Unidades,DOLGENAL,medicity,1,0.8,0.8,https://www.farmaciasmedicity.com/dolgenal-duo-capasula-rigida-1025-mg-caja-con-10-unidades/p
+Ketorolaco,analgesico_antiinflamatorio,Dolgenal Rapid Comprimidos Sublinguales 10 mg Caja Con 10 Unidades,DOLGENAL,medicity,1,0.46,0.46,https://www.farmaciasmedicity.com/dolgenal-rapid-comprimidos-sublinguales-10-mg-caja-con-10-unidades/p
+Ketorolaco,analgesico_antiinflamatorio,Dolgenal duo 10/25mg quifatex dist medicamenta cápsulas rigidas de liberación controlada,Dolgenal Duo,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/dolgenal-duo-10-25mg-quifatex-dist-medicamenta-capsulas-rigidas-de-liberacion-controlada/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco 10mg dyvenpro ecuagen tabletas recubiertas,Ketorolaco,cruzazul|pharmacys,2,2.0,2.0,https://www.pharmacys.com.ec/ketorolaco-10mg-dyvenpro-ecuagen-tabletas-recubiertas/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco 10mg garcos - nifa genericos tableta,Ketorolaco,cruzazul|pharmacys,2,2.0,2.0,https://www.pharmacys.com.ec/ketorolaco-10mg-garcos-nifa-genericos-tableta/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco 20mg garcos - nifa genericos tableta,Ketorolaco,cruzazul|pharmacys,2,6.4,8.0,https://www.pharmacys.com.ec/ketorolaco-20mg-garcos-nifa-genericos-tableta/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco 30mg la sante tableta,Ketorolaco,cruzazul|pharmacys,2,7.04,7.04,https://www.pharmacys.com.ec/ketorolaco-30mg-la-sante-tableta/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco 30mg leterago - genfar solución inyectable,Ketorolaco,cruzazul|pharmacys,2,3.68,3.68,https://www.pharmacys.com.ec/ketorolaco-30mg-leterago-genfar-solucion-inyectable/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco 60mg jaspharm generico solución inyectable,Ketorolaco,cruzazul|pharmacys,2,6.36,6.36,https://www.pharmacys.com.ec/ketorolaco-60mg-jaspharm-generico-solucion-inyectable/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco La Santé Tabletas Sublingual 30 mg Con 4 Unidades,LA SANTE,medicity,1,1.62,1.62,https://www.farmaciasmedicity.com/ketorolaco-la-sante-tabletas-sublingual-30-mg-con-4-unidades/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco Nifa Tabletas 10mg Caja 10 Unidades,NIFA,medicity,1,0.16,0.16,https://www.farmaciasmedicity.com/ketorolaco-nifa-tabletas-10mg-caja-10-unidades-1/p
+Ketorolaco,analgesico_antiinflamatorio,Ketorolaco Nifa Tabletas 20mg Caja 10 Unidades,NIFA,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/ketorolaco-nifa-tabletas-20mg-caja-10-unidades-1/p
+Ketorolaco,analgesico_antiinflamatorio,Nomadol Rapid Comprimidos Sublinguales 20 mg Caja Con 10 Unidades,NOMADOL,medicity,1,0.92,0.92,https://www.farmaciasmedicity.com/nomadol-rapid-comprimidos-sublinguales-20-mg-caja-con-10-unidades/p
+Ketorolaco,analgesico_antiinflamatorio,Nomadol Rapid Comprimidos Sublinguales 30mg Caja 10 Unidades,NOMADOL,medicity,1,2.43,2.43,https://www.farmaciasmedicity.com/nomadol-rapid-comprimidos-sublinguales-30mg-caja-10-unidades-1/p
+Ketorolaco,analgesico_antiinflamatorio,Proalgan 20mg dyvenpro farma eticos 2 dolor,Proalgan,cruzazul|pharmacys,2,9.49,9.49,https://www.pharmacys.com.ec/proalgan-20mg-dyvenpro-farma-eticos-2-tabletas-recubiertas/p
+Ketorolaco,analgesico_antiinflamatorio,Proalgan 60mg dyvenpro farma eticos 2 solución inyectable,Proalgan,cruzazul|pharmacys,2,13.8,13.8,https://www.pharmacys.com.ec/proalgan-60mg-dyvenpro-farma-eticos-2-solucion-inyectable/p
+Ketorolaco,analgesico_antiinflamatorio,Proalgan sol-inyx30mg/1mlx3,Proalgan,cruzazul|pharmacys,2,6.9,6.9,https://www.pharmacys.com.ec/proalgan-30mg-dyvenpro-farma-eticos-2-solucion-inyectable/p
+Meloxicam,analgesico_antiinflamatorio,Bienex Cápsula Líquida 15 mg Caja 20 Unidades,BIENEX,medicity,1,0.71,0.71,https://www.farmaciasmedicity.com/bienex-capsula-liquida-15-mg-caja-con-20-unidades/p
+Meloxicam,analgesico_antiinflamatorio,Bienex Ibp Tabletas Recubiertas 20mg/15mg Caja 10 Unidades,BIENEX,medicity,1,1.34,1.34,https://www.farmaciasmedicity.com/bienex-ibp-tabletas-recubiertas-20mg-15mg-caja-10-unidades-1/p
+Meloxicam,analgesico_antiinflamatorio,Dolo-Artrosamin Sobres 1500/15mg Caja 15 Unidades,DOLO-ARTROSAMIN,medicity,1,1.76,1.76,https://www.farmaciasmedicity.com/dolo-artrosamin-sobres-150015mg-caja-con-15-unidades/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg dyvenpro ecuagen tableta,Meloxicam,cruzazul|pharmacys,2,7.0,7.0,https://www.pharmacys.com.ec/meloxicam-15mg-dyvenpro-ecuagen-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg garcos - nifa genericos tableta,Meloxicam,cruzazul|pharmacys,2,6.0,6.0,https://www.pharmacys.com.ec/meloxicam-15mg-garcos-nifa-genericos-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg genamerica generico comprimidos,Meloxicam,cruzazul|pharmacys,2,5.2,5.2,https://www.pharmacys.com.ec/meloxicam-15mg-genamerica-generico-comprimidos/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg la sante tableta,Meloxicam,cruzazul|pharmacys,2,5.67,5.67,https://www.pharmacys.com.ec/meloxicam-15mg-la-sante-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg labovida tableta,Meloxicam,cruzazul|pharmacys,2,6.2,7.75,https://www.pharmacys.com.ec/meloxicam-15mg-labovida-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg leterago - genfar comprimidos,Meloxicam,cruzazul|pharmacys,2,4.54,4.54,https://www.pharmacys.com.ec/meloxicam-15mg-leterago-genfar-comprimidos/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg portugal - generico tabletas,Meloxicam,cruzazul|pharmacys,2,40.0,40.0,https://www.pharmacys.com.ec/meloxicam-15mg-portugal-generico-tabletas/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 15mg tecnoquimicas - genericos tableta,Meloxicam,cruzazul|pharmacys,2,4.04,4.04,https://www.pharmacys.com.ec/meloxicam-15mg-tecnoquimicas-genericos-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 7.5mg la sante tableta,Meloxicam,cruzazul|pharmacys,2,3.0,3.0,https://www.pharmacys.com.ec/meloxicam-75mg-la-sante-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Meloxicam 7.5mg tecnoquimicas - genericos tableta,Meloxicam,cruzazul|pharmacys,2,3.31,3.31,https://www.pharmacys.com.ec/meloxicam-75mg-tecnoquimicas-genericos-tableta/p
+Meloxicam,analgesico_antiinflamatorio,Miolox Granulado 15mg Sobre 2 g Caja 30 Unidades,MIOLOX,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/miolox-granulado-15mg-sobre-2-g-caja-30-unidades-1/p
+Meloxicam,analgesico_antiinflamatorio,Mobic Comprimidos Caja Con 10 Unidades,MOBIC,medicity,1,0.7,0.7,https://www.farmaciasmedicity.com/mobic-comprimidos-caja-con-10-unidades/p
+Meloxicam,analgesico_antiinflamatorio,Oxa Solución Inyectable 15mg/1.5ml Caja 3 Unidades,OXA,medicity,1,2.93,2.93,https://www.farmaciasmedicity.com/oxa-solucion-inyectable-15mg-1-5ml-caja-3-unidades-1/p
+Metamizol sodico,analgesico_antiinflamatorio,Novalgina Jarabe 250mg/5ml - 100ml,NOVALGINA,medicity,1,4.6,4.6,https://www.farmaciasmedicity.com/novalgina-jarabe-250mg-5ml-100ml-1/p
+Naproxeno,analgesico_antiinflamatorio,"Analgésico x ray 250 mg, 220 mg, 65 mg tableta x 12",X Ray,cruzazul|pharmacys,2,6.3,6.3,https://www.pharmacys.com.ec/analgesico-x-ray-250-mg-220-mg-65-mg-tableta-x-12/p
+Naproxeno,analgesico_antiinflamatorio,Apronax Gel 5.5% Tubo 40 g,APRONAX,medicity,1,9.42,9.42,https://www.farmaciasmedicity.com/apronax-gel-5-5-tubo-40-g/p
+Naproxeno,analgesico_antiinflamatorio,Apronax Pro Tableta De Liberación Modificada 660 mg Caja 16 Unidades,APRONAX,medicity,1,1.03,1.03,https://www.farmaciasmedicity.com/apronax-pro-tableta-de-liberacion-modificada-660-mg-caja-16-unidades/p
+Naproxeno,analgesico_antiinflamatorio,Naproxeno 550mg caplin point - generico tableta recubierta,Naproxeno,cruzazul|pharmacys,2,6.0,6.0,https://www.pharmacys.com.ec/naproxeno-550mg-caplin-point-generico-tableta-recubierta/p
+Naproxeno,analgesico_antiinflamatorio,Nifa Naproxeno Tabletas Recubiertas 550 mg Caja 20 Unidades,NIFA,medicity,1,0.32,0.32,https://www.farmaciasmedicity.com/nifa-naproxeno-tabletas-recubiertas-550-mg-caja-20-unidades-1/p
+Naproxeno,analgesico_antiinflamatorio,Quitadol Forte Gel 5% Frasco 120 g,QUITADOL,medicity,1,14.44,14.44,https://www.farmaciasmedicity.com/quitadol-forte-gel-5-frasco-120-g/p
+Naproxeno,analgesico_antiinflamatorio,Quitadol medicamento acetaminofen 250 mg naproxeno sódico 220 mg cafeína anhidra 65 mg x 10,Quitadol,cruzazul|pharmacys,2,6.05,6.05,https://www.pharmacys.com.ec/quitadol-medicamento-acetaminofen-250-mg-naproxeno-sodico-22/p
+Naproxeno,analgesico_antiinflamatorio,Riproxen 550/2mg biogenet tableta,Riproxen,cruzazul|pharmacys,2,9.4,9.4,https://www.pharmacys.com.ec/riproxen-550-2mg-biogenet-tableta/p
+Paracetamol,analgesico_antiinflamatorio,Analgésico paracetamol 120mg/5ml jarabe 120ml,Paracetamol,cruzazul|pharmacys,2,1.52,1.9,https://www.pharmacys.com.ec/analgesico-paracetamol-120mg-5ml-jarabe-120ml/p
+Paracetamol,analgesico_antiinflamatorio,Elbrus Granulados 3 g 20 Unidades,ELBRUS,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/elbrus-granulados-1-g-sobres-3-g-caja-con-20-unidades/p
+Paracetamol,analgesico_antiinflamatorio,Febrax Tabletas 275 / 300 mg Caja con 20 Unidades,FEBRAX,medicity,1,0.26,0.26,https://www.farmaciasmedicity.com/febrax-tabletas-275--300-mg-caja-con-20-unidades/p
+Paracetamol,analgesico_antiinflamatorio,Finalin Niños Tabletas Masticables 160 mg 30 Unidades,FINALIN,medicity,1,0.18,0.18,https://www.farmaciasmedicity.com/finalin-tabletas-masticables-160-mg-ninos-caja-con-30-unidades/p
+Paracetamol,analgesico_antiinflamatorio,Fluzetrin F Gotas Pediátricas Frasco 15 ml,FLUZETRIN F,medicity,1,6.12,6.12,https://www.farmaciasmedicity.com/fluzetrin-f-gotas-pediatricas-frasco-con-15-ml/p
+Paracetamol,analgesico_antiinflamatorio,Molar-Ex Forte Cápsulas 400/200 mg Caja con 20 Unidades,MOLAR-EX,medicity,1,0.44,0.44,https://www.farmaciasmedicity.com/molar-ex-forte-capsulas-400200-mg-caja-con-20-unidades/p
+Paracetamol,analgesico_antiinflamatorio,Neogripal F Gotas Pediátricas Frasco con 15 mL,NEOGRIPAL F,medicity,1,4.8,4.8,https://www.farmaciasmedicity.com/neogripal-f-gotas-pediatricas-frasco-con-15-ml/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 100mg labovida,Paracetamol,cruzazul|pharmacys,2,1.4,1.75,https://www.pharmacys.com.ec/paracetamol-100mg-labovida/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 100mg tecnoquimicas - genericos en gotas,Paracetamol,cruzazul|pharmacys,2,1.68,1.68,https://www.pharmacys.com.ec/paracetamol-100mg-tecnoquimicas-genericos-en-gotas/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 120mg/5ml labovida jarabe,Paracetamol,cruzazul|pharmacys,2,1.62,1.62,https://www.pharmacys.com.ec/paracetamol-120mg-5ml-labovida-jarabe/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 150mg/5ml tecnoquimicas - genericos,Paracetamol,cruzazul|pharmacys,2,2.58,3.23,https://www.pharmacys.com.ec/paracetamol-150mg-5ml-tecnoquimicas-genericos/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 160mg/5ml labovida jarabe,Paracetamol,cruzazul|pharmacys,2,2.63,2.63,https://www.pharmacys.com.ec/paracetamol-160mg-5ml-labovida-jarabe/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 1gr labovida tabletas,Paracetamol,cruzazul|pharmacys,2,5.0,5.0,https://www.pharmacys.com.ec/paracetamol-1gr-labovida-tabletas/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 500mg alianza quimica ariston comprimidos,Paracetamol,cruzazul|pharmacys,2,15.0,15.0,https://www.pharmacys.com.ec/paracetamol-500mg-alianza-quimica-ariston-comprimidos/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 500mg dyvenpro ecuagen tableta,Paracetamol,cruzazul|pharmacys,2,2.5,2.5,https://www.pharmacys.com.ec/paracetamol-500mg-dyvenpro-ecuagen-tableta/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol 500mg nutrimed,Paracetamol,cruzazul|pharmacys,2,5.0,5.0,https://www.pharmacys.com.ec/paracetamol-500mg-nutrimed/p
+Paracetamol,analgesico_antiinflamatorio,Paracetamol Genfar Tabletas 500 mg Caja con 100 Unidades,GENFAR,medicity,1,0.05,0.05,https://www.farmaciasmedicity.com/paracetamol-genfar-tabletas-500-mg-caja-con-100-unidades/p
+Paracetamol,analgesico_antiinflamatorio,Trio-Val Gotas Frasco 15 mL(Prc),TRIO-VAL,medicity,1,4.6,4.6,https://www.farmaciasmedicity.com/trio-val-gotas-frasco-con-15-ml/p
+Paracetamol,analgesico_antiinflamatorio,Trio-Val Suspensión Frasco Con 100 ml,TRIO-VAL,medicity,1,6.44,6.44,https://www.farmaciasmedicity.com/trio-val-suspension-frasco-con-100-ml/p
+Paracetamol,analgesico_antiinflamatorio,Umbral Gotas 100 mg/ mL Ped Frasco Con 30 mL,UMBRAL,medicity,1,1.93,1.93,https://www.farmaciasmedicity.com/umbral-gotas-100-mg-ml-ped-frasco-con-30-ml/p
+Paracetamol/Cafeina,analgesico_antiinflamatorio,Bonadol Migraña Cap-Bla x500/65Mg x24,Bonadol,cruzazul|pharmacys,2,7.2,9.6,https://www.pharmacys.com.ec/bonadol-migrana-cap-bla-x500-65mg-x24/p
+Paracetamol/Cafeina,analgesico_antiinflamatorio,Migrax Comprimidos Recubiertos Caja 10 Unidades,MIGRAX,medicity,1,0.6,0.6,https://www.farmaciasmedicity.com/migrax-comprimidos-recubiertos-caja-con-10-unidades/p
+Paracetamol/Cafeina,analgesico_antiinflamatorio,X Ray Dol Tabletas Caja con 12 Unidades,X RAY,medicity,1,0.47,0.47,https://www.farmaciasmedicity.com/x-ray-dol-tabletas-caja-con-12-unidades/p
+Piroxicam,analgesico_antiinflamatorio,"Analgésico piroxicam 0,5 % gel 40 g",Piroxicam,cruzazul|pharmacys,2,2.77,3.46,https://www.pharmacys.com.ec/analgesico-piroxicam-05-gel-40-g/p
+Piroxicam,analgesico_antiinflamatorio,Piroxicam 20mg leterago - genfar cápsulas,Piroxicam,cruzazul|pharmacys,2,1.25,1.25,https://www.pharmacys.com.ec/piroxicam-20mg-leterago-genfar-capsulas/p
+Piroxicam,analgesico_antiinflamatorio,Piroxicam 20mg tecnoquimicas - genericos cápsulas,Piroxicam,cruzazul|pharmacys,2,1.25,1.25,https://www.pharmacys.com.ec/piroxicam-20mg-tecnoquimicas-genericos-capsulas/p
+Piroxicam,analgesico_antiinflamatorio,Piroxim 20mg ecu tableta,Piroxim,cruzazul|pharmacys,2,2.88,2.88,https://www.pharmacys.com.ec/piroxim-20mg-ecu-tableta/p
+Tramadol,analgesico_antiinflamatorio,Adorlan Comprimidos 25 / 25 mg Caja con 30 Unidades,ADORLAN,medicity,1,0.33,0.33,https://www.farmaciasmedicity.com/adorlan-comprimidos-25--25-mg-caja-con-30-unidades/p
+Tramadol,analgesico_antiinflamatorio,Analgan Tram Comprimidos 325/37.5 mg Caja con 20 Unidades,ANALGAN,medicity,1,0.39,0.39,https://www.farmaciasmedicity.com/analgan-tram-comprimidos-325375-mg-caja-con-20-unidades/p
+Tramadol,analgesico_antiinflamatorio,Tramadol 100mg leterago - genfar solución oral,Tramadol,pharmacys,1,3.98,3.98,https://www.pharmacys.com.ec/tramadol-100mg-leterago-genfar-solucion-oral/p
+Tramadol,analgesico_antiinflamatorio,Tramadol 100mg magma especialidad ampolla inyectable,Tramadol,pharmacys,1,14.97,14.97,https://www.pharmacys.com.ec/tramadol-100mg-fresenius-kabi-hospitalario-ampolla-inyectable/p
+Tramadol,analgesico_antiinflamatorio,Tramadol 50mg labvitalis,Tramadol,pharmacys,1,28.8,28.8,https://www.pharmacys.com.ec/tramadol-50mg-labvitalis/p
+Tramadol,analgesico_antiinflamatorio,Tramadol 50mg leterago - genfar cápsulas,Tramadol,pharmacys,1,2.6,2.6,https://www.pharmacys.com.ec/tramadol-50mg-leterago-genfar-capsulas/p
+Tramadol,analgesico_antiinflamatorio,Tramadol Genfar Cápsulas 50 mg Caja Con 10 Unidades,GENFAR,medicity,1,0.21,0.21,https://www.farmaciasmedicity.com/tramadol-genfar-capsulas-50-mg-caja-con-10-unidades/p
+Tramadol,analgesico_antiinflamatorio,Tramal Gotas 100 mg / mL Con 10 mL,TRAMAL,medicity,1,5.52,5.52,https://www.farmaciasmedicity.com/tramal-gotas-100-mg--ml-con-10-ml/p
+Tramadol,analgesico_antiinflamatorio,Tramal Long Tabletas Recubiertas 150 mg Liberación Prolongada 10 Unidades,TRAMAL,medicity,1,1.04,1.04,https://www.farmaciasmedicity.com/tramal-long-tabletas-recubiertas-150-mg-liberacion-prolongada-10-unidades/p
+Tramadol,analgesico_antiinflamatorio,Tramal Long Tabletas Recubiertas 50 mg Liberación Prolongada 10 Unidades,TRAMAL,medicity,1,0.36,0.36,https://www.farmaciasmedicity.com/tramal-long-tabletas-recubiertas-50-mg-liberacion-prolongada-10-unidades/p
+Amikacina,antibiotico,Akim Solución Inyectable 1g/4mL Caja 1 Unidad,AKIM,medicity,1,6.53,6.53,https://www.farmaciasmedicity.com/akim-solucion-inyectable-1-g--4-ml-caja-con-1-unidad/p
+Amikacina,antibiotico,Amikacina 100mg labvitalis ampolla inyectable,Amikacina,cruzazul|pharmacys,2,5.57,5.57,https://www.pharmacys.com.ec/amikacina-100mg-labvitalis-ampolla-inyectable/p
+Amikacina,antibiotico,Amikacina 1gr genamerica generico ampollas inyectables + jeringa,Amikacina,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/amikacina-1gr-genamerica-generico-ampollas-inyectables-jeringa/p
+Amikacina,antibiotico,Amikacina 500mg genamerica generico ampollas inyectables + jeringa,Amikacina,cruzazul|pharmacys,2,4.0,4.0,https://www.pharmacys.com.ec/amikacina-500mg-genamerica-generico-ampollas-inyectables-jeringa/p
+Amikacina,antibiotico,Amikacina 500mg labvitalis ampolla inyectable,Amikacina,cruzazul|pharmacys,2,7.2,7.2,https://www.pharmacys.com.ec/amikacina-500mg-labvitalis-ampolla-inyectable/p
+Amikacina,antibiotico,Amikacina 500mg leterago - genfar ampollas,Amikacina,cruzazul|pharmacys,2,33.6,33.6,https://www.pharmacys.com.ec/amikacina-500mg-leterago-genfar-ampollas/p
+Amikacina,antibiotico,Amikacina 500mg magma especialidad ampolla inyectable,Amikacina,cruzazul|pharmacys,2,16.95,16.95,https://www.pharmacys.com.ec/amikacina-500mg-fresenius-kabi-hospitalario-ampolla-inyectable/p
+Amoxicilina,antibiotico,Acemuk Biotic Duo Comprimidos 875/300 mg Caja Con 14 Unidades (REC),ACEMUK,medicity,1,1.29,1.29,https://www.farmaciasmedicity.com/acemuk-biotic-duo-comprimidos-875300-mg-caja-con-14-unidades/p
+Amoxicilina,antibiotico,Amoxicilina 1gr dyvenpro ecuagen tableta,Amoxicilina,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/amoxicilina-1gr-dyvenpro-ecuagen-tableta/p
+Amoxicilina,antibiotico,Amoxicilina 1gr la sante tableta,Amoxicilina,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/amoxicilina-1gr-la-sante-tableta/p
+Amoxicilina,antibiotico,Amoxicilina 1gr labovida tabletas recubiertas,Amoxicilina,cruzazul|pharmacys,2,8.12,8.12,https://www.pharmacys.com.ec/amoxicilina-1gr-labovida-tabletas-recubiertas/p
+Amoxicilina,antibiotico,Amoxicilina 250mg rocnarf suspensión,Amoxicilina,cruzazul|pharmacys,2,3.23,3.23,https://www.pharmacys.com.ec/amoxicilina-250mg-rocnarf-generico-suspension/p
+Amoxicilina,antibiotico,Amoxicilina 250mg/5ml labovida suspensión,Amoxicilina,cruzazul|pharmacys,2,2.23,2.23,https://www.pharmacys.com.ec/amoxicilina-250mg-5ml-labovida-suspension/p
+Amoxicilina,antibiotico,Amoxicilina 500mg dyvenpro ecuagen cápsulas,Amoxicilina,cruzazul|pharmacys,2,10.5,10.5,https://www.pharmacys.com.ec/amoxicilina-500mg-dyvenpro-ecuagen-capsulas/p
+Amoxicilina,antibiotico,Amoxicilina 500mg la sante cápsulas,Amoxicilina,cruzazul|pharmacys,2,7.88,7.88,https://www.pharmacys.com.ec/amoxicilina-500mg-la-sante-capsulas/p
+Amoxicilina,antibiotico,Amoxicilina 500mg labovida cápsulas,Amoxicilina,cruzazul|pharmacys,2,4.6,4.6,https://www.pharmacys.com.ec/amoxicilina-500mg-labovida-capsulas/p
+Amoxicilina,antibiotico,Amoxicilina 500mg portugal - generico,Amoxicilina,cruzazul|pharmacys,2,18.4,18.4,https://www.pharmacys.com.ec/amoxicilina-500mg-portugal-generico/p
+Amoxicilina,antibiotico,Amoxicilina Genfar Cápsulas 500 mg Caja Con 50 Unidades (REC),GENFAR,medicity,1,0.18,0.18,https://www.farmaciasmedicity.com/amoxicilina-genfar-capsulas-500-mg-caja-con-50-unidades/p
+Amoxicilina,antibiotico,Amoxicilina Santé Cápsulas 500 mg Caja con 50 Unidades (REC),LA SANTE,medicity,1,0.15,0.15,https://www.farmaciasmedicity.com/amoxicilina-sante-capsulas-500-mg-caja-con-50-unidades/p
+Amoxicilina,antibiotico,Amoxicilina+acido clavulanico 1000/200mg,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,14.28,14.28,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-1000-200mg-caplin-point-generico-solucion-inyectable-acido-clavulanico/p
+Amoxicilina,antibiotico,Augmentin Bid Polvo Para Suspensión 400mg/57mg/5ml Frasco 70 ml,AUGMENTIN,medicity,1,6.91,6.91,https://www.farmaciasmedicity.com/augmentin-bid-polvo-para-suspension-400mg-57mg-5ml-frasco-70-ml-1/p
+Amoxicilina,antibiotico,Clavinex Duo Forte Suspensión 800/57 mg Con 70 mL,CLAVINEX,medicity,1,17.03,17.03,https://www.farmaciasmedicity.com/clavinex-duo-forte-suspension-80057-mg-con-70-ml/p
+Amoxicilina,antibiotico,Curam Suspensión 457 mg/5 mL Frasco Con 70 mL (REC),CURAM,medicity,1,7.03,7.03,https://www.farmaciasmedicity.com/curam-suspension-457-mg5-ml-frasco-con-70-ml/p
+Amoxicilina,antibiotico,Curam Suspensión 600/42.9 mg/5ml Frasco 125 ml,CURAM,medicity,1,9.72,9.72,https://www.farmaciasmedicity.com/curam-suspension-600429-mg5-ml-frasco-con-125-ml/p
+Amoxicilina,antibiotico,Trifamox Ibl Duo Polvo Para Suspensión 1g/250mg/5ml Frasco 60 ml,TRIFAMOX,medicity,1,21.17,21.17,https://www.farmaciasmedicity.com/trifamox-ibl-duo-polvo-para-suspension-1g-250mg-5ml-frasco-60-ml-1/p
+Amoxicilina,antibiotico,Trifamox Ibl Duo Suspensión 1 g/250 mg/5 mL Con 30 mL,TRIFAMOX,medicity,1,9.53,9.53,https://www.farmaciasmedicity.com/trifamox-ibl-duo-suspension-1-g250-mg5-ml-con-30-ml/p
+Amoxicilina,antibiotico,Trigastro Nc Pack Caja 1 Unidades (Ant) (REC),TRIGASTRO,medicity,1,36.0,36.0,https://www.farmaciasmedicity.com/trigastro-nc-pack-caja-1-unidades-ant-1/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 125/31.25mg labovida suspensión,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,5.62,5.62,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-125-3125mg-labovida-suspension/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 156.25mg garcos - nifa genericos suspensión,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,5.4,5.4,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-15625mg-garcos-nifa-genericos-suspension/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 250/62.5mg labovida suspensión,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-250-625mg-labovida-suspension/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 312.5mg garcos - nifa genericos suspensión,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,10.8,10.8,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-3125mg-garcos-nifa-genericos-suspension/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 400/57mg labovida suspensión,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,8.63,8.63,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-400-57mg-labovida-suspension/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 500/125mg labovida tabletas recubiertas,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,7.5,7.5,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-500-125mg-labovida-tabletas-recubiertas/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 500mg dyvenpro ecuagen tabletas recubiertas,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,9.95,9.95,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-500mg-dyvenpro-ecuagen-tabletas-recubiertas/p
+Amoxicilina/Acido clavulanico,antibiotico,Amoxicilina+acido clavulanico 875/125mg labovida tabletas recubiertas,Amoxicilina+acido Clavulanico,cruzazul|pharmacys,2,11.25,11.25,https://www.pharmacys.com.ec/amoxicilina-acido-clavulanico-875-125mg-labovida-tabletas-recubiertas/p
+Amoxicilina/Acido clavulanico,antibiotico,Augmentin Bid Tabletas Recubierto 875/125mg 14 Unidades (REC),AUGMENTIN,medicity,1,1.0,1.0,https://www.farmaciasmedicity.com/augmentin-bid-tabletas-recubierto-875--125-mg-con-14-unidades/p
+Amoxicilina/Acido clavulanico,antibiotico,Augmentin Suspensión Pediátrico Con 100 mL,AUGMENTIN,medicity,1,9.66,9.66,https://www.farmaciasmedicity.com/augmentin-suspension-pediatrico-con-100-ml/p
+Amoxicilina/Acido clavulanico,antibiotico,Clavinex 800/57mg ecuaquimica - saval suspensión,Clavinex,cruzazul|pharmacys,2,21.29,21.29,https://www.pharmacys.com.ec/clavinex-800-57mg-ecuaquimica-saval-suspension/p
+Amoxicilina/Acido clavulanico,antibiotico,Curam Suspensión 156.25 mg/5 mL Pediátrico Frasco Con 120 mL,CURAM,medicity,1,6.74,6.74,https://www.farmaciasmedicity.com/curam-suspension-15625-mg5-ml-pediatrico-frasco-con-120-ml/p
+Amoxicilina/Acido clavulanico,antibiotico,Curam Suspensión 312.5 mg/5ml Frasco 120 ml,CURAM,medicity,1,13.14,13.14,https://www.farmaciasmedicity.com/curam-suspension-3125-mg5-ml-frasco-con-120-ml/p
+Amoxicilina/Acido clavulanico,antibiotico,Curam Tabletas Recubiertas Caja Con 14 Unidades (REC),CURAM,medicity,1,0.87,0.87,https://www.farmaciasmedicity.com/curam-tabletas-recubiertas-caja-con-14-unidades/p
+Ampicilina,antibiotico,Ampicilina 1.5gr hospimedikka ampolla inyectable,Ampicilina,cruzazul|pharmacys,2,18.92,18.92,https://www.pharmacys.com.ec/ampicilina-15gr-hospimedikka-ampolla-inyectable/p
+Ampicilina,antibiotico,Ampicilina 1/0.5gr labvitalis ampolla inyectable,Ampicilina,cruzazul|pharmacys,2,17.5,17.5,https://www.pharmacys.com.ec/ampicilina-1-05gr-labvitalis-ampolla-inyectable/p
+Ampicilina,antibiotico,Ampicilina 1gr dyvenpro ecuagen tableta,Ampicilina,cruzazul|pharmacys,2,25.6,25.6,https://www.pharmacys.com.ec/ampicilina-1gr-dyvenpro-ecuagen-tableta/p
+Ampicilina,antibiotico,Ampicilina 1gr genamerica generico ampollas inyectables,Ampicilina,cruzazul|pharmacys,2,14.5,14.5,https://www.pharmacys.com.ec/ampicilina-1gr-genamerica-generico-ampollas-inyectables/p
+Ampicilina,antibiotico,Ampicilina 1gr la sante tableta,Ampicilina,cruzazul|pharmacys,2,27.7,27.7,https://www.pharmacys.com.ec/ampicilina-1gr-la-sante-tableta/p
+Ampicilina,antibiotico,Ampicilina 1gr labvitalis ampolla inyectable,Ampicilina,cruzazul|pharmacys,2,8.7,8.7,https://www.pharmacys.com.ec/ampicilina-1gr-labvitalis-ampolla-inyectable/p
+Ampicilina,antibiotico,Ampicilina 1gr tecnoquimicas - genericos tableta,Ampicilina,cruzazul|pharmacys,2,36.0,36.0,https://www.pharmacys.com.ec/ampicilina-1gr-tecnoquimicas-genericos-tableta/p
+Ampicilina,antibiotico,Ampicilina 250mg/5ml dyvenpro ecuagen suspensión,Ampicilina,cruzazul|pharmacys,2,3.75,3.75,https://www.pharmacys.com.ec/ampicilina-250mg-5ml-dyvenpro-ecuagen-suspension/p
+Ampicilina,antibiotico,Ampicilina 500mg dyvenpro ecuagen cápsulas,Ampicilina,cruzazul|pharmacys,2,18.75,18.75,https://www.pharmacys.com.ec/ampicilina-500mg-dyvenpro-ecuagen-capsulas/p
+Ampicilina,antibiotico,Ampicilina 500mg la sante cápsulas,Ampicilina,cruzazul|pharmacys,2,19.0,19.0,https://www.pharmacys.com.ec/ampicilina-500mg-la-sante-capsulas/p
+Ampicilina,antibiotico,Ampliurina Forte Cápsulas 500/100 mg 50 Unidades,AMPLIURINA,medicity,1,0.51,0.51,https://www.farmaciasmedicity.com/ampliurina-forte-capsulas-500100-mg-con-50-unidades/p
+Ampicilina,antibiotico,Unasyn Tabletas 750 mg Caja Con 10 Unidades (REC),UNASYN,medicity,1,2.17,2.17,https://www.farmaciasmedicity.com/unasyn-tabletas-750-mg-caja-con-10-unidades/p
+Azitromicina,antibiotico,Azitromicina 200mg/5ml dyvenpro ecuagen suspensión,Azitromicina,cruzazul|pharmacys,2,6.36,6.36,https://www.pharmacys.com.ec/azitromicina-200mg-5ml-dyvenpro-ecuagen-suspension/p
+Azitromicina,antibiotico,Azitromicina 200mg/5ml la sante suspensión,Azitromicina,cruzazul|pharmacys,2,6.36,6.36,https://www.pharmacys.com.ec/azitromicina-200mg-5ml-la-sante-suspension/p
+Azitromicina,antibiotico,Azitromicina 200mg/5ml oxialfarm farma suspensión,Azitromicina,cruzazul|pharmacys,2,9.8,9.8,https://www.pharmacys.com.ec/azitromicina-200mg-5ml-oxialfarm-farma-suspension/p
+Azitromicina,antibiotico,Azitromicina 200mg/5ml rocnarf suspensión,Azitromicina,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/azitromicina-200mg-5ml-rocnarf-generico-suspension/p
+Azitromicina,antibiotico,Azitromicina 500mg dyvenpro ecuagen tableta,Azitromicina,cruzazul|pharmacys,2,5.85,5.85,https://www.pharmacys.com.ec/azitromicina-500mg-dyvenpro-ecuagen-tableta/p
+Azitromicina,antibiotico,Azitromicina 500mg jaspharm generico tableta recubierta,Azitromicina,cruzazul|pharmacys,2,9.75,9.75,https://www.pharmacys.com.ec/azitromicina-500mg-jaspharm-generico-tableta-recubierta/p
+Azitromicina,antibiotico,Azitromicina 500mg la sante tableta,Azitromicina,cruzazul|pharmacys,2,8.0,8.0,https://www.pharmacys.com.ec/azitromicina-500mg-la-sante-tableta/p
+Azitromicina,antibiotico,Azitromicina 500mg labovida tabletas recubiertas,Azitromicina,cruzazul|pharmacys,2,5.85,5.85,https://www.pharmacys.com.ec/azitromicina-500mg-labovida-tabletas-recubiertas/p
+Azitromicina,antibiotico,Azitromicina 500mg oxialfarm farma tabletas recubiertas,Azitromicina,cruzazul|pharmacys,2,5.82,5.82,https://www.pharmacys.com.ec/azitromicina-500mg-oxialfarm-farma-tabletas-recubiertas/p
+Azitromicina,antibiotico,Azitromicina 500mg rocnarf tabletas,Azitromicina,cruzazul|pharmacys,2,6.4,6.4,https://www.pharmacys.com.ec/azitromicina-500mg-rocnarf-generico-tabletas/p
+Azitromicina,antibiotico,Azitromicina Genfar Tabletas Recubierto 500 mg Caja con 3 Unidades (REC),GENFAR,medicity,1,1.79,1.79,https://www.farmaciasmedicity.com/azitromicina-genfar-tabletas-recubierto-500-mg-caja-con-3-unidades/p
+Azitromicina,antibiotico,Azitromicina Mk Tabletas Recubiertas 500 mg Caja 3 Unidades (REC),MK,medicity,1,1.06,1.06,https://www.farmaciasmedicity.com/azitromicina-mk-500-mg-caja-con-3-tabletas-recubiertas/p
+Azitromicina,antibiotico,Azitromicina Santé Suspensión 200 mg / 5 mL Con 15 mL,LA SANTE,medicity,1,5.85,5.85,https://www.farmaciasmedicity.com/azitromicina-sante-suspension-200-mg--5-ml-con-15-ml/p
+Azitromicina,antibiotico,Azitromicina Santé Tabletas Recubierto 500 mg Caja Con 5 Unidades (REC),LA SANTE,medicity,1,1.47,1.47,https://www.farmaciasmedicity.com/azitromicina-sante-tabletas-recubierto-500-mg-caja-con-5-unidades/p
+Azitromicina,antibiotico,Binozyt Suspensión 200 mg/5 mL (REC),BINOZYT,medicity,1,5.85,5.85,https://www.farmaciasmedicity.com/binozyt-suspension-200-mg5-ml/p
+Azitromicina,antibiotico,Trex Comprimido Recubierto 500 mg Caja Con 3 Unidades (REC),TREX,medicity,1,1.48,1.48,https://www.farmaciasmedicity.com/trex-comprimido-recubierto-500-mg-caja-con-3-unidades/p
+Azitromicina,antibiotico,Trex Comprimidos Recubiertos 500 mg Caja 6 Unidades (REC),TREX,medicity,1,1.56,1.56,https://www.farmaciasmedicity.com/trex-comprimidos-recubiertos-500-mg-caja-con-6-unidades/p
+Azitromicina,antibiotico,Trex Suspensión 200 mg/5 mL Frasco Con 30 mL (REC),TREX,medicity,1,10.17,10.17,https://www.farmaciasmedicity.com/trex-suspension-200-mg5-ml-frasco-con-30-ml/p
+Cefadroxilo,antibiotico,Biodroxil 1000 mg x 12,Biodroxil,cruzazul|pharmacys,2,19.44,19.44,https://www.pharmacys.com.ec/biodroxil-1000mg-x12/p
+Cefadroxilo,antibiotico,Biodroxil 250 mg/5 ml suspensión oral frasco x 60 ml,Biodroxil,cruzazul|pharmacys,2,5.9,5.9,https://www.pharmacys.com.ec/biodroxil-250mg-5ml-suspension-oral-frasco-x60ml/p
+Cefadroxilo,antibiotico,Biodroxil 500 mg cápsulas caja x 12,Biodroxil,cruzazul|pharmacys,2,12.81,12.81,https://www.pharmacys.com.ec/biodroxil-500mg-capsulas-caja-x12/p
+Cefadroxilo,antibiotico,Biodroxil 500 mg/5 ml suspensión oral frasco x 60 ml,Biodroxil,cruzazul|pharmacys,2,10.63,10.63,https://www.pharmacys.com.ec/biodroxil-500mg-5ml-suspension-oral-frasco-x60ml/p
+Cefadroxilo,antibiotico,Biodroxil Cápsulas 500 mg Caja Con 12 Unidades (REC),BIODROXIL,medicity,1,0.98,0.98,https://www.farmaciasmedicity.com/biodroxil-capsulas-500-mg-caja-con-12-unidades/p
+Cefadroxilo,antibiotico,Cefadroxilo 250mg/5ml dyvenpro ecuagen suspensión,Cefadroxilo,cruzazul|pharmacys,2,4.75,4.75,https://www.pharmacys.com.ec/cefadroxilo-250mg-5ml-dyvenpro-ecuagen-suspension/p
+Cefadroxilo,antibiotico,Cefadroxilo 250mg/5ml garcos - nifa genericos suspensión,Cefadroxilo,cruzazul|pharmacys,2,3.6,3.6,https://www.pharmacys.com.ec/cefadroxilo-250mg5ml-garcos-nifa-genericos-suspension-98591/p
+Cefadroxilo,antibiotico,Cefadroxilo 500mg dyvenpro ecuagen cápsulas,Cefadroxilo,cruzazul|pharmacys,2,7.6,7.6,https://www.pharmacys.com.ec/cefadroxilo-500mg-dyvenpro-ecuagen-capsulas/p
+Cefadroxilo,antibiotico,Cefadroxilo 500mg ecuaquimica - mintlab cápsulas,Cefadroxilo,cruzazul|pharmacys,2,5.76,5.76,https://www.pharmacys.com.ec/cefadroxilo-500mg-ecuaquimica-mintlab-capsulas/p
+Cefadroxilo,antibiotico,Cefadroxilo 500mg garcos - nifa genericos cápsulas,Cefadroxilo,cruzazul|pharmacys,2,7.2,7.2,https://www.pharmacys.com.ec/cefadroxilo-500mg-garcos-nifa-genericos-capsulas/p
+Cefadroxilo,antibiotico,Cefadroxilo 500mg leterago - genfar cápsulas,Cefadroxilo,cruzazul|pharmacys,2,7.6,7.6,https://www.pharmacys.com.ec/cefadroxilo-500mg-leterago-genfar-capsulas/p
+Cefadroxilo,antibiotico,Cefadroxilo Genfar Cápsulas 500 mg Caja Con 10 Unidades (REC),GENFAR,medicity,1,0.7,0.7,https://www.farmaciasmedicity.com/cefadroxilo-genfar-capsulas-500-mg-caja-con-10-unidades/p
+Cefadroxilo,antibiotico,Cefadroxilo Santé Cápsulas 500 mg Caja Con 12 Unidades (REC),LA SANTE,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/cefadroxilo-sante-capsulas-500-mg-caja-con-12-unidades/p
+Cefalexina,antibiotico,Cefalexina 250mg/5ml dyvenpro ecuagen suspensión,Cefalexina,cruzazul|pharmacys,2,2.25,2.25,https://www.pharmacys.com.ec/cefalexina-250mg-5ml-dyvenpro-ecuagen-suspension/p
+Cefalexina,antibiotico,Cefalexina 250mg/5ml kronos genericos suspensión,Cefalexina,cruzazul|pharmacys,2,2.2,2.2,https://www.pharmacys.com.ec/cefalexina-250mg-5ml-kronos-genericos-suspension/p
+Cefalexina,antibiotico,Cefalexina 250mg/5ml labovida suspensión,Cefalexina,cruzazul|pharmacys,2,2.25,2.25,https://www.pharmacys.com.ec/cefalexina-250mg-5ml-labovida-suspension/p
+Cefalexina,antibiotico,Cefalexina 250mg/5ml rocnarf suspensión,Cefalexina,cruzazul|pharmacys,2,4.0,4.0,https://www.pharmacys.com.ec/cefalexina-250mg-5ml-rocnarf-suspension-antibacterianos/p
+Cefalexina,antibiotico,Cefalexina 500mg caplin point - generico cápsulas,Cefalexina,cruzazul|pharmacys,2,14.5,14.5,https://www.pharmacys.com.ec/cefalexina-500mg-caplin-point-generico-capsulas/p
+Cefalexina,antibiotico,Cefalexina 500mg dyvenpro ecuagen cápsulas,Cefalexina,cruzazul|pharmacys,2,2.9,2.9,https://www.pharmacys.com.ec/cefalexina-500mg-dyvenpro-ecuagen-capsulas/p
+Cefalexina,antibiotico,Cefalexina 500mg kronos genericos cápsulas,Cefalexina,cruzazul|pharmacys,2,4.8,4.8,https://www.pharmacys.com.ec/cefalexina-500mg-kronos-genericos-capsulas/p
+Cefalexina,antibiotico,Cefalexina 500mg labovida cápsulas,Cefalexina,cruzazul|pharmacys,2,5.8,5.8,https://www.pharmacys.com.ec/cefalexina-500mg-labovida-capsulas/p
+Cefalexina,antibiotico,Cefalexina 500mg leterago - genfar cápsulas,Cefalexina,cruzazul|pharmacys,2,2.9,2.9,https://www.pharmacys.com.ec/cefalexina-500mg-leterago-genfar-capsulas/p
+Cefalexina,antibiotico,Cefalexina Genfar Cápsulas 500 mg Caja Con 10 Unidades (REC),GENFAR,medicity,1,0.23,0.23,https://www.farmaciasmedicity.com/cefalexina-genfar-capsulas-500-mg-caja-con-10-unidades/p
+Cefixima,antibiotico,Longacef 100mg/5ml leterago - megat-pharmaceutical,Longacef,cruzazul|pharmacys,2,22.0,22.0,https://www.pharmacys.com.ec/longacef-100mg-5ml-leterago-megat-pharmaceutical/p
+Cefixima,antibiotico,Longacef 400mg leterago - megat-pharmaceutical,Longacef,cruzazul|pharmacys,2,20.0,20.0,https://www.pharmacys.com.ec/longacef-400mg-leterago-megat-pharmaceutical-107478/p
+Cefixima,antibiotico,Longacef Cápsulas 400mg Caja 5 Unidades,LONGACEF,medicity,1,3.2,3.2,https://www.farmaciasmedicity.com/longacef-capsulas-400mg-caja-5-unidades-1/p
+Cefixima,antibiotico,Longacef Polvo Suspensión 100mg/5ml 60 ml (Ant) (REC),LONGACEF,medicity,1,17.6,17.6,https://www.farmaciasmedicity.com/longacef-polvo-suspension-100mg-5ml-60-ml-ant-1/p
+Cefpodoxima,antibiotico,Bafodix 200 mg x 10,Bafodix,cruzazul|pharmacys,2,23.0,23.0,https://www.pharmacys.com.ec/bafodix-200-mg-x10/p
+Cefpodoxima,antibiotico,Bafodix Tabletas Recubiertas 200 mg Caja 10 Unidades (Ant) (REC),BAFODIX,medicity,1,1.84,1.84,https://www.farmaciasmedicity.com/bafodix-tabletas-recubiertas-200-mg-caja-10-unidades-ant-1/p
+Cefpodoxima,antibiotico,Cefirax 100mg/5ml ecuaquimica - saval suspensión,Cefirax,cruzazul|pharmacys,2,33.0,33.0,https://www.pharmacys.com.ec/cefirax-100mg-5ml-ecuaquimica-saval-suspension/p
+Cefpodoxima,antibiotico,Cefirax 200mg ecuaquimica - saval comprimidos recubiertos,Cefirax,cruzazul|pharmacys,2,25.5,25.5,https://www.pharmacys.com.ec/cefirax-200mg-ecuaquimica-saval-comprimidos-recubiertos/p
+Ceftriaxona,antibiotico,Axtar Solución Inyectable 1 g/10 mg I.M. Caja Con 1 Unidad (REC),AXTAR,medicity,1,7.51,7.51,https://www.farmaciasmedicity.com/axtar-solucion-inyectable-1-g10-mg-im-caja-con-1-unidad/p
+Ceftriaxona,antibiotico,Ceftriaxona 1Gr Solución inyectable Vitalis,Ceftriaxona,cruzazul|pharmacys,2,17.6,17.6,https://www.pharmacys.com.ec/ceftriaxona-1gr-labvitalis-solucion-inyectable/p
+Ceftriaxona,antibiotico,Ceftriaxona 1gr caplin point - generico en polvo,Ceftriaxona,cruzazul|pharmacys,2,8.16,8.16,https://www.pharmacys.com.ec/ceftriaxona-1gr-caplin-point-generico-en-polvo/p
+Ceftriaxona,antibiotico,Ceftriaxona Vitalis Polvo Inyectable 1g 10 Unidades (Ant) (REC),VITALIS,medicity,1,1.62,1.62,https://www.farmaciasmedicity.com/ceftriaxona-vitalis-polvo-inyectable-1g-10-unidades-ant-1/p
+Cefuroxima,antibiotico,Altacef Tabletas Recubiertas 500 mg Caja Con 16 Unidades (REC),ALTACEF,medicity,1,1.04,1.04,https://www.farmaciasmedicity.com/altacef-tabletas-recubiertas-500-mg-caja-con-16-unidades/p
+Cefuroxima,antibiotico,Cefuroxima 250mg/5ml garcos - nifa genericos suspensión,Cefuroxima,cruzazul|pharmacys,2,14.7,14.7,https://www.pharmacys.com.ec/cefuroxima-250mg-5ml-garcos-nifa-genericos-suspension/p
+Cefuroxima,antibiotico,Cefuroxima 500mg garcos - nifa genericos tabletas recubiertas,Cefuroxima,cruzazul|pharmacys,2,13.0,13.0,https://www.pharmacys.com.ec/cefuroxima-500mg-garcos-nifa-genericos-tabletas-recubiertas/p
+Cefuroxima,antibiotico,Cefuroxima 500mg genamerica generico comprimidos recubiertos,Cefuroxima,cruzazul|pharmacys,2,13.5,13.5,https://www.pharmacys.com.ec/cefuroxima-500mg-genamerica-generico-comprimidos-recubiertos/p
+Cefuroxima,antibiotico,Cefuroxima 500mg labovida tabletas recubiertas,Cefuroxima,cruzazul|pharmacys,2,12.5,12.5,https://www.pharmacys.com.ec/cefuroxima-500mg-labovida-tabletas-recubiertas/p
+Cefuroxima,antibiotico,Cefuroxima 500mg leterago - genfar,Cefuroxima,cruzazul|pharmacys,2,13.45,13.45,https://www.pharmacys.com.ec/cefuroxima-500mg-leterago-genfar/p
+Cefuroxima,antibiotico,Furacam Polvo Suspensión 250mg/5 ml x 70 ml (Ant) (REC),FURACAM,medicity,1,14.13,14.13,https://www.farmaciasmedicity.com/furacam-polvo-suspension-250mg-5-ml-x-70-ml-ant-1/p
+Cefuroxima,antibiotico,Furacam Suspensión 250 mg/5 mL Frasco Con 100 mL (REC),FURACAM,medicity,1,18.52,18.52,https://www.farmaciasmedicity.com/furacam-suspension-250-mg5-ml-frasco-con-100-ml/p
+Cefuroxima,antibiotico,Zamur-500 Tabletas Recubierto 500 mg Caja Con 10 Unidades (REC),ZAMUR,medicity,1,1.79,1.79,https://www.farmaciasmedicity.com/zamur-500-tabletas-recubierto-500-mg-caja-con-10-unidades/p
+Cefuroxima,antibiotico,Zinnat 250 mg x 10,Zinnat,cruzazul|pharmacys,2,8.3,8.3,https://www.pharmacys.com.ec/zinnat-250mg-x10/p
+Cefuroxima,antibiotico,Zinnat 250 mg/5 ml suspensión x 70 ml,Zinnat,cruzazul|pharmacys,2,15.37,15.37,https://www.pharmacys.com.ec/zinnat-250mg-5ml-suspension-x70ml/p
+Cefuroxima,antibiotico,Zinnat 500 mg x 10,Zinnat,cruzazul|pharmacys,2,21.14,21.14,https://www.pharmacys.com.ec/zinnat-500mg-x10/p
+Cefuroxima,antibiotico,Zinnat 750 mg/17 ml inyectable (vial) x 1,Zinnat,cruzazul|pharmacys,2,13.96,13.96,https://www.pharmacys.com.ec/zinnat-750mg-17ml-inyectable-vial-x1/p
+Ciprofloxacino,antibiotico,Ciprofloxacina 500mg la sante tableta,Ciprofloxacina,cruzazul|pharmacys,2,7.5,7.5,https://www.pharmacys.com.ec/ciprofloxacina-500mg-la-sante-tableta/p
+Ciprofloxacino,antibiotico,Ciprofloxacino 200mg genamerica generico ampollas inyectables,Ciprofloxacino,cruzazul|pharmacys,2,3.8,3.8,https://www.pharmacys.com.ec/ciprofloxacino-200mg-genamerica-generico-ampollas-inyectables/p
+Ciprofloxacino,antibiotico,Ciprofloxacino 500mg caplin point - generico cápsulas,Ciprofloxacino,cruzazul|pharmacys,2,89.0,89.0,https://www.pharmacys.com.ec/ciprofloxacino-500mg-caplin-point-generico-capsulas/p
+Ciprofloxacino,antibiotico,Ciprofloxacino 500mg dyvenpro representaciones lab chile linea generica comprimidos recubiertos,Ciprofloxacino,cruzazul|pharmacys,2,4.44,4.44,https://www.pharmacys.com.ec/ciprofloxacino-500mg-dyvenpro-representaciones-lab-chile-linea-generica-comprimidos-recubiertos/p
+Ciprofloxacino,antibiotico,Ciprofloxacino 500mg leterago - genfar tabletas recubiertas,Ciprofloxacino,cruzazul|pharmacys,2,7.88,7.88,https://www.pharmacys.com.ec/ciprofloxacino-500mg-leterago-genfar-tabletas-recubiertas/p
+Ciprofloxacino,antibiotico,Ciprofloxacino 500mg portugal - generico tabletas recubiertas,Ciprofloxacino,cruzazul|pharmacys,2,75.0,75.0,https://www.pharmacys.com.ec/ciprofloxacino-500mg-portugal-generico-tabletas-recubiertas/p
+Ciprofloxacino,antibiotico,Ciprofloxacino Comp Rec 500 Mg X6,Ciprofloxacino,cruzazul|pharmacys,2,3.25,3.25,https://www.pharmacys.com.ec/ciprofloxacino-500mg-ecuaquimica-mintlab-comprimidos-recubiertos/p
+Ciprofloxacino,antibiotico,Ciprofloxacino Santé Tabletas Recubierto 500 mg Con 10 Unidades (REC),LA SANTE,medicity,1,0.69,0.69,https://www.farmaciasmedicity.com/ciprofloxacino-sante-tabletas-recubierto-500-mg-con-10-unidades/p
+Ciprofloxacino,antibiotico,Genfar Ciprofloxacino Tabletas Recubiertas 500 mg 10 Unidades,GENFAR,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/ciprofloxacino-genfar-tabletas-recubiertas-500-mg-con-10-unidades/p
+Ciprofloxacino,antibiotico,Prixol 500mg danivet tableta,Prixol,cruzazul|pharmacys,2,7.5,7.5,https://www.pharmacys.com.ec/prixol-500mg-danivet-tableta/p
+Claritromicina,antibiotico,Claritromicina 250mg caplin point - generico suspensión,Claritromicina,cruzazul|pharmacys,2,13.23,13.23,https://www.pharmacys.com.ec/claritromicina-250mg-caplin-point-generico-suspension/p
+Claritromicina,antibiotico,Claritromicina 250mg dyvenpro ecuagen suspensión,Claritromicina,cruzazul|pharmacys,2,13.17,13.17,https://www.pharmacys.com.ec/claritromicina-250mg-dyvenpro-ecuagen-suspension/p
+Claritromicina,antibiotico,Claritromicina 250mg/5ml polvo La sante,Claritromicina,cruzazul|pharmacys,2,11.02,11.02,https://www.pharmacys.com.ec/claritromicina-250mg-5ml-la-sante-polvo/p
+Claritromicina,antibiotico,Claritromicina 500mg dyvenpro ecuagen tableta,Claritromicina,cruzazul|pharmacys,2,9.7,9.7,https://www.pharmacys.com.ec/claritromicina-500mg-dyvenpro-ecuagen-tableta/p
+Claritromicina,antibiotico,Claritromicina 500mg garcos - nifa genericos tabletas recubiertas,Claritromicina,cruzazul|pharmacys,2,9.7,9.7,https://www.pharmacys.com.ec/claritromicina-500mg-garcos-nifa-genericos-tabletas-recubiertas/p
+Claritromicina,antibiotico,Claritromicina 500mg la sante tableta,Claritromicina,cruzazul|pharmacys,2,9.7,9.7,https://www.pharmacys.com.ec/claritromicina-500mg-la-sante-tableta/p
+Claritromicina,antibiotico,Claritromicina 500mg labvitalis solución inyectable,Claritromicina,cruzazul|pharmacys,2,107.9,107.9,https://www.pharmacys.com.ec/claritromicina-500mg-labvitalis-solucion-inyectable/p
+Claritromicina,antibiotico,Claritromicina 500mg leterago - genfar tableta recubierta,Claritromicina,cruzazul|pharmacys,2,9.7,9.7,https://www.pharmacys.com.ec/claritromicina-500mg-leterago-genfar-tableta-recubierta/p
+Claritromicina,antibiotico,Claritromicina 500mg rocnarf tabletas recubiertas,Claritromicina,cruzazul|pharmacys,2,10.2,10.2,https://www.pharmacys.com.ec/claritromicina-500mg-rocnarf-generico-tabletas-recubiertas/p
+Claritromicina,antibiotico,Claritromicina 500mg tecnoquimicas - genericos tableta recubierta,Claritromicina,cruzazul|pharmacys,2,8.42,8.42,https://www.pharmacys.com.ec/claritromicina-500mg-tecnoquimicas-genericos-tableta-recubierta/p
+Claritromicina,antibiotico,Claritromicina Genfar Tabletas Recubierto 500 mg Con 10 Unidades,GENFAR,medicity,1,0.89,0.89,https://www.farmaciasmedicity.com/claritromicina-genfar-tabletas-recubierto-500-mg-con-10-unidades/p
+Claritromicina,antibiotico,Klaricid Gránulos 250 mg/5 mL Frasco Con 60 mL (REC),KLARICID,medicity,1,11.91,11.91,https://www.farmaciasmedicity.com/klaricid-granulos-250-mg5-ml-frasco-con-60-ml/p
+Claritromicina,antibiotico,Klaricid Tabletas Recubiertas 500mg Caja 10 Unidades,KLARICID,medicity,1,0.84,0.84,https://www.farmaciasmedicity.com/klaricid-tabletas-recubiertas-500mg-caja-10-unidades-1/p
+Clindamicina,antibiotico,Clear Face Solución Tópica 1% Rolllon 10 ml,CLEAR FACE,medicity,1,9.13,9.13,https://www.farmaciasmedicity.com/clear-face-solucion-topica-1-rolllon-10-ml/p
+Clindamicina,antibiotico,Clear face 1% biogenet roll-on,Clear Face,cruzazul,1,9.92,9.92,https://www.farmaciascruzazul.ec/clear-face-1-biogenet-roll-on/p
+Clindamicina,antibiotico,Clindamicina 300mg caplin point - generico cápsulas,Clindamicina,cruzazul,1,5.4,5.4,https://www.farmaciascruzazul.ec/clindamicina-300mg-caplin-point-generico-capsulas/p
+Clindamicina,antibiotico,Clindamicina 300mg dyvenpro ecuagen cápsulas,Clindamicina,cruzazul,1,8.4,8.4,https://www.farmaciascruzazul.ec/clindamicina-300mg-dyvenpro-ecuagen-capsulas/p
+Clindamicina,antibiotico,Clindamicina 300mg la sante tableta,Clindamicina,cruzazul,1,8.75,8.75,https://www.farmaciascruzazul.ec/clindamicina-300mg-la-sante-tableta/p
+Clindamicina,antibiotico,Clindamicina 300mg leterago - genfar,Clindamicina,cruzazul,1,9.9,9.9,https://www.farmaciascruzazul.ec/clindamicina-300mg-leterago-genfar/p
+Clindamicina,antibiotico,Clindamicina 300mg tecnoquimicas - genericos cápsulas,Clindamicina,cruzazul,1,10.98,10.98,https://www.farmaciascruzazul.ec/clindamicina-300mg-tecnoquimicas-genericos-capsulas/p
+Clindamicina,antibiotico,Clindamicina 600mg caplin point - generico solución inyectable,Clindamicina,cruzazul,1,156.5,156.5,https://www.farmaciascruzazul.ec/clindamicina-600mg-caplin-point-generico-solucion-inyectable/p
+Clindamicina,antibiotico,Clindamicina Santé Cápsulas 300 mg 24 Unidades (REC),LA SANTE,medicity,1,0.33,0.33,https://www.farmaciasmedicity.com/clindamicina-sante-capsulas-300-mg-24-unidades/p
+Clindamicina,antibiotico,Clindana Óvulos 100 mg Caja 7 Unidades,CLINDANA,medicity,1,2.3,2.3,https://www.farmaciasmedicity.com/clindana-ovulos-100-mg-caja-7-unidades-1/p
+Clindamicina,antibiotico,Couplett Crema Vaginal 1.67/ 8% Tubo Con 30 g,COUPLETT,medicity,1,16.1,16.1,https://www.farmaciasmedicity.com/couplett-crema-vaginal-167-8-tubo-con-30-g/p
+Clindamicina,antibiotico,Divanon Ovulos 100 mg Caja 7 Unidades,DIVANON,medicity,1,2.36,2.36,https://www.farmaciasmedicity.com/divanon-ovulos-100-mg-caja-7-unidades-1/p
+Clindamicina,antibiotico,Euroclin Crema Vaginal 2% Tubo 40 g,EUROCLIN,medicity,1,23.54,23.54,https://www.farmaciasmedicity.com/euroclin-crema-vaginal-2-tubo-40-g-1/p
+Clindamicina,antibiotico,Locator Crema Vaginal 2/4% Tubo 20 g + 3 Aplicadores,LOCATOR,medicity,1,20.88,20.88,https://www.farmaciasmedicity.com/locator-crema-vaginal-24-tubo-con-20-g--3-aplicadores/p
+Clindamicina,antibiotico,Vaginsol F Óvulos 200/100 mg Caja Con 7 Unidades,VAGINSOL F,medicity,1,25.2,25.2,https://www.farmaciasmedicity.com/vaginsol-f-i“vulos-200100-mg-caja-con-7-unidades/p
+Clindamicina,antibiotico,Vaxiduo Cápsulas Vaginales 100 / 400 mg Caja con 7 Unidades,VAXIDUO,medicity,1,2.75,2.75,https://www.farmaciasmedicity.com/vaxiduo-capsulas-vaginales-100--400-mg-caja-con-7-unidades/p
+Clindamicina,antibiotico,Zudenina Plus Gel 0.1/1% Tubo Con 30 g,ZUDENINA,medicity,1,19.2,19.2,https://www.farmaciasmedicity.com/zudenina-plus-gel-011-tubo-con-30-g/p
+Dicloxacilina,antibiotico,Dicloxacilina 125mg/5ml tofis - generico suspensión,Dicloxacilina,cruzazul|pharmacys,2,1.72,1.72,https://www.pharmacys.com.ec/dicloxacilina-125mg-5ml-tofis-generico-suspension/p
+Dicloxacilina,antibiotico,Dicloxacilina 250mg/5ml dyvenpro ecuagen suspensión,Dicloxacilina,cruzazul|pharmacys,2,3.61,3.61,https://www.pharmacys.com.ec/dicloxacilina-250mg-5ml-dyvenpro-ecuagen-suspension/p
+Dicloxacilina,antibiotico,Dicloxacilina 250mg/5ml la sante suspensión,Dicloxacilina,cruzazul|pharmacys,2,2.65,2.65,https://www.pharmacys.com.ec/dicloxacilina-250mg-5ml-la-sante-suspension/p
+Dicloxacilina,antibiotico,Dicloxacilina 250mg/5ml tecnoquimicas - genericos suspensión,Dicloxacilina,cruzazul|pharmacys,2,2.65,2.65,https://www.pharmacys.com.ec/dicloxacilina-250mg-5ml-tecnoquimicas-genericos-suspension/p
+Dicloxacilina,antibiotico,Dicloxacilina 250mg/5ml tofis - generico jarabe,Dicloxacilina,cruzazul|pharmacys,2,2.1,2.1,https://www.pharmacys.com.ec/dicloxacilina-250mg-5ml-tofis-generico-jarabe/p
+Dicloxacilina,antibiotico,Dicloxacilina 500mg caplin point - generico cápsulas,Dicloxacilina,cruzazul|pharmacys,2,20.0,20.0,https://www.pharmacys.com.ec/dicloxacilina-500mg-caplin-point-generico-capsulas/p
+Dicloxacilina,antibiotico,Dicloxacilina 500mg dyvenpro ecuagen cápsulas,Dicloxacilina,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/dicloxacilina-500mg-dyvenpro-ecuagen-capsulas/p
+Dicloxacilina,antibiotico,Dicloxacilina 500mg la sante cápsulas,Dicloxacilina,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/dicloxacilina-500mg-la-sante-capsulas/p
+Dicloxacilina,antibiotico,Dicloxacilina 500mg tecnoquimicas - genericos cápsulas,Dicloxacilina,cruzazul|pharmacys,2,3.2,3.2,https://www.pharmacys.com.ec/dicloxacilina-500mg-tecnoquimicas-genericos-capsulas/p
+Dicloxacilina,antibiotico,Dicloxacilina Sante Polvo 250/5ml 80 ml (Ant),LA SANTE,medicity,1,2.44,2.44,https://www.farmaciasmedicity.com/dicloxacilina-sante-polvo-250-5ml-80-ml-ant-1/p
+Doxiciclina,antibiotico,Supramycina Forte Tabletas 200 mg Caja Con 10 Unidades (REC),SUPRAMYCINA,medicity,1,0.44,0.44,https://www.farmaciasmedicity.com/supramycina-forte-tabletas-200-mg-caja-con-10-unidades/p
+Eritromicina,antibiotico,Iloticipina Solución Tópica 4% 120 ml (REC),ILOTICINA,medicity,1,13.49,13.49,https://www.farmaciasmedicity.com/iloticipina-solucion-topica-4-120-ml/p
+Gentamicina,antibiotico,Bicorpan Crema Tubo 15 g,BICORPAN,medicity,1,2.98,2.98,https://www.farmaciasmedicity.com/bicorpan-crema-tubo-con-15-g/p
+Gentamicina,antibiotico,Diprogenta Crema Tubo 30 g,DIPROGENTA,medicity,1,5.33,5.33,https://www.farmaciasmedicity.com/diprogenta-crema-tubo-con-30-g/p
+Gentamicina,antibiotico,Gentamax Solución Inyectable Caja Con 1 Unidad (REC),GENTAMAX,medicity,1,0.86,0.86,https://www.farmaciasmedicity.com/gentamax-solucion-inyectable-caja-con-1-unidad/p
+Gentamicina,antibiotico,Gentamicina 160mg labvitalis ampolla inyectable,Gentamicina,cruzazul|pharmacys,2,4.45,4.45,https://www.pharmacys.com.ec/gentamicina-160mg-labvitalis-ampolla-inyectable/p
+Gentamicina,antibiotico,Gentamicina 80mg labvitalis ampolla inyectable,Gentamicina,cruzazul|pharmacys,2,4.42,4.42,https://www.pharmacys.com.ec/gentamicina-80mg-labvitalis-ampolla-inyectable/p
+Gentamicina,antibiotico,Nodial Crema Tubo 40 g,NODIAL,medicity,1,5.78,5.78,https://www.farmaciasmedicity.com/nodial-crema-tubo-40-g-1/p
+Gentamicina,antibiotico,Oftagen Compuesto Solución Oftálmico 0.3/0.1% Con 5 mL,OFTAGEN,medicity,1,3.2,3.2,https://www.farmaciasmedicity.com/oftagen-compuesto-solucion-oftalmico-0301-con-5-ml/p
+Gentamicina,antibiotico,Oftagen Solución Oftálmico 0.3% Frasco Con 5 mL (REC),OFTAGEN,medicity,1,1.22,1.22,https://www.farmaciasmedicity.com/oftagen-solucion-oftalmico-03-frasco-con-5-ml/p
+Gentamicina,antibiotico,Oftagen Ungüento Oftálmico 0.3% Con 3.5 g (REC),OFTAGEN,medicity,1,3.48,3.48,https://www.farmaciasmedicity.com/oftagen-unguento-oftalmico-03-con-35-g/p
+Gentamicina,antibiotico,Triderm Crema Tubo con 30 g,TRIDERM,medicity,1,5.92,5.92,https://www.farmaciasmedicity.com/triderm-crema-tubo-con-30-g/p
+Levofloxacino,antibiotico,Floximax 500mg eurofarma marcas tableta,Floximax,cruzazul|pharmacys,2,10.57,10.57,https://www.pharmacys.com.ec/floximax-500mg-eurofarma-marcas-tableta/p
+Levofloxacino,antibiotico,Floximax 750mg eurofarma marcas tableta,Floximax,cruzazul|pharmacys,2,13.0,13.0,https://www.pharmacys.com.ec/floximax-750mg-eurofarma-marcas-tableta/p
+Levofloxacino,antibiotico,Levofloxacina 500mg pharmedic infusión,Levofloxacina,cruzazul|pharmacys,2,12.39,12.39,https://www.pharmacys.com.ec/levofloxacina-500mg-pharmedic-infusion/p
+Levofloxacino,antibiotico,Levofree 500mg biogenet,Levofree,cruzazul|pharmacys,2,15.05,15.05,https://www.pharmacys.com.ec/levofree-500mg-biogenet/p
+Levofloxacino,antibiotico,Truxa 500mg quifatex dist medicamenta comprimidos recubiertos,Truxa,cruzazul|pharmacys,2,15.1,15.1,https://www.pharmacys.com.ec/truxa-500mg-quifatex-dist-medicamenta-comprimidos-recubiertos/p
+Levofloxacino,antibiotico,Truxa 750mg quifatex dist medicamenta comprimidos recubiertos,Truxa,cruzazul|pharmacys,2,18.9,18.9,https://www.pharmacys.com.ec/truxa-750mg-quifatex-dist-medicamenta-comprimidos-recubiertos/p
+Levofloxacino,antibiotico,Truxa Comprimido Recubierto 500 mg Caja 10 Unidades (REC),TRUXA,medicity,1,1.39,1.39,https://www.farmaciasmedicity.com/truxa-comprimido-recubierto-500-mg-caja-con-10-unidades/p
+Levofloxacino,antibiotico,Zoltum Pack Tratamiento 10 Días Caja 2 Unidades (REC),ZOLTUM,medicity,1,20.7,20.7,https://www.farmaciasmedicity.com/zoltum-pack-tratamiento-10-dias-caja-con-2-unidades/p
+Meropenem,antibiotico,Meropenem 1gr fresenius kabi hospitalario solución inyectable,Meropenem,cruzazul|pharmacys,2,445.2,445.2,https://www.pharmacys.com.ec/meropenem-1gr-fresenius-kabi-hospitalario-solucion-inyectable/p
+Meropenem,antibiotico,Meropenem 1gr labvitalis solución inyectable,Meropenem,cruzazul|pharmacys,2,303.8,303.8,https://www.pharmacys.com.ec/meropenem-1gr-labvitalis-solucion-inyectable/p
+Meropenem,antibiotico,Meropenem 500mg labvitalis solución inyectable,Meropenem,cruzazul|pharmacys,2,193.2,193.2,https://www.pharmacys.com.ec/meropenem-500mg-labvitalis-solucion-inyectable/p
+Metronidazol,antibiotico,Acromona Óvulos 500 mg /100.000 Ui 60 Unidades,ACROMONA,medicity,1,0.43,0.43,https://www.farmaciasmedicity.com/acromona-ovulos-500-mg-100000-ui-60-unidades/p
+Metronidazol,antibiotico,Amevan Tabletas 500mg Caja 30 Unidades,AMEVAN,medicity,1,0.1,0.1,https://www.farmaciasmedicity.com/amevan-tabletas-500mg-caja-30-unidades-1/p
+Metronidazol,antibiotico,Colpofilin Max Ovulos 750Mg+200Mg Caja 7 Unidades,COLPOFILIN MAX,medicity,1,1.31,1.31,https://www.farmaciasmedicity.com/colpofilin-max-ovulos-750mg-200mg-caja-7-unidades/p
+Metronidazol,antibiotico,Etron Nistatina Óvulos 500 mg/100.000Ui Con 10 Unidades,ETRON,medicity,1,0.84,0.84,https://www.farmaciasmedicity.com/etron-nistatina-ovulos-500-mg100000ui-con-10-unidades/p
+Metronidazol,antibiotico,Etron Suspensión Frasco 120 ml,ETRON,medicity,1,2.73,2.73,https://www.farmaciasmedicity.com/etron-suspension-frasco-con-120-ml/p
+Metronidazol,antibiotico,Fangan Plus Ovulos Caja 6 Unidades,FANGAN,medicity,1,1.06,1.06,https://www.farmaciasmedicity.com/fangan-plus-ovulos-caja-6-unidades/p
+Metronidazol,antibiotico,Gynotran Óvulos 750 / 200 mg Caja con 7 Unidades,GYNOTRAN,medicity,1,1.21,1.21,https://www.farmaciasmedicity.com/gynotran-ovulos-750--200-mg-caja-con-7-unidades/p
+Metronidazol,antibiotico,Metronidazol 1000mg oxialfarm farma óvulos,Metronidazol,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/metronidazol-1000mg-oxialfarm-farma-ovulos/p
+Metronidazol,antibiotico,Metronidazol 1gr labovida,Metronidazol,cruzazul|pharmacys,2,9.4,9.4,https://www.pharmacys.com.ec/metronidazol-1gr-labovida/p
+Metronidazol,antibiotico,Metronidazol 250mg/5ml labovida suspensión,Metronidazol,cruzazul|pharmacys,2,2.47,2.47,https://www.pharmacys.com.ec/metronidazol-250mg-5ml-labovida-suspension/p
+Metronidazol,antibiotico,Metronidazol 500mg alianza life,Metronidazol,cruzazul|pharmacys,2,5.09,5.09,https://www.pharmacys.com.ec/metronidazol-500mg-alianza-life-solucion-inyectable/p
+Metronidazol,antibiotico,Metronidazol 500mg kronos marca comprimidos,Metronidazol,cruzazul|pharmacys,2,6.0,6.0,https://www.pharmacys.com.ec/metronidazol-500mg-kronos-marca-comprimidos/p
+Metronidazol,antibiotico,Metronidazol 500mg labovida óvulos,Metronidazol,cruzazul|pharmacys,2,4.7,4.7,https://www.pharmacys.com.ec/metronidazol-500mg-labovida-ovulos/p
+Metronidazol,antibiotico,Metronidazol 500mg pharmatotal,Metronidazol,cruzazul|pharmacys,2,4.23,4.23,https://www.pharmacys.com.ec/metronidazol-500mg-pharmatotal/p
+Metronidazol,antibiotico,Metronidazol 500mg pharmedic ampolla inyectable,Metronidazol,cruzazul|pharmacys,2,3.85,3.85,https://www.pharmacys.com.ec/metronidazol-500mg-pharmedic-ampolla-inyectable/p
+Metronidazol,antibiotico,Metronidazol 500mg portugal - generico tableta,Metronidazol,cruzazul|pharmacys,2,12.0,12.0,https://www.pharmacys.com.ec/metronidazol-500mg-portugal-generico-tableta/p
+Metronidazol,antibiotico,Metronidazol 500mg rocnarf antiparasitarios,Metronidazol,cruzazul|pharmacys,2,3.6,3.6,https://www.pharmacys.com.ec/metronidazol-500mg-rocnarf-ovulos/p
+Metronidazol,antibiotico,Metronidazol Life Solución Inyectable 5mg/Ml x 100 ml,LIFE,medicity,1,3.82,3.82,https://www.farmaciasmedicity.com/metronidazol-life-solucion-inyectable-5mg-ml-x-100-ml-1/p
+Metronidazol,antibiotico,Neo Pelvicillin Óvulos Caja 6 Unidades,NEO PELVICILLIN,medicity,1,2.25,2.25,https://www.farmaciasmedicity.com/neo-pelvicillin-caja-con-6-ovulos-1/p
+Metronidazol,antibiotico,Rozex Gel 0.75% Tubo 30 g,ROZEX,medicity,1,9.41,9.41,https://www.farmaciasmedicity.com/rozex-gel-075-tubo-con-30-g/p
+Moxifloxacino,antibiotico,Flukal Tabletas Recubiertas 400mg Caja 10 Unidades,FLUKAL,medicity,1,6.95,6.95,https://www.farmaciasmedicity.com/flukal-tabletas-recubiertas-400mg-caja-10-unidades-1/p
+Moxifloxacino,antibiotico,Lamoflox Solución Oftálmica 0.5% Frasco 5 ml (REC),LAMOFLOX,medicity,1,12.22,12.22,https://www.farmaciasmedicity.com/lamoflox-solucion-oftalmica-0-5-frasco-5-ml-1/p
+Moxifloxacino,antibiotico,Moxaval 400mg ecuaquimica - saval comprimidos,Moxaval,cruzazul|pharmacys,2,46.9,46.9,https://www.pharmacys.com.ec/moxaval-400mg-ecuaquimica-saval-comprimidos/p
+Moxifloxacino,antibiotico,Moxaval Comprimidos Recubiertos 400mg Caja 7 Unidades,MOXAVAL,medicity,1,5.36,5.36,https://www.farmaciasmedicity.com/moxaval-comprimidos-recubiertos-400mg-caja-7-unidades-1/p
+Moxifloxacino,antibiotico,Moxifloxacino 400mg tecnoquimicas - genericos tableta,Moxifloxacino,cruzazul|pharmacys,2,20.16,20.16,https://www.pharmacys.com.ec/moxifloxacino-400mg-tecnoquimicas-genericos-tableta/p
+Moxifloxacino,antibiotico,Vigamox Solución Oftálmica 0.5% Frasco 5 ml (REC),VIGAMOX,medicity,1,12.22,12.22,https://www.farmaciasmedicity.com/vigamox-solucion-oftalmica-05-frasco-con-5-ml/p
+Nistatina,antibiotico,Etron 500mg/100000ui leterago - procaps óvulos,Etron,cruzazul|pharmacys,2,10.5,10.5,https://www.pharmacys.com.ec/etron-500mg-100000ui-leterago-roddome-ovulos/p
+Nistatina,antibiotico,Metronidazol+nistatina 500mg/100000ui caplin point - generico cápsulas,Metronidazol+nistatina,cruzazul|pharmacys,2,4.2,4.2,https://www.pharmacys.com.ec/metronidazol-nistatina-500mg-100000ui-caplin-point-generico-capsulas/p
+Nistatina,antibiotico,Neo Nystasolona Crema Tubo 15 g,NEO NYSTASOLONA,medicity,1,2.82,2.82,https://www.farmaciasmedicity.com/neo-nystasolona-crema-tubo-con-15-g/p
+Nistatina,antibiotico,Topsym Polivalente Crema Tubo 15 g,TOPSYM,medicity,1,2.58,2.58,https://www.farmaciasmedicity.com/topsym-polivalente-crema-tubo-con-15-g/p
+Nitrofurantoina,antibiotico,Nitrofurantoina 100mg tecnoquimicas - genericos cápsulas,Nitrofurantoina,cruzazul|pharmacys,2,7.0,7.0,https://www.pharmacys.com.ec/nitrofurantoina-100mg-tecnoquimicas-genericos-capsulas/p
+Nitrofurantoina,antibiotico,Uvamin Retardante Cápsulas 100 mg Caja Con 20 Unidades (REC),UVAMIN,medicity,1,0.21,0.21,https://www.farmaciasmedicity.com/uvamin-retardante-capsulas-100-mg-caja-con-20-unidades/p
+Norfloxacino,antibiotico,Norfloxacino 400mg tecnoquimicas - genericos tableta recubierta,Norfloxacino,cruzazul|pharmacys,2,5.76,5.76,https://www.pharmacys.com.ec/norfloxacino-400mg-tecnoquimicas-genericos-tableta-recubierta/p
+Norfloxacino,antibiotico,Orsanac 400mg leterago - megalabs comprimidos,Orsanac,cruzazul|pharmacys,2,8.98,8.98,https://www.pharmacys.com.ec/orsanac-400mg-leterago-megalabs-comprimidos/p
+Penicilina benzatinica,antibiotico,Biconcilina BZ Polvo Inyectable Caja 2 Unidades (REC),BICONCILINA,medicity,1,1.89,1.89,https://www.farmaciasmedicity.com/biconcilina-bz-polvo-inyectable-caja-con-2-unidades/p
+Penicilina benzatinica,antibiotico,Penicilina benzatinica 1200000ui genamerica generico ampollas inyectables,Penicilina Benzatinica,cruzazul|pharmacys,2,20.0,20.0,https://www.pharmacys.com.ec/penicilina-benzatinica-1200000ui-genamerica-generico-ampollas-inyectables/p
+Penicilina benzatinica,antibiotico,Penicilina benzatinica 2400000ui genamerica generico en polvo,Penicilina Benzatinica,cruzazul|pharmacys,2,27.0,27.0,https://www.pharmacys.com.ec/penicilina-benzatinica-2400000ui-genamerica-generico-en-polvo/p
+Sulfadiazina de plata,antibiotico,Platsul-A Crema Tubo 30 g,PLATSUL-A,medicity,1,7.73,7.73,https://www.farmaciasmedicity.com/platsul-a-crema-tubo-con-30-g/p
+Sulfadiazina de plata,antibiotico,Silvadin Crema 1% Frasco Con 150 g (REC),SILVADIN,medicity,1,9.56,9.56,https://www.farmaciasmedicity.com/silvadin-crema-1-frasco-con-150-g/p
+Sulfadiazina de plata,antibiotico,Sulfadiazina plata 1gr leterago - genfar en crema,Sulfadiazina Plata,cruzazul|pharmacys,2,2.93,2.93,https://www.pharmacys.com.ec/sulfadiazina-plata-1gr-leterago-genfar-en-crema/p
+Tetraciclina,antibiotico,Tetraciclina Ecuaquimica Cápsula 500mg Cápsula 500mg Caja 8 Unidades,ECUAQUIMICA,medicity,1,0.18,0.18,https://www.farmaciasmedicity.com/tetraciclina-ecuaquimica-capsula-500mg-capsula-500mg-caja-8-unidades-1/p
+Desogestrel,anticonceptivo,Tejania 0.075mg gedeonrichter tableta,Tejania,cruzazul|pharmacys,2,4.95,4.95,https://www.pharmacys.com.ec/tejania-0075mg-gedeonrichter-tableta/p
+Desogestrel,anticonceptivo,Tejania Comprimidos Recubiertos 0.075 mg Caja 28 Unidades,TEJANIA,medicity,1,4.55,4.55,https://www.farmaciasmedicity.com/tejania-comprimidos-recubiertos-0075-mg-caja-con-28-unidades/p
+Etinilestradiol/Ciproterona,anticonceptivo,Dixi 35 Tabletas Recubiertas 2/0.035 mg Caja con 21 Unidades,DIXI,medicity,1,7.84,7.84,https://www.farmaciasmedicity.com/dixi-35-tabletas-recubiertas-20035-mg-caja-con-21-unidades/p
+Etinilestradiol/Ciproterona,anticonceptivo,Dixi Suave 30 Tableta Recubierta 2mg/30mcg Caja 28 Unidades,DIXI,medicity,1,8.15,8.15,https://www.farmaciasmedicity.com/dixi-suave-30-tableta-recubierta-2-mg--30-mcg-caja-con-28-unidades/p
+Etinilestradiol/Ciproterona,anticonceptivo,Mileva 35 Comprimidos Recubiertos 2/0.035 mg Caja con 21 Unidades,MILEVA,medicity,1,5.95,5.95,https://www.farmaciasmedicity.com/mileva-35-comprimidos-recubiertos-20035-mg-caja-con-21-unidades/p
+Etinilestradiol/Clormadinona,anticonceptivo,Brunelle 2/0.03mg quifatex dist medicamenta comprimido recubierto,Brunelle,cruzazul|pharmacys,2,9.84,9.84,https://www.pharmacys.com.ec/brunelle-2-003mg-quifatex-dist-medicamenta-comprimido-recubierto/p
+Etinilestradiol/Clormadinona,anticonceptivo,Brunelle Comprimidos Recubiertos 2/0.03 mg Caja 21 Unidades,BRUNELLE,medicity,1,7.87,7.87,https://www.farmaciasmedicity.com/brunelle-comprimidos-recubiertos-2--003-mg-cajas-con-21-unidades/p
+Etinilestradiol/Clormadinona,anticonceptivo,Viora 20 Comprimidos Recubiertos 2/0.02 mg Caja 28 Unidades,VIORA,medicity,1,6.79,6.79,https://www.farmaciasmedicity.com/viora-20-comprimidos-recubiertos-2002-mg-caja-con-28-unidades/p
+Etinilestradiol/Dienogest,anticonceptivo,Gianda Comprimidos 2/0.03 mg Caja con 21 Unidades,GIANDA,medicity,1,15.94,15.94,https://www.farmaciasmedicity.com/gianda-comprimidos-2003-mg-caja-con-21-unidades/p
+Etinilestradiol/Dienogest,anticonceptivo,Sibilla Cd Comprimidos Recubiertos 2 / 0.03 mg Caja con 21+7 Unidades,SIBILLA,medicity,1,13.88,13.88,https://www.farmaciasmedicity.com/sibilla-cd-comprimidos-recubiertos-2--003-mg-caja-con-217-unidades/p
+Etinilestradiol/Dienogest,anticonceptivo,Sibilla Comprimido Recubierto Caja 21 Unidades,SIBILLA,medicity,1,12.7,12.7,https://www.farmaciasmedicity.com/sibilla-comprimido-recubierto-caja-con-21-unidades/p
+Etinilestradiol/Dienogest,anticonceptivo,Yael 0.03/2mg leterago - procaps tableta,Yael,cruzazul|pharmacys,2,14.5,14.5,https://www.pharmacys.com.ec/yael-003-2mg-leterago-roddome-tableta/p
+Etinilestradiol/Drospirenona,anticonceptivo,Jolian Comprimidos Recubierto 3/0.02mg Caja 24+4 Unidades,JOLIAN,medicity,1,15.47,15.47,https://www.farmaciasmedicity.com/jolian-comprimidos-recubierto-3-0-02mg-caja-24-4-unidades-1/p
+Etinilestradiol/Drospirenona,anticonceptivo,Mesames Comprimidos Recubiertos 3/0.03 mg Caja con 28 Unidades,MESAMES,medicity,1,9.24,9.24,https://www.farmaciasmedicity.com/mesames-comprimidos-recubiertos-3003-mg-caja-con-28-unidades/p
+Etinilestradiol/Drospirenona,anticonceptivo,Nadine Com-Rec x3/0.03mg x21,Prudence,cruzazul|pharmacys,2,3.09,3.09,https://www.pharmacys.com.ec/nadine-com-rec-x3-0-03mg-x21/p
+Etinilestradiol/Levonorgestrel,anticonceptivo,Anulette Comprimidos Recubiertos 0.15/0.03mg Caja 21 Unidades,ANULETTE,medicity,1,2.18,2.18,https://www.farmaciasmedicity.com/anulette-comprimidos-recubiertos-015--003-mg-caja-con-21-unidades/p
+Etinilestradiol/Levonorgestrel,anticonceptivo,Microgynon CD Grageas 0.15/0.03 mg Caja 28 Unidades,MICROGYNON,medicity,1,3.03,3.03,https://www.farmaciasmedicity.com/microgynon-cd-grageas-015003-mg-caja-con-28-unidades/p
+Etinilestradiol/Levonorgestrel,anticonceptivo,Microgynon Grageas 0.15/0.03mg Caja 21 Unidades,MICROGYNON,medicity,1,2.98,2.98,https://www.farmaciasmedicity.com/microgynon-grageas-015003-mg-caja-con-21-unidades/p
+Etinilestradiol/Norelgestromina,anticonceptivo,Evra Parch Tran Caja con 3 Unidades,EVRA,medicity,1,17.39,17.39,https://www.farmaciasmedicity.com/evra-parch-tran-caja-con-3-unidades/p
+Etonogestrel,anticonceptivo,Implanon 68mg organon,Implanon,cruzazul|pharmacys,2,60.55,60.55,https://www.pharmacys.com.ec/implanon-68mg-organon/p
+Etonogestrel,anticonceptivo,Implanon Nxt Implante 68 mg 1 Unidad,IMPLANON NXT,medicity,1,60.55,60.55,https://www.farmaciasmedicity.com/implanon-nxt-implante-68-mg-1-unidad/p
+Levonorgestrel emergencia,anticonceptivo,Damicocyn Tab x1.5mg x1,Damicocyn,cruzazul|pharmacys,2,6.89,6.89,https://www.pharmacys.com.ec/damicocyn-15mg-alianza-bonapharm/p
+Levonorgestrel emergencia,anticonceptivo,Escapel comprimidos,Escapel,cruzazul|pharmacys,2,7.5,7.5,https://www.pharmacys.com.ec/escapel-comprimidos/p
+Levonorgestrel emergencia,anticonceptivo,Tace 1 Tableta 1.5 mg  1 Unidad,TACE,medicity,1,6.03,6.03,https://www.farmaciasmedicity.com/tace-1-15mg-caja-con-1-tabletas/p
+Medroxiprogesterona,anticonceptivo,Cyclofemina Suspensión Inyectable 25/5mg Prellenado 0.5 ml,CYCLOFEMINA,medicity,1,7.73,7.73,https://www.farmaciasmedicity.com/cyclofemina-suspension-inyectable-25--5-mg-prellenado-05-ml/p
+Medroxiprogesterona,anticonceptivo,Provera Tabletas 10 mg Caja 10 Unidades,PROVERA,medicity,1,0.31,0.31,https://www.farmaciasmedicity.com/provera-tabletas-10-mg-caja-con-10-unidades/p
+Noretisterona enantato/Estradiol valerato,anticonceptivo,Soluna 5 Solución Inyectable 50/5mg/ml Frasco 1 ml,SOLUNA 5,medicity,1,3.81,3.81,https://www.farmaciasmedicity.com/soluna-5-solucion-inyectable-50--5-mg--ml-frasco-con-1-ml/p
+Atorvastatina,colesterol,Acrovastin Comprimido Recubierto Caja 30 Unidades,ACROVASTIN,medicity,1,1.03,1.03,https://www.farmaciasmedicity.com/acrovastin-comprimido-recubierto-caja-con-30-unidades/p
+Atorvastatina,colesterol,Atormibe Tableta Recubierta 10/10mg Caja 30 Unidades,ATORMIBE,medicity,1,1.15,1.15,https://www.farmaciasmedicity.com/atormibe-tableta-recubierta-10-10mg-caja-30-unidades-1/p
+Atorvastatina,colesterol,Atormibe Tabletas Recubiertas 20/10 mg Caja Con 30 Unidades,ATORMIBE,medicity,1,1.65,1.65,https://www.farmaciasmedicity.com/atormibe-tabletas-recubiertas-2010-mg-caja-con-30-unidades/p
+Atorvastatina,colesterol,Atorvastatina 10 MG x 10,Atorvastatina,cruzazul|pharmacys,2,15.6,15.6,https://www.pharmacys.com.ec/atorvastatina-tab-rx10m-pa2lle3-lst/p
+Atorvastatina,colesterol,Atorvastatina 20 MG x 10,Atorvastatina,cruzazul|pharmacys,2,22.4,22.4,https://www.pharmacys.com.ec/atorvastatina-tabx20mg-pag2lle3-lst/p
+Atorvastatina,colesterol,Atorvastatina 20mg caplin point - generico tableta,Atorvastatina,cruzazul|pharmacys,2,33.6,33.6,https://www.pharmacys.com.ec/atorvastatina-20mg-caplin-point-generico-tableta/p
+Atorvastatina,colesterol,Atorvastatina 20mg dyvenpro ecuagen tableta,Atorvastatina,cruzazul|pharmacys,2,11.2,11.2,https://www.pharmacys.com.ec/atorvastatina-20mg-dyvenpro-ecuagen-tableta/p
+Atorvastatina,colesterol,Atorvastatina 20mg garcos - nifa genericos tableta,Atorvastatina,cruzazul|pharmacys,2,11.2,11.2,https://www.pharmacys.com.ec/atorvastatina-20mg-garcos-nifa-genericos-tableta/p
+Atorvastatina,colesterol,Atorvastatina 40 mg x 10 Tabletas Recubiertas,Atorvastatina,cruzazul|pharmacys,2,18.5,18.5,https://www.pharmacys.com.ec/atorvastatina-40mg-la-sante-tabletas-recubiertas/p
+Atorvastatina,colesterol,Atorvastatina 40mg dyvenpro ecuagen tableta,Atorvastatina,cruzazul|pharmacys,2,35.8,35.8,https://www.pharmacys.com.ec/atorvastatina-40mg-dyvenpro-ecuagen-tableta/p
+Atorvastatina,colesterol,Atorvastatina 40mg garcos - nifa genericos tabletas recubiertas,Atorvastatina,cruzazul|pharmacys,2,18.5,18.5,https://www.pharmacys.com.ec/atorvastatina-40mg-garcos-nifa-genericos-tabletas-recubiertas/p
+Atorvastatina,colesterol,Atorvastatina 80mg garcos - nifa genericos tabletas recubiertas,Atorvastatina,cruzazul|pharmacys,2,29.0,29.0,https://www.pharmacys.com.ec/atorvastatina-80mg-garcos-nifa-genericos-tabletas-recubiertas/p
+Atorvastatina,colesterol,Atorvastatina Tabletas 10MG x 10,Atorvastatina,cruzazul|pharmacys,2,7.8,7.8,https://www.pharmacys.com.ec/atorvastatina-tabx10mgx10-lste/p
+Atorvastatina,colesterol,Atrolip Tableta Recubierta 40 mg Caja 14 Unidades,ATROLIP,medicity,1,1.48,1.48,https://www.farmaciasmedicity.com/atrolip-tableta-recubierta-40-mg-caja-con-14-unidades/p
+Atorvastatina,colesterol,Colmibe Comprimido 40/10mg Caja 30 Unidades,COLMIBE,medicity,1,1.96,1.96,https://www.farmaciasmedicity.com/purigi-panal-inf-ucare-diapers-xl-4-paquete-100-unidades-1/p
+Atorvastatina,colesterol,Lipomega Cápsula Blanda 20 mg Caja 30 Unidades,LIPOMEGA,medicity,1,1.64,1.64,https://www.farmaciasmedicity.com/lipomega-capsula-blanda-20-mg-caja-30-unidades-1/p
+Atorvastatina,colesterol,Tiazomet-A Tabletas Recubiertas 20mg+10mg Caja 30 Unidades,TIAZOMET,medicity,1,1.54,1.9,https://www.farmaciasmedicity.com/tiazomet-a-tabletas-recubiertas-20mg-10mg-caja-30-unidades-1/p
+Ezetimiba,colesterol,Amilipol 10/20mg biogenet cápsulas,Amilipol,cruzazul|pharmacys,2,13.4,13.4,https://www.pharmacys.com.ec/amilipol-10-20mg-biogenet-capsulas/p
+Fenofibrato,colesterol,Controlip Cápsulas 160 mg Caja Con 30 Unidades,CONTROLIP,medicity,1,0.59,0.59,https://www.farmaciasmedicity.com/controlip-capsulas-160-mg-caja-con-30-unidades/p
+Fenofibrato,colesterol,Lipidil 200 m Cápsulas 200 mg Caja 20 Unidades,LIPIDIL,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/lipidil-200-m-capsulas-200-mg-caja-con-20-unidades/p
+Fenofibrato,colesterol,Nortricol Fenofibrato Cápsula 200 mg Caja 20 Unidades,NORTRICOL FENOFIBRATO,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/nortricol-fenofibrato-capsula-200-mg-caja-20-unidades-1/p
+Fenofibrato,colesterol,Trilipix Cápsulas 135 mg Liberación Prolongada Caja Con 30 Unidades,TRILIPIX,medicity,1,0.72,0.72,https://www.farmaciasmedicity.com/trilipix-capsulas-135-mg-liberacion-prolongada-caja-con-30-unidades/p
+Gemfibrozilo,colesterol,Gemfibrozilo 600mg dyvenpro ecuagen tableta recubierta,Gemfibrozilo,cruzazul|pharmacys,2,6.2,6.2,https://www.pharmacys.com.ec/gemfibrozilo-600mg-dyvenpro-ecuagen-tableta-recubierta/p
+Gemfibrozilo,colesterol,Gemfibrozilo 600mg ecuaquimica - mintlab comprimidos recubiertos,Gemfibrozilo,cruzazul|pharmacys,2,9.3,9.3,https://www.pharmacys.com.ec/gemfibrozilo-600mg-ecuaquimica-mintlab-comprimidos-recubiertos/p
+Gemfibrozilo,colesterol,Gemfibrozilo 600mg la sante tableta,Gemfibrozilo,cruzazul|pharmacys,2,5.6,5.6,https://www.pharmacys.com.ec/gemfibrozilo-600mg-la-sante-tableta/p
+Gemfibrozilo,colesterol,Gemfibrozilo 600mg labovida tabletas recubiertas,Gemfibrozilo,cruzazul|pharmacys,2,5.2,5.2,https://www.pharmacys.com.ec/gemfibrozilo-600mg-labovida-tabletas-recubiertas/p
+Gemfibrozilo,colesterol,Gemfibrozilo 600mg leterago - genfar tableta,Gemfibrozilo,cruzazul|pharmacys,2,5.78,5.78,https://www.pharmacys.com.ec/gemfibrozilo-600mg-leterago-genfar-tableta/p
+Gemfibrozilo,colesterol,Gemfibrozilo 600mg tecnoquimicas - genericos tableta recubierta,Gemfibrozilo,cruzazul|pharmacys,2,6.2,6.2,https://www.pharmacys.com.ec/gemfibrozilo-600mg-tecnoquimicas-genericos-tableta-recubierta/p
+Gemfibrozilo,colesterol,Gemfibrozilo 900mg tecnoquimicas - genericos tableta recubierta,Gemfibrozilo,cruzazul|pharmacys,2,16.07,16.07,https://www.pharmacys.com.ec/gemfibrozilo-900mg-tecnoquimicas-genericos-tableta-recubierta/p
+Gemfibrozilo,colesterol,Gemfibrozilo Genfar Tabletas Recubiertas 600 mg Caja con 20 Unidades,GENFAR,medicity,1,0.27,0.27,https://www.farmaciasmedicity.com/gemfibrozilo-genfar-tabletas-recubiertas-600-mg-caja-con-20-unidades/p
+Gemfibrozilo,colesterol,Gemfibrozilo Tabletas  600 mg x 20,Gemfibrozilo,cruzazul|pharmacys,2,4.96,6.2,https://www.pharmacys.com.ec/gemfibrozilo-600mg-garcos-nifa-genericos-tableta-98588-1/p
+Omega 3 aceite de pescado,colesterol,Herbalmax triple omega 3-6-9 100 softgels,Herbalmax,cruzazul|pharmacys,2,20.0,20.0,https://www.pharmacys.com.ec/herbalmax-triple-omega-3-6-9-100-softgels/p
+Omega 3 aceite de pescado,colesterol,Krillomex 44.4 gr,Krillomex,cruzazul|pharmacys,2,21.6,21.6,https://www.pharmacys.com.ec/krillomex-444-gr/p
+Omega 3 aceite de pescado,colesterol,Mason Omega 3 Cápsulas Blandas 1000 mg Frasco 60 Unidades,MASON,medicity,1,0.21,0.21,https://www.farmaciasmedicity.com/mason-omega-3-capsulas-blandas-1000-mg-frasco-con-60-unidades/p
+Omega 3 aceite de pescado,colesterol,Omega 3 cápsulas x 60,Omega 3,cruzazul|pharmacys,2,11.12,13.9,https://www.pharmacys.com.ec/omega-3-capsulas-x-60/p
+Omega 3 aceite de pescado,colesterol,Xtralife Omega 3 Cápsula Blanda 1000 mg 100 Unidades,XTRALIFE,medicity,1,16.55,16.55,https://www.farmaciasmedicity.com/omega-3-xtralife-capsula-blanda-1000-mg-con-100-unidades/p
+Omega 3 aceite de pescado,colesterol,Xtralife cápsulas x 90,Xtralife,cruzazul|pharmacys,2,17.97,23.96,https://www.pharmacys.com.ec/xtralife-capsulas-x-90/p
+Rosuvastatina,colesterol,Crestor Comprimido Recubierto 10 mg Caja Con 30 Unidades,CRESTOR,medicity,1,0.94,0.94,https://www.farmaciasmedicity.com/crestor-comprimido-recubierto-caja-con-30-unidades/p
+Rosuvastatina,colesterol,Crestor Tabletas Recubiertas 20 mg Caja Con 30 Unidades,CRESTOR,medicity,1,1.89,1.89,https://www.farmaciasmedicity.com/crestor-tabletas-recubiertas-caja-con-30-unidades/p
+Rosuvastatina,colesterol,Liparon Comprimidos Recubiertos 40mg Caja 30 Unidades,LIPARON,medicity,1,2.57,2.57,https://www.farmaciasmedicity.com/liparon-comprimidos-recubiertos-40mg-caja-30-unidades-1/p
+Rosuvastatina,colesterol,Recolmax Tabletas 10mg+10mg Caja 30 Unidades,RECOLMAX,medicity,1,1.05,1.05,https://www.farmaciasmedicity.com/recolmax-tabletas-10mg-10mg-caja-30-unidades-1/p
+Rosuvastatina,colesterol,Recolmax Tabletas Recubiertas 20mg+10mg Caja 30 Unidades,RECOLMAX,medicity,1,1.39,1.39,https://www.farmaciasmedicity.com/recolmax-tabletas-recubiertas-20mg-10mg-caja-30-unidades-1/p
+Rosuvastatina,colesterol,Rosucol Comprimidos Recubiertas 20 mg Caja 30 Unidades,ROSUCOL,medicity,1,1.7,1.7,https://www.farmaciasmedicity.com/rosucol-comprimidos-recubiertas-20-mg-caja-30-unidades-1/p
+Rosuvastatina,colesterol,Rosucol E Tableta Recubierta 10/10mg Caja 30 Unidades,ROSUCOL,medicity,1,1.58,1.58,https://www.farmaciasmedicity.com/rosucol-e-tableta-recubierta-10-10mg-caja-30-unidades-1/p
+Rosuvastatina,colesterol,Rosuvastatina 10 mg x30,Rosuvastatina,cruzazul|pharmacys,2,22.5,22.5,https://www.pharmacys.com.ec/rosuvastatina-10mg-la-sante-tabletas-recubiertas/p
+Rosuvastatina,colesterol,Rosuvastatina 20mg la sante tabletas recubiertas,Rosuvastatina,cruzazul|pharmacys,2,27.0,27.0,https://www.pharmacys.com.ec/rosuvastatina-20mg-la-sante-tabletas-recubiertas/p
+Rosuvastatina,colesterol,Rosuvina 10/40mg leterago - legrand,Rosuvina,cruzazul|pharmacys,2,60.0,60.0,https://www.pharmacys.com.ec/rosuvina-10-40mg-leterago-legrand/p
+Rosuvastatina,colesterol,Rux Comprimido Recubierto 10 mg Caja 30 Unidades,RUX,medicity,1,0.88,0.88,https://www.farmaciasmedicity.com/rux-comprimido-recubierto-10-mg-caja-30-unidades-1/p
+Rosuvastatina,colesterol,Rux Comprimido Recubierto 20 mg Caja Con 30 Unidades,RUX,medicity,1,1.58,1.58,https://www.farmaciasmedicity.com/rux-comprimido-recubierto-20-mg-caja-con-30-unidades-1/p
+Rosuvastatina,colesterol,Rux Comprimido Recubierto 5 mg Caja 30 Unidades,RUX,medicity,1,0.39,0.39,https://www.farmaciasmedicity.com/rux-comprimido-recubierto-5-mg-caja-30-unidades-1/p
+Simvastatina,colesterol,Simvastatina 20mg dyvenpro ecuagen tabletas recubiertas,Simvastatina,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/simvastatina-20mg-dyvenpro-ecuagen-tabletas-recubiertas/p
+Simvastatina,colesterol,Simvastatina 20mg kronos genericos tableta,Simvastatina,cruzazul|pharmacys,2,43.93,43.93,https://www.pharmacys.com.ec/simvastatina-20mg-kronos-marca-tableta/p
+Simvastatina,colesterol,Simvastatina 20mg la sante tableta,Simvastatina,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/simvastatina-20mg-la-sante-tableta/p
+Simvastatina,colesterol,Simvastatina 20mg labovida tableta recubierta,Simvastatina,cruzazul|pharmacys,2,9.0,9.0,https://www.pharmacys.com.ec/simvastatina-20mg-labovida-tableta-recubierta/p
+Simvastatina,colesterol,Simvastatina 20mg leterago - genfar cápsulas,Simvastatina,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/simvastatina-20mg-leterago-genfar-capsulas/p
+Simvastatina,colesterol,Simvastatina 20mg tecnoquimicas - genericos tableta,Simvastatina,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/simvastatina-20mg-tecnoquimicas-genericos-tableta/p
+Simvastatina,colesterol,Simvastatina 40 mg Tabletas Recubiertas Caja x10,Simvastatina,cruzazul|pharmacys,2,5.0,5.0,https://www.pharmacys.com.ec/simvastatina-40mg-dyvenpro-ecuagen-tableta-recubierta/p
+Simvastatina,colesterol,Simvastatina 40mg garcos - nifa genericos tableta,Simvastatina,cruzazul|pharmacys,2,5.0,5.0,https://www.pharmacys.com.ec/simvastatina-40mg-garcos-nifa-genericos-tableta/p
+Simvastatina,colesterol,Simvastatina 40mg labovida tableta recubierta,Simvastatina,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/simvastatina-40mg-labovida-tableta-recubierta/p
+Simvastatina,colesterol,Simvastatina 40mg leterago - genfar cápsulas,Simvastatina,cruzazul|pharmacys,2,5.0,5.0,https://www.pharmacys.com.ec/simvastatina-40mg-leterago-genfar-capsulas/p
+Simvastatina,colesterol,Simvastatina Genfar Tabletas Recubiertas 40 mg Caja 10 Unidades,GENFAR,medicity,1,0.38,0.38,https://www.farmaciasmedicity.com/simvastatina-genfar-tabletas-recubiertas-40-mg-caja-10-unidades-1/p
+Simvastatina,colesterol,Simvastatina Genfar Tabletas Recubierto 20mg Caja 10 Unidades,GENFAR,medicity,1,0.36,0.36,https://www.farmaciasmedicity.com/simvastatina-genfar-tabletas-recubierto-20mg-caja-10-unidades-1/p
+Simvastatina,colesterol,Vytorin Comprimido 10/20 mg Caja 28 Unidades,VYTORIN,medicity,1,1.64,1.64,https://www.farmaciasmedicity.com/vytorin-comprimido-1020-mg-caja-con-28-unidades/p
+Simvastatina,colesterol,Vytorin Comprimidos 10/10mg Caja 28 Unidades,VYTORIN,medicity,1,1.25,1.25,https://www.farmaciasmedicity.com/vytorin-comprimidos-10mg-10mg-caja-28-unidades-1/p
+Simvastatina,colesterol,Vytorin Comprimidos 10/40mg Caja 28 Unidades,VYTORIN,medicity,1,2.61,2.61,https://www.farmaciasmedicity.com/vytorin-comprimidos-40mg-10mg-caja-28-unidades-1/p
+Simvastatina,colesterol,Zetina Tabletas Recubiertas 20 mg Caja 30 Unidades,ZETINA,medicity,1,0.41,0.41,https://www.farmaciasmedicity.com/zetina-tabletas-recubiertas-20-mg-caja-con-30-unidades/p
+Dapagliflozina,diabetes,Fanter 10mg quifatex dist medicamenta fanter – inhibidor sglt2 oral,Fanter,cruzazul|pharmacys,2,45.9,45.9,https://www.pharmacys.com.ec/fanter-10mg-quifatex-dist-medicamenta-fanter-inhibidor-sglt2/p
+Dapagliflozina,diabetes,Fanter Comprimidos Recubiertos 10 mg Caja 30 Unidades,FANTER,medicity,1,1.22,1.22,https://www.farmaciasmedicity.com/fanter-comprimidos-recubiertos-10-mg-caja-30-unidades-1/p
+Dapagliflozina,diabetes,Forxiga Comprimidos Recubiertas 10 mg Caja 30 Unidades,FORXIGA,medicity,1,1.56,1.56,https://www.farmaciasmedicity.com/forxiga-comprimidos-recubiertas-10-mg-caja-30-unidades-1/p
+Dapagliflozina,diabetes,Paziglip Duo 10 mg/1000 mg x 28,Paziglip,cruzazul|pharmacys,2,41.49,41.49,https://www.pharmacys.com.ec/paziglip-duo-10mg-1000mg-x28/p
+Dapagliflozina,diabetes,Paziglip Duo 5 mg/1000 mg x 28,Paziglip,cruzazul|pharmacys,2,21.17,21.17,https://www.pharmacys.com.ec/paziglip-duo-5mg-1000mg-x28/p
+Dapagliflozina,diabetes,Xigduo XR Comprimidos Recubiertos Caja con 30 Unidades,XIGDUO,medicity,1,1.23,1.23,https://www.farmaciasmedicity.com/xigduo-xr-comprimidos-recubiertos-caja-con-30-unidades/p
+Empagliflozina,diabetes,Jardiance Comprimidos Recubiertos Caja con 30 Unidades,JARDIANCE,medicity,1,1.6,1.6,https://www.farmaciasmedicity.com/jardiance-comprimidos-recubiertos-caja-con-30-unidades/p
+Empagliflozina,diabetes,Jardiance Duo Comprimidos Recubiertos Caja Con 60 Unidades,JARDIANCE,medicity,1,1.14,1.14,https://www.farmaciasmedicity.com/jardiance-duo-comprimidos-recubiertos-caja-con-60-unidades/p
+Glibenclamida,diabetes,Glibenclamida 5mg ecuaquimica - mintlab comprimidos,Glibenclamida,cruzazul|pharmacys,2,2.4,2.4,https://www.pharmacys.com.ec/glibenclamida-5mg-ecuaquimica-mintlab-comprimidos/p
+Glibenclamida,diabetes,Glibenclamida 5mg tecnoquimicas - genericos tableta,Glibenclamida,cruzazul|pharmacys,2,2.4,2.4,https://www.pharmacys.com.ec/glibenclamida-5mg-tecnoquimicas-genericos-tableta/p
+Glibenclamida,diabetes,Glibenclamida Mk Tabletas 5 mg Caja Con 30 Unidades,MK,medicity,1,0.06,0.06,https://www.farmaciasmedicity.com/glibenclamida-mk-tabletas-5-mg-caja-con-30-unidades/p
+Glibenclamida,diabetes,Glucovance Tabletas Recubiertas Caja Con 30 Unidades,GLUCOVANCE,medicity,1,0.26,0.26,https://www.farmaciasmedicity.com/glucovance-tabletas-recubiertas-caja-con-30-unidades/p
+Glibenclamida,diabetes,Metfordan 500/5mg danivet tableta,Metfordan,cruzazul|pharmacys,2,4.53,4.53,https://www.pharmacys.com.ec/metfordan-500-5mg-danivet-tableta/p
+Glimepirida,diabetes,Amaryl M Comprimido Recubierto Caja Con 16 Unidades,AMARYL,medicity,1,0.51,0.51,https://www.farmaciasmedicity.com/amaryl-m-comprimido-recubierto-caja-con-16-unidades/p
+Glimepirida,diabetes,Glimepirida 2mg tecnoquimicas - genericos tableta,Glimepirida,cruzazul|pharmacys,2,3.9,3.9,https://www.pharmacys.com.ec/glimepirida-2mg-tecnoquimicas-genericos-tableta/p
+Glimepirida,diabetes,Glimepirida 4mg tecnoquimicas - genericos tableta,Glimepirida,cruzazul|pharmacys,2,6.8,6.8,https://www.pharmacys.com.ec/glimepirida-4mg-tecnoquimicas-genericos-tableta/p
+Insulina detemir,diabetes,Levemir 100ui leterago - novo nordisk solución inyectable,Levemir,cruzazul|pharmacys,2,15.92,15.92,https://www.pharmacys.com.ec/levemir-100ui-leterago-novo-nordisk-solucion-inyectable/p
+Insulina glargina,diabetes,Lantus Solostar Solución Inyectable 100Ui/ mL Caja con 1 Unidad,LANTUS,medicity,1,14.33,14.33,https://www.farmaciasmedicity.com/lantus-solostar-solucion-inyectable-100ui-ml-caja-con-1-unidad/p
+Insulina glargina,diabetes,Toujeo Solución Inyectable 300u/Ml Prellenado 1.5 ml 1 Unidad Cf,TOUJEO,medicity,1,30.49,30.49,https://www.farmaciasmedicity.com/toujeo-solucion-inyectable-300u-ml-prellenado-1-5-ml-1-unidad-cf-1/p
+Insulina glulisina,diabetes,Apidra Solostar Solución Inyectable 100Ui/ mL Con 3 mL,APIDRA,medicity,1,12.46,12.46,https://www.farmaciasmedicity.com/apidra-solostar-solucion-inyectable-100ui-ml-con-3-ml/p
+Insulina lispro,diabetes,Humalog 100ui quifatex dist medicamenta solución inyectable,Humalog,cruzazul|pharmacys,2,68.5,68.5,https://www.pharmacys.com.ec/humalog-100ui-quifatex-dist-medicamenta-solucion-inyectable/p
+Insulina lispro,diabetes,Humalog 100ui quifatex dist medicamenta solución inyectable mix lapicero,Humalog,cruzazul|pharmacys,2,68.5,68.5,https://www.pharmacys.com.ec/humalog-100ui-quifatex-dist-medicamenta-solucion-inyectable-mix-lapicero/p
+Insulina mezcla 70/30,diabetes,Insulina Humulin 70/30 100 UI/ml Vial 10 ml,Humulin,cruzazul|pharmacys,2,22.14,22.14,https://www.pharmacys.com.ec/humulin-100ui-quifatex-dist-medicamenta-suspension-30-70/p
+Insulina mezcla 70/30,diabetes,Novolin 70/30 Insulina 100 UI/mL Frasco 10 mL,Novolin,cruzazul|pharmacys,2,14.4,18.0,https://www.pharmacys.com.ec/novolin-100ui-leterago-novo-nordisk-suspension-inyectable-1042-13741/p
+Insulina mezcla 70/30,diabetes,Novolin penf 70/30 s-inyx100uix3mx5,Novolin,cruzazul|pharmacys,2,34.21,34.21,https://www.pharmacys.com.ec/novolin-100ui-leterago-novo-nordisk-suspension-inyectable-1652-13741/p
+Linagliptina,diabetes,Glipnal 5 mg x 30,Glipnal,cruzazul|pharmacys,2,40.03,40.03,https://www.pharmacys.com.ec/glipnal-5mg-x30/p
+Linagliptina,diabetes,"Glipnal Duo 2,5 mg/1000 mg x 60",Glipnal,cruzazul|pharmacys,2,41.82,41.82,https://www.pharmacys.com.ec/glipnal-duo-2-5mg-1000mg-x60/p
+Linagliptina,diabetes,"Glipnal Duo 2,5 mg/500 mg x 60",Glipnal,cruzazul|pharmacys,2,41.82,41.82,https://www.pharmacys.com.ec/glipnal-duo-2-5mg-500mg-x60/p
+Linagliptina,diabetes,"Glipnal Duo 2,5 mg/850 mg x 60",Glipnal,cruzazul|pharmacys,2,41.82,41.82,https://www.pharmacys.com.ec/glipnal-duo-2-5mg-850mg-x60/p
+Linagliptina,diabetes,Glyxambi Comprimidos Recubiertas 25/5mg Caja 30 Unidades,GLYXAMBI,medicity,1,2.78,2.78,https://www.farmaciasmedicity.com/glyxambi-comprimidos-recubiertas-25-5mg-caja-30-unidades-1/p
+Linagliptina,diabetes,Trayenta Duo Comprimidos Recubiertos 2.5/500 mg Caja 60 Unidades,TRAYENTA,medicity,1,0.83,0.83,https://www.farmaciasmedicity.com/trayenta-duo-comprimidos-recubiertos-25500-mg-caja-con-60-unidades/p
+Linagliptina,diabetes,Trayenta Duo Comprimidos Recubiertos Caja Con 60 Unidades,TRAYENTA,medicity,1,0.83,0.83,https://www.farmaciasmedicity.com/trayenta-duo-comprimidos-recubiertos-caja-con-60-unidades/p
+Liraglutida,diabetes,Saxenda Solución Inyectable Prell 6mg/ml Caja 3 Unidades,SAXENDA,medicity,1,104.83,104.83,https://www.farmaciasmedicity.com/saxenda-solucion-inyectable-prell-6mg-ml-caja-3-unidades-1/p
+Metformina,diabetes,Glicenex Sr Comprimidos 750 mg Liberación Prolongada Caja Con 30 Unidades,GLICENEX,medicity,1,0.55,0.55,https://www.farmaciasmedicity.com/glicenex-sr-comprimidos-750-mg-liberacion-prolongada-caja-con-30-unidades/p
+Metformina,diabetes,Glicenex Sr Comprimidos Liberación Prolongada 1000 mg Caja 30 Unidades,GLICENEX,medicity,1,0.92,0.92,https://www.farmaciasmedicity.com/glicenex-sr-comprimidos-liberacion-prolongada-1000-mg-caja-30-unidades-1/p
+Metformina,diabetes,Glicenex Sr Comprimidos Recubiertos 500 mg Caja Con 30 Unidades,GLICENEX,medicity,1,0.48,0.48,https://www.farmaciasmedicity.com/glicenex-sr-comprimidos-recubiertos-500-mg-caja-con-30-unidades/p
+Metformina,diabetes,Glucocid Comprimidos Recubiertos 850 mg Caja 30 Unidades,GLUCOCID,medicity,1,0.21,0.21,https://www.farmaciasmedicity.com/glucocid-comprimidos-recubiertos-850-mg-caja-con-30-unidades/p
+Metformina,diabetes,Glucofage Tabletas Caja Con 60 Unidades,GLUCOFAGE,medicity,1,0.22,0.22,https://www.farmaciasmedicity.com/glucofage-tabletas-caja-con-60-unidades/p
+Metformina,diabetes,Glucofage Xr Tabletas Liberación Prolongada Caja Con 30 Unidades,GLUCOFAGE,medicity,1,0.76,0.76,https://www.farmaciasmedicity.com/glucofage-xr-tabletas-liberacion-prolongada-caja-con-30-unidades/p
+Metformina,diabetes,Metformina 1000mg berkanafarma tabletas recubiertas,Metformina,cruzazul|pharmacys,2,11.4,11.4,https://www.pharmacys.com.ec/metformina-1000mg-berkana-berkana-tabletas-recubiertas/p
+Metformina,diabetes,Metformina 1000mg caplin point - generico tableta,Metformina,cruzazul|pharmacys,2,11.4,11.4,https://www.pharmacys.com.ec/metformina-1000mg-caplin-point-generico-tableta/p
+Metformina,diabetes,Metformina 1000mg jaspharm generico tabletas recubiertas,Metformina,cruzazul|pharmacys,2,11.1,11.1,https://www.pharmacys.com.ec/metformina-1000mg-jaspharm-generico-tabletas-recubiertas/p
+Metformina,diabetes,Metformina 1000mg labovida tabletas recubiertas,Metformina,cruzazul|pharmacys,2,5.4,9.0,https://www.pharmacys.com.ec/metformina-1000mg-labovida-tabletas-recubiertas/p
+Metformina,diabetes,Metformina 500mg berkanafarma tabletas recubiertas,Metformina,cruzazul|pharmacys,2,7.5,7.5,https://www.pharmacys.com.ec/metformina-500mg-berkana-berkana-tabletas-recubiertas/p
+Metformina,diabetes,Metformina 500mg labovida tableta recubierta,Metformina,cruzazul|pharmacys,2,3.24,5.4,https://www.pharmacys.com.ec/metformina-500mg-labovida-tableta-recubierta/p
+Metformina,diabetes,Metformina 850 mg 10 Tabletas,Metformina,cruzazul|pharmacys,2,3.28,4.1,https://www.pharmacys.com.ec/metformina-850mg-pharmedic/p
+Metformina,diabetes,Metformina 850mg berkanafarma tabletas recubiertas,Metformina,cruzazul|pharmacys,2,8.1,8.1,https://www.pharmacys.com.ec/metformina-850mg-berkana-berkana-tabletas-recubiertas/p
+Metformina,diabetes,Metformina 850mg leterago - genfar comprimidos,Metformina,cruzazul|pharmacys,2,8.1,8.1,https://www.pharmacys.com.ec/metformina-850mg-leterago-genfar-comprimidos/p
+Metformina,diabetes,Metformina 850mg tecnoquimicas - genericos tableta,Metformina,cruzazul|pharmacys,2,5.1,5.1,https://www.pharmacys.com.ec/metformina-850mg-tecnoquimicas-genericos-tableta/p
+Metformina,diabetes,Metformina Bkf Tabletas Recubiertas 500 mg Caja 30 Unidades,BKF,medicity,1,0.19,0.19,https://www.farmaciasmedicity.com/metformina-bkf-tabletas-recubiertas-500-mg-caja-30-unidades-1/p
+Metformina,diabetes,Metformina Bkf Tabletas Recubiertas 850 mg Caja 30 Unidades,BKF,medicity,1,0.25,0.25,https://www.farmaciasmedicity.com/metformina-bkf-tabletas-recubiertas-850-mg-caja-30-unidades-1/p
+Metformina,diabetes,Metformina Bkf Tabletas Recubierto 1000mg Caja 30 Unidades,BKF,medicity,1,0.28,0.28,https://www.farmaciasmedicity.com/metformina-bkf-tabletas-recubierto-1000mg-caja-30-unidades-1/p
+Metformina,diabetes,Metformina Nifa Tabletas Recubiertas 500 mg Caja con 30 Unidades,NIFA,medicity,1,0.15,0.15,https://www.farmaciasmedicity.com/metformina-nifa-tabletas-recubiertas-500-mg-caja-con-30-unidades-1/p
+Metformina liberacion prolongada,diabetes,Altuxerin Duo 100 mg/1000 mg x 28,Altuxerin,cruzazul|pharmacys,2,49.84,49.84,https://www.pharmacys.com.ec/altuxerin-duo-100mg-1000mg-x28/p
+Metformina liberacion prolongada,diabetes,Altuxerin Duo 50 mg/1000 mg x 28,Altuxerin,cruzazul|pharmacys,2,31.08,31.08,https://www.pharmacys.com.ec/altuxerin-duo-50mg-1000mg-x28/p
+Metformina liberacion prolongada,diabetes,Circadin Tabletas De Liberación Prolongada 2mg Caja 30 Unidades,CIRCADIN,medicity,1,1.11,1.11,https://www.farmaciasmedicity.com/circadin-tabletas-de-liberacion-prolongada-2mg-caja-30-unidades-1/p
+Metformina liberacion prolongada,diabetes,Dexilant Cápsulas Liberación Prolongada Caja Con 14 Unidades,DEXILANT,medicity,1,1.38,1.38,https://www.farmaciasmedicity.com/dexilant-capsulas-liberacion-prolongada-caja-con-14-unidades/p
+Metformina liberacion prolongada,diabetes,Dexopral Cápsulas Liberación Prolongada Caja Con 30 Unidades,DEXOPRAL,medicity,1,1.21,1.21,https://www.farmaciasmedicity.com/dexopral-capsulas-liberacion-prolongada-caja-con-30-unidades/p
+Metformina liberacion prolongada,diabetes,Dolo-Neurobión Retard Tabletas Liberación Prolongada 20 Unidades,DOLO-NEUROBION,medicity,1,1.12,1.12,https://www.farmaciasmedicity.com/dolo-neurobion-tabletas-liberacion-prolongada-caja-con-20-unidades/p
+Metformina liberacion prolongada,diabetes,Enablex Comprimidos De Liberación Prolongada 7.5mg Caja 28 Unidades,ENABLEX,medicity,1,1.33,1.33,https://www.farmaciasmedicity.com/enablex-comprimidos-de-liberacion-prolongada-7-5mg-caja-28-unidades-1/p
+Metformina liberacion prolongada,diabetes,Glucofage Xr Comprimidos 750 mg Liberación Prolongada 30 Unidades,GLUCOFAGE,medicity,1,0.61,0.61,https://www.farmaciasmedicity.com/glucofage-xr-comprimidos-750-mg-liberacion-prolongada-30-unidades/p
+Metformina liberacion prolongada,diabetes,Hiprostam 0.4/0.5mg rocnarf d - cápsulas de liberación prolongada,Hiprostam,cruzazul|pharmacys,2,28.8,28.8,https://www.pharmacys.com.ec/hiprostam-04-05mg-rocnarf-marca-d-capsulas-de-liberacion-prolongada/p
+Metformina liberacion prolongada,diabetes,Mellimet 1000 mg x 30,Mellimet,cruzazul|pharmacys,2,11.76,11.76,https://www.pharmacys.com.ec/mellimet-1000mg-x30/p
+Metformina liberacion prolongada,diabetes,Mellimet 500 mg x 30,Mellimet,cruzazul|pharmacys,2,11.76,11.76,https://www.pharmacys.com.ec/mellimet-500mg-x30/p
+Metformina liberacion prolongada,diabetes,Mellimet 750 mg x 30,Mellimet,cruzazul|pharmacys,2,16.33,16.33,https://www.pharmacys.com.ec/mellimet-750mg-x30/p
+Metformina liberacion prolongada,diabetes,Urocit Tabletas 1080 mg Liberación Prolongada 100 Unidades,UROCIT,medicity,1,33.22,33.22,https://www.farmaciasmedicity.com/urocit-tabletas-1080-mg-liberacion-prolongada-100-unidades/p
+Semaglutida,diabetes,Dutide 3 mg Semaglutida 30 Comprimidos,DUTIDE,medicity,1,3.9,3.9,https://www.farmaciasmedicity.com/dutide-3-mg-semaglutida-30-comprimidos/p
+Semaglutida,diabetes,Dutide 7 mg Semaglutida 30 Comprimidos,DUTIDE,medicity,1,3.9,3.9,https://www.farmaciasmedicity.com/dutide-7-mg-semaglutida-30-comprimidos/p
+Semaglutida,diabetes,Ozempic Duald Solución Inyectable 0.25/0.5mg 1.5ml Caja con Frasco,OZEMPIC,medicity,1,178.66,178.66,https://www.farmaciasmedicity.com/ozempic-duald-solucion-inyectable-0-25-0-5mg-1-5ml-caja-con-frasco-1/p
+Sitagliptina,diabetes,Altuxerin 100 mg x 28,Altuxerin,cruzazul|pharmacys,2,44.8,44.8,https://www.pharmacys.com.ec/altuxerin-100mg-x28/p
+Sitagliptina,diabetes,Altuxerin 50 mg x 14,Altuxerin,cruzazul|pharmacys,2,22.4,22.4,https://www.pharmacys.com.ec/altuxerin-50mg-x14/p
+Sitagliptina,diabetes,Janumet Comprimidos Recubiertos 50/850 mg,JANUMET,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/janumet-comprimidos-recubiertos-50850-mg/p
+Sitagliptina,diabetes,Janumet Comprimidos Recubiertos Caja Con 28 Unidades,JANUMET,medicity,1,0.67,0.67,https://www.farmaciasmedicity.com/janumet-comprimidos-recubiertos-caja-con-28-unidades/p
+Sitagliptina,diabetes,Janumet Comprimidos Recubiertos Caja Con 56 Unidades,JANUMET,medicity,1,0.75,0.75,https://www.farmaciasmedicity.com/janumet-comprimidos-recubiertos-caja-con-56-unidades/p
+Sitagliptina,diabetes,Paziglip 10 mg x 30,Paziglip,cruzazul|pharmacys,2,45.0,45.0,https://www.pharmacys.com.ec/paziglip-10mg-x30/p
+Tiras reactivas glucosa,diabetes,Accu-Chek Guide Tiras Reactivas con 50 Unidades,ACCU-CHEK GUIDE,medicity,1,43.37,43.37,https://www.farmaciasmedicity.com/accu-chek-guide-tiras-reactivas-con-50-unidades/p
+Tiras reactivas glucosa,diabetes,Accu-Chek Instant Tiras Reactivas 25 Unidades,ACCU-CHEK INSTANT,medicity,1,19.66,19.66,https://www.farmaciasmedicity.com/accu-chek-instant-tiras-reactivas-25-unidades/p
+Tiras reactivas glucosa,diabetes,Accu-Chek Instant Tiras Reactivas con 50 Unidades,ACCU-CHEK INSTANT,medicity,1,34.04,34.04,https://www.farmaciasmedicity.com/accu-chek-instant-tiras-reactivas-con-50-unidades/p
+Tiras reactivas glucosa,diabetes,Accu-Chek Softclix Lancetas con 25 Unidades,ACCU-CHEK SOFTCLIX,medicity,1,6.14,6.14,https://www.farmaciasmedicity.com/accu-chek-softclix-lancetas-con-25-unidades/p
+Tiras reactivas glucosa,diabetes,Ge Tiras Reactivas De Glucosa + Lancetas 50 Unidades,GE,medicity,1,30.09,30.09,https://www.farmaciasmedicity.com/ge-tiras-reactivas-de-glucosa-lancetas-50-unidades-1/p
+Tiras reactivas glucosa,diabetes,Gmate Tiras Reactivas Glucosa 50 Unidades,GMATE,medicity,1,28.99,28.99,https://www.farmaciasmedicity.com/gmate-tiras-reactivas-glucosa-50-unidades/p
+Tiras reactivas glucosa,diabetes,Lanceta gmate + equipo gmate smart + tiras,Gmate,cruzazul|pharmacys,2,36.0,36.0,https://www.pharmacys.com.ec/lanceta-gmate-equipo-gmate-smart-tiras/p
+Tiras reactivas glucosa,diabetes,Tira de prueba accu-chek 25 unidades,Accu-chek,cruzazul|pharmacys,2,17.1,17.1,https://www.pharmacys.com.ec/tira-de-prueba-accu-chek-25-unidades/p
+Tiras reactivas glucosa,diabetes,Tira de prueba accu-chek 50 unidades,Accu-chek,cruzazul|pharmacys,2,29.6,29.6,https://www.pharmacys.com.ec/tira-de-prueba-accu-chek-50-unidades/p
+Tiras reactivas glucosa,diabetes,Tirillas Reactivas de Glucosa GE100 50 Unidades (2 frascos de 25),Teradry,cruzazul|pharmacys,2,24.0,24.0,https://www.pharmacys.com.ec/tira-reactiva-teradry-gel-100-electric-x-50/p
+Vildagliptina,diabetes,Galvus Met Fix Comprimidos Recubiertos 50/500 mg Caja Con 56 Unidades,GALVUS,medicity,1,0.85,0.85,https://www.farmaciasmedicity.com/galvus-met-fix-comprimidos-recubiertos-50500-mg-caja-con-56-unidades/p
+Vildagliptina,diabetes,Vilzer 50mg quifatex dist medicamenta comprimidos,Vilzer,cruzazul|pharmacys,2,24.3,24.3,https://www.pharmacys.com.ec/vilzer-50mg-quifatex-dist-medicamenta-comprimidos/p
+Vildagliptina,diabetes,Vilzermet 50/1000mg quifatex dist medicamenta comprimido recubierto,Vilzermet,cruzazul|pharmacys,2,28.18,28.18,https://www.pharmacys.com.ec/vilzermet-50-1000mg-quifatex-dist-medicamenta-comprimido-recubierto/p
+Vildagliptina,diabetes,Vilzermet 50/500mg quifatex dist medicamenta comprimido recubierto,Vilzermet,cruzazul|pharmacys,2,27.6,27.6,https://www.pharmacys.com.ec/vilzermet-50-500mg-quifatex-dist-medicamenta-comprimido-recubierto/p
+Vildagliptina,diabetes,Vilzermet 50/850mg quifatex dist medicamenta comprimido recubierto,Vilzermet,cruzazul|pharmacys,2,27.9,27.9,https://www.pharmacys.com.ec/vilzermet-50-850mg-quifatex-dist-medicamenta-comprimido-recubierto/p
+Vildagliptina,diabetes,Vilzermet Comprimidos Recubiertos 850/50mg Caja 30 Unidades,VILZERMET,medicity,1,0.6,0.6,https://www.farmaciasmedicity.com/vilzermet-comprimidos-recubiertos-850-50mg-caja-30-unidades-1/p
+Alginato de sodio/Antiacido,gastritis,Alka Seltzer Boost Caja con 10 Comprimidos Efervescentes,ALKA SELTZER,medicity,1,0.39,0.39,https://www.farmaciasmedicity.com/alka-seltzer-boost-caja-con-10-comprimidos-efervescentes/p
+Alginato de sodio/Antiacido,gastritis,"Antiácido frutalis limón bicarbonato de sodio 2312,50mg/5g sobres x 12",Frutalis,cruzazul|pharmacys,2,1.64,2.05,https://www.pharmacys.com.ec/antiacido-frutalis-limon-5-g-sobres-x-12/p
+Alginato de sodio/Antiacido,gastritis,Dentafirme Forte Nf Polvo Adhesivo 25 g,DENTAFIRME FORTE,medicity,1,6.62,6.62,https://www.farmaciasmedicity.com/dentafirme-forte-nf-polvo-adhesivo-25g/p
+Alginato de sodio/Antiacido,gastritis,Milpax Suspensión Cereza Frasco Con 360 mL,MILPAX,medicity,1,12.81,12.81,https://www.farmaciasmedicity.com/milpax-suspension-cereza-frasco-con-360-ml/p
+Alginato de sodio/Antiacido,gastritis,Qg5 Plus Suspensión Oral Menta Sachet 10 ml Caja 10 Unidades,QG5,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/qg5-plus-suspension-oral-menta-sachet-10-ml-caja-10-unidades/p
+Alginato de sodio/Antiacido,gastritis,Qg5 Plus Suspensión Oral Menta Sachet 10 ml Caja 24 Unidades,QG5,medicity,1,0.76,0.76,https://www.farmaciasmedicity.com/qg5-plus-suspension-oral-menta-sachet-10-ml-caja-24-unidades/p
+Carbonato de calcio,gastritis,Carbonato calcio 600mg oxialfarm farma tableta,Carbonato Calcio,cruzazul|pharmacys,2,6.9,6.9,https://www.pharmacys.com.ec/carbonato-calcio-600mg-oxialfarm-farma-tableta/p
+Carbonato de calcio,gastritis,Cebión Tabletas Efervescentes De Vitamina C + Calcio 10 Unidades,CEBION,medicity,1,5.81,5.81,https://www.farmaciasmedicity.com/cebion-calcio-tabletas-efervescentes-naranja-con-10-unidades/p
+Carbonato de calcio,gastritis,Centrum Adulto Suplemento Nutricional 30 Unidades,CENTRUM,medicity,1,18.88,18.88,https://www.farmaciasmedicity.com/centrum-adulto-suplemento-nutricional-30-unidades/p
+Carbonato de calcio,gastritis,Centrum Silver Suplemento Nutricional 30 Unidades,CENTRUM,medicity,1,21.6,21.6,https://www.farmaciasmedicity.com/centrum-silver-suplemento-nutricional-30-unidades/p
+Carbonato de calcio,gastritis,Kidcal Suplemento Alimenticio Suspensión 180 ml,KIDCAL,medicity,1,17.01,17.01,https://www.farmaciasmedicity.com/kidcal-suplemento-alimenticio-suspension-con-180-ml/p
+Dimenhidrinato,gastritis,Anautin 50mg ecu tableta,Anautin,cruzazul|pharmacys,2,9.6,9.6,https://www.pharmacys.com.ec/anautin-50mg-ecu-tableta/p
+Dimenhidrinato,gastritis,Anautin Tabletas 50 mg Caja con 100 Unidades,ANAUTIN,medicity,1,0.09,0.09,https://www.farmaciasmedicity.com/anautin-tabletas-50-mg-caja-con-100-unidades/p
+Esomeprazol,gastritis,Biped Rapid Cápsulas 40mg Caja 20 Unidades,BIPET,medicity,1,1.74,1.74,https://www.farmaciasmedicity.com/biped-rapid-capsulas-40mg-caja-20-unidades-1/p
+Esomeprazol,gastritis,Bipetol Cápsulas Caja Con 14 Unidades,BIPETOL,medicity,1,1.15,1.15,https://www.farmaciasmedicity.com/bipetol-capsulas-caja-con-14-unidades/p
+Esomeprazol,gastritis,Enterogermina Infantil Probióticos Suspensión Oral en Gotas 8 ml,ENTEROGERMINA,medicity,1,23.88,23.88,https://www.farmaciasmedicity.com/enterogermina-infantil-probioticos-suspension-oral-en-gotas-8-ml/p
+Esomeprazol,gastritis,Enterogermina Suspensión 2 Millardos/5ml Frascos 10 Unidades,ENTEROGERMINA,medicity,1,1.61,1.61,https://www.farmaciasmedicity.com/enterogermina-suspension-2-millardos-5ml-frascos-10-unidades/p
+Esomeprazol,gastritis,Esomeprazol 20mg la sante tableta,Esomeprazol,cruzazul|pharmacys,2,7.84,7.84,https://www.pharmacys.com.ec/esomeprazol-20mg-la-sante-tableta/p
+Esomeprazol,gastritis,Esomeprazol 20mg labovida cápsulas,Esomeprazol,cruzazul|pharmacys,2,7.0,13.75,https://www.pharmacys.com.ec/esomeprazol-capx20mgx14-vida/p
+Esomeprazol,gastritis,Esomeprazol 20mg tecnoquimicas - genericos tableta,Esomeprazol,cruzazul|pharmacys,2,6.32,6.32,https://www.pharmacys.com.ec/esomeprazol-20mg-tecnoquimicas-genericos-tableta/p
+Esomeprazol,gastritis,Esomeprazol 40mg la sante tableta,Esomeprazol,cruzazul|pharmacys,2,13.5,13.5,https://www.pharmacys.com.ec/esomeprazol-40mg-la-sante-tableta/p
+Esomeprazol,gastritis,Esomeprazol 40mg labovida cápsulas,Esomeprazol,cruzazul|pharmacys,2,11.25,11.25,https://www.pharmacys.com.ec/esomeprazol-40mg-labovida-capsulas/p
+Esomeprazol,gastritis,Esoz 40mg leterago - sanfer tabletas recubiertas,Esoz,cruzazul|pharmacys,2,49.75,49.75,https://www.pharmacys.com.ec/esoz-40mg-leterago-sanfer-tabletas-recubiertas/p
+Esomeprazol,gastritis,Ezolium 20mg leterago - procaps cápsulas,Ezolium,cruzazul|pharmacys,2,26.0,26.0,https://www.pharmacys.com.ec/acondicionador-pantene-bambu-400ml/p
+Esomeprazol,gastritis,Ezolium 40mg leterago - procaps cápsulas,Ezolium,cruzazul|pharmacys,2,40.0,40.0,https://www.pharmacys.com.ec/crema-para-peinar-savital-multioleo-y-sabila-275ml/p
+Esomeprazol,gastritis,Ezolium Cápsula 20 mg Caja 20 Unidades,EZOLIUM,medicity,1,1.04,1.04,https://www.farmaciasmedicity.com/ezolium-capsula-20-mg-caja-20-unidades-1/p
+Esomeprazol,gastritis,Ezolium Cápsula 40 mg Caja 20 Unidades,EZOLIUM,medicity,1,1.6,1.6,https://www.farmaciasmedicity.com/ezolium-capsula-40-mg-caja-20-unidades-1/p
+Esomeprazol,gastritis,Nexium Tabletas Recubiertas Caja Con 14 Unidades,NEXIUM,medicity,1,1.07,1.07,https://www.farmaciasmedicity.com/nexium-tabletas-recubiertas-caja-con-14-unidades/p
+Esomeprazol,gastritis,Ocam 7.5/20mg leterago - sanfer tableta,Ocam,cruzazul|pharmacys,2,10.92,10.92,https://www.pharmacys.com.ec/ocam-75-20mg-leterago-sanfer-tableta/p
+Hidroxido de aluminio/magnesio,gastritis,"Antiácido hidroxido aluminio+magnesio+simeticona 4 g x 4 g x 0,4 g suspensión 150 ml",Hidroxido Aluminio+magnesio+simeticona,cruzazul|pharmacys,2,2.32,2.9,https://www.pharmacys.com.ec/antiacido-hidroxido-aluminio-magnesio-simeticona-4-g-x-4-g-x-04-g-suspension-150-ml/p
+Hidroxido de aluminio/magnesio,gastritis,"Antiácido hidroxido aluminio+magnesio+simeticona 4 g x 4 g x 0,4 g suspensión 360 ml",Hidroxido Aluminio+magnesio+simeticona,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/antiacido-hidroxido-aluminio-magnesio-simeticona-4-g-x-4-g-x-04-g-suspension-360-ml/p
+Hidroxido de aluminio/magnesio,gastritis,Mk Leche Magnesia Suspensión Frasco 360 ml,MK,medicity,1,3.68,3.68,https://www.farmaciasmedicity.com/leche-magnesia-mk-suspension-frasco/p
+Lactulosa,gastritis,Beralactulosa 66.70% lfgm,Beralactulosa,cruzazul|pharmacys,2,6.51,6.51,https://www.pharmacys.com.ec/beralactulosa-6670-lfgm/p
+Lactulosa,gastritis,Duphalac 200 ml,DUPHALAC,medicity,1,11.98,11.98,https://www.farmaciasmedicity.com/duphalac-jbe-667-g100-ml-frasco-con-200-ml/p
+Lactulosa,gastritis,Lactulosa 10gr rocnarf solución oral,Lactulosa,cruzazul|pharmacys,2,10.0,10.0,https://www.pharmacys.com.ec/lactulosa-10gr-rocnarf-generico-solucion-oral/p
+Lactulosa,gastritis,Lactulosa 65% caplin point - generico suspensión oral,Lactulosa,cruzazul|pharmacys,2,8.99,8.99,https://www.pharmacys.com.ec/lactulosa-65-caplin-point-generico-suspension-oral/p
+Lactulosa,gastritis,Lactulosa 65% cedimed,Lactulosa,cruzazul|pharmacys,2,3.6,4.5,https://www.pharmacys.com.ec/lactulosa-65-cedimed/p
+Lactulosa,gastritis,Lactulosa 65% dyvenpro ecuagen,Lactulosa,cruzazul|pharmacys,2,6.8,8.5,https://www.pharmacys.com.ec/lactulosa-65-dyvenpro-ecuagen/p
+Lactulosa,gastritis,Lactulosa 65% ecuaquimica - mintlab jarabe 0.65,Lactulosa,cruzazul|pharmacys,2,8.99,8.99,https://www.pharmacys.com.ec/lactulosa-65-ecuaquimica-mintlab-jarabe-065/p
+Lactulosa,gastritis,Lactulosa 65% grunenthal solución oral,Lactulosa,cruzazul|pharmacys,2,8.99,8.99,https://www.pharmacys.com.ec/lactulosa-65-grunenthal-solucion-oral/p
+Lactulosa,gastritis,Lactulosa 66.70% dyvenpro ecuagen solución oral,Lactulosa,cruzazul|pharmacys,2,9.6,9.6,https://www.pharmacys.com.ec/lactulosa-6670-dyvenpro-ecuagen-solucion-oral/p
+Lactulosa,gastritis,Lactulosa Solución 65% Frasco 200 ml,GRUNENTHAL,medicity,1,8.27,8.27,https://www.farmaciasmedicity.com/lactulosa-solucion-65-frasco-con-200-ml/p
+Lansoprazol,gastritis,Lansoprazol 30mg la sante cápsulas,Lansoprazol,cruzazul|pharmacys,2,9.8,9.8,https://www.pharmacys.com.ec/lansoprazol-30mg-la-sante-capsulas/p
+Lansoprazol,gastritis,Lansoprazol 30mg leterago - genfar cápsulas,Lansoprazol,cruzazul|pharmacys,2,6.0,6.0,https://www.pharmacys.com.ec/biosil-capsulas-x-30/p
+Lansoprazol,gastritis,Lansoprazol 30mg tecnoquimicas - genericos cápsulas,Lansoprazol,cruzazul|pharmacys,2,3.43,3.43,https://www.pharmacys.com.ec/lansoprazol-30mg-tecnoquimicas-genericos-capsulas/p
+Lansoprazol,gastritis,Lansoprazol Genfar Cápsulas 30mg Liberación Retardada 14 Unidades,GENFAR,medicity,1,0.4,0.4,https://www.farmaciasmedicity.com/lansoprazol-genfar-capsulas-30mg-liberacion-retardada-14-unidades-1/p
+Lansoprazol,gastritis,Lanzopral Cápsulas 30 mg Caja Con 30 Unidades,LANZOPRAL,medicity,1,1.44,1.44,https://www.farmaciasmedicity.com/lanzopral-capsulas-30-mg-caja-con-30-unidades/p
+Metoclopramida,gastritis,Clodopan Gotas 2.6 mg Frasco con 30 mL,CLODOPAN,medicity,1,2.37,2.37,https://www.farmaciasmedicity.com/clodopan-gotas-26-mg-frasco-con-30-ml/p
+Metoclopramida,gastritis,Metoclopramida 10mg kronos genericos ampolla,Metoclopramida,pharmacys,1,2.13,2.13,https://www.pharmacys.com.ec/metoclopramida-10mg-kronos-genericos-ampolla/p
+Metoclopramida,gastritis,Metoclopramida 10mg kronos marca tableta,Metoclopramida,pharmacys,1,1.0,1.0,https://www.pharmacys.com.ec/metoclopramida-10mg-kronos-marca-tableta/p
+Metoclopramida,gastritis,Metoclopramida 10mg magma especialidad solución inyectable,Metoclopramida,pharmacys,1,38.87,38.87,https://www.pharmacys.com.ec/metoclopramida-10mg-fresenius-kabi-hospitalario-solucion-inyectable/p
+Metoclopramida,gastritis,Metoclox Comprimido 10 mg Caja con 100 Unidades,METOCLOX,medicity,1,0.06,0.06,https://www.farmaciasmedicity.com/metoclox-comprimido-10-mg-caja-con-100-unidades-1/p
+Omeprazol,gastritis,Esomeprazol Santé Tabletas Recubiertas Caja Con 14 Unidades,LA SANTE,medicity,1,0.52,0.52,https://www.farmaciasmedicity.com/esomeprazol-sante-tabletas-recubiertas-caja-con-14-unidades/p
+Omeprazol,gastritis,Genamerica Omeprazol Cápsulas Caja 14 Unidades,GENAMERICA,medicity,1,0.4,0.4,https://www.farmaciasmedicity.com/omeprazol-genamerica-capsulas-caja-con-14-unidades/p
+Omeprazol,gastritis,Inprogast Cápsulas 40 mg Caja con 14 Unidades,INPROGAST,medicity,1,0.74,0.74,https://www.farmaciasmedicity.com/inprogast-capsulas-40-mg-caja-con-14-unidades/p
+Omeprazol,gastritis,Nifa Omeprazol Cápsulas 40 mg Caja 30 Unidades,NIFA,medicity,1,0.59,0.59,https://www.farmaciasmedicity.com/nifa-omeprazol-capsulas-40-mg-caja-30-unidades-1/p
+Omeprazol,gastritis,Omeprazol 20mg genamerica generico cápsulas,Omeprazol,cruzazul|pharmacys,2,6.16,6.16,https://www.pharmacys.com.ec/omeprazol-20mg-genamerica-generico-capsulas/p
+Omeprazol,gastritis,Omeprazol 20mg la sante cápsulas,Omeprazol,cruzazul|pharmacys,2,4.38,4.38,https://www.pharmacys.com.ec/omeprazol-20mg-la-sante-capsulas/p
+Omeprazol,gastritis,Omeprazol 20mg labovida cápsulas,Omeprazol,cruzazul|pharmacys,2,10.35,10.35,https://www.pharmacys.com.ec/omeprazol-20mg-labovida-capsulas/p
+Omeprazol,gastritis,Omeprazol 20mg rocnarf cápsulas,Omeprazol,cruzazul|pharmacys,2,8.16,8.16,https://www.pharmacys.com.ec/omeprazol-20mg-rocnarf-generico-capsulas/p
+Omeprazol,gastritis,Omeprazol 40mg dyvenpro ecuagen cápsulas,Omeprazol,cruzazul|pharmacys,2,6.4,6.4,https://www.pharmacys.com.ec/omeprazol-40mg-dyvenpro-ecuagen-capsulas/p
+Omeprazol,gastritis,Omeprazol 40mg farmanacion cápsulas,Omeprazol,cruzazul|pharmacys,2,10.25,10.25,https://www.pharmacys.com.ec/omeprazol-40mg-farmanacion-capsulas/p
+Omeprazol,gastritis,Omeprazol 40mg genamerica generico cápsulas,Omeprazol,cruzazul|pharmacys,2,8.96,8.96,https://www.pharmacys.com.ec/omeprazol-40mg-genamerica-generico-capsulas/p
+Omeprazol,gastritis,Omeprazol 40mg la sante cápsulas,Omeprazol,cruzazul|pharmacys,2,19.2,19.2,https://www.pharmacys.com.ec/omeprazol-40mg-la-sante-capsulas/p
+Omeprazol,gastritis,Omeprazol 40mg labovida cápsulas,Omeprazol,cruzazul|pharmacys,2,10.25,10.25,https://www.pharmacys.com.ec/omeprazol-40mg-labovida-capsulas/p
+Omeprazol,gastritis,Omeprazol 40mg rocnarf cápsulas,Omeprazol,cruzazul|pharmacys,2,11.52,11.52,https://www.pharmacys.com.ec/omeprazol-40mg-rocnarf-generico-capsulas/p
+Omeprazol,gastritis,Omeprazol Genfar Cápsulas 20 mg Caja 10 Unidades,GENFAR,medicity,1,0.37,0.37,https://www.farmaciasmedicity.com/omeprazol-genfar-capsulas-20-mg-caja-con-10-unidades/p
+Omeprazol,gastritis,Omeprazol Santé Cápsulas 20 mg Caja Con 16 Unidades,LA SANTE,medicity,1,0.25,0.25,https://www.farmaciasmedicity.com/omeprazol-sante-capsulas-20-mg-caja-con-16-unidades/p
+Omeprazol,gastritis,Omeprazol Santé Cápsulas 40 mg Liberación Retardante Caja con 30 Unidades,LA SANTE,medicity,1,0.59,0.59,https://www.farmaciasmedicity.com/omeprazol-sante-capsulas-40-mg-liberacion-retardante-caja-con-30-unidades/p
+Omeprazol,gastritis,Omeprazol Vitalis Polvo Inyectable 40mg Caja 10 Unidades,VITALIS,medicity,1,2.37,2.37,https://www.farmaciasmedicity.com/omeprazol-vitalis-polvo-inyectable-40mg-caja-10-unidades-1/p
+Omeprazol,gastritis,Ulcozol Rapid Cápsulas 20 mg/1.1 g Caja Con 28 Unidades,ULCOZOL RAPID,medicity,1,0.74,0.74,https://www.farmaciasmedicity.com/ulcozol-rapid-capsulas-20-mg11-g-caja-con-28-unidades/p
+Omeprazol,gastritis,Ulcozol Rapid Polvo Suspensión Sobre 5 g Caja Con 30 Unidades,ULCOZOL RAPID,medicity,1,1.74,1.74,https://www.farmaciasmedicity.com/ulcozol-rapid-polvo-suspension-sobre-5-g-caja-con-30-unidades/p
+Pantoprazol,gastritis,Enfagrow Promental 3 Regular 1100gr,Enfagrow,cruzazul|pharmacys,2,39.08,48.85,https://www.pharmacys.com.ec/formula-de-crecimiento-enfagrow-premium-etapa-3-sabor-natural-caja-de-1100g/p
+Pantoprazol,gastritis,Pantoprazol 20mg farmayala - farmayala tabletas recubiertas,Pantoprazol,cruzazul|pharmacys,2,12.6,12.6,https://www.pharmacys.com.ec/pantoprazol-20mg-farmayala-farmayala-tabletas-recubiertas/p
+Pantoprazol,gastritis,Pantoprazol 40mg la sante tableta,Pantoprazol,cruzazul|pharmacys,2,26.99,26.99,https://www.pharmacys.com.ec/pantoprazol-40mg-la-sante-tableta/p
+Pantoprazol,gastritis,Tecta Tabletas 40 mg Caja Con 14 Unidades,TECTA,medicity,1,1.69,1.69,https://www.farmaciasmedicity.com/tecta-tabletas-40-mg-caja-con-14-unidades/p
+Pantoprazol,gastritis,Zoltum 20mg quifatex dist medicamenta comprimidos recubiertos,Zoltum,cruzazul|pharmacys,2,12.98,12.98,https://www.pharmacys.com.ec/zoltum-20mg-quifatex-dist-medicamenta-comprimidos-recubiertos/p
+Pantoprazol,gastritis,Zoltum 40mg quifatex dist medicamenta ampollas inyectables,Zoltum,cruzazul|pharmacys,2,17.85,17.85,https://www.pharmacys.com.ec/zoltum-40mg-quifatex-dist-medicamenta-ampollas-inyectables/p
+Pantoprazol,gastritis,Zoltum 40mg quifatex dist medicamenta comprimidos recubiertos,Zoltum,cruzazul|pharmacys,2,21.05,21.05,https://www.pharmacys.com.ec/zoltum-com-recx40mgx14/p
+Pantoprazol,gastritis,Zoltum 40mg quifatex dist medicamenta comprimidos recubiertos pack,Zoltum,cruzazul|pharmacys,2,36.0,45.0,https://www.pharmacys.com.ec/zoltum-40mg-quifatex-dist-medicamenta-comprimidos-recubiertos-pack-98809-1/p
+Pantoprazol,gastritis,Zoltum Polvo Inyectable 40 mg Caja 1 Unidad,ZOLTUM,medicity,1,16.42,16.42,https://www.farmaciasmedicity.com/zoltum-polvo-inyectable-40-mg-caja-1-unidad-1/p
+Rabeprazol,gastritis,Rabezol Cápsula 20 mg Caja 10 Unidades,RABEZOL,medicity,1,1.6,1.6,https://www.farmaciasmedicity.com/rabezol-capsula-20-mg-caja-con-10-unidades-1/p
+Sales de rehidratacion oral,gastritis,Hidrasec Granulado 10mg/G Lactantes Sobre Caja 18 Unidades,HIDRASEC,medicity,1,1.27,1.27,https://www.farmaciasmedicity.com/hidrasec-granulado-10mg-g-lactantes-sobre-caja-18-unidades-1/p
+Sales de rehidratacion oral,gastritis,Hidrasec Granulado 30mg/3g Niños Sobre Caja 18 Unidades,HIDRASEC,medicity,1,2.13,2.13,https://www.farmaciasmedicity.com/hidrasec-granulado-30mg-3g-ninos-sobre-caja-18-unidades-1/p
+Sales de rehidratacion oral,gastritis,Oralyte plus 45 meq manzana solución oral 400 ml,Oralyte,cruzazul|pharmacys,2,3.52,3.76,https://www.pharmacys.com.ec/oralyte-plus-45-meq-manzana-solucion-oral-400-ml/p
+Sales de rehidratacion oral,gastritis,Oralyte plus 75meq mandarina solución oral 400 ml,Oralyte,cruzazul|pharmacys,2,3.37,3.59,https://www.pharmacys.com.ec/oralyte-plus-75meq-mandarina-solucion-oral-400-ml/p
+Sales de rehidratacion oral,gastritis,Oralyte plus 75meq manzana solución oral 400 ml,Oralyte,cruzazul|pharmacys,2,3.37,3.59,https://www.pharmacys.com.ec/oralyte-plus-75meq-manzana-solucion-oral-400-ml/p
+Sales de rehidratacion oral,gastritis,Oralyte plus 75meq uva solución oral 400 ml,Oralyte,cruzazul|pharmacys,2,3.52,3.76,https://www.pharmacys.com.ec/oralyte-plus-75meq-uva-solucion-oral-400-ml/p
+Sales de rehidratacion oral,gastritis,Pedialyte NG Fresa 45 mEq 500 ml,PEDIALYTE,medicity,1,4.18,4.18,https://www.farmaciasmedicity.com/pedialyte-45-solucion-oral-fresa-500-ml/p
+Sales de rehidratacion oral,gastritis,Pedialyte NL Coco 60 mEq Max 500 ml,PEDIALYTE,medicity,1,4.18,4.18,https://www.farmaciasmedicity.com/pedialyte-60-max-solucion-oral-coco-500-ml/p
+Sales de rehidratacion oral,gastritis,Pedialyte NL Fresa 60 mEq Max 500 ml,PEDIALYTE,medicity,1,4.18,4.18,https://www.farmaciasmedicity.com/pedialyte-60-max-solucion-oral-fresa-500-ml/p
+Sales de rehidratacion oral,gastritis,Pedialyte NL Manzana 60 EQ Max 500 ml,PEDIALYTE,medicity,1,4.18,4.18,https://www.farmaciasmedicity.com/pedialyte-60-max-solucion-oral-manzana-500-ml/p
+Sales de rehidratacion oral,gastritis,Pedialyte Nl Uva 60 Eq Max 500 ml,PEDIALYTE,medicity,1,4.18,4.18,https://www.farmaciasmedicity.com/pedialyte-60-max-solucion-oral-uva-500-ml/p
+Sales de rehidratacion oral,gastritis,Sales de hidratación oralyte plus 45 meq solución oral 400ml,Oralyte,cruzazul|pharmacys,2,3.37,3.59,https://www.pharmacys.com.ec/sales-de-hidratacion-oralyte-plus-45-meq-solucion-oral-400ml/p
+Sales de rehidratacion oral,gastritis,Sales de hidratación sales rehidratacion en polvo x 30,Sales Rehidratacion,cruzazul|pharmacys,2,15.6,19.5,https://www.pharmacys.com.ec/sales-de-hidratacion-sales-rehidratacion-en-polvo-x-30/p
+Sales de rehidratacion oral,gastritis,Sales de hidratación sales rehidratacion sabor neutro sobres x 5,Sales Rehidratacion,cruzazul|pharmacys,2,3.25,3.25,https://www.pharmacys.com.ec/sales-de-hidratacion-sales-rehidratacion-sabor-neutro-sobres-x-5/p
+Sales de rehidratacion oral,gastritis,Soluciones hidratantes hydrity rehidratacion oral manzana 45meq 500 ml,Hydrity,cruzazul|pharmacys,2,3.6,4.5,https://www.pharmacys.com.ec/soluciones-hidratantes-hydrity-rehidratacion-oral-manzana-45meq-500-ml/p
+Sales de rehidratacion oral,gastritis,Soluciones hidratantes hydrity rehidratacion oral uva 45meq 500ml,Hydrity,cruzazul|pharmacys,2,3.6,4.5,https://www.pharmacys.com.ec/soluciones-hidratantes-hydrity-rehidratacion-oral-uva-45meq-500ml/p
+Sales de rehidratacion oral,gastritis,Suero oral sales rehidratacion sabor frutas tropicales sobres x 5,Sales Rehidratacion,cruzazul|pharmacys,2,2.6,3.25,https://www.pharmacys.com.ec/suero-oral-sales-rehidratacion-sabor-frutas-tropicales-sobres-x-5/p
+Simeticona,gastritis,Actibutin 200/120mg leterago - procaps tabletas recubiertas,Actibutin,cruzazul|pharmacys,2,12.0,12.0,https://www.pharmacys.com.ec/actibutin-200-120mg-leterago-roddome-tabletas-recubiertas/p
+Simeticona,gastritis,Aero-Om Comprimidos Masticables 40 mg Caja 30 Unidades,AERO-OM,medicity,1,0.18,0.18,https://www.farmaciasmedicity.com/aero-om-comprimidos-masticables-40-mg-caja-30-unidades/p
+Simeticona,gastritis,Aero-Om Gotas 100 mg/ mL Frasco con 15 mL,AERO-OM,medicity,1,6.23,6.23,https://www.farmaciasmedicity.com/aero-om-gotas-100-mg-ml-frasco-con-15-ml/p
+Simeticona,gastritis,Antiácido digesta 250 mg cápsulas blandas x 20,Digesta,cruzazul|pharmacys,2,9.28,11.6,https://www.pharmacys.com.ec/antiacido-digesta-250-mg-capsulas-blandas-x-20/p
+Simeticona,gastritis,Antiácido endial digest x 1/200 com-rec x 20,Endial,cruzazul|pharmacys,2,20.8,20.8,https://www.pharmacys.com.ec/endial-digest-x-1-200-com-rec-x-20/p
+Simeticona,gastritis,Colonorm Comprimido Recubierto 120/200Mg Caja 30 Unidades,COLONORM,medicity,1,0.55,0.55,https://www.farmaciasmedicity.com/colonorm-comprimido-recubierto-120-200mg-caja-30-unidades/p
+Simeticona,gastritis,Colypan Plus Tabletas Recubiertas 200/120 mg Caja Con 30 Unidades,COLYPAN,medicity,1,0.6,0.6,https://www.farmaciasmedicity.com/colypan-plus-tabletas-recubiertas-200120-mg-caja-con-30-unidades/p
+Simeticona,gastritis,Digeril Forte Suspensión Frasco,DIGERIL,medicity,1,11.04,11.04,https://www.farmaciasmedicity.com/digeril-forte-suspension-frasco/p
+Simeticona,gastritis,Digeril Suspensión Sabor Vainilla 800 mg / 60 mg / 10 ml Frasco 300 ml,DIGERIL,medicity,1,11.04,11.04,https://www.farmaciasmedicity.com/digeril-suspension-800-mg---60-mg---10-ml-frasco-300-ml/p
+Simeticona,gastritis,Digeril Suspensión Sabor Vainilla 800mg / 60mg / 10ml Frasco 200ml,DIGERIL,medicity,1,8.28,8.28,https://www.farmaciasmedicity.com/digeril-suspension-sabor-vainilla-800mg---60mg---10ml-frasco-200ml/p
+Simeticona,gastritis,Digestotal Pancreático Cápsulas Caja 30 Unidades,DIGESTOTAL,medicity,1,1.56,1.56,https://www.farmaciasmedicity.com/digestotal-pancreatico-capsulas-caja-30-unidades/p
+Simeticona,gastritis,Endial Digest Comprimidos Recubiertos Caja Con 20 Unidades,ENDIAL,medicity,1,1.2,1.2,https://www.farmaciasmedicity.com/endial-digest-comprimidos-recubiertos-caja-con-20-unidades/p
+Simeticona,gastritis,Laxante digesflat 170 mg x 100 mg tableta x 50,Digesflat,cruzazul|pharmacys,2,9.6,12.0,https://www.pharmacys.com.ec/laxante-digesflat-170-mg-x-100-mg-tableta-x-50/p
+Simeticona,gastritis,Magaldrato+simeticona 800/60mg dyvenpro ecuagen,Magaldrato+simeticona,cruzazul|pharmacys,2,4.4,5.5,https://www.pharmacys.com.ec/magaldrato-simeticona-800-60mg-dyvenpro-ecuagen/p
+Simeticona,gastritis,Magaldrato+simeticona 800/60mg labovida suspensión,Magaldrato+simeticona,cruzazul|pharmacys,2,5.5,5.5,https://www.pharmacys.com.ec/magaldrato-simeticona-800-60mg-labovida-suspension/p
+Simeticona,gastritis,Muvett S Tabletas Recubiertas 200/120mg Caja 30 Unidades,MUVETT,medicity,1,0.67,0.67,https://www.farmaciasmedicity.com/muvett-s-tabletas-recubiertas-200-120mg-caja-30-unidades/p
+Simeticona,gastritis,Pancreol Compuesto,Pancreol,cruzazul|pharmacys,2,18.24,18.24,https://www.pharmacys.com.ec/pancreol-compuesto/p
+Simeticona,gastritis,Pancreol Forte,Pancreol,cruzazul|pharmacys,2,19.92,19.92,https://www.pharmacys.com.ec/pancreol-forte/p
+Sucralfato,gastritis,Sucralgastric Suspensión 1000mg/5ml Frasco 200 ml,SUCRALGASTRIC,medicity,1,10.56,10.56,https://www.farmaciasmedicity.com/sucralgastric-suspension-1000-mg--5-ml-frasco-con-200-ml/p
+Trimebutina,gastritis,Colypan Lp Tabletas 300 mg Liberación Prolongada Caja 20 Unidades,COLYPAN,medicity,1,0.79,0.79,https://www.farmaciasmedicity.com/colypan-lp-tabletas-300-mg-liberacion-prolongada-caja-con-20-unidades/p
+Trimebutina,gastritis,Colypan Tabletas Recubiertas 200 mg 30 Unidades,COLYPAN,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/colypan-tabletas-recubiertas-200-mg-30-unidades/p
+Trimebutina,gastritis,Muvett Cápsulas 200mg Caja 21 Unidades,MUVETT,medicity,1,0.61,0.61,https://www.farmaciasmedicity.com/muvett-capsulas-200mg-caja-21-unidades-1/p
+Amlodipino,hipertension,Amlodipino 10mg dyvenpro ecuagen tableta,Amlodipino,cruzazul|pharmacys,2,3.1,3.1,https://www.pharmacys.com.ec/amlodipino-10mg-dyvenpro-ecuagen-tableta/p
+Amlodipino,hipertension,Amlodipino 10mg leterago - genfar tableta,Amlodipino,cruzazul|pharmacys,2,3.1,3.1,https://www.pharmacys.com.ec/amlodipino-10mg-leterago-genfar-tableta/p
+Amlodipino,hipertension,Amlodipino 10mg portugal - generico tableta,Amlodipino,cruzazul|pharmacys,2,18.4,18.4,https://www.pharmacys.com.ec/amlodipino-10mg-portugal-generico-tableta-7000-106480/p
+Amlodipino,hipertension,Amlodipino 5 mg Tabletas Caja x10,Amlodipino,cruzazul|pharmacys,2,3.5,3.5,https://www.pharmacys.com.ec/amlodipino-5mg-dyvenpro-ecuagen-tableta/p
+Amlodipino,hipertension,Amlodipino 5 mg Tabletas x10,Amlodipino,cruzazul|pharmacys,2,3.2,3.2,https://www.pharmacys.com.ec/amlodipino-5mg-la-sante-tableta/p
+Amlodipino,hipertension,Amlodipino 5mg ecuaquimica - mintlab comprimidos,Amlodipino,cruzazul|pharmacys,2,5.46,5.46,https://www.pharmacys.com.ec/amlodipino-5mg-ecuaquimica-mintlab-comprimidos/p
+Amlodipino,hipertension,Amlodipino 5mg leterago - genfar tableta,Amlodipino,cruzazul|pharmacys,2,3.6,3.6,https://www.pharmacys.com.ec/amlodipino-5mg-leterago-genfar-tableta/p
+Amlodipino,hipertension,Amlodipino Genfar Tabletas Caja Con 10 Unidades,GENFAR,medicity,1,0.23,0.23,https://www.farmaciasmedicity.com/amlodipino-genfar-tabletas-caja-con-10-unidades/p
+Amlodipino,hipertension,Amlodipino Mk Tableta 10 mg Caja 30 Unidades,MK,medicity,1,0.29,0.29,https://www.farmaciasmedicity.com/amlodipino-mk-tableta-10-mg-caja-30-unidades-1/p
+Amlodipino,hipertension,Amlodipino Mk Tabletas 5mg Caja 30 Unidades,MK,medicity,1,0.33,0.33,https://www.farmaciasmedicity.com/amlodipino-mk-tabletas-5mg-caja-30-unidades-1/p
+Amlodipino,hipertension,Amlodipino tabx10mg combo 2+1 lste,Amlodipino,cruzazul|pharmacys,2,5.14,5.14,https://www.pharmacys.com.ec/amlodipino-tabx10mg-combo-2-1-lste/p
+Amlodipino,hipertension,Amlodipino tabx10mgx10 lste,Amlodipino,cruzazul|pharmacys,2,2.58,2.58,https://www.pharmacys.com.ec/amlodipino-tabx10mgx10-lste/p
+Amlodipino,hipertension,Amlodipino tabx10mgx10 ngen,Amlodipino,cruzazul|pharmacys,2,2.3,2.3,https://www.pharmacys.com.ec/amlodipino-10mg-portugal-generico-tableta/p
+Amlodipino,hipertension,Norvasc Comprimidos 5mg Caja 30 Unidades,NORVASC,medicity,1,0.33,0.33,https://www.farmaciasmedicity.com/norvasc-comprimidos-5mg-caja-30-unidades-1/p
+Atenolol,hipertension,Atenolol 100mg ecuaquimica - mintlab comprimidos,Atenolol,cruzazul|pharmacys,2,7.0,7.0,https://www.pharmacys.com.ec/atenolol-100mg-ecuaquimica-mintlab-comprimidos/p
+Atenolol,hipertension,Atenolol 100mg kronos marca tableta,Atenolol,cruzazul|pharmacys,2,4.2,4.2,https://www.pharmacys.com.ec/atenolol-100mg-kronos-marca-tableta/p
+Atenolol,hipertension,Atenolol 100mg tecnoquimicas - genericos tableta,Atenolol,cruzazul|pharmacys,2,13.16,13.16,https://www.pharmacys.com.ec/atenolol-100mg-tecnoquimicas-genericos-tableta/p
+Atenolol,hipertension,Atenolol 50 mg x 20 Comprimidos,Atenolol,cruzazul|pharmacys,2,3.0,4.0,https://www.pharmacys.com.ec/atenolol-50mg-ecuaquimica-mintlab-comprimidos/p
+Atenolol,hipertension,Atenolol 50mg kronos marca tableta,Atenolol,cruzazul|pharmacys,2,2.12,2.12,https://www.pharmacys.com.ec/atenolol-50mg-kronos-marca-tableta/p
+Atenolol,hipertension,Plenacor Comprimidos 50mg Caja 30 Unidades,PLENACOR,medicity,1,0.23,0.23,https://www.farmaciasmedicity.com/plenacor-comprimidos-50mg-caja-30-unidades-1/p
+Bisoprolol,hipertension,Bisoprolol 5mg tecnoquimicas - genericos tableta recubierta,Bisoprolol,cruzazul|pharmacys,2,14.88,14.88,https://www.pharmacys.com.ec/bisoprolol-5mg-tecnoquimicas-genericos-tableta-recubierta/p
+Bisoprolol,hipertension,Concor 10mg alianza merck farma tableta,Concor,cruzazul,1,22.8,22.8,https://www.farmaciascruzazul.ec/concor-10mg-alianza-merck-farma-tableta/p
+Bisoprolol,hipertension,Concor 5mg alianza merck farma tableta,Concor,pharmacys,1,18.6,18.6,https://www.pharmacys.com.ec/concor-5mg-alianza-merck-farma-tableta/p
+Bisoprolol,hipertension,Concor AM 5 mg / 5 mg tabletas caja x 30,Concor,cruzazul|pharmacys,2,27.0,27.0,https://www.pharmacys.com.ec/concor-5-5mg-alianza-merck-farma-tableta-am/p
+Bisoprolol,hipertension,Concor Am Tabletas Caja Con 30 Unidades,CONCOR,medicity,1,1.02,1.02,https://www.farmaciasmedicity.com/concor-am-tabletas-caja-con-30-unidades/p
+Bisoprolol,hipertension,Concor Tableta Recubierta 5 mg Caja 30 Unidades,CONCOR,medicity,1,0.51,0.51,https://www.farmaciasmedicity.com/concor-tableta-recubierta-5-mg-caja-30-unidades-1/p
+Bisoprolol,hipertension,Concor Tabletas Recubiertas 10mg Caja 30 Unidades,CONCOR,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/concor-tabletas-recubiertas-10mg-caja-30-unidades-1/p
+Bisoprolol,hipertension,Concor Tabletas Recubiertas 2.5 mg Caja 30 Unidades,CONCOR,medicity,1,0.34,0.34,https://www.farmaciasmedicity.com/concor-tabletas-recubiertas-2-5-mg-caja-30-unidades-1/p
+Bisoprolol,hipertension,Concor Tabletas Recubiertas Caja con 30 Unidades,CONCOR,medicity,1,0.22,0.22,https://www.farmaciasmedicity.com/concor-tabletas-recubiertas-caja-con-30-unidades/p
+Bisoprolol,hipertension,Corbis 2.5mg leterago - siegfried - interpharm comprimidos recubiertos,Corbis,cruzazul|pharmacys,2,12.3,12.3,https://www.pharmacys.com.ec/corbis-25mg-leterago-siegfried-interpharm-comprimidos-recubiertos/p
+Bisoprolol,hipertension,Corbis Comprimido Recubierto Caja Con 30 Unidades,CORBIS,medicity,1,0.38,0.38,https://www.farmaciasmedicity.com/corbis-comprimido-recubierto-caja-con-30-unidades/p
+Bisoprolol,hipertension,Eurocor 1.25mg ecuaquimica - saval comprimidos recubiertos,Eurocor,cruzazul|pharmacys,2,3.08,3.08,https://www.pharmacys.com.ec/eurocor-125mg-ecuaquimica-saval-comprimidos-recubiertos/p
+Bisoprolol,hipertension,Eurocor 10mg ecuaquimica - saval comprimidos recubiertos,Eurocor,cruzazul|pharmacys,2,22.75,22.75,https://www.pharmacys.com.ec/eurocor-10mg-ecuaquimica-saval-comprimidos-recubiertos/p
+Bisoprolol,hipertension,Eurocor 2.5/6.25mg ecuaquimica - saval comprimidos recubiertos,Eurocor,cruzazul|pharmacys,2,9.9,9.9,https://www.pharmacys.com.ec/eurocor-25-625mg-ecuaquimica-saval-comprimidos-recubiertos/p
+Bisoprolol,hipertension,Eurocor 2.5mg ecuaquimica - saval comprimidos recubiertos,Eurocor,cruzazul|pharmacys,2,10.85,10.85,https://www.pharmacys.com.ec/eurocor-25mg-ecuaquimica-saval-comprimidos-recubiertos/p
+Bisoprolol,hipertension,Eurocor 5 mg Comprimidos Recubiertos Caja x 35,Eurocor,cruzazul|pharmacys,2,16.45,16.45,https://www.pharmacys.com.ec/eurocor-5mg-ecuaquimica-saval-comprimidos/p
+Bisoprolol,hipertension,Eurocor 5/6.25mg ecuaquimica - saval comprimidos recubiertos,Eurocor,cruzazul|pharmacys,2,15.0,15.0,https://www.pharmacys.com.ec/eurocor-5-625mg-ecuaquimica-saval-comprimidos-recubiertos/p
+Candesartan,hipertension,Blopress Comprimido 16 mg Caja 30 Unidades,BLOPRESS,medicity,1,0.77,0.77,https://www.farmaciasmedicity.com/blopress-comprimido-16-mg-caja-30-unidades/p
+Candesartan,hipertension,Blopress Comprimido 8 mg Caja 30 Unidades,BLOPRESS,medicity,1,0.7,0.7,https://www.farmaciasmedicity.com/blopress-comprimido-caja-con-30-unidades/p
+Candesartan,hipertension,Blox 16/12.5mg ecuaquimica - saval comprimidos,Blox,cruzazul|pharmacys,2,26.4,26.4,https://www.pharmacys.com.ec/blox-16-125mg-ecuaquimica-saval-comprimidos/p
+Candesartan,hipertension,Blox 32 mg Comprimidos Caja x 30,Blox,cruzazul|pharmacys,2,28.0,28.0,https://www.pharmacys.com.ec/blox-32mg-ecuaquimica-saval-comprimidos/p
+Candesartan,hipertension,Blox 8/12.5mg ecuaquimica - saval comprimidos,Blox,cruzazul|pharmacys,2,20.4,20.4,https://www.pharmacys.com.ec/blox-8-125mg-ecuaquimica-saval-comprimidos/p
+Candesartan,hipertension,Blox 8mg ecuaquimica - saval comprimidos,Blox,cruzazul|pharmacys,2,22.6,22.6,https://www.pharmacys.com.ec/blox-8mg-ecuaquimica-saval-comprimidos/p
+Candesartan,hipertension,Blox Comprimido 8 mg Caja 30 Unidades,BLOX,medicity,1,0.6,0.6,https://www.farmaciasmedicity.com/blox-comprimido-8-mg-caja-30-unidades-1/p
+Candesartan,hipertension,Blox-D Comprimido 8/12.5 mg Caja Con 30 Unidades,BLOX,medicity,1,0.54,0.54,https://www.farmaciasmedicity.com/blox-d-comprimido-8125-mg-caja-con-30-unidades/p
+Candesartan,hipertension,Minart Am Comprimidos 16mg+5mg Caja 14 Unidades,MINART,medicity,1,0.96,0.96,https://www.farmaciasmedicity.com/minart-am-comprimidos-16mg-5mg-caja-14-unidades-1/p
+Carvedilol,hipertension,Carvedil Comprimidos Caja con 28 Unidades,CARVEDIL,medicity,1,0.29,0.29,https://www.farmaciasmedicity.com/carvedil-comprimidos-caja-con-28-unidades/p
+Carvedilol,hipertension,Carvedilol 12.5mg caplin point - generico cápsulas,Carvedilol,cruzazul|pharmacys,2,3.2,3.2,https://www.pharmacys.com.ec/carvedilol-125mg-caplin-point-generico-capsulas/p
+Carvedilol,hipertension,Carvedilol 12.5mg la sante tabletas recubiertas,Carvedilol,cruzazul|pharmacys,2,8.5,8.5,https://www.pharmacys.com.ec/carvedilol-125mg-la-sante-tabletas-recubiertas/p
+Carvedilol,hipertension,Carvedilol 12.5mg leterago - genfar tableta,Carvedilol,cruzazul|pharmacys,2,8.5,8.5,https://www.pharmacys.com.ec/carvedilol-125mg-leterago-genfar-tableta/p
+Carvedilol,hipertension,Carvedilol 25mg caplin point - generico tableta,Carvedilol,cruzazul|pharmacys,2,6.2,6.2,https://www.pharmacys.com.ec/carvedilol-25mg-caplin-point-generico-tableta/p
+Carvedilol,hipertension,Carvedilol 25mg la sante tableta,Carvedilol,cruzazul|pharmacys,2,14.7,14.7,https://www.pharmacys.com.ec/carvedilol-25mg-la-sante-tableta/p
+Carvedilol,hipertension,Carvedilol 25mg labovida tableta,Carvedilol,cruzazul|pharmacys,2,18.6,18.6,https://www.pharmacys.com.ec/carvedilol-25mg-labovida-tableta/p
+Carvedilol,hipertension,Carvedilol 6.25 mg x28 Comprimidos,Carvedil,cruzazul|pharmacys,2,9.8,9.8,https://www.pharmacys.com.ec/carvedil-625mg-quifatex-dist-bago-comprimidos/p
+Carvedilol,hipertension,Carvedilol 6.25mg caplin point - generico tableta,Carvedilol,cruzazul|pharmacys,2,3.5,3.5,https://www.pharmacys.com.ec/carvedilol-625mg-caplin-point-generico-tableta/p
+Carvedilol,hipertension,Carvedilol 6.25mg la sante tabletas recubiertas,Carvedilol,cruzazul|pharmacys,2,6.7,6.7,https://www.pharmacys.com.ec/carvedilol-625mg-la-sante-tabletas-recubiertas/p
+Carvedilol,hipertension,Carvedilol 6.25mg leterago - genfar tableta,Carvedilol,cruzazul|pharmacys,2,6.9,6.9,https://www.pharmacys.com.ec/carvedilol-625mg-leterago-genfar-tableta/p
+Clortalidona,hipertension,Clortalidona 50mg garcos - nifa genericos tableta,Clortalidona,cruzazul|pharmacys,2,3.6,3.6,https://www.pharmacys.com.ec/clortalidona-50mg-garcos-nifa-genericos-tableta/p
+Clortalidona,hipertension,Clortalidona 50mg oxialfarm farma tableta,Clortalidona,cruzazul|pharmacys,2,4.48,4.48,https://www.pharmacys.com.ec/clortalidona-50mg-oxialfarm-farma-tableta/p
+Clortalidona,hipertension,Clortalidona Nifa Tabletas 50 mg 30 Unidades,NIFA,medicity,1,0.1,0.1,https://www.farmaciasmedicity.com/clortalidona-nifa-tabletas-50-mg-30-unidades/p
+Clortalidona,hipertension,Hidroten 12.5mg leterago - grupo farma tableta,Hidroten,cruzazul|pharmacys,2,15.0,15.0,https://www.pharmacys.com.ec/hidroten-125mg-leterago-grupo-farma-tableta/p
+Clortalidona,hipertension,Hidroten 25mg leterago - grupo farma tableta,Hidroten,cruzazul|pharmacys,2,15.72,15.72,https://www.pharmacys.com.ec/hidroten-25mg-leterago-grupo-farma-tableta/p
+Clortalidona,hipertension,Hidroten Tabletas Caja 30 Unidades,HIDROTEN,medicity,1,0.42,0.42,https://www.farmaciasmedicity.com/hidroten-tabletas-caja-con-30-unidades/p
+Diltiazem,hipertension,Incoril Comprimidos Recubiertos 180mg Caja 30 Unidades,INCORIL,medicity,1,0.93,0.93,https://www.farmaciasmedicity.com/incoril-comprimidos-recubiertos-180mg-caja-30-unidades-1/p
+Diltiazem,hipertension,Incoril Comprimidos Recubiertos De Liberación Prolongada 120mg Caja 30 Unidades,INCORIL,medicity,1,0.67,0.67,https://www.farmaciasmedicity.com/incoril-comprimidos-recubiertos-de-liberacion-prolongada-120mg-caja-30-unidades-1/p
+Diltiazem,hipertension,Incoril Comprimidos Recubiertos De Liberación Prolongada 90 mg Caja 30 Unidades,INCORIL,medicity,1,0.29,0.29,https://www.farmaciasmedicity.com/incoril-comprimidos-recubiertos-de-liberacion-prolongada-90-mg-caja-30-unidades/p
+Doxazosina,hipertension,Cardura 4 mg Tabletas x 30,Cardura,cruzazul|pharmacys,2,39.6,39.6,https://www.pharmacys.com.ec/cardura-4mg-aspen-upjohn-tableta/p
+Doxazosina,hipertension,Cardura Tabletas 4 mg Caja 30 Unidades,CARDURA,medicity,1,1.21,1.21,https://www.farmaciasmedicity.com/cardura-tabletas-4-mg-caja-30-unidades-1/p
+Doxazosina,hipertension,Doxazosina 2mg garcos - nifa genericos tableta,Doxazosina,cruzazul|pharmacys,2,11.0,11.0,https://www.pharmacys.com.ec/doxazosina-2mg-garcos-nifa-genericos-tableta/p
+Doxazosina,hipertension,Doxazosina 4mg garcos - nifa genericos tableta,Doxazosina,cruzazul|pharmacys,2,20.6,20.6,https://www.pharmacys.com.ec/doxazosina-4mg-garcos-nifa-genericos-tableta/p
+Doxazosina,hipertension,Doxazosina Momenta Comprimidos 2mg Caja 30 Unidades,MOMENTA,medicity,1,0.41,0.41,https://www.farmaciasmedicity.com/doxazosina-momenta-comprimidos-2mg-caja-30-unidades-1/p
+Doxazosina,hipertension,Doxazosina Nifa Tabletas 2mg Caja 20 Unidades,NIFA,medicity,1,0.51,0.51,https://www.farmaciasmedicity.com/doxazosina-nifa-tabletas-2mg-caja-20-unidades-1/p
+Doxazosina,hipertension,Doxazosina Nifa Tabletas 4 mg Caja 20 Unidades,NIFA,medicity,1,0.95,0.95,https://www.farmaciasmedicity.com/doxazosina-nifa-tabletas-4-mg-caja-20-unidades-1/p
+Doxazosina,hipertension,Duomo Hp Cápsulas 2/5 mg Adultos Caja con 30 Unidades,DUOMO HP,medicity,1,1.06,1.06,https://www.farmaciasmedicity.com/duomo-hp-capsulas-25-mg-adultos-caja-con-30-unidades/p
+Enalapril,hipertension,Cardiol Tabletas 10 mg Caja Con 30 Unidades,CARDIOL,medicity,1,0.17,0.17,https://www.farmaciasmedicity.com/cardiol-tabletas-10-mg-caja-con-30-unidades/p
+Enalapril,hipertension,Enalapril 10mg dyvenpro ecuagen tableta,Enalapril,cruzazul|pharmacys,2,4.8,4.8,https://www.pharmacys.com.ec/enalapril-10mg-dyvenpro-ecuagen-tableta/p
+Enalapril,hipertension,Enalapril 10mg garcos - nifa genericos tableta,Enalapril,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/enalapril-10mg-garcos-nifa-genericos-tableta/p
+Enalapril,hipertension,Enalapril 10mg rocnarf tableta,Enalapril,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/enalapril-10mg-rocnarf-tableta/p
+Enalapril,hipertension,Enalapril 20mg dyvenpro ecuagen comprimidos,Enalapril,cruzazul|pharmacys,2,2.8,2.8,https://www.pharmacys.com.ec/enalapril-20mg-dyvenpro-ecuagen-comprimidos/p
+Enalapril,hipertension,Enalapril 20mg garcos - nifa genericos tableta,Enalapril,cruzazul|pharmacys,2,3.0,3.0,https://www.pharmacys.com.ec/enalapril-20mg-garcos-nifa-genericos-tableta/p
+Enalapril,hipertension,Enalapril 20mg tecnoquimicas - genericos tableta,Enalapril,cruzazul|pharmacys,2,2.74,2.74,https://www.pharmacys.com.ec/alivio-topico-yodosalil-unguento-120-g/p
+Enalapril,hipertension,Enalapril 5mg garcos - nifa genericos tableta,Enalapril,cruzazul|pharmacys,2,1.8,1.8,https://www.pharmacys.com.ec/enalapril-5mg-garcos-nifa-genericos-tableta/p
+Enalapril,hipertension,Enalapril 5mg tecnoquimicas - genericos tableta,Enalapril,cruzazul|pharmacys,2,5.56,5.56,https://www.pharmacys.com.ec/enalapril-5mg-tecnoquimicas-genericos-tableta/p
+Enalapril,hipertension,Enalapril Ecuaquimica Comprimidos 20mg Caja 20 Unidades,ECUAQUIMICA,medicity,1,0.11,0.11,https://www.farmaciasmedicity.com/enalapril-ecuaquimica-comprimidos-20mg-caja-20-unidades-1/p
+Enalapril,hipertension,Enalapril Nifa Tabletas 10 mg Caja 30,NIFA,medicity,1,0.14,0.14,https://www.farmaciasmedicity.com/enalapril-nifa-tabletas-caja-con-20-unidades/p
+Enalapril,hipertension,Enalten 20/12.5mg ecuaquimica - saval comprimidos,Enalten,cruzazul|pharmacys,2,15.6,15.6,https://www.pharmacys.com.ec/enalten-20-125mg-ecuaquimica-saval-comprimidos/p
+Enalapril,hipertension,Enalten 20mg ecuaquimica - saval comprimidos,Enalten,cruzazul|pharmacys,2,4.5,4.5,https://www.pharmacys.com.ec/enalten-20mg-ecuaquimica-saval-comprimidos/p
+Enalapril/Hidroclorotiazida,hipertension,Enalten 10/25mg ecuaquimica - saval comprimidos,Enalten,cruzazul|pharmacys,2,9.9,9.9,https://www.pharmacys.com.ec/enalten-10-25mg-ecuaquimica-saval-comprimidos/p
+Espironolactona,hipertension,Aldactone A Tabletas 25 mg Caja Con 30 Unidades,ALDACTONE,medicity,1,0.27,0.27,https://www.farmaciasmedicity.com/aldactone-a-tabletas-25-mg-caja-con-30-unidades/p
+Espironolactona,hipertension,Aldactone Tabletas 100 mg Caja 30 Unidades,ALDACTONE,medicity,1,0.58,0.58,https://www.farmaciasmedicity.com/aldactone-tabletas-100-mg-caja-30-unidades-1/p
+Espironolactona,hipertension,Ecuaquimica Espironolactona Comprimidos 25 mg Caja 20 Unidades,ECUAQUIMICA,medicity,1,0.22,0.22,https://www.farmaciasmedicity.com/ecuaquimica-espironolactona-comprimidos-25-mg-caja-20-unidades-1/p
+Espironolactona,hipertension,Espironolactona 25 Mg x20,Espironolactona,cruzazul|pharmacys,2,5.75,5.75,https://www.pharmacys.com.ec/espironolactona-25mg-dyvenpro-representaciones-lab-chile-linea-generica-comprimidos/p
+Espironolactona,hipertension,Espironolactona 25 mg Tabletas x 20,Espironolactona,cruzazul|pharmacys,2,5.67,5.67,https://www.pharmacys.com.ec/espironolactona-25mg-ecuaquimica-mintlab-comprimidos/p
+Espironolactona,hipertension,Espironolactona 25mg lacfarma tableta,Espironolactona,cruzazul|pharmacys,2,9.6,9.6,https://www.pharmacys.com.ec/espironolactona-25mg-lacfarma-tableta/p
+Espironolactona,hipertension,Espironolactona Cormin Comprimidos 25 mg Caja Con 20 Unidades,CORMIN,medicity,1,0.27,0.27,https://www.farmaciasmedicity.com/espironolactona-cormin-comprimidos-25-mg-caja-con-20-unidades/p
+Furosemida,hipertension,Furosemida 20mg magma especialidad solución inyectable,Furosemida,cruzazul|pharmacys,2,55.0,55.0,https://www.pharmacys.com.ec/furosemida-20mg-fresenius-kabi-hospitalario-solucion-inyectable/p
+Furosemida,hipertension,Furosemida 40mg leterago - genfar tableta,Furosemida,cruzazul|pharmacys,2,3.2,3.2,https://www.pharmacys.com.ec/furosemida-40mg-leterago-genfar-tableta/p
+Furosemida,hipertension,Furosemida 40mg tecnoquimicas - genericos tableta,Furosemida,cruzazul|pharmacys,2,7.94,7.94,https://www.pharmacys.com.ec/furosemida-40mg-tecnoquimicas-genericos-tableta/p
+Furosemida,hipertension,Genfar Furosemida Tabletas 40 mg Caja 100 Unidades,GENFAR,medicity,1,0.02,0.02,https://www.farmaciasmedicity.com/genfar-furosemida-tabletas-40-mg-caja-100-unidades-1/p
+Hidroclorotiazida,hipertension,Exforge HCT 10 Mg/320 Mg/25 Mg Comprimidos x 28,Exforge,cruzazul|pharmacys,2,34.29,34.29,https://www.pharmacys.com.ec/exforge-10-320-25mg-alianza-siegfried-interpharm-comprimidos/p
+Indapamida,hipertension,Natrilix Sr Com x1.5MG x30,Natrilix,cruzazul|pharmacys,2,19.2,19.2,https://www.pharmacys.com.ec/natrilix-sr-com-x1-5mg-x30/p
+Irbesartan,hipertension,Aprovasc Comprimidos Recubiertos 300/10 mg Caja 28 Unidades,APROVASC,medicity,1,1.43,1.43,https://www.farmaciasmedicity.com/aprovasc-comprimidos-recubiertos-caja-con-28-unidades/p
+Irbesartan,hipertension,Besarzid Tabletas 300/12.5 mg Caja Con 30 Unidades,BESARZID,medicity,1,1.18,1.18,https://www.farmaciasmedicity.com/besarzid-tabletas-300125-mg-caja-con-30-unidades/p
+Irbesartan,hipertension,Coacepress 150/12.5mg eurofarma marcas tableta,Coacepress,cruzazul|pharmacys,2,13.3,13.3,https://www.pharmacys.com.ec/coacepress-150-125mg-eurofarma-marcas-tableta/p
+Irbesartan,hipertension,Coacepress 300/12.5mg eurofarma marcas tableta,Coacepress,cruzazul|pharmacys,2,16.8,16.8,https://www.pharmacys.com.ec/coacepress-300-125mg-eurofarma-marcas-tableta/p
+Irbesartan,hipertension,Irbesartan 150mg caplin point - generico comprimidos,Irbesartan,cruzazul|pharmacys,2,21.0,21.0,https://www.pharmacys.com.ec/irbesartan-150mg-caplin-point-generico-comprimidos/p
+Irbesartan,hipertension,Irbesartan 150mg la sante comprimidos,Irbesartan,cruzazul|pharmacys,2,12.6,12.6,https://www.pharmacys.com.ec/irbesartan-150mg-la-sante-comprimidos/p
+Irbesartan,hipertension,Irbesartan 150mg la sante tableta,Irbesartan,cruzazul|pharmacys,2,6.3,6.3,https://www.pharmacys.com.ec/irbesartan-150mg-la-sante-tableta/p
+Irbesartan,hipertension,Irbesartan 300mg la sante comprimidos,Irbesartan,cruzazul|pharmacys,2,17.76,22.2,https://www.pharmacys.com.ec/irbesartan-300mg-la-sante-comprimidos/p
+Irbesartan,hipertension,Irbesartan 300mg la sante tableta,Irbesartan,cruzazul|pharmacys,2,11.1,11.1,https://www.pharmacys.com.ec/irbesartan-300mg-la-sante-tableta/p
+Irbesartan,hipertension,Irbesartan 300mg tecnoquimicas - genericos tabletas,Irbesartan,cruzazul|pharmacys,2,5.7,5.7,https://www.pharmacys.com.ec/irbesartan-300mg-tecnoquimicas-genericos-tabletas/p
+Irbesartan,hipertension,Irbetan Tabletas 300 mg Caja 30 Unidades,IRBETAN,medicity,1,0.8,0.8,https://www.farmaciasmedicity.com/irbetan-tabletas-300-mg-caja-30-unidades-1/p
+Irbesartan,hipertension,Irbetiazid Comprimidos 150mg+12.5mg Caja 30 Unidades,IRBETIAZID,medicity,1,0.83,0.83,https://www.farmaciasmedicity.com/irbetiazid-comprimidos-150mg-12-5mg-caja-30-unidades-1/p
+Irbesartan,hipertension,Irbett Comprimido 150 mg Caja 30 Unidades,IRBETT,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/irbett-comprimido-150-mg-caja-30-unidades-1/p
+Irbesartan,hipertension,Irbett Comprimidos 300mg Caja 30 Unidades,IRBETT,medicity,1,0.76,0.76,https://www.farmaciasmedicity.com/irbett-comprimidos-300mg-caja-30-unidades-1/p
+Irbesartan,hipertension,Santé Irbesartan Tabletas 300 mg Caja 30 Unidades,LA SANTE,medicity,1,0.34,0.34,https://www.farmaciasmedicity.com/irbesartan-sante-tabletas-caja-con-30-unidades/p
+Losartan,hipertension,Convertal D Comprimido Recubierto Caja Con 10 Unidades,CONVERTAL,medicity,1,0.84,0.84,https://www.farmaciasmedicity.com/convertal-d-comprimido-recubierto-caja-con-10-unidades/p
+Losartan,hipertension,Convertal Plus Comprimidos 100mg/10mg Caja 30 Unidades,CONVERTAL,medicity,1,1.16,1.16,https://www.farmaciasmedicity.com/convertal-plus-comprimidos-100mg-10mg-caja-30-unidades-1/p
+Losartan,hipertension,Cozaar Comprimido Recubierto 50 mg Caja Con 30 Unidades,COZAAR,medicity,1,0.33,0.33,https://www.farmaciasmedicity.com/cozaar-comprimido-recubierto-50-mg-caja-con-30-unidades/p
+Losartan,hipertension,Cozaar Comprimidos Recubiertos 100 mg Caja 30 Unidades,COZAAR,medicity,1,0.75,0.75,https://www.farmaciasmedicity.com/cozaar-comprimidos-recubiertos-100-mg-caja-30-unidades/p
+Losartan,hipertension,Losartan 100mg caplin point - generico tableta,Losartan,cruzazul|pharmacys,2,82.0,82.0,https://www.pharmacys.com.ec/losartan-100mg-caplin-point-generico-tableta/p
+Losartan,hipertension,Losartan 100mg labovida tableta recubierta,Losartan,cruzazul|pharmacys,2,19.5,19.5,https://www.pharmacys.com.ec/losartan-100mg-labovida-tableta-recubierta/p
+Losartan,hipertension,Losartan 50mg dyvenpro ecuagen tableta recubierta,Losartan,cruzazul|pharmacys,2,6.6,6.6,https://www.pharmacys.com.ec/losartan-50mg-dyvenpro-ecuagen-tableta-recubierta/p
+Losartan,hipertension,Losartan 50mg labovida tableta recubierta,Losartan,cruzazul|pharmacys,2,7.5,7.5,https://www.pharmacys.com.ec/losartan-50mg-labovida-tableta-recubierta/p
+Losartan,hipertension,Losartan 50mg leterago - genfar comprimidos,Losartan,cruzazul|pharmacys,2,6.9,6.9,https://www.pharmacys.com.ec/losartan-50mg-leterago-genfar-comprimidos/p
+Losartan,hipertension,Losartan 50mg tecnoquimicas - genericos tabletas recubiertas,Losartan,cruzazul|pharmacys,2,8.48,8.48,https://www.pharmacys.com.ec/losartan-50mg-tecnoquimicas-genericos-tabletas-recubiertas/p
+Losartan,hipertension,Losartan Genfar Comprimidos Recubiertos Caja Con 30 Unidades,GENFAR,medicity,1,0.63,0.63,https://www.farmaciasmedicity.com/losartan-genfar-comprimidos-recubiertos-caja-con-30-unidades/p
+Losartan,hipertension,Losartan Mk Tableta Recubierta 100 mg Caja 30 Unidades,MK,medicity,1,0.56,0.56,https://www.farmaciasmedicity.com/losartan-mk-tableta-recubierta-100-mg-caja-30-unidades-1/p
+Losartan,hipertension,Losartan Mk Tabletas Recubierto 50mg Caja 30 Unidades,MK,medicity,1,0.26,0.26,https://www.farmaciasmedicity.com/losartan-mk-tabletas-recubierto-50mg-caja-30-unidades-1/p
+Losartan,hipertension,Losartan Potasico Nifa Tableta 100 mg 20 Unidades,NIFA,medicity,1,0.75,0.75,https://www.farmaciasmedicity.com/losartan-potasico-nifa-tableta-100-mg-20-unidades-1/p
+Losartan,hipertension,Losartan Potásico Tabletas x30 - 100Mg,Losartan,cruzazul|pharmacys,2,21.0,21.0,https://www.pharmacys.com.ec/losartan-potasi-t-recx100mgx30-lste/p
+Losartan,hipertension,Losartan Santé Tabletas 50 mg Caja con 30 Unidades,LA SANTE,medicity,1,0.17,0.17,https://www.farmaciasmedicity.com/losartan-sante-tabletas-50-mg-caja-con-30-unidades/p
+Losartan,hipertension,Losartan Santé Tabletas Recubiertas 100 mg Caja Con 30 Unidades,LA SANTE,medicity,1,0.64,0.64,https://www.farmaciasmedicity.com/losartan-sante-tabletas-recubiertas-100-mg-caja-con-30-unidades/p
+Losartan,hipertension,Losartán 100 MG Tabletas Recubiertas x20,Losartan,cruzazul|pharmacys,2,14.0,14.0,https://www.pharmacys.com.ec/losartan-100mg-dyvenpro-ecuagen-tableta-recubierta/p
+Losartan,hipertension,Losartán 50 Mg x 30 Tabletas,Losartan,cruzazul|pharmacys,2,10.8,10.8,https://www.pharmacys.com.ec/losartan-50mg-la-sante-tableta/p
+Losartan,hipertension,Losartán 50 mg Tabletas Recubiertas x30,Losartan,cruzazul|pharmacys,2,5.4,5.4,https://www.pharmacys.com.ec/losartan-50mg-la-sante-tabletas-recubiertas/p
+Losartan/Amlodipino,hipertension,Aranda 2.5/50mg leterago - grupo farma cápsulas,Aranda,cruzazul|pharmacys,2,32.1,32.1,https://www.pharmacys.com.ec/aranda-25-50mg-leterago-grupo-farma-capsulas/p
+Losartan/Amlodipino,hipertension,Aranda 5/100mg leterago - grupo farma cápsulas,Aranda,cruzazul|pharmacys,2,43.59,43.59,https://www.pharmacys.com.ec/aranda-5-100mg-leterago-grupo-farma-capsulas/p
+Losartan/Hidroclorotiazida,hipertension,Angioretic Comprimido Recubierto 50/12.5 mg Con 20 Unidades,ANGIORETIC,medicity,1,0.59,0.59,https://www.farmaciasmedicity.com/angioretic-comprimido-recubierto-50125-mg-con-20-unidades/p
+Losartan/Hidroclorotiazida,hipertension,Angioretic Forte Comprimido Recubierto 100/25 mg Con 20 Unidades,ANGIORETIC,medicity,1,0.97,0.97,https://www.farmaciasmedicity.com/angioretic-forte-comprimido-recubierto-10025-mg-con-20-unidades/p
+Losartan/Hidroclorotiazida,hipertension,Hyzaar Comprimidos Recubiertos 30 Unidades,HYZAAR,medicity,1,1.02,1.02,https://www.farmaciasmedicity.com/hyzaar-comprimidos-recubiertos-30-unidades/p
+Nebivolol,hipertension,Nabila Comprimidos 2.5 mg Caja 28 Unidades,NABILA,medicity,1,0.53,0.53,https://www.farmaciasmedicity.com/nabila-comprimidos-caja-con-28-unidades/p
+Nebivolol,hipertension,Nabila Comprimidos 5 mg Caja 28 Unidades,NABILA,medicity,1,0.58,0.58,https://www.farmaciasmedicity.com/nabila-comprimidos-5-mg-caja-con-28-unidades/p
+Nebivolol,hipertension,Pertium Comprimidos 5mg Caja 30 Unidades,PERTIUM,medicity,1,0.42,0.42,https://www.farmaciasmedicity.com/pertium-comprimidos-5mg-caja-30-unidades-1/p
+Olmesartan,hipertension,Iltux Comprimidos Recubiertos Caja Con 28 Unidades,ILTUX,medicity,1,0.88,0.88,https://www.farmaciasmedicity.com/iltux-comprimidos-recubiertos-caja-con-28-unidades/p
+Olmesartan,hipertension,Iltux Hct Comprimidos Recubiertos Caja Con 28 Unidades,ILTUX,medicity,1,0.97,0.97,https://www.farmaciasmedicity.com/iltux-hct-comprimidos-recubiertos-caja-con-28-unidades/p
+Olmesartan,hipertension,Iltuxam 20/5/12.5mg quifatex dist medicamenta iltuxam – antihipertensivo triple combinación,Iltuxam,cruzazul|pharmacys,2,42.56,42.56,https://www.pharmacys.com.ec/iltuxam-20-5-125mg-quifatex-dist-medicamenta-iltuxam-antihip/p
+Olmesartan,hipertension,Iltuxam 40/10/25mg quifatex dist medicamenta iltuxam – antihipertensivo triple combinación,Iltuxam,cruzazul|pharmacys,2,48.44,48.44,https://www.pharmacys.com.ec/iltuxam-40-10-25mg-quifatex-dist-medicamenta-iltuxam-antihip/p
+Olmesartan,hipertension,Iltuxam 40/5/12.5mg quifatex dist medicamenta iltuxam – antihipertensivo triple combinación,Iltuxam,cruzazul|pharmacys,2,42.56,42.56,https://www.pharmacys.com.ec/iltuxam-40-5-125mg-quifatex-dist-medicamenta-iltuxam-antihip/p
+Olmesartan,hipertension,Iltuxam 40/5/25mg quifatex dist medicamenta iltuxam – antihipertensivo triple combinación,Iltuxam,cruzazul|pharmacys,2,43.68,43.68,https://www.pharmacys.com.ec/iltuxam-40-5-25mg-quifatex-dist-medicamenta-iltuxam-antihipe/p
+Olmesartan,hipertension,Iltuxam Comprimido Recubierto 20/5/12.5mg Caja 28 Unidades,ILTUXAM,medicity,1,34.05,34.05,https://www.farmaciasmedicity.com/iltuxam-comprimido-recubierto-20-5-12-5mg-caja-28-unidades-1/p
+Olmesartan,hipertension,Iltuxam Comprimido Recubierto 40/10/25mg Caja 28 Unidades,ILTUXAM,medicity,1,36.33,36.33,https://www.farmaciasmedicity.com/iltuxam-comprimido-recubierto-40-10-25mg-caja-28-unidades-1/p
+Olmesartan,hipertension,Iltuxam Comprimido Recubierto 40/5/12.5mg Caja 28 Unidades,ILTUXAM,medicity,1,31.92,31.92,https://www.farmaciasmedicity.com/iltuxam-comprimido-recubierto-40-5-12-5mg-caja-28-unidades-1/p
+Olmesartan,hipertension,Iltuxam Comprimido Recubierto 40/5/25mg Caja 28 Unidades,ILTUXAM,medicity,1,32.76,32.76,https://www.farmaciasmedicity.com/iltuxam-comprimido-recubierto-40-5-25mg-caja-28-unidades-1/p
+Olmesartan,hipertension,Iltuxam Comprimidos Recubiertos 20/5 mg Caja Con 28 Unidades,ILTUXAM,medicity,1,1.15,1.15,https://www.farmaciasmedicity.com/iltuxam-comprimidos-recubiertos-205-mg-caja-con-28-unidades/p
+Olmesartan,hipertension,Iltuxam Comprimidos Recubiertos 40/5 mg Caja 28 Unidades,ILTUXAM,medicity,1,1.24,1.24,https://www.farmaciasmedicity.com/iltuxam-comprimidos-recubiertos-caja-con-28-unidades/p
+Olmesartan,hipertension,Olmesartan 20mg leterago - genfar,Olmesartan,cruzazul|pharmacys,2,27.36,27.36,https://www.pharmacys.com.ec/olmesartan-20mg-leterago-genfar/p
+Perindopril,hipertension,Coveram Com x10/5MG x30,Coveram,cruzazul|pharmacys,2,49.68,49.68,https://www.pharmacys.com.ec/coveram-com-x10-5mg-x30/p
+Perindopril,hipertension,Coveram Com x5/5MG x30,Coveram,cruzazul|pharmacys,2,48.0,48.0,https://www.pharmacys.com.ec/coveram-com-x5-5mg-x30/p
+Perindopril,hipertension,Coversyl Com-Rec x10MG x30,Coversyl,cruzazul|pharmacys,2,32.32,32.32,https://www.pharmacys.com.ec/coversyl-com-rec-x10mg-x30/p
+Perindopril,hipertension,Coversyl Com-Rec x5MG x30,Coversyl,cruzazul|pharmacys,2,24.72,24.72,https://www.pharmacys.com.ec/coversyl-com-rec-x5mg-x30/p
+Perindopril,hipertension,Preterax Com x10/2.5MG x30,Preterax,cruzazul|pharmacys,2,49.68,49.68,https://www.pharmacys.com.ec/preterax-com-x10-2-5mg-x30/p
+Perindopril,hipertension,Preterax Com-Rec x5/1.25MG x30,Preterax,cruzazul|pharmacys,2,41.4,41.4,https://www.pharmacys.com.ec/preterax-com-rec-x5-1-25mg-x30/p
+Propranolol,hipertension,Protolif Comprimido Caja con 100 Unidades,PROTOLIF,medicity,1,0.05,0.05,https://www.farmaciasmedicity.com/protolif-comprimido-caja-con-100-unidades-1/p
+Telmisartan,hipertension,Indivan Hct Tabletas 80/12.5mg Caja con 30 Unidades,INDIVAN,medicity,1,0.87,1.07,https://www.farmaciasmedicity.com/indivan-hct-tabletas-80-12-5mg-caja-con-30-unidades-1/p
+Telmisartan,hipertension,Micardis Amlo Comprimidos 80/10mg Caja 28 Unidades,MICARDIS,medicity,1,1.43,1.43,https://www.farmaciasmedicity.com/micardis-amlo-comprimidos-80-10mg-caja-28-unidades-1/p
+Telmisartan,hipertension,Micardis Amlo Comprimidos 80/5 mg Caja Con 28 Unidades,MICARDIS,medicity,1,1.35,1.35,https://www.farmaciasmedicity.com/micardis-amlo-comprimidos-805-mg-caja-con-28-unidades/p
+Telmisartan,hipertension,Micardis Plus Comprimidos 80/12.5 mg Caja 28 Unidades,MICARDIS,medicity,1,1.04,1.16,https://www.farmaciasmedicity.com/micardis-plus-comprimidos-80-12-5-mg-caja-28-unidades-1/p
+Telmisartan,hipertension,Micardis Plus Comprimidos 80/25 mg Caja Con 28 Unidades,MICARDIS,medicity,1,1.38,1.38,https://www.farmaciasmedicity.com/micardis-plus-comprimidos-8025-mg-caja-con-28-unidades/p
+Valsartan,hipertension,Diapresan Comprimidos Recubiertos 160 mg Caja Con 30 Unidades,DIAPRESAN,medicity,1,1.08,1.08,https://www.farmaciasmedicity.com/diapresan-comprimidos-recubiertos-160-mg-caja-con-30-unidades/p
+Valsartan,hipertension,Diapresan D Comprimidos Recubiertos 80/12.5 mg Caja Con 30 Unidades,DIAPRESAN,medicity,1,0.97,0.97,https://www.farmaciasmedicity.com/diapresan-d-comprimidos-recubiertos-80125-mg-caja-con-30-unidades/p
+Valsartan,hipertension,Diovan Comprimido Recubierto Caja Con 28 Unidades,DIOVAN,medicity,1,0.94,0.94,https://www.farmaciasmedicity.com/diovan-comprimido-recubierto-caja-con-28-unidades/p
+Valsartan,hipertension,Entresto Comprimidos Recubiertas 100 mg Caja 60 Unidades,ENTRESTO,medicity,1,1.66,1.66,https://www.farmaciasmedicity.com/entresto-comprimidos-recubiertas-100-mg-caja-60-unidades-1/p
+Valsartan,hipertension,Entresto Comprimidos Recubiertas 50 mg Caja 30 Unidades,ENTRESTO,medicity,1,1.49,1.49,https://www.farmaciasmedicity.com/entresto-comprimidos-recubiertas-50-mg-caja-30-unidades-1/p
+Valsartan,hipertension,Exforge Comprimidos Recubiertos 28 Unidades,EXFORGE,medicity,1,1.14,1.14,https://www.farmaciasmedicity.com/exforge-comprimidos-recubiertos-28-unidades/p
+Valsartan,hipertension,Simultan Comprimido Recubierto 160 Mg Caja 30 Unidades,SIMULTAN,medicity,1,0.72,0.72,https://www.farmaciasmedicity.com/simultan-comprimido-recubierto-160-mg-caja-30-unidades/p
+Valsartan,hipertension,Terovan 200 Comprimidos REC 97/103MGx 60,Terovan,cruzazul|pharmacys,2,108.0,108.0,https://www.pharmacys.com.ec/terovan-103-97mg-quifatex-dist-medicamenta-terovan-inhibidor/p
+Valsartan,hipertension,Terovan 26/24mg quifatex dist medicamenta terovan – inhibidor de neprilisina + ara ii,Terovan,cruzazul|pharmacys,2,54.0,54.0,https://www.pharmacys.com.ec/terovan-26-24mg-quifatex-dist-medicamenta-terovan-inhibidor-/p
+Valsartan,hipertension,Terovan 51/49mg quifatex dist medicamenta terovan – inhibidor de neprilisina + ara ii,Terovan,cruzazul|pharmacys,2,108.0,108.0,https://www.pharmacys.com.ec/terovan-51-49mg-quifatex-dist-medicamenta-terovan-inhibidor-/p
+Valsartan,hipertension,Terovan Comprimido Recubierto 24mg/26mg Caja 30 Unidades,TEROVAN,medicity,1,37.8,37.8,https://www.farmaciasmedicity.com/terovan-comprimido-recubierto-24mg-26mg-caja-30-unidades-1/p
+Valsartan,hipertension,Terovan Comprimido Recubierto 49mg/51mg Caja 60 Unidades,TEROVAN,medicity,1,75.6,75.6,https://www.farmaciasmedicity.com/terovan-comprimido-recubierto-49mg-51mg-caja-60-unidades-1/p
+Valsartan,hipertension,Valaxam 160/10mg ecuaquimica - saval comprimido recubierto,Valaxam,cruzazul|pharmacys,2,30.0,30.0,https://www.pharmacys.com.ec/valaxam-160-10mg-ecuaquimica-saval-comprimido-recubierto/p
+Valsartan,hipertension,Valaxam 160/5/12.5mg ecuaquimica - saval comprimido recubierto,Valaxam,cruzazul|pharmacys,2,30.0,30.0,https://www.pharmacys.com.ec/valaxam-160-5-125mg-ecuaquimica-saval-comprimido-recubierto/p
+Valsartan,hipertension,Valaxam 160/5mg ecuaquimica - saval comprimido recubierto,Valaxam,cruzazul|pharmacys,2,30.0,30.0,https://www.pharmacys.com.ec/valaxam-160-5mg-ecuaquimica-saval-comprimido-recubierto/p
+Valsartan,hipertension,Valaxam-D Comprimidos Recubiertos 160mg+12.5mg+5mg Caja 30 Unidades,VALAXAM-D,medicity,1,0.92,0.92,https://www.farmaciasmedicity.com/valaxam-d-comprimidos-recubiertos-160mg-12-5mg-5mg-caja-30-unidades-1/p
+Valsartan/Hidroclorotiazida,hipertension,Diovan Hct Comprimidos Recubiertos Caja 28 Unidades,DIOVAN,medicity,1,1.03,1.03,https://www.farmaciasmedicity.com/diovan-hct-comprimidos-recubiertos-caja-con-28-unidades/p
+Valsartan/Hidroclorotiazida,hipertension,Exforge Hct Comprimidos Recubiertos Caja Con 28 Unidades,EXFORGE,medicity,1,1.26,1.26,https://www.farmaciasmedicity.com/exforge-hct-comprimidos-recubiertos-caja-con-28-unidades/p
+Verapamilo,hipertension,Verapamilo 80mg la sante tabletas recubiertas,Verapamilo,cruzazul|pharmacys,2,3.0,3.0,https://www.pharmacys.com.ec/verapamilo-80mg-la-sante-tabletas-recubiertas/p
+Levotiroxina,tiroides,Boncheck Tab x100Mcg x50,Boncheck,cruzazul|pharmacys,2,3.95,3.95,https://www.pharmacys.com.ec/boncheck-tab-x100mcg-x50/p
+Levotiroxina,tiroides,Boncheck Tab x125Mcg x50,Boncheck,cruzazul|pharmacys,2,4.95,4.95,https://www.pharmacys.com.ec/boncheck-tab-x125mcg-x50/p
+Levotiroxina,tiroides,Boncheck Tab x150Mcg x50,Boncheck,cruzazul|pharmacys,2,7.45,7.45,https://www.pharmacys.com.ec/boncheck-tab-x150mcg-x50/p
+Levotiroxina,tiroides,Boncheck Tab x50mcg x50,Boncheck,cruzazul|pharmacys,2,2.95,2.95,https://www.pharmacys.com.ec/boncheck-50mcg-alianza-bonapharm/p
+Levotiroxina,tiroides,Boncheck Tab x75mcg x50,Boncheck,cruzazul|pharmacys,2,3.9,3.9,https://www.pharmacys.com.ec/boncheck-75mcg-alianza-bonapharm/p
+Levotiroxina,tiroides,Eutirox Tabletas Caja con 50 Unidades,EUTIROX,medicity,1,0.1,0.1,https://www.farmaciasmedicity.com/euritox-tabletas-caja-con-50-unidades/p
+Levotiroxina,tiroides,Levotiroxina 100mg berkanafarma tableta,Levotiroxina,cruzazul|pharmacys,2,3.95,3.95,https://www.pharmacys.com.ec/levotiroxina-100mg-berkana-berkana-tableta/p
+Levotiroxina,tiroides,Levotiroxina 50mg berkanafarma tabletas,Levotiroxina,cruzazul|pharmacys,2,3.0,3.0,https://www.pharmacys.com.ec/levotiroxina-50mg-berkana-berkana-tabletas/p
+Metimazol,tiroides,Tapazol Tabletas 5 mg Caja 100 Unidades,TAPAZOL,medicity,1,0.1,0.1,https://www.farmaciasmedicity.com/tapazol-tabletas-5-mg-caja-con-100-unidades/p
