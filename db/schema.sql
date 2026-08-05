@@ -4,16 +4,27 @@
 create extension if not exists pg_trgm;
 create extension if not exists "uuid-ossp";
 
-create type pharmacy_enum as enum (
-  'fybeca', 'pharmacys', 'medicity', 'cruzazul', 'economicas'
-);
+-- CREATE TYPE no soporta IF NOT EXISTS en Postgres; se envuelve en DO para
+-- que el script completo sea seguro de re-ejecutar.
+do $$ begin
+  create type pharmacy_enum as enum (
+    'fybeca', 'pharmacys', 'medicity', 'cruzazul', 'economicas'
+  );
+exception when duplicate_object then null;
+end $$;
 
-create type match_method_enum as enum ('exact', 'ia', 'manual');
+do $$ begin
+  create type match_method_enum as enum ('exact', 'ia', 'manual');
+exception when duplicate_object then null;
+end $$;
 
-create type subscription_type_enum as enum ('precio_baja', 'repone_stock');
+do $$ begin
+  create type subscription_type_enum as enum ('precio_baja', 'repone_stock');
+exception when duplicate_object then null;
+end $$;
 
 -- Catálogo maestro.
-create table drugs (
+create table if not exists drugs (
   id uuid primary key default uuid_generate_v4(),
   slug text unique not null,
   principio_activo text not null,
@@ -30,12 +41,12 @@ create table drugs (
   updated_at timestamptz not null default now()
 );
 
-create index idx_drugs_principio_activo on drugs using gin (principio_activo gin_trgm_ops);
-create index idx_drugs_nombre_comercial on drugs using gin (nombre_comercial gin_trgm_ops);
-create index idx_drugs_registro_sanitario on drugs (registro_sanitario);
+create index if not exists idx_drugs_principio_activo on drugs using gin (principio_activo gin_trgm_ops);
+create index if not exists idx_drugs_nombre_comercial on drugs using gin (nombre_comercial gin_trgm_ops);
+create index if not exists idx_drugs_registro_sanitario on drugs (registro_sanitario);
 
 -- Producto de una cadena de farmacia, emparejado a un drug del catálogo maestro.
-create table pharmacy_products (
+create table if not exists pharmacy_products (
   id uuid primary key default uuid_generate_v4(),
   drug_id uuid references drugs (id) on delete set null,
   pharmacy pharmacy_enum not null,
@@ -49,10 +60,10 @@ create table pharmacy_products (
   unique (pharmacy, external_id)
 );
 
-create index idx_pharmacy_products_drug_id on pharmacy_products (drug_id);
+create index if not exists idx_pharmacy_products_drug_id on pharmacy_products (drug_id);
 
 -- Una fila por producto por día.
-create table price_snapshots (
+create table if not exists price_snapshots (
   id uuid primary key default uuid_generate_v4(),
   pharmacy_product_id uuid not null references pharmacy_products (id) on delete cascade,
   fecha date not null,
@@ -63,11 +74,11 @@ create table price_snapshots (
   unique (pharmacy_product_id, fecha)
 );
 
-create index idx_price_snapshots_fecha on price_snapshots (fecha);
-create index idx_price_snapshots_pharmacy_product_fecha on price_snapshots (pharmacy_product_id, fecha);
+create index if not exists idx_price_snapshots_fecha on price_snapshots (fecha);
+create index if not exists idx_price_snapshots_pharmacy_product_fecha on price_snapshots (pharmacy_product_id, fecha);
 
 -- Suscripciones a alertas por Telegram.
-create table subscriptions (
+create table if not exists subscriptions (
   id uuid primary key default uuid_generate_v4(),
   telegram_chat_id text not null,
   drug_id uuid not null references drugs (id) on delete cascade,
@@ -77,10 +88,10 @@ create table subscriptions (
   unique (telegram_chat_id, drug_id, tipo)
 );
 
-create index idx_subscriptions_drug_id on subscriptions (drug_id);
+create index if not exists idx_subscriptions_drug_id on subscriptions (drug_id);
 
 -- Bitácora de corridas de scraping.
-create table scrape_runs (
+create table if not exists scrape_runs (
   id uuid primary key default uuid_generate_v4(),
   fuente text not null,
   fecha timestamptz not null default now(),
@@ -89,10 +100,10 @@ create table scrape_runs (
   duracion_segundos numeric(10, 2)
 );
 
-create index idx_scrape_runs_fuente_fecha on scrape_runs (fuente, fecha desc);
+create index if not exists idx_scrape_runs_fuente_fecha on scrape_runs (fuente, fecha desc);
 
 -- Caché de normalización con IA: nunca pagar dos veces la misma pregunta.
-create table ai_cache (
+create table if not exists ai_cache (
   id uuid primary key default uuid_generate_v4(),
   input_hash text unique not null,
   response_json jsonb not null,
@@ -100,14 +111,14 @@ create table ai_cache (
 );
 
 -- Clicks salientes hacia cada farmacia (preparación de monetización, sección 7.6).
-create table outbound_clicks (
+create table if not exists outbound_clicks (
   id uuid primary key default uuid_generate_v4(),
   drug_id uuid references drugs (id) on delete set null,
   pharmacy pharmacy_enum not null,
   fecha timestamptz not null default now()
 );
 
-create index idx_outbound_clicks_drug_pharmacy on outbound_clicks (drug_id, pharmacy);
+create index if not exists idx_outbound_clicks_drug_pharmacy on outbound_clicks (drug_id, pharmacy);
 
 -- Row Level Security: lectura pública solo en drugs, pharmacy_products,
 -- price_snapshots. Escritura únicamente con service key (que hace bypass de RLS).
@@ -119,8 +130,13 @@ alter table scrape_runs enable row level security;
 alter table ai_cache enable row level security;
 alter table outbound_clicks enable row level security;
 
+drop policy if exists "lectura publica drugs" on drugs;
 create policy "lectura publica drugs" on drugs for select using (true);
+
+drop policy if exists "lectura publica pharmacy_products" on pharmacy_products;
 create policy "lectura publica pharmacy_products" on pharmacy_products for select using (true);
+
+drop policy if exists "lectura publica price_snapshots" on price_snapshots;
 create policy "lectura publica price_snapshots" on price_snapshots for select using (true);
 
 -- subscriptions, scrape_runs, ai_cache y outbound_clicks: sin política de
