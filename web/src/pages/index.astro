@@ -2,7 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Farma Precios Ecuador — Comparador de precios de medicamentos">
+<Layout
+  title="Farma Precios Ecuador — Comparador de precios de medicamentos"
+  description="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. Encuentra el precio más bajo cerca de ti."
+>
   <h1>Compara precios de medicamentos en Ecuador</h1>
   <p class="subtitle">
     Busca por nombre comercial. Comparamos Fybeca, Pharmacys, Medicity, Cruz
@@ -27,6 +30,8 @@ import Layout from "../layouts/Layout.astro";
   </p>
 
   <div id="results"></div>
+
+  <!-- AD SLOT: debajo de los resultados de búsqueda — ver Layout.astro para cómo activar -->
 </Layout>
 
 <style>

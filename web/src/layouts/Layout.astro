@@ -1,8 +1,16 @@
 ---
 interface Props {
   title: string;
+  description?: string;
+  structuredData?: Record<string, unknown>;
 }
-const { title } = Astro.props;
+const {
+  title,
+  description = "Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas.",
+  structuredData,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -11,10 +19,34 @@ const { title } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <meta
-      name="description"
-      content="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas."
-    />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Farma Precios Ecuador" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="es_EC" />
+    <meta name="twitter:card" content="summary" />
+
+    {
+      structuredData && (
+        <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+      )
+    }
+
+    <!--
+      Slot de anuncios (Google AdSense) — preparado, sin activar todavía.
+      Cuando exista una cuenta AdSense aprobada:
+        1. Agregar el script de verificación del sitio en <head>:
+           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+        2. Crear public/ads.txt con la línea que da AdSense
+           (google.com, pub-XXXXXXXXXX, DIRECT, f08c47fec0942fa0).
+        3. Descomentar los <ins class="adsbygoogle"> donde corresponda
+           (ver comentarios "AD SLOT" en index.astro y medicamento/[slug].astro).
+      Ver Boveda Farmacia/Conceptos/Monetización.
+    -->
   </head>
   <body>
     <header class="site-header">
@@ -33,6 +65,7 @@ const { title } = Astro.props;
         Farmacias Económicas. Proyecto independiente, sin afiliación con
         ninguna cadena.
       </p>
+      <p><a href="/politica-de-privacidad">Política de privacidad</a></p>
     </footer>
   </body>
 </html>
@@ -87,5 +120,8 @@ const { title } = Astro.props;
     color: var(--muted);
     font-size: 0.8rem;
     padding: 2rem 1rem;
+  }
+  .site-footer a {
+    color: var(--muted);
   }
 </style>

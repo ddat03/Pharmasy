@@ -46,15 +46,55 @@ const techo = drug.precio_techo_usd;
 function formatPrice(value: number | null): string {
   return value == null ? "—" : `$${value.toFixed(2)}`;
 }
+
+const MESES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+const now = new Date();
+const mesAnio = `${MESES[now.getMonth()]} ${now.getFullYear()}`;
+const seoTitle = `Precio de ${nombre} en Ecuador — comparación ${mesAnio} | Farma Precios Ecuador`;
+const seoDescription =
+  pricedRows.length > 0
+    ? `Compara el precio de ${nombre} en ${pricedRows.length} ${pricedRows.length === 1 ? "farmacia" : "farmacias"} de Ecuador. Desde ${formatPrice(Math.min(...pricedRows.map((p) => p.precio_usd as number)))}.`
+    : `Precio de ${nombre} en farmacias de Ecuador: Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas.`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: nombre,
+  description: drug.presentacion ?? undefined,
+  ...(drug.laboratorio ? { brand: { "@type": "Brand", name: drug.laboratorio } } : {}),
+  ...(pricedRows.length > 0
+    ? {
+        offers: pricedRows.map((row) => ({
+          "@type": "Offer",
+          price: row.precio_usd,
+          priceCurrency: "USD",
+          availability:
+            row.en_stock === true
+              ? "https://schema.org/InStock"
+              : row.en_stock === false
+                ? "https://schema.org/OutOfStock"
+                : "https://schema.org/LimitedAvailability",
+          url: row.url ?? undefined,
+          seller: { "@type": "Organization", name: PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy },
+        })),
+      }
+    : {}),
+};
 ---
 
-<Layout title={`${nombre} — precios en Ecuador | Farma Precios Ecuador`}>
+<Layout title={seoTitle} description={seoDescription} structuredData={structuredData}>
   <p class="breadcrumb">
     <a href="/">Buscador</a> ·
     <a href={`/principio/${slugifyPrincipio(drug.principio_activo)}`}>{drug.principio_activo}</a>
   </p>
   <h1>{nombre}</h1>
   {drug.presentacion && <p class="subtitle">{drug.presentacion}</p>}
+
+  <!-- AD SLOT: banner superior, debajo del título — ver Layout.astro para cómo activar -->
+
 
   {
     techo != null && (
@@ -103,6 +143,8 @@ function formatPrice(value: number | null): string {
     <a href={`/principio/${slugifyPrincipio(drug.principio_activo)}`}>página de {drug.principio_activo}</a> —
     mismo principio activo, consulte a su médico o farmacéutico antes de sustituir un medicamento.
   </p>
+
+  <!-- AD SLOT: debajo de la nota de equivalencia genérica — ver Layout.astro para cómo activar -->
 </Layout>
 
 <style>

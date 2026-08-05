@@ -46,9 +46,23 @@ items.sort((a, b) => (a.precioMin ?? Infinity) - (b.precioMin ?? Infinity));
 function formatPrice(value: number | null): string {
   return value == null ? "—" : `$${value.toFixed(2)}`;
 }
+
+const seoTitle = `${principioActivo}: presentaciones, genéricos y precios en Ecuador | Farma Precios Ecuador`;
+const seoDescription = `Todas las presentaciones de ${principioActivo} disponibles en Ecuador (genéricos y marca), con el precio más bajo encontrado en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas.`;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: `Presentaciones de ${principioActivo}`,
+  itemListElement: items.map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    url: new URL(`/medicamento/${item.drug.slug}`, Astro.site).toString(),
+    name: [item.drug.principio_activo, item.drug.concentracion, item.drug.forma_farmaceutica].filter(Boolean).join(" "),
+  })),
+};
 ---
 
-<Layout title={`${principioActivo} — presentaciones y precios | Farma Precios Ecuador`}>
+<Layout title={seoTitle} description={seoDescription} structuredData={structuredData}>
   <p class="breadcrumb"><a href="/">Buscador</a></p>
   <h1>{principioActivo}</h1>
   <p class="subtitle">
@@ -77,6 +91,8 @@ function formatPrice(value: number | null): string {
       ))
     }
   </div>
+
+  <!-- AD SLOT: debajo del listado de presentaciones — ver Layout.astro para cómo activar -->
 </Layout>
 
 <style>

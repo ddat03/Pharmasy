@@ -1,0 +1,6 @@
+# TODO: actualizar el dominio del Sitemap cuando se conecte Cloudflare
+# Pages con el dominio real (debe coincidir con `site` en astro.config.mjs).
+User-agent: *
+Allow: /
+
+Sitemap: https://farmaprecios.pages.dev/sitemap-index.xml
