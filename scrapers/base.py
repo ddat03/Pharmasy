@@ -43,7 +43,8 @@ def rate_limit_sleep():
     time.sleep(RATE_LIMIT_MIN + random.random() * (RATE_LIMIT_MAX - RATE_LIMIT_MIN))
 
 
-def get_json(url, max_retries=3, timeout=15):
+def _get(url, max_retries=3, timeout=15):
+    """GET con reintentos. Lanza BlockedError en 403/429 (nunca se evade)."""
     last_exc = None
     for attempt in range(1, max_retries + 1):
         try:
@@ -55,14 +56,20 @@ def get_json(url, max_retries=3, timeout=15):
         if resp.status_code in (403, 429):
             raise BlockedError(f"{url} -> {resp.status_code}")
         if resp.status_code in (200, 206):  # VTEX responde 206 en búsquedas paginadas
-            try:
-                return resp.json()
-            except ValueError as e:
-                last_exc = e
-        else:
-            last_exc = RuntimeError(f"status {resp.status_code}")
+            return resp
+        last_exc = RuntimeError(f"status {resp.status_code}")
         time.sleep(2 * attempt)
     raise RuntimeError(f"fallo tras {max_retries} intentos: {last_exc}")
+
+
+def get_json(url, max_retries=3, timeout=15):
+    resp = _get(url, max_retries=max_retries, timeout=timeout)
+    return resp.json()
+
+
+def get_html(url, max_retries=3, timeout=15):
+    resp = _get(url, max_retries=max_retries, timeout=timeout)
+    return resp.text
 
 
 def save_raw(source, name, data):
