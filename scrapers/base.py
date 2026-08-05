@@ -120,6 +120,15 @@ def supabase_select(table, params, timeout=30):
     return resp.json()
 
 
+def supabase_delete(table, params, timeout=30):
+    """DELETE vía PostgREST filtrado por `params`, ej. {"id": "eq.<uuid>"}."""
+    base_url = os.environ["SUPABASE_URL"]
+    url = f"{base_url}/rest/v1/{table}"
+    resp = requests.delete(url, headers=_supabase_headers(), params=params, timeout=timeout)
+    resp.raise_for_status()
+    return resp.json() if resp.text else []
+
+
 def supabase_insert(table, rows, timeout=30):
     if not rows:
         return []

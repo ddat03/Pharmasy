@@ -44,10 +44,18 @@ JSON_SCHEMA = {
                 "type": "string",
                 "description": "Principio activo en forma genérica estándar (ej. 'Losartan', no 'Losartán Potásico 50mg Caja x30')",
             },
-            "concentracion": {"type": ["string", "null"], "description": "ej. '50mg', null si no aparece"},
+            "concentracion": {
+                "type": ["string", "null"],
+                "description": "Sin espacios entre número y unidad (ej. '50mg', '20/12.5mg'), null si no aparece",
+            },
             "forma_farmaceutica": {
                 "type": ["string", "null"],
-                "description": "tableta, capsula, jarabe, suspension, inyectable, crema, ovulo, etc. null si no se puede inferir",
+                "description": (
+                    "Elige EXACTAMENTE uno de esta lista (singular, minúsculas), el más cercano al "
+                    "producto, o null si no se puede inferir: tableta, capsula, jarabe, suspension, "
+                    "inyectable, crema, gel, ovulo, gotas, supositorio, parche, polvo, kit. "
+                    "'comprimido' y 'comprimidos' cuentan como 'tableta'."
+                ),
             },
             "presentacion": {"type": ["string", "null"], "description": "ej. 'caja x30', null si no aparece"},
             "es_generico": {
@@ -73,9 +81,31 @@ JSON_SCHEMA = {
 SYSTEM_PROMPT = (
     "Extraes información estructurada de nombres de productos de farmacias "
     "ecuatorianas. Normaliza el principio activo a su forma genérica "
-    "estándar en español. Nunca inventes un valor: si no puedes determinar "
-    "un campo, usa null. Reporta tu confianza real en la extracción."
+    "estándar en español (mismo texto exacto para el mismo principio activo "
+    "cada vez, ej. siempre 'Enalapril', nunca a veces 'Enalapril' y a veces "
+    "'ENALAPRIL' o 'Enalapril Maleato'). concentracion sin espacios entre "
+    "número y unidad. forma_farmaceutica: usa siempre la misma palabra "
+    "canónica de la lista dada, nunca sinónimos ni variantes. Nunca "
+    "inventes un valor: si no puedes determinar un campo, usa null. "
+    "Reporta tu confianza real en la extracción."
 )
+
+# Sinónimos comunes en Ecuador que la IA a veces no normaliza (defensa
+# adicional a nivel de código, además del prompt/schema más prescriptivos).
+FORMA_SYNONYMS = {
+    "comprimido": "tableta",
+    "comprimidos": "tableta",
+    "comprimido recubierto": "tableta",
+    "tabletas": "tableta",
+    "tab": "tableta",
+    "tabs": "tableta",
+    "capsulas": "capsula",
+    "cap": "capsula",
+    "caps": "capsula",
+    "ampolla": "inyectable",
+    "vial": "inyectable",
+    "ovulos": "ovulo",
+}
 
 
 def normalize_key(text):
@@ -83,7 +113,8 @@ def normalize_key(text):
         return ""
     text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
     text = text.lower().strip()
-    text = re.sub(r"\s+", " ", text)
+    text = FORMA_SYNONYMS.get(text, text)  # solo aplica si el texto completo matchea (forma_farmaceutica)
+    text = re.sub(r"\s+", "", text)  # ignora diferencias de espaciado para la clave de dedupe
     return text
 
 
@@ -104,8 +135,15 @@ def load_existing_drugs():
     return by_key
 
 
+# Se incluye en el hash de ai_cache junto al texto: si el prompt o el
+# schema cambian de forma que afecte la extracción, subir esta versión
+# invalida el caché viejo automáticamente en vez de arrastrar respuestas
+# obtenidas con instrucciones desactualizadas.
+PROMPT_VERSION = "v2"
+
+
 def get_cached_extraction(client, text):
-    h = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    h = hashlib.sha256(f"{PROMPT_VERSION}:{text}".encode("utf-8")).hexdigest()
     cached = supabase_select("ai_cache", {"select": "response_json", "input_hash": f"eq.{h}"})
     if cached:
         return cached[0]["response_json"]
