@@ -2,6 +2,14 @@
 // Página por medicamento (pre-generada en el build nocturno).
 // Tabla comparativa de las 5 cadenas, precio techo, historial 90 días,
 // equivalentes genéricos, botón "Recibir alertas".
-// TODO (fase 4 del Orden de construcción).
+//
+// getStaticPaths() vacío a propósito: depende de `drugs` poblado por el
+// normalizador (fase 3, en pausa) y de `precio_techo_usd` (fase 6). Hasta
+// entonces el buscador de / consulta pharmacy_products directamente.
+// TODO (fase 3 + fase 6 del Orden de construcción).
+export async function getStaticPaths() {
+  return [];
+}
 ---
+
 <p>TODO: página de medicamento</p>

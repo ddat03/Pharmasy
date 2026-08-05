@@ -1,6 +1,240 @@
 ---
-// Buscador principal. Input con autocompletado consultando Supabase (nombre
-// comercial o principio activo, tolerante a tildes/typos con pg_trgm).
-// TODO (fase 4 del Orden de construcción).
+import Layout from "../layouts/Layout.astro";
 ---
-<p>TODO: buscador</p>
+
+<Layout title="Farma Precios Ecuador — Comparador de precios de medicamentos">
+  <h1>Compara precios de medicamentos en Ecuador</h1>
+  <p class="subtitle">
+    Busca por nombre comercial. Comparamos Fybeca, Pharmacys, Medicity, Cruz
+    Azul y Farmacias Económicas.
+  </p>
+
+  <div class="search-box">
+    <input
+      id="search-input"
+      type="search"
+      placeholder="Ej. Losartan, Metformina, Paracetamol..."
+      autocomplete="off"
+      autofocus
+    />
+  </div>
+
+  <p class="normalizer-note">
+    Nota: todavía no agrupamos genéricos equivalentes por principio activo
+    (esa parte del proyecto está en construcción) — cada fila es el
+    producto tal como aparece en su tienda. Compara por nombre y
+    presentación.
+  </p>
+
+  <div id="results"></div>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.25rem;
+  }
+  .subtitle {
+    color: var(--muted);
+    margin-top: 0;
+  }
+  .search-box {
+    margin: 1.25rem 0 0.5rem;
+  }
+  #search-input {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.85rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+  }
+  #search-input:focus {
+    border-color: var(--accent);
+  }
+  .normalizer-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0.25rem 0 1.25rem;
+  }
+  #results {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+</style>
+
+<script>
+  import { searchProducts, PHARMACY_LABELS, type LatestPriceRow } from "../lib/supabase";
+
+  const input = document.getElementById("search-input") as HTMLInputElement;
+  const results = document.getElementById("results") as HTMLDivElement;
+
+  let debounceTimer: ReturnType<typeof setTimeout>;
+  let requestSeq = 0;
+
+  function formatPrice(value: number | null): string {
+    return value == null ? "—" : `$${value.toFixed(2)}`;
+  }
+
+  function renderCard(row: LatestPriceRow, isCheapest: boolean): string {
+    const pharmacyLabel = PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy;
+    const stockLabel =
+      row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada";
+    const stockClass = row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted";
+    const promo =
+      row.precio_promocional != null && row.precio_promocional < (row.precio_usd ?? Infinity)
+        ? `<span class="promo">${formatPrice(row.precio_promocional)}</span>`
+        : "";
+    return `
+      <article class="card ${isCheapest ? "cheapest" : ""}">
+        ${isCheapest ? '<span class="badge">Precio más bajo de esta búsqueda</span>' : ""}
+        <div class="card-main">
+          <h3>${escapeHtml(row.nombre_en_tienda ?? "(sin nombre)")}</h3>
+          <p class="pharmacy">${escapeHtml(pharmacyLabel)}</p>
+        </div>
+        <div class="card-side">
+          <p class="price">${promo || formatPrice(row.precio_usd)}${promo ? `<s class="price-old">${formatPrice(row.precio_usd)}</s>` : ""}</p>
+          <p class="stock ${stockClass}">${stockLabel}</p>
+          ${row.url ? `<a class="cta" href="${escapeAttr(row.url)}" target="_blank" rel="noopener">Ver en tienda</a>` : ""}
+        </div>
+      </article>`;
+  }
+
+  function escapeHtml(text: string): string {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function escapeAttr(text: string): string {
+    return text.replace(/"/g, "&quot;");
+  }
+
+  async function runSearch(term: string) {
+    const seq = ++requestSeq;
+    if (term.trim().length < 3) {
+      results.innerHTML = "";
+      return;
+    }
+    results.innerHTML = `<p class="status">Buscando...</p>`;
+    try {
+      const rows = await searchProducts(term.trim());
+      if (seq !== requestSeq) return; // respuesta obsoleta, ya se lanzó otra búsqueda
+      if (rows.length === 0) {
+        results.innerHTML = `<p class="status">Sin resultados para "${escapeHtml(term)}".</p>`;
+        return;
+      }
+      const pricedRows = rows.filter((r) => r.precio_usd != null);
+      const cheapestId =
+        pricedRows.length > 0
+          ? pricedRows.reduce((min, r) => ((r.precio_usd ?? Infinity) < (min.precio_usd ?? Infinity) ? r : min)).pharmacy_product_id
+          : null;
+      results.innerHTML = rows.map((row) => renderCard(row, row.pharmacy_product_id === cheapestId)).join("");
+    } catch (err) {
+      if (seq !== requestSeq) return;
+      results.innerHTML = `<p class="status error">No se pudo conectar con la base de datos. Intenta de nuevo.</p>`;
+      console.error(err);
+    }
+  }
+
+  input.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    const term = input.value;
+    debounceTimer = setTimeout(() => runSearch(term), 300);
+  });
+</script>
+
+<style is:global>
+  .status {
+    color: var(--muted);
+  }
+  .status.error {
+    color: var(--danger);
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    position: relative;
+  }
+  .card.cheapest {
+    border-color: var(--ok);
+  }
+  .badge {
+    position: absolute;
+    top: -0.6rem;
+    left: 0.9rem;
+    background: var(--ok);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+  }
+  .card-main h3 {
+    margin: 0 0 0.15rem;
+    font-size: 1rem;
+  }
+  .pharmacy {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .card-side {
+    text-align: right;
+    min-width: 140px;
+  }
+  .price {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+  }
+  .promo {
+    color: var(--danger);
+  }
+  .price-old {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-left: 0.4rem;
+    font-weight: 400;
+  }
+  .stock {
+    margin: 0.15rem 0 0.4rem;
+    font-size: 0.8rem;
+  }
+  .stock.ok {
+    color: var(--ok);
+  }
+  .stock.danger {
+    color: var(--danger);
+  }
+  .stock.muted {
+    color: var(--muted);
+  }
+  .cta {
+    display: inline-block;
+    font-size: 0.82rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  .cta:hover {
+    background: var(--accent-dark);
+  }
+  @media (max-width: 480px) {
+    .card {
+      flex-direction: column;
+    }
+    .card-side {
+      text-align: left;
+    }
+  }
+</style>

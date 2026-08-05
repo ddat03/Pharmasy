@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 node_modules/
 web/dist/
+web/.astro/
 .env
 *.log
 raw/
