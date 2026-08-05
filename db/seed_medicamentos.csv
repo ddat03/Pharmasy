@@ -1,0 +1,323 @@
+principio_activo,concentracion,forma_farmaceutica,presentacion_referencial,categoria
+Enalapril,5mg,tableta,caja x30,hipertension
+Enalapril,10mg,tableta,caja x30,hipertension
+Enalapril,20mg,tableta,caja x30,hipertension
+Captopril,25mg,tableta,caja x30,hipertension
+Captopril,50mg,tableta,caja x30,hipertension
+Lisinopril,10mg,tableta,caja x30,hipertension
+Lisinopril,20mg,tableta,caja x30,hipertension
+Ramipril,5mg,tableta,caja x30,hipertension
+Ramipril,10mg,tableta,caja x30,hipertension
+Perindopril,4mg,tableta,caja x30,hipertension
+Perindopril,8mg,tableta,caja x30,hipertension
+Enalapril/Hidroclorotiazida,10/25mg,tableta,caja x30,hipertension
+Captopril/Hidroclorotiazida,50/25mg,tableta,caja x30,hipertension
+Losartan,25mg,tableta,caja x30,hipertension
+Losartan,50mg,tableta,caja x30,hipertension
+Losartan,50mg,tableta,caja x10,hipertension
+Losartan,100mg,tableta,caja x30,hipertension
+Losartan/Hidroclorotiazida,50/12.5mg,tableta,caja x30,hipertension
+Losartan/Hidroclorotiazida,100/25mg,tableta,caja x30,hipertension
+Valsartan,80mg,tableta,caja x30,hipertension
+Valsartan,160mg,tableta,caja x30,hipertension
+Valsartan/Hidroclorotiazida,160/12.5mg,tableta,caja x30,hipertension
+Telmisartan,40mg,tableta,caja x30,hipertension
+Telmisartan,80mg,tableta,caja x30,hipertension
+Telmisartan/Hidroclorotiazida,80/12.5mg,tableta,caja x30,hipertension
+Irbesartan,150mg,tableta,caja x30,hipertension
+Irbesartan,300mg,tableta,caja x30,hipertension
+Olmesartan,20mg,tableta,caja x30,hipertension
+Olmesartan,40mg,tableta,caja x30,hipertension
+Candesartan,8mg,tableta,caja x30,hipertension
+Candesartan,16mg,tableta,caja x30,hipertension
+Amlodipino,5mg,tableta,caja x30,hipertension
+Amlodipino,5mg,tableta,caja x10,hipertension
+Amlodipino,10mg,tableta,caja x30,hipertension
+Nifedipino retard,30mg,tableta,caja x30,hipertension
+Nifedipino retard,60mg,tableta,caja x30,hipertension
+Losartan/Amlodipino,50/5mg,tableta,caja x30,hipertension
+Amlodipino/Valsartan,5/160mg,tableta,caja x30,hipertension
+Verapamilo,80mg,tableta,caja x30,hipertension
+Diltiazem,60mg,tableta,caja x30,hipertension
+Diltiazem retard,120mg,tableta,caja x30,hipertension
+Atenolol,50mg,tableta,caja x30,hipertension
+Atenolol,100mg,tableta,caja x30,hipertension
+Metoprolol tartrato,50mg,tableta,caja x30,hipertension
+Metoprolol tartrato,100mg,tableta,caja x30,hipertension
+Metoprolol succinato retard,25mg,tableta,caja x30,hipertension
+Metoprolol succinato retard,50mg,tableta,caja x30,hipertension
+Bisoprolol,2.5mg,tableta,caja x30,hipertension
+Bisoprolol,5mg,tableta,caja x30,hipertension
+Bisoprolol,10mg,tableta,caja x30,hipertension
+Carvedilol,6.25mg,tableta,caja x30,hipertension
+Carvedilol,12.5mg,tableta,caja x30,hipertension
+Carvedilol,25mg,tableta,caja x30,hipertension
+Propranolol,40mg,tableta,caja x30,hipertension
+Nebivolol,5mg,tableta,caja x30,hipertension
+Hidroclorotiazida,25mg,tableta,caja x30,hipertension
+Hidroclorotiazida,50mg,tableta,caja x30,hipertension
+Furosemida,40mg,tableta,caja x30,hipertension
+Espironolactona,25mg,tableta,caja x30,hipertension
+Espironolactona,100mg,tableta,caja x30,hipertension
+Indapamida,2.5mg,tableta,caja x30,hipertension
+Clortalidona,25mg,tableta,caja x30,hipertension
+Clonidina,0.1mg,tableta,caja x30,hipertension
+Clonidina,0.15mg,tableta,caja x30,hipertension
+Doxazosina,2mg,tableta,caja x30,hipertension
+Doxazosina,4mg,tableta,caja x30,hipertension
+Prazosina,1mg,tableta,caja x30,hipertension
+Metildopa,250mg,tableta,caja x30,hipertension
+Metformina,500mg,tableta,caja x30,diabetes
+Metformina,500mg,tableta,caja x50,diabetes
+Metformina,850mg,tableta,caja x30,diabetes
+Metformina,1000mg,tableta,caja x30,diabetes
+Metformina liberacion prolongada,500mg,tableta,caja x30,diabetes
+Metformina liberacion prolongada,1000mg,tableta,caja x30,diabetes
+Glibenclamida,5mg,tableta,caja x30,diabetes
+Glimepirida,1mg,tableta,caja x30,diabetes
+Glimepirida,2mg,tableta,caja x30,diabetes
+Glimepirida,4mg,tableta,caja x30,diabetes
+Glimepirida/Metformina,2/500mg,tableta,caja x30,diabetes
+Gliclazida,30mg,tableta,caja x30,diabetes
+Gliclazida,60mg,tableta,caja x30,diabetes
+Gliclazida,80mg,tableta,caja x30,diabetes
+Sitagliptina,50mg,tableta,caja x28,diabetes
+Sitagliptina,100mg,tableta,caja x28,diabetes
+Sitagliptina/Metformina,50/1000mg,tableta,caja x28,diabetes
+Vildagliptina,50mg,tableta,caja x30,diabetes
+Vildagliptina/Metformina,50/1000mg,tableta,caja x30,diabetes
+Linagliptina,5mg,tableta,caja x30,diabetes
+Saxagliptina,5mg,tableta,caja x30,diabetes
+Empagliflozina,10mg,tableta,caja x30,diabetes
+Empagliflozina,25mg,tableta,caja x30,diabetes
+Dapagliflozina,10mg,tableta,caja x30,diabetes
+Dapagliflozina/Metformina,10/1000mg,tableta,caja x30,diabetes
+Pioglitazona,15mg,tableta,caja x30,diabetes
+Pioglitazona,30mg,tableta,caja x30,diabetes
+Acarbosa,50mg,tableta,caja x30,diabetes
+Acarbosa,100mg,tableta,caja x30,diabetes
+Repaglinida,1mg,tableta,caja x30,diabetes
+Repaglinida,2mg,tableta,caja x30,diabetes
+Insulina glargina,100UI/ml,inyectable,pluma x3ml,diabetes
+Insulina glargina,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina NPH,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina cristalina,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina lispro,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina aspart,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina mezcla 70/30,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina degludec,100UI/ml,inyectable,pluma x3ml,diabetes
+Levotiroxina,25mcg,tableta,caja x50,tiroides
+Levotiroxina,50mcg,tableta,caja x50,tiroides
+Levotiroxina,75mcg,tableta,caja x50,tiroides
+Levotiroxina,88mcg,tableta,caja x50,tiroides
+Levotiroxina,100mcg,tableta,caja x50,tiroides
+Levotiroxina,112mcg,tableta,caja x50,tiroides
+Levotiroxina,125mcg,tableta,caja x50,tiroides
+Levotiroxina,150mcg,tableta,caja x50,tiroides
+Levotiroxina,175mcg,tableta,caja x50,tiroides
+Levotiroxina,200mcg,tableta,caja x50,tiroides
+Metimazol,5mg,tableta,caja x30,tiroides
+Metimazol,10mg,tableta,caja x30,tiroides
+Propiltiouracilo,50mg,tableta,caja x30,tiroides
+Atorvastatina,10mg,tableta,caja x30,colesterol
+Atorvastatina,10mg,tableta,caja x10,colesterol
+Atorvastatina,20mg,tableta,caja x30,colesterol
+Atorvastatina,40mg,tableta,caja x30,colesterol
+Atorvastatina,80mg,tableta,caja x30,colesterol
+Rosuvastatina,5mg,tableta,caja x30,colesterol
+Rosuvastatina,10mg,tableta,caja x30,colesterol
+Rosuvastatina,20mg,tableta,caja x30,colesterol
+Rosuvastatina,40mg,tableta,caja x30,colesterol
+Simvastatina,10mg,tableta,caja x30,colesterol
+Simvastatina,20mg,tableta,caja x30,colesterol
+Simvastatina,40mg,tableta,caja x30,colesterol
+Pravastatina,20mg,tableta,caja x30,colesterol
+Pravastatina,40mg,tableta,caja x30,colesterol
+Lovastatina,20mg,tableta,caja x30,colesterol
+Lovastatina,40mg,tableta,caja x30,colesterol
+Ezetimiba,10mg,tableta,caja x30,colesterol
+Ezetimiba/Atorvastatina,10/20mg,tableta,caja x30,colesterol
+Ezetimiba/Simvastatina,10/20mg,tableta,caja x30,colesterol
+Fenofibrato,145mg,tableta,caja x30,colesterol
+Fenofibrato,160mg,tableta,caja x30,colesterol
+Fenofibrato,200mg,capsula,caja x30,colesterol
+Gemfibrozilo,600mg,tableta,caja x30,colesterol
+Bezafibrato,400mg,tableta,caja x30,colesterol
+Colestiramina,4g,polvo,sobre caja x30,colesterol
+Omega 3 aceite de pescado,1000mg,capsula,caja x30,colesterol
+Amoxicilina,250mg,capsula,caja x21,antibiotico
+Amoxicilina,500mg,capsula,caja x21,antibiotico
+Amoxicilina,875mg,tableta,caja x14,antibiotico
+Amoxicilina,250mg/5ml,suspension,frasco x100ml,antibiotico
+Amoxicilina/Acido clavulanico,500/125mg,tableta,caja x14,antibiotico
+Amoxicilina/Acido clavulanico,875/125mg,tableta,caja x14,antibiotico
+Amoxicilina/Acido clavulanico,400/57mg/5ml,suspension,frasco x70ml,antibiotico
+Amoxicilina/Acido clavulanico,250/62.5mg/5ml,suspension,frasco x100ml,antibiotico
+Azitromicina,250mg,tableta,caja x6,antibiotico
+Azitromicina,500mg,tableta,caja x3,antibiotico
+Azitromicina,200mg/5ml,suspension,frasco x15ml,antibiotico
+Claritromicina,500mg,tableta,caja x14,antibiotico
+Claritromicina,250mg/5ml,suspension,frasco x50ml,antibiotico
+Ciprofloxacino,250mg,tableta,caja x10,antibiotico
+Ciprofloxacino,500mg,tableta,caja x10,antibiotico
+Levofloxacino,500mg,tableta,caja x7,antibiotico
+Levofloxacino,750mg,tableta,caja x5,antibiotico
+Moxifloxacino,400mg,tableta,caja x5,antibiotico
+Norfloxacino,400mg,tableta,caja x14,antibiotico
+Cefalexina,500mg,capsula,caja x20,antibiotico
+Cefalexina,250mg/5ml,suspension,frasco x100ml,antibiotico
+Cefadroxilo,500mg,capsula,caja x20,antibiotico
+Cefuroxima,500mg,tableta,caja x14,antibiotico
+Cefuroxima,250mg/5ml,suspension,frasco x50ml,antibiotico
+Cefixima,400mg,tableta,caja x7,antibiotico
+Cefixima,100mg/5ml,suspension,frasco x50ml,antibiotico
+Ceftriaxona,1g,inyectable,caja x1 vial,antibiotico
+Trimetoprim/Sulfametoxazol,800/160mg,tableta,caja x20,antibiotico
+Trimetoprim/Sulfametoxazol,200/40mg/5ml,suspension,frasco x100ml,antibiotico
+Doxiciclina,100mg,capsula,caja x10,antibiotico
+Clindamicina,300mg,capsula,caja x16,antibiotico
+Clindamicina,75mg/5ml,suspension,frasco x80ml,antibiotico
+Clindamicina,2%,crema vaginal,tubo x40g,antibiotico
+Metronidazol,500mg,tableta,caja x20,antibiotico
+Metronidazol,500mg,ovulo,caja x10,antibiotico
+Nitrofurantoina,100mg,capsula,caja x20,antibiotico
+Fosfomicina trometamol,3g,polvo,sobre caja x1,antibiotico
+Penicilina benzatinica,1.2 MUI,inyectable,caja x1 vial,antibiotico
+Ampicilina,500mg,capsula,caja x20,antibiotico
+Dicloxacilina,500mg,capsula,caja x20,antibiotico
+Eritromicina,500mg,tableta,caja x20,antibiotico
+Eritromicina,250mg/5ml,suspension,frasco x100ml,antibiotico
+Gentamicina,80mg/2ml,inyectable,caja x1 amp,antibiotico
+Amikacina,500mg/2ml,inyectable,caja x1 amp,antibiotico
+Nistatina,100000UI,ovulo,caja x10,antibiotico
+Nistatina,100000UI/ml,suspension oral,frasco x30ml,antibiotico
+Paracetamol,500mg,tableta,caja x20,analgesico_antiinflamatorio
+Paracetamol,650mg,tableta,caja x20,analgesico_antiinflamatorio
+Paracetamol,1g,tableta,caja x10,analgesico_antiinflamatorio
+Paracetamol,100mg/ml,gotas pediatricas,frasco x15ml,analgesico_antiinflamatorio
+Paracetamol,160mg/5ml,jarabe,frasco x120ml,analgesico_antiinflamatorio
+Paracetamol/Cafeina,500/65mg,tableta,caja x20,analgesico_antiinflamatorio
+Ibuprofeno,400mg,tableta,caja x20,analgesico_antiinflamatorio
+Ibuprofeno,600mg,tableta,caja x20,analgesico_antiinflamatorio
+Ibuprofeno,100mg/5ml,suspension,frasco x120ml,analgesico_antiinflamatorio
+Ibuprofeno/Paracetamol,200/325mg,tableta,caja x20,analgesico_antiinflamatorio
+Diclofenaco sodico,50mg,tableta,caja x20,analgesico_antiinflamatorio
+Diclofenaco sodico,75mg/3ml,inyectable,caja x3 amp,analgesico_antiinflamatorio
+Diclofenaco potasico,50mg,tableta,caja x10,analgesico_antiinflamatorio
+Diclofenaco,1%,gel,tubo x60g,analgesico_antiinflamatorio
+Naproxeno,250mg,tableta,caja x20,analgesico_antiinflamatorio
+Naproxeno,500mg,tableta,caja x20,analgesico_antiinflamatorio
+Naproxeno sodico,550mg,tableta,caja x10,analgesico_antiinflamatorio
+Ketorolaco,10mg,tableta,caja x10,analgesico_antiinflamatorio
+Ketorolaco,30mg/ml,inyectable,caja x3 amp,analgesico_antiinflamatorio
+Acido acetilsalicilico,100mg,tableta,caja x30,analgesico_antiinflamatorio
+Acido acetilsalicilico,500mg,tableta,caja x20,analgesico_antiinflamatorio
+Meloxicam,7.5mg,tableta,caja x10,analgesico_antiinflamatorio
+Meloxicam,15mg,tableta,caja x10,analgesico_antiinflamatorio
+Celecoxib,200mg,capsula,caja x10,analgesico_antiinflamatorio
+Etoricoxib,60mg,tableta,caja x14,analgesico_antiinflamatorio
+Etoricoxib,90mg,tableta,caja x14,analgesico_antiinflamatorio
+Etoricoxib,120mg,tableta,caja x7,analgesico_antiinflamatorio
+Tramadol,50mg,capsula,caja x10,analgesico_antiinflamatorio
+Tramadol/Paracetamol,37.5/325mg,tableta,caja x20,analgesico_antiinflamatorio
+Metamizol sodico,500mg,tableta,caja x10,analgesico_antiinflamatorio
+Metamizol sodico,1g/2ml,inyectable,caja x5 amp,analgesico_antiinflamatorio
+Piroxicam,20mg,tableta,caja x10,analgesico_antiinflamatorio
+Dexketoprofeno,25mg,tableta,caja x10,analgesico_antiinflamatorio
+Nimesulida,100mg,tableta,caja x10,analgesico_antiinflamatorio
+Aceclofenaco,100mg,tableta,caja x20,analgesico_antiinflamatorio
+Indometacina,25mg,capsula,caja x30,analgesico_antiinflamatorio
+Indometacina,100mg,supositorio,caja x6,analgesico_antiinflamatorio
+Flurbiprofeno,100mg,tableta,caja x10,analgesico_antiinflamatorio
+Etinilestradiol/Levonorgestrel,0.03/0.15mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Levonorgestrel,0.02/0.1mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Levonorgestrel trifasico,variable,tableta,caja x21,anticonceptivo
+Etinilestradiol/Drospirenona,0.03/3mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Drospirenona,0.02/3mg,tableta,caja x28,anticonceptivo
+Etinilestradiol/Gestodeno,0.02/0.075mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Gestodeno,0.03/0.075mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Ciproterona,0.035/2mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Desogestrel,0.02/0.15mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Desogestrel,0.03/0.15mg,tableta,caja x21,anticonceptivo
+Etinilestradiol/Clormadinona,0.03/2mg,tableta,caja x21,anticonceptivo
+Norgestrel/Etinilestradiol,0.3/0.03mg,tableta,caja x21,anticonceptivo
+Desogestrel,0.075mg,tableta,caja x28,anticonceptivo
+Levonorgestrel emergencia,1.5mg,tableta,caja x1,anticonceptivo
+Medroxiprogesterona,150mg/ml,inyectable trimestral,ampolla x1,anticonceptivo
+Estradiol/Medroxiprogesterona,5/25mg,inyectable mensual,ampolla x1,anticonceptivo
+Etonogestrel,68mg,implante subdermico,caja x1,anticonceptivo
+Etinilestradiol/Norelgestromina,parche,parche transdermico,caja x3,anticonceptivo
+Etonogestrel/Etinilestradiol,anillo,anillo vaginal,caja x1,anticonceptivo
+Omeprazol,20mg,capsula,caja x14,gastritis
+Omeprazol,40mg,capsula,caja x14,gastritis
+Omeprazol,40mg,inyectable,vial x1,gastritis
+Esomeprazol,20mg,tableta,caja x14,gastritis
+Esomeprazol,40mg,tableta,caja x14,gastritis
+Pantoprazol,20mg,tableta,caja x14,gastritis
+Pantoprazol,40mg,tableta,caja x14,gastritis
+Pantoprazol,40mg,inyectable,vial x1,gastritis
+Lansoprazol,15mg,capsula,caja x14,gastritis
+Lansoprazol,30mg,capsula,caja x14,gastritis
+Rabeprazol,20mg,tableta,caja x14,gastritis
+Famotidina,20mg,tableta,caja x20,gastritis
+Famotidina,40mg,tableta,caja x20,gastritis
+Sucralfato,1g,tableta,caja x30,gastritis
+Sucralfato,1g/5ml,suspension,frasco x120ml,gastritis
+Hidroxido de aluminio/magnesio,variable,suspension,frasco x240ml,gastritis
+Hidroxido de aluminio/magnesio,variable,tableta masticable,caja x30,gastritis
+Domperidona,10mg,tableta,caja x30,gastritis
+Metoclopramida,10mg,tableta,caja x20,gastritis
+Bismuto subsalicilato,variable,suspension,frasco x120ml,gastritis
+Simeticona,40mg,tableta,caja x30,gastritis
+Butilhioscina,10mg,tableta,caja x20,gastritis
+Butilhioscina/Paracetamol,10/500mg,tableta,caja x20,gastritis
+Carbonato de calcio,500mg,tableta masticable,caja x30,gastritis
+Terapia triple H. pylori (Omeprazol/Amoxicilina/Claritromicina),kit,kit combinado,caja x1 tratamiento,gastritis
+Insulina glulisina,100UI/ml,inyectable,frasco x10ml,diabetes
+Insulina detemir,100UI/ml,inyectable,pluma x3ml,diabetes
+Glibenclamida/Metformina,5/500mg,tableta,caja x30,diabetes
+Canagliflozina,100mg,tableta,caja x30,diabetes
+Canagliflozina,300mg,tableta,caja x30,diabetes
+Liraglutida,6mg/ml,inyectable,pluma x3ml,diabetes
+Semaglutida,1.34mg/ml,inyectable,pluma x3ml,diabetes
+Tiras reactivas glucosa,n/a,insumo,caja x50,diabetes
+Metformina,850mg,tableta,caja x50,diabetes
+Glimepirida,3mg,tableta,caja x30,diabetes
+Atorvastatina/Amlodipino,10/5mg,tableta,caja x30,colesterol
+Rosuvastatina/Ezetimiba,10/10mg,tableta,caja x30,colesterol
+Evolocumab,140mg/ml,inyectable,jeringa precargada x1,colesterol
+Acido nicotinico,500mg,tableta,caja x30,colesterol
+Simvastatina,80mg,tableta,caja x30,colesterol
+Pitavastatina,2mg,tableta,caja x30,colesterol
+Amoxicilina,125mg/5ml,suspension,frasco x100ml,antibiotico
+Penicilina V,500mg,tableta,caja x20,antibiotico
+Tetraciclina,500mg,capsula,caja x20,antibiotico
+Rifampicina,300mg,capsula,caja x30,antibiotico
+Sulfadiazina de plata,1%,crema,tubo x50g,antibiotico
+Claritromicina,250mg,tableta,caja x14,antibiotico
+Cefpodoxima,200mg,tableta,caja x10,antibiotico
+Cefpodoxima,100mg/5ml,suspension,frasco x50ml,antibiotico
+Vancomicina,125mg,capsula,caja x20,antibiotico
+Meropenem,1g,inyectable,vial x1,antibiotico
+Ketoprofeno,100mg,capsula,caja x10,analgesico_antiinflamatorio
+Ketoprofeno,2.5%,gel,tubo x60g,analgesico_antiinflamatorio
+Piroxicam,0.5%,gel,tubo x60g,analgesico_antiinflamatorio
+Etodolaco,400mg,tableta,caja x10,analgesico_antiinflamatorio
+Naproxeno/Paracetamol,275/300mg,tableta,caja x10,analgesico_antiinflamatorio
+Diclofenaco/Vitaminas B1-B6-B12,75mg,inyectable,caja x3 amp,analgesico_antiinflamatorio
+Paracetamol,120mg/5ml,jarabe,frasco x60ml,analgesico_antiinflamatorio
+Acido mefenamico,500mg,tableta,caja x10,analgesico_antiinflamatorio
+Etinilestradiol/Levonorgestrel,0.03/0.15mg,tableta,caja x28,anticonceptivo
+Drospirenona sola,4mg,tableta,caja x28,anticonceptivo
+Linestrenol,0.5mg,tableta,caja x28,anticonceptivo
+Etinilestradiol/Dienogest,0.03/2mg,tableta,caja x28,anticonceptivo
+Noretisterona enantato/Estradiol valerato,50/5mg,inyectable mensual,ampolla x1,anticonceptivo
+Levonorgestrel emergencia,0.75mg,tableta,caja x2,anticonceptivo
+Loperamida,2mg,tableta,caja x12,gastritis
+Racecadotrilo,100mg,capsula,caja x10,gastritis
+Racecadotrilo,30mg,sobre,caja x10,gastritis
+Sales de rehidratacion oral,n/a,polvo,sobre caja x1,gastritis
+Alginato de sodio/Antiacido,n/a,suspension,frasco x150ml,gastritis
+Lactulosa,10g/15ml,jarabe,frasco x120ml,gastritis
+Trimebutina,200mg,tableta,caja x20,gastritis
+Dimenhidrinato,50mg,tableta,caja x10,gastritis

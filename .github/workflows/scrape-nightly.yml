@@ -1,0 +1,24 @@
+name: scrape-nightly
+
+# Corrida nocturna: scraping → normalización → alertas → trigger rebuild web.
+# Horario: 07:00 UTC = 02:00 Ecuador (ventana 2:00-4:00 AM, ver
+# Boveda Farmacia/Conceptos/Scraping respetuoso.md).
+#
+# TODO (fase 2 en adelante del Orden de construcción):
+#   - checkout + setup Python 3.11
+#   - correr scrapers/*.py habilitados (excluir los blocked_from_ci)
+#   - correr pipeline/normalizer.py
+#   - correr pipeline/alerts.py
+#   - repository_dispatch hacia deploy-web.yml
+
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "TODO: implementar pipeline nocturno (fase 2+)"

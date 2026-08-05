@@ -1,0 +1,21 @@
+name: deploy-web
+
+# Build Astro + deploy a Cloudflare Pages.
+# Disparado por scrape-nightly.yml vía repository_dispatch, o manualmente.
+#
+# TODO (fase 4 del Orden de construcción):
+#   - checkout + setup Node
+#   - npm ci && npm run build (dentro de web/)
+#   - deploy a Cloudflare Pages con CLOUDFLARE_API_TOKEN
+
+on:
+  repository_dispatch:
+    types: [rebuild-web]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "TODO: implementar build + deploy (fase 4)"
