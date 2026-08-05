@@ -1,11 +1,114 @@
 """Base compartida para todos los scrapers: rate limit, reintentos,
-user-agent, guardado de crudos.
+user-agent, guardado de crudos, y carga a Supabase vía PostgREST.
 
-TODO (fase 2 del Orden de construcción): implementar al construir el primer
-scraper end-to-end. Reglas a respetar, ver
-Boveda Farmacia/Conceptos/Scraping respetuoso.md:
-  - 1 petición cada 5-10s con jitter
-  - user-agent identificable
-  - nunca evadir bloqueos activos (403/429 sistemático -> blocked_from_ci)
-  - preferir siempre endpoints JSON internos sobre parseo de HTML
+Reglas de scraping respetuoso (ver
+Boveda Farmacia/Conceptos/Scraping respetuoso.md):
+  - 1 petición cada 5-10s con jitter (rate_limit_sleep).
+  - user-agent identificable con contacto.
+  - nunca evadir bloqueos activos: 403/429 -> BlockedError, el caller debe
+    marcar la fuente blocked_from_ci y detenerse, no reintentar evadiendo.
+  - preferir siempre endpoints JSON internos sobre parseo de HTML.
+  - campo no extraído = None, nunca inventado.
 """
+
+import json
+import os
+import random
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+USER_AGENT = (
+    "FarmaPreciosEcuadorBot/0.1 "
+    "(+https://github.com/ddat03/Pharmasy; comparador de precios de "
+    "medicamentos sin fines comerciales; contacto: diegodavidaleman@gmail.com)"
+)
+
+RATE_LIMIT_MIN = 5.0
+RATE_LIMIT_MAX = 10.0
+
+RAW_DIR = Path(__file__).resolve().parent.parent / "raw"
+
+
+class BlockedError(Exception):
+    """La fuente respondió 403/429. No reintentar ni evadir."""
+
+
+def rate_limit_sleep():
+    time.sleep(RATE_LIMIT_MIN + random.random() * (RATE_LIMIT_MAX - RATE_LIMIT_MIN))
+
+
+def get_json(url, max_retries=3, timeout=15):
+    last_exc = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=timeout)
+        except requests.RequestException as e:
+            last_exc = e
+            time.sleep(2 * attempt)
+            continue
+        if resp.status_code in (403, 429):
+            raise BlockedError(f"{url} -> {resp.status_code}")
+        if resp.status_code in (200, 206):  # VTEX responde 206 en búsquedas paginadas
+            try:
+                return resp.json()
+            except ValueError as e:
+                last_exc = e
+        else:
+            last_exc = RuntimeError(f"status {resp.status_code}")
+        time.sleep(2 * attempt)
+    raise RuntimeError(f"fallo tras {max_retries} intentos: {last_exc}")
+
+
+def save_raw(source, name, data):
+    out_dir = RAW_DIR / source
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S")
+    safe_name = "".join(c if c.isalnum() or c in "-_" else "_" for c in name)[:60]
+    path = out_dir / f"{ts}_{safe_name}.json"
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
+# --- Supabase (REST/PostgREST), usa SUPABASE_URL + SUPABASE_SERVICE_KEY ---
+
+
+def _supabase_headers(extra=None):
+    key = os.environ["SUPABASE_SERVICE_KEY"]
+    headers = {
+        "apikey": key,
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+    }
+    if extra:
+        headers.update(extra)
+    return headers
+
+
+def supabase_upsert(table, rows, on_conflict, timeout=30):
+    """Upsert (insert o update por conflicto de índice único) vía PostgREST.
+    Devuelve las filas resultantes (con sus id)."""
+    if not rows:
+        return []
+    base_url = os.environ["SUPABASE_URL"]
+    url = f"{base_url}/rest/v1/{table}?on_conflict={on_conflict}"
+    headers = _supabase_headers({"Prefer": "resolution=merge-duplicates,return=representation"})
+    resp = requests.post(url, headers=headers, json=rows, timeout=timeout)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def supabase_insert(table, rows, timeout=30):
+    if not rows:
+        return []
+    base_url = os.environ["SUPABASE_URL"]
+    url = f"{base_url}/rest/v1/{table}"
+    headers = _supabase_headers({"Prefer": "return=representation"})
+    resp = requests.post(url, headers=headers, json=rows, timeout=timeout)
+    resp.raise_for_status()
+    return resp.json()
