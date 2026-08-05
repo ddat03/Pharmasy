@@ -103,6 +103,16 @@ def supabase_upsert(table, rows, on_conflict, timeout=30):
     return resp.json()
 
 
+def supabase_select(table, params, timeout=30):
+    """GET vía PostgREST. `params` son query params estilo PostgREST, ej.
+    {"select": "id,nombre", "drug_id": "is.null", "limit": "50"}."""
+    base_url = os.environ["SUPABASE_URL"]
+    url = f"{base_url}/rest/v1/{table}"
+    resp = requests.get(url, headers=_supabase_headers(), params=params, timeout=timeout)
+    resp.raise_for_status()
+    return resp.json()
+
+
 def supabase_insert(table, rows, timeout=30):
     if not rows:
         return []
