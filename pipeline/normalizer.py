@@ -40,9 +40,23 @@ JSON_SCHEMA = {
     "schema": {
         "type": "object",
         "properties": {
+            "es_medicamento": {
+                "type": "boolean",
+                "description": (
+                    "true si el producto es un medicamento/fármaco con principio activo "
+                    "farmacológico real. false para pañales, toallas húmedas, champú, "
+                    "cosméticos, alimento infantil, higiene, dispositivos, cepillos, etc. "
+                    "— cualquier cosa vendida en una farmacia que NO sea un medicamento."
+                ),
+            },
             "principio_activo": {
-                "type": "string",
-                "description": "Principio activo en forma genérica estándar (ej. 'Losartan', no 'Losartán Potásico 50mg Caja x30')",
+                "type": ["string", "null"],
+                "description": (
+                    "Principio activo en forma genérica estándar (ej. 'Losartan', no "
+                    "'Losartán Potásico 50mg Caja x30'). null si es_medicamento es false "
+                    "o si no se puede determinar — nunca un string vacío ni texto como "
+                    "'null' o ':'."
+                ),
             },
             "concentracion": {
                 "type": ["string", "null"],
@@ -66,6 +80,7 @@ JSON_SCHEMA = {
             "confidence": {"type": "number", "description": "0-1, tu confianza en esta extracción"},
         },
         "required": [
+            "es_medicamento",
             "principio_activo",
             "concentracion",
             "forma_farmaceutica",
@@ -80,14 +95,21 @@ JSON_SCHEMA = {
 
 SYSTEM_PROMPT = (
     "Extraes información estructurada de nombres de productos de farmacias "
-    "ecuatorianas. Normaliza el principio activo a su forma genérica "
-    "estándar en español (mismo texto exacto para el mismo principio activo "
-    "cada vez, ej. siempre 'Enalapril', nunca a veces 'Enalapril' y a veces "
-    "'ENALAPRIL' o 'Enalapril Maleato'). concentracion sin espacios entre "
-    "número y unidad. forma_farmaceutica: usa siempre la misma palabra "
-    "canónica de la lista dada, nunca sinónimos ni variantes. Nunca "
-    "inventes un valor: si no puedes determinar un campo, usa null. "
-    "Reporta tu confianza real en la extracción."
+    "ecuatorianas. El catálogo de una farmacia incluye de todo, no solo "
+    "medicamentos: pañales, cosméticos, higiene, alimento infantil, etc. "
+    "Primero decide es_medicamento con honestidad. Si es false, deja "
+    "principio_activo/concentracion/forma_farmaceutica en null — no "
+    "inventes un principio activo falso para encajar el producto en el "
+    "esquema. Si es true: normaliza el principio activo a su forma "
+    "genérica estándar en español (mismo texto exacto para el mismo "
+    "principio activo cada vez, ej. siempre 'Enalapril', nunca a veces "
+    "'Enalapril' y a veces 'ENALAPRIL' o 'Enalapril Maleato'). "
+    "concentracion sin espacios entre número y unidad. forma_farmaceutica: "
+    "usa siempre la misma palabra canónica de la lista dada, nunca "
+    "sinónimos ni variantes. Nunca inventes un valor: si no puedes "
+    "determinar un campo, usa null (el valor JSON null, nunca el string "
+    "'null' ni un string vacío). Reporta tu confianza real en la "
+    "extracción."
 )
 
 # Sinónimos comunes en Ecuador que la IA a veces no normaliza (defensa
@@ -139,7 +161,7 @@ def load_existing_drugs():
 # schema cambian de forma que afecte la extracción, subir esta versión
 # invalida el caché viejo automáticamente en vez de arrastrar respuestas
 # obtenidas con instrucciones desactualizadas.
-PROMPT_VERSION = "v2"
+PROMPT_VERSION = "v3"
 
 
 def get_cached_extraction(client, text):
@@ -180,10 +202,16 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
     exact = 0
     nuevos = 0
     baja_confianza = 0
+    no_medicamento = 0
 
     for i, prod in enumerate(products, start=1):
         text = prod["nombre_en_tienda"]
         parsed = get_cached_extraction(client, text)
+
+        if not parsed.get("es_medicamento") or not parsed.get("principio_activo"):
+            no_medicamento += 1
+            print(f"[{i}/{len(products)}] {text[:60]!r} -> no es medicamento, se omite")
+            continue
 
         key = (
             normalize_key(parsed["principio_activo"]),
@@ -231,7 +259,11 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
         )
         print(f"[{i}/{len(products)}] {text[:60]!r} -> {parsed['principio_activo']} {parsed['concentracion']} ({match_method}, conf={parsed['confidence']})")
 
-    print(f"\nListo. {exact} emparejados a medicamentos existentes, {nuevos} medicamentos nuevos creados, {baja_confianza} con confidence < 0.85 (revisión manual pendiente).")
+    print(
+        f"\nListo. {exact} emparejados a medicamentos existentes, {nuevos} medicamentos nuevos creados, "
+        f"{no_medicamento} omitidos por no ser medicamentos, {baja_confianza} con confidence < 0.85 "
+        "(revisión manual pendiente)."
+    )
 
 
 def main():
