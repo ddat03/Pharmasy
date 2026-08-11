@@ -130,6 +130,17 @@ FORMA_SYNONYMS = {
 }
 
 
+def is_garbage_text(text):
+    """True si `text` no tiene contenido real más allá de puntuación/espacios
+    o de las palabras 'null'/'none' escritas como texto literal (el modelo a
+    veces devuelve eso en vez de un JSON null real, con variantes como
+    '/null', ':null', 'null/' que un simple `in (...)` no detecta)."""
+    if not text:
+        return True
+    letters_only = re.sub(r"[^a-zA-Z]", "", text).lower()
+    return letters_only in ("", "null", "none")
+
+
 def normalize_key(text):
     if not text:
         return ""
@@ -208,7 +219,7 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
         text = prod["nombre_en_tienda"]
         parsed = get_cached_extraction(client, text)
 
-        if not parsed.get("es_medicamento") or not parsed.get("principio_activo"):
+        if not parsed.get("es_medicamento") or is_garbage_text(parsed.get("principio_activo")):
             no_medicamento += 1
             print(f"[{i}/{len(products)}] {text[:60]!r} -> no es medicamento, se omite")
             continue

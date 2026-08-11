@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://farmaprecios.pages.dev/sitemap-index.xml
+Sitemap: https://farmaprecios.pages.dev/sitemap.xml

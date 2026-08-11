@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 
 // TODO: actualizar site con el dominio real en cuanto se conecte
 // Cloudflare Pages (ver Boveda Farmacia/Orden de construcción.md, fase 4).
@@ -7,5 +6,4 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   output: "static",
   site: "https://farmaprecios.pages.dev",
-  integrations: [sitemap()],
 });
