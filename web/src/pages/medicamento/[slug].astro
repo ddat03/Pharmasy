@@ -8,6 +8,8 @@ import {
   getPricesForDrug,
   slugifyPrincipio,
   PHARMACY_LABELS,
+  PHARMACY_COLORS,
+  pharmacyInitials,
   type Drug,
   type LatestPriceRow,
 } from "../../lib/supabase";
@@ -113,17 +115,22 @@ const structuredData = {
         {prices.map((row) => {
           const isCheapest = row.pharmacy_product_id === cheapestId;
           return (
-            <article class={`card ${isCheapest ? "cheapest" : ""}`}>
-              {isCheapest && <span class="badge">Mejor precio</span>}
-              <div class="card-main">
-                <h3>{PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy}</h3>
-                <p class="pharmacy">{row.nombre_en_tienda}</p>
+            <article class={`price-card ${isCheapest ? "cheapest" : ""}`}>
+              {isCheapest && <span class="price-card-badge">Mejor precio</span>}
+              <div class="price-card-main">
+                <div class="pharmacy-avatar" style={`background:${PHARMACY_COLORS[row.pharmacy] ?? "#667085"}`}>
+                  {pharmacyInitials(row.pharmacy)}
+                </div>
+                <div class="price-card-text">
+                  <h3>{PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy}</h3>
+                  <p class="pharmacy-name">{row.nombre_en_tienda}</p>
+                  <p class={`stock ${row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted"}`}>
+                    {row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada"}
+                  </p>
+                </div>
               </div>
-              <div class="card-side">
+              <div class="price-card-side">
                 <p class="price">{formatPrice(row.precio_usd)}</p>
-                <p class={`stock ${row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted"}`}>
-                  {row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada"}
-                </p>
                 {row.url && (
                   <a class="cta" href={row.url} target="_blank" rel="noopener">
                     Ver en tienda
@@ -182,76 +189,6 @@ const structuredData = {
     gap: 0.75rem;
     margin-top: 1rem;
   }
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.9rem 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.75rem;
-    position: relative;
-  }
-  .card.cheapest {
-    border-color: var(--ok);
-  }
-  .badge {
-    position: absolute;
-    top: -0.6rem;
-    left: 0.9rem;
-    background: var(--ok);
-    color: #fff;
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-  }
-  .card-main h3 {
-    margin: 0 0 0.15rem;
-    font-size: 1rem;
-  }
-  .pharmacy {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  .over-techo {
-    color: var(--danger);
-    font-size: 0.78rem;
-    margin: 0.25rem 0 0;
-  }
-  .card-side {
-    text-align: right;
-    min-width: 140px;
-  }
-  .price {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--accent-dark);
-  }
-  .stock {
-    margin: 0.15rem 0 0.4rem;
-    font-size: 0.8rem;
-  }
-  .stock.ok {
-    color: var(--ok);
-  }
-  .stock.danger {
-    color: var(--danger);
-  }
-  .stock.muted {
-    color: var(--muted);
-  }
-  .cta {
-    display: inline-block;
-    font-size: 0.82rem;
-    color: #fff;
-    background: var(--accent);
-    padding: 0.35rem 0.7rem;
-    border-radius: 6px;
-    text-decoration: none;
-  }
   .generic-note {
     margin-top: 1.5rem;
     font-size: 0.82rem;
@@ -262,16 +199,5 @@ const structuredData = {
   }
   .generic-note a {
     color: var(--accent-dark);
-  }
-  .status {
-    color: var(--muted);
-  }
-  @media (max-width: 480px) {
-    .card {
-      flex-direction: column;
-    }
-    .card-side {
-      text-align: left;
-    }
   }
 </style>

@@ -91,3 +91,23 @@ export const PHARMACY_LABELS: Record<string, string> = {
   cruzazul: "Cruz Azul",
   economicas: "Farmacias Económicas",
 };
+
+// Color fijo por cadena (no depende de datos, solo para que el avatar de
+// cada farmacia sea reconocible/consistente entre búsquedas).
+export const PHARMACY_COLORS: Record<string, string> = {
+  fybeca: "#7c3aed",
+  pharmacys: "#0e9f6e",
+  medicity: "#d97706",
+  cruzazul: "#2563eb",
+  economicas: "#db2777",
+};
+
+export function pharmacyInitials(pharmacy: string): string {
+  const label = PHARMACY_LABELS[pharmacy] ?? pharmacy;
+  return label
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}

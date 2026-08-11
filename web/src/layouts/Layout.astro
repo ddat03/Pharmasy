@@ -50,11 +50,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="/">💊 Farma Precios Ecuador</a>
+      <div class="site-header-inner">
+        <a class="brand" href="/"><span class="brand-mark">💊</span> Farma Precios <span class="brand-cc">EC</span></a>
+        <p class="tagline">Compara precios reales en 5 cadenas de farmacias</p>
+      </div>
     </header>
     <div class="disclaimer">
-      Información referencial de precios. No constituye consejo médico.
-      Consulte a su médico o farmacéutico.
+      ℹ️ Información referencial de precios. No constituye consejo médico. Consulte a su médico o farmacéutico.
     </div>
     <main>
       <slot />
@@ -72,48 +74,80 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <style is:global>
   :root {
-    --accent: #1d6fd6;
-    --accent-dark: #14509e;
-    --bg: #f7f9fc;
+    --brand-start: #1e3a8a;
+    --brand-end: #2563eb;
+    --accent: #2563eb;
+    --accent-dark: #173d8f;
+    --deal: #0e9f6e;
+    --deal-bg: #e7f9f2;
+    --bg: #f4f6fb;
     --card-bg: #ffffff;
-    --text: #1a1f27;
-    --muted: #5b6472;
-    --border: #e2e6ec;
-    --danger: #b3261e;
+    --text: #171b24;
+    --muted: #667085;
+    --border: #e4e8f0;
+    --danger: #c0362c;
     --danger-bg: #fdecea;
-    --ok: #1f7a3f;
+    --ok: #0e9f6e;
+    --shadow-sm: 0 1px 2px rgba(23, 27, 36, 0.06);
+    --shadow-md: 0 4px 16px rgba(23, 27, 36, 0.08);
+    --shadow-lg: 0 12px 32px rgba(23, 27, 36, 0.12);
+    --radius: 14px;
   }
   * {
     box-sizing: border-box;
   }
   body {
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, "Segoe UI", system-ui, Roboto, sans-serif;
     background: var(--bg);
     color: var(--text);
+    -webkit-font-smoothing: antialiased;
   }
   .site-header {
-    background: var(--accent);
-    padding: 1rem 1.25rem;
+    background: linear-gradient(120deg, var(--brand-start), var(--brand-end));
+    padding: 1.25rem 1.25rem 1.5rem;
+    box-shadow: var(--shadow-md);
+  }
+  .site-header-inner {
+    max-width: 960px;
+    margin: 0 auto;
   }
   .brand {
     color: #fff;
     text-decoration: none;
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+  .brand-mark {
+    font-size: 1.15em;
+  }
+  .brand-cc {
+    font-weight: 600;
+    color: #bfd4ff;
+    font-size: 0.7em;
+    letter-spacing: 0.05em;
+  }
+  .tagline {
+    margin: 0.3rem 0 0;
+    color: #d9e4ff;
+    font-size: 0.88rem;
   }
   .disclaimer {
     background: #fff8e1;
     color: #7a5b00;
-    font-size: 0.82rem;
-    padding: 0.5rem 1.25rem;
+    font-size: 0.8rem;
+    padding: 0.55rem 1.25rem;
     text-align: center;
     border-bottom: 1px solid #f0e0a0;
   }
   main {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 1.5rem 1rem 3rem;
+    padding: 1.75rem 1rem 3rem;
   }
   .site-footer {
     text-align: center;
@@ -123,5 +157,146 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   }
   .site-footer a {
     color: var(--muted);
+  }
+
+  /* Componentes de tarjeta compartidos entre buscador / medicamento / principio activo */
+  .price-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.85rem;
+    position: relative;
+    transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+  }
+  .price-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .price-card.cheapest {
+    border-color: var(--deal);
+    box-shadow: 0 0 0 1px var(--deal), var(--shadow-sm);
+  }
+  .price-card-badge {
+    position: absolute;
+    top: -0.65rem;
+    left: 1rem;
+    background: var(--deal);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+  }
+  .price-card-main {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    flex: 1 1 260px;
+  }
+  .pharmacy-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .price-card-text h3 {
+    margin: 0 0 0.15rem;
+    font-size: 0.98rem;
+    line-height: 1.3;
+  }
+  .price-card-text h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .price-card-text h3 a:hover {
+    text-decoration: underline;
+  }
+  .price-card-text .pharmacy-name {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .price-card-side {
+    text-align: right;
+  }
+  .price-card-side .price {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--accent-dark);
+    letter-spacing: -0.01em;
+  }
+  .price-card-side .cta {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+  .price-card-side .cta:hover {
+    background: var(--accent-dark);
+  }
+  @media (max-width: 480px) {
+    .price-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .price-card-side {
+      text-align: left;
+      width: 100%;
+    }
+  }
+
+  /* Estados de texto compartidos (búsqueda libre, medicamento, principio activo) */
+  .status {
+    color: var(--muted);
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .status.error {
+    color: var(--danger);
+  }
+  .stock {
+    margin: 0.1rem 0 0;
+    font-size: 0.76rem;
+  }
+  .stock.ok {
+    color: var(--ok);
+  }
+  .stock.danger {
+    color: var(--danger);
+  }
+  .stock.muted {
+    color: var(--muted);
+  }
+  .promo {
+    color: var(--danger);
+  }
+  .price-old {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-left: 0.35rem;
+    font-weight: 400;
+    text-decoration: line-through;
   }
 </style>

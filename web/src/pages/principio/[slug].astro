@@ -42,6 +42,7 @@ interface Props {
 }
 const { principioActivo, items } = Astro.props;
 items.sort((a, b) => (a.precioMin ?? Infinity) - (b.precioMin ?? Infinity));
+const cheapestSlug = items.find((i) => i.precioMin != null)?.drug.slug;
 
 function formatPrice(value: number | null): string {
   return value == null ? "—" : `$${value.toFixed(2)}`;
@@ -73,14 +74,17 @@ const structuredData = {
   <div class="price-list">
     {
       items.map(({ drug, precioMin, nFarmacias }) => (
-        <a class="card" href={`/medicamento/${drug.slug}`}>
+        <a class={`card ${drug.slug === cheapestSlug ? "cheapest" : ""}`} href={`/medicamento/${drug.slug}`}>
+          {drug.slug === cheapestSlug && <span class="card-badge">Más económico</span>}
           <div class="card-main">
             <h3>
               {drug.concentracion} {drug.forma_farmaceutica}
             </h3>
             <p class="pharmacy">
-              {drug.es_generico ? "Genérico" : "Marca"}
-              {drug.laboratorio ? ` · ${drug.laboratorio}` : ""}
+              <span class={`tag ${drug.es_generico ? "generico" : "marca"}`}>
+                {drug.es_generico ? "Genérico" : "Marca"}
+              </span>
+              {drug.laboratorio ? ` ${drug.laboratorio}` : ""}
             </p>
           </div>
           <div class="card-side">
@@ -120,20 +124,41 @@ const structuredData = {
   .card {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.9rem 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 0.9rem 1.1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.75rem;
     text-decoration: none;
     color: inherit;
+    position: relative;
+    transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
   }
   .card:hover {
     border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .card.cheapest {
+    border-color: var(--deal);
+    box-shadow: 0 0 0 1px var(--deal), var(--shadow-sm);
+  }
+  .card-badge {
+    position: absolute;
+    top: -0.65rem;
+    left: 1rem;
+    background: var(--deal);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
   }
   .card-main h3 {
-    margin: 0 0 0.15rem;
+    margin: 0 0 0.3rem;
     font-size: 1rem;
   }
   .pharmacy {
@@ -141,14 +166,30 @@ const structuredData = {
     color: var(--muted);
     font-size: 0.85rem;
   }
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: 5px;
+    margin-right: 0.35rem;
+  }
+  .tag.generico {
+    background: var(--deal-bg);
+    color: var(--deal);
+  }
+  .tag.marca {
+    background: #eef1f8;
+    color: var(--muted);
+  }
   .card-side {
     text-align: right;
     min-width: 140px;
   }
   .price {
     margin: 0;
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
     color: var(--accent-dark);
   }
   .n-farmacias {

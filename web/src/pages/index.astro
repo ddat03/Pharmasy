@@ -1,32 +1,69 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getAllDrugs, slugifyPrincipio } from "../lib/supabase";
+
+const drugs = await getAllDrugs();
+const seenPrincipios = new Map<string, string>();
+for (const d of drugs) {
+  const slug = slugifyPrincipio(d.principio_activo);
+  if (!seenPrincipios.has(slug)) seenPrincipios.set(slug, d.principio_activo);
+}
+const totalProductos = drugs.length;
+const totalPrincipios = seenPrincipios.size;
+const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
 ---
 
 <Layout
   title="Farma Precios Ecuador — Comparador de precios de medicamentos"
   description="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. Encuentra el precio más bajo cerca de ti."
 >
-  <h1>Compara precios de medicamentos en Ecuador</h1>
-  <p class="subtitle">
-    Busca por nombre comercial. Comparamos Fybeca, Pharmacys, Medicity, Cruz
-    Azul y Farmacias Económicas.
-  </p>
+  <section class="hero">
+    <h1>Compara precios de medicamentos en Ecuador</h1>
+    <p class="subtitle">
+      Busca por nombre comercial y encuentra el precio más bajo entre Fybeca, Pharmacys, Medicity, Cruz Azul y
+      Farmacias Económicas.
+    </p>
 
-  <div class="search-box">
-    <input
-      id="search-input"
-      type="search"
-      placeholder="Ej. Losartan, Metformina, Paracetamol..."
-      autocomplete="off"
-      autofocus
-    />
-  </div>
+    <div class="search-box">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input
+        id="search-input"
+        type="search"
+        placeholder="Ej. Losartan, Metformina, Paracetamol..."
+        autocomplete="off"
+        autofocus
+      />
+    </div>
+
+    {
+      totalProductos > 0 && (
+        <p class="stats">
+          <strong>{totalProductos}</strong> medicamentos catalogados de <strong>{totalPrincipios}</strong> principios
+          activos distintos
+        </p>
+      )
+    }
+  </section>
+
+  {
+    categoriasPopulares.length > 0 && (
+      <section class="chips-section">
+        <h2>Búsquedas frecuentes</h2>
+        <div class="chips">
+          {categoriasPopulares.map(([slug, nombre]) => (
+            <a class="chip" href={`/principio/${slug}`}>
+              {nombre}
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   <p class="normalizer-note">
-    Nota: todavía no agrupamos genéricos equivalentes por principio activo
-    (esa parte del proyecto está en construcción) — cada fila es el
-    producto tal como aparece en su tienda. Compara por nombre y
-    presentación.
+    Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre
+    (esa parte del proyecto está en construcción) — cada fila es el producto tal como aparece en su tienda.
+    Compara por nombre y presentación.
   </p>
 
   <div id="results"></div>
@@ -35,32 +72,92 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <style>
+  .hero {
+    text-align: center;
+    padding: 0.5rem 0 0.5rem;
+  }
   h1 {
-    font-size: 1.6rem;
-    margin-bottom: 0.25rem;
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
   }
   .subtitle {
     color: var(--muted);
-    margin-top: 0;
+    margin: 0 auto;
+    max-width: 46ch;
+    font-size: 0.98rem;
   }
   .search-box {
-    margin: 1.25rem 0 0.5rem;
+    position: relative;
+    margin: 1.5rem auto 0.5rem;
+    max-width: 560px;
+  }
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    opacity: 0.6;
   }
   #search-input {
     width: 100%;
     font-size: 1.1rem;
-    padding: 0.85rem 1rem;
+    padding: 0.95rem 1rem 0.95rem 2.75rem;
     border: 2px solid var(--border);
-    border-radius: 10px;
+    border-radius: 999px;
     outline: none;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
   }
   #search-input:focus {
     border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+  }
+  .stats {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.85rem;
+  }
+  .chips-section {
+    margin: 1.75rem 0 0.5rem;
+    text-align: center;
+  }
+  .chips-section h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0 0 0.6rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--accent-dark);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .chip:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
   }
   .normalizer-note {
     font-size: 0.78rem;
     color: var(--muted);
-    margin: 0.25rem 0 1.25rem;
+    margin: 1.5rem 0 1.25rem;
+    text-align: center;
   }
   #results {
     display: flex;
@@ -70,7 +167,7 @@ import Layout from "../layouts/Layout.astro";
 </style>
 
 <script>
-  import { searchProducts, PHARMACY_LABELS, type LatestPriceRow } from "../lib/supabase";
+  import { searchProducts, PHARMACY_LABELS, PHARMACY_COLORS, pharmacyInitials, type LatestPriceRow } from "../lib/supabase";
 
   const input = document.getElementById("search-input") as HTMLInputElement;
   const results = document.getElementById("results") as HTMLDivElement;
@@ -84,6 +181,8 @@ import Layout from "../layouts/Layout.astro";
 
   function renderCard(row: LatestPriceRow, isCheapest: boolean): string {
     const pharmacyLabel = PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy;
+    const avatarColor = PHARMACY_COLORS[row.pharmacy] ?? "#667085";
+    const initials = pharmacyInitials(row.pharmacy);
     const stockLabel =
       row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada";
     const stockClass = row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted";
@@ -101,15 +200,18 @@ import Layout from "../layouts/Layout.astro";
       ? `<a href="/medicamento/${row.drug_slug}">${escapeHtml(row.nombre_en_tienda ?? "(sin nombre)")}</a>`
       : escapeHtml(row.nombre_en_tienda ?? "(sin nombre)");
     return `
-      <article class="card ${isCheapest ? "cheapest" : ""}">
-        ${isCheapest ? '<span class="badge">Precio más bajo de esta búsqueda</span>' : ""}
-        <div class="card-main">
-          <h3>${nombreHtml}</h3>
-          <p class="pharmacy">${escapeHtml(pharmacyLabel)}</p>
+      <article class="price-card ${isCheapest ? "cheapest" : ""}">
+        ${isCheapest ? '<span class="price-card-badge">Precio más bajo</span>' : ""}
+        <div class="price-card-main">
+          <div class="pharmacy-avatar" style="background:${avatarColor}">${initials}</div>
+          <div class="price-card-text">
+            <h3>${nombreHtml}</h3>
+            <p class="pharmacy-name">${escapeHtml(pharmacyLabel)}</p>
+            <p class="stock ${stockClass}">${stockLabel}</p>
+          </div>
         </div>
-        <div class="card-side">
+        <div class="price-card-side">
           <p class="price">${promo || formatPrice(row.precio_usd)}${promo ? `<s class="price-old">${formatPrice(row.precio_usd)}</s>` : ""}</p>
-          <p class="stock ${stockClass}">${stockLabel}</p>
           ${row.url ? `<a class="cta" href="${escapeAttr(row.url)}" target="_blank" rel="noopener">Ver en tienda</a>` : ""}
         </div>
       </article>`;
@@ -158,97 +260,3 @@ import Layout from "../layouts/Layout.astro";
     debounceTimer = setTimeout(() => runSearch(term), 300);
   });
 </script>
-
-<style is:global>
-  .status {
-    color: var(--muted);
-  }
-  .status.error {
-    color: var(--danger);
-  }
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.9rem 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.75rem;
-    position: relative;
-  }
-  .card.cheapest {
-    border-color: var(--ok);
-  }
-  .badge {
-    position: absolute;
-    top: -0.6rem;
-    left: 0.9rem;
-    background: var(--ok);
-    color: #fff;
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-    border-radius: 999px;
-  }
-  .card-main h3 {
-    margin: 0 0 0.15rem;
-    font-size: 1rem;
-  }
-  .pharmacy {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.85rem;
-  }
-  .card-side {
-    text-align: right;
-    min-width: 140px;
-  }
-  .price {
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--accent-dark);
-  }
-  .promo {
-    color: var(--danger);
-  }
-  .price-old {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-left: 0.4rem;
-    font-weight: 400;
-  }
-  .stock {
-    margin: 0.15rem 0 0.4rem;
-    font-size: 0.8rem;
-  }
-  .stock.ok {
-    color: var(--ok);
-  }
-  .stock.danger {
-    color: var(--danger);
-  }
-  .stock.muted {
-    color: var(--muted);
-  }
-  .cta {
-    display: inline-block;
-    font-size: 0.82rem;
-    color: #fff;
-    background: var(--accent);
-    padding: 0.35rem 0.7rem;
-    border-radius: 6px;
-    text-decoration: none;
-  }
-  .cta:hover {
-    background: var(--accent-dark);
-  }
-  @media (max-width: 480px) {
-    .card {
-      flex-direction: column;
-    }
-    .card-side {
-      text-align: left;
-    }
-  }
-</style>
