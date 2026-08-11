@@ -33,4 +33,8 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: web
+          # Pinned a la misma versión probada en local (deploy manual exitoso
+          # a dark-star-3bb3.pages.dev). La acción instala 3.90.0 por defecto,
+          # que se comporta distinto frente al flujo nuevo de Pages/Workers.
+          wranglerVersion: "4.120.1"
           command: pages deploy dist --project-name=dark-star-3bb3
