@@ -183,6 +183,13 @@ def get_cached_extraction(client, text):
 
     resp = client.chat.completions.create(
         model=MODEL,
+        # gpt-5-mini es un modelo de razonamiento: sin esto, genera cientos de
+        # "reasoning tokens" ocultos (facturados como output, $1/1M) incluso
+        # para esta extracción trivial -- confirmado con una prueba real: 704
+        # tokens de razonamiento por llamada, ~15x el costo esperado. Con
+        # "minimal" + json_schema queda en 0 tokens de razonamiento y
+        # respuesta correcta.
+        reasoning_effort="minimal",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": f"Nombre del producto: {text}"},
