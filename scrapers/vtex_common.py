@@ -79,13 +79,28 @@ def normalize(raw_products):
 
 def scrape(pharmacy, base_url, search_path, terms):
     by_external_id = {}
+    errores = []
     for i, term in enumerate(terms, start=1):
-        raw = fetch(pharmacy, base_url, search_path, term)
+        try:
+            raw = fetch(pharmacy, base_url, search_path, term)
+        except BlockedError:
+            raise  # 403/429: nunca se evade, se detiene todo el run
+        except Exception as e:
+            # Error transitorio (ej. 500 puntual del sitio): se registra y
+            # se sigue con el siguiente término en vez de perder toda la
+            # corrida por una falla de un solo término.
+            errores.append((term, str(e)))
+            print(f"[{i}/{len(terms)}] {term} -> ERROR, se omite: {e}")
+            if i < len(terms):
+                rate_limit_sleep()
+            continue
         for row in normalize(raw):
             by_external_id[row["external_id"]] = row
         print(f"[{i}/{len(terms)}] {term} -> {len(by_external_id)} productos únicos acumulados")
         if i < len(terms):
             rate_limit_sleep()
+    if errores:
+        print(f"\n{len(errores)} términos con error (omitidos, no bloquean la corrida): {[t for t, _ in errores]}")
     return list(by_external_id.values())
 
 

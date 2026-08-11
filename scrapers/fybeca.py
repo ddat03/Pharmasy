@@ -121,13 +121,25 @@ def normalize(page_html):
 
 def scrape(terms):
     by_external_id = {}
+    errores = []
     for i, term in enumerate(terms, start=1):
-        page_html = fetch(term)
+        try:
+            page_html = fetch(term)
+        except BlockedError:
+            raise  # 403/429: nunca se evade, se detiene todo el run
+        except Exception as e:
+            errores.append((term, str(e)))
+            print(f"[{i}/{len(terms)}] {term} -> ERROR, se omite: {e}")
+            if i < len(terms):
+                rate_limit_sleep()
+            continue
         for row in normalize(page_html):
             by_external_id[row["external_id"]] = row
         print(f"[{i}/{len(terms)}] {term} -> {len(by_external_id)} productos únicos acumulados")
         if i < len(terms):
             rate_limit_sleep()
+    if errores:
+        print(f"\n{len(errores)} términos con error (omitidos, no bloquean la corrida): {[t for t, _ in errores]}")
     return list(by_external_id.values())
 
 
