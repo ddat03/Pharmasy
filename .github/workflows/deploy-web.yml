@@ -1,21 +1,36 @@
 name: deploy-web
 
-# Build Astro + deploy a Cloudflare Pages.
-# Disparado por scrape-nightly.yml vía repository_dispatch, o manualmente.
-#
-# TODO (fase 4 del Orden de construcción):
-#   - checkout + setup Node
-#   - npm ci && npm run build (dentro de web/)
-#   - deploy a Cloudflare Pages con CLOUDFLARE_API_TOKEN
+# Build Astro + deploy a Cloudflare Pages (proyecto "dark-star-3bb3").
+# Disparado por scrape-nightly.yml vía repository_dispatch, por push a main
+# (cambios en web/), o manualmente.
 
 on:
   repository_dispatch:
     types: [rebuild-web]
   workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - ".github/workflows/deploy-web.yml"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "TODO: implementar build + deploy (fase 4)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: web
+          command: pages deploy dist --project-name=dark-star-3bb3
