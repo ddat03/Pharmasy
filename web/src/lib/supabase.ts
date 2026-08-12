@@ -17,6 +17,12 @@ export type LatestPriceRow = {
   precio_promocional: number | null;
   en_stock: boolean | null;
   fecha: string;
+  // true cuando el precio es por unidad suelta, no por la presentación
+  // completa (ej. Medicity marca productos "esFraccionado" cuya API
+  // devuelve precio por tableta individual). Nunca se calcula el precio
+  // de caja a partir de este valor — solo se etiqueta para no mostrarlo
+  // como si fuera el precio de la caja.
+  precio_por_unidad: boolean | null;
 };
 
 async function supabaseGet<T>(table: string, params: Record<string, string>): Promise<T> {
@@ -34,7 +40,7 @@ async function supabaseGet<T>(table: string, params: Record<string, string>): Pr
 }
 
 const LATEST_PRICE_COLUMNS =
-  "pharmacy_product_id,pharmacy,nombre_en_tienda,url,drug_id,drug_slug,precio_techo_usd,precio_usd,precio_promocional,en_stock,fecha";
+  "pharmacy_product_id,pharmacy,nombre_en_tienda,url,drug_id,drug_slug,precio_techo_usd,precio_usd,precio_promocional,en_stock,fecha,precio_por_unidad";
 
 export async function searchProducts(term: string, limit = 30): Promise<LatestPriceRow[]> {
   return supabaseGet<LatestPriceRow[]>("latest_prices", {

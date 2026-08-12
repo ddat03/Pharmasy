@@ -55,10 +55,20 @@ create table if not exists pharmacy_products (
   nombre_en_tienda text not null,
   match_confidence numeric(3, 2) check (match_confidence >= 0 and match_confidence <= 1),
   match_method match_method_enum,
+  -- true cuando el precio publicado por la farmacia es por unidad suelta
+  -- (ej. Medicity/Farmaenlace marca "esFraccionado" y el precio de su API
+  -- es por tableta individual, no por la caja completa que aparece en el
+  -- nombre del producto) — nunca se calcula el precio de caja a partir de
+  -- este valor, solo se etiqueta para no mostrarlo como si fuera el precio
+  -- de la presentación completa. Ver Boveda Farmacia/Conceptos/Precio
+  -- techo.md para el mismo principio aplicado al precio techo.
+  precio_por_unidad boolean,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   unique (pharmacy, external_id)
 );
+
+alter table pharmacy_products add column if not exists precio_por_unidad boolean;
 
 create index if not exists idx_pharmacy_products_drug_id on pharmacy_products (drug_id);
 
@@ -163,7 +173,8 @@ select
   ps.precio_usd,
   ps.precio_promocional,
   ps.en_stock,
-  ps.fecha
+  ps.fecha,
+  pp.precio_por_unidad
 from pharmacy_products pp
 left join drugs d on d.id = pp.drug_id
 join lateral (

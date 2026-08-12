@@ -17,7 +17,12 @@ export async function getStaticPaths() {
     const withPrices = group.map((drug) => {
       const prices = pricesByDrug.get(drug.id) ?? [];
       const priced = prices.filter((p) => p.precio_usd != null);
-      const min = priced.length > 0 ? Math.min(...priced.map((p) => p.precio_usd as number)) : null;
+      // Precios por unidad suelta (ver medicamento/[slug].astro) quedan
+      // fuera del "desde $X": no son comparables contra el precio de caja
+      // de las demás farmacias.
+      const comparable = priced.filter((p) => !p.precio_por_unidad);
+      const minSource = comparable.length > 0 ? comparable : priced;
+      const min = minSource.length > 0 ? Math.min(...minSource.map((p) => p.precio_usd as number)) : null;
       return { drug, precioMin: min, nFarmacias: prices.length };
     });
     return {

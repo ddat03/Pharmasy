@@ -188,6 +188,7 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
         </div>
         <div class="ledger-side">
           <p class="ledger-price"><span class="${animate ? "odometer roll-in" : ""}">${promo ? `${promo}<span class="ledger-price-old">${formatPrice(row.precio_usd)}</span>` : formatPrice(row.precio_usd)}</span></p>
+          ${row.precio_por_unidad ? '<p class="ledger-unit-note">precio por unidad, no por caja</p>' : ""}
           ${row.url ? `<a class="ledger-cta" href="${escapeAttr(row.url)}" target="_blank" rel="noopener">Ver en tienda</a>` : ""}
         </div>
       </article>`;

@@ -47,6 +47,16 @@ def normalize(raw_products):
     for prod in raw_products or []:
         url = prod.get("link")
         nombre = prod.get("productName")
+        # Algunas cadenas (confirmado en Medicity/Farmaenlace) marcan
+        # "esFraccionado": ["si"] en productos que se venden también por
+        # unidad suelta — para esos, el campo Price/ListPrice de la API es
+        # el precio por unidad, no el de la caja completa que describe
+        # "productName" (ej. "Con 100 Unidades" a $0.05 = precio por
+        # tableta, la caja se vende a $5 en la página real). Nunca se
+        # deduce el precio de caja multiplicando: se etiqueta el dato tal
+        # como lo entrega la API, para que la web lo muestre como "por
+        # unidad" en vez de hacerlo pasar por el precio de la presentación.
+        es_fraccionado = (prod.get("esFraccionado") or [None])[0] == "si"
         for item in prod.get("items", []) or []:
             external_id = item.get("itemId")
             if not external_id:
@@ -72,6 +82,7 @@ def normalize(raw_products):
                     "precio_usd": precio_usd,
                     "precio_promocional": precio_promocional,
                     "en_stock": offer.get("IsAvailable"),
+                    "precio_por_unidad": es_fraccionado,
                 }
             )
     return rows
@@ -115,6 +126,7 @@ def load_to_supabase(pharmacy, products):
             "external_id": p["external_id"],
             "url": p["url"],
             "nombre_en_tienda": p["nombre_en_tienda"],
+            "precio_por_unidad": p["precio_por_unidad"],
         }
         for p in products
     ]

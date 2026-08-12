@@ -30,9 +30,15 @@ const { drug, prices } = Astro.props;
 
 const nombre = [drug.principio_activo, drug.concentracion, drug.forma_farmaceutica].filter(Boolean).join(" ");
 const pricedRows = prices.filter((p) => p.precio_usd != null);
+// Filas con precio_por_unidad (ej. Medicity marca productos "esFraccionado"
+// cuya API devuelve precio por tableta suelta, no por la caja) quedan fuera
+// del cálculo de "mejor precio": comparar un precio por unidad contra el
+// precio de caja de otra farmacia sería la misma comparación inventada que
+// el sitio se niega a hacer. Ver Boveda Farmacia/Conceptos/Precio techo.md.
+const comparableRows = pricedRows.filter((p) => !p.precio_por_unidad);
 const cheapestId =
-  pricedRows.length > 0
-    ? pricedRows.reduce((min, r) => ((r.precio_usd ?? Infinity) < (min.precio_usd ?? Infinity) ? r : min)).pharmacy_product_id
+  comparableRows.length > 0
+    ? comparableRows.reduce((min, r) => ((r.precio_usd ?? Infinity) < (min.precio_usd ?? Infinity) ? r : min)).pharmacy_product_id
     : null;
 // OJO: precio_techo_usd es por unidad (fijado así por el Consejo Nacional
 // de Fijación de Precios) y precio_usd es por presentación completa (caja
@@ -59,9 +65,10 @@ const MESES = [
 const now = new Date();
 const mesAnio = `${MESES[now.getMonth()]} ${now.getFullYear()}`;
 const seoTitle = `Precio de ${nombre} en Ecuador — comparación ${mesAnio} | Farma Precios Ecuador`;
+const desdeRows = comparableRows.length > 0 ? comparableRows : pricedRows;
 const seoDescription =
   pricedRows.length > 0
-    ? `Compara el precio de ${nombre} en ${pricedRows.length} ${pricedRows.length === 1 ? "farmacia" : "farmacias"} de Ecuador. Desde ${formatPrice(Math.min(...pricedRows.map((p) => p.precio_usd as number)))}.`
+    ? `Compara el precio de ${nombre} en ${pricedRows.length} ${pricedRows.length === 1 ? "farmacia" : "farmacias"} de Ecuador. Desde ${formatPrice(Math.min(...desdeRows.map((p) => p.precio_usd as number)))}.`
     : `Precio de ${nombre} en farmacias de Ecuador: Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas.`;
 
 const structuredData = {
@@ -139,6 +146,7 @@ const structuredData = {
                 <p class="ledger-price">
                   <span class="odometer roll-in">{formatPrice(row.precio_usd)}</span>
                 </p>
+                {row.precio_por_unidad && <p class="ledger-unit-note">precio por unidad, no por caja</p>}
                 {row.url && (
                   <a class="ledger-cta" href={row.url} target="_blank" rel="noopener">
                     Ver en tienda
