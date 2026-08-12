@@ -123,22 +123,13 @@ export const PHARMACY_LABELS: Record<string, string> = {
   economicas: "Farmacias Económicas",
 };
 
-// Color fijo por cadena (no depende de datos, solo para que el avatar de
-// cada farmacia sea reconocible/consistente entre búsquedas).
-export const PHARMACY_COLORS: Record<string, string> = {
-  fybeca: "#7c3aed",
-  pharmacys: "#0e9f6e",
-  medicity: "#d97706",
-  cruzazul: "#2563eb",
-  economicas: "#db2777",
+// Logos reales de cada cadena (favicon oficial de cada sitio, obtenidos
+// respetuosamente — ver Boveda Farmacia/Conceptos/Diseño web.md). Usados
+// como marca compacta en cada fila del libro mayor de resultados.
+export const PHARMACY_LOGOS: Record<string, string> = {
+  fybeca: "/logos/fybeca.png",
+  pharmacys: "/logos/pharmacys.png",
+  medicity: "/logos/medicity.png",
+  cruzazul: "/logos/cruzazul.png",
+  economicas: "/logos/economicas.png",
 };
-
-export function pharmacyInitials(pharmacy: string): string {
-  const label = PHARMACY_LABELS[pharmacy] ?? pharmacy;
-  return label
-    .split(/\s+/)
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}

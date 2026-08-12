@@ -15,17 +15,11 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
 
 <Layout
   title="Farma Precios Ecuador — Comparador de precios de medicamentos"
-  description="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. Encuentra el precio más bajo cerca de ti."
+  description="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. El precio tal cual aparece en cada tienda, sin cálculos."
 >
-  <section class="hero">
-    <h1>Compara precios de medicamentos en Ecuador</h1>
-    <p class="subtitle">
-      Busca por nombre comercial y encuentra el precio más bajo entre Fybeca, Pharmacys, Medicity, Cruz Azul y
-      Farmacias Económicas.
-    </p>
-
+  <section class="receipt-head">
+    <p class="field-label">Buscar medicamento</p>
     <div class="search-box">
-      <span class="search-icon" aria-hidden="true">🔍</span>
       <input
         id="search-input"
         type="search"
@@ -34,12 +28,11 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
         autofocus
       />
     </div>
-
     {
       totalProductos > 0 && (
         <p class="stats">
-          <strong>{totalProductos}</strong> medicamentos catalogados de <strong>{totalPrincipios}</strong> principios
-          activos distintos
+          <span class="odometer roll-in">{totalProductos}</span> medicamentos catalogados ·{" "}
+          <span class="odometer roll-in">{totalPrincipios}</span> principios activos
         </p>
       )
     }
@@ -48,7 +41,7 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
   {
     categoriasPopulares.length > 0 && (
       <section class="chips-section">
-        <h2>Búsquedas frecuentes</h2>
+        <p class="field-label">Búsquedas frecuentes</p>
         <div class="chips">
           {categoriasPopulares.map(([slug, nombre]) => (
             <a class="chip" href={`/principio/${slug}`}>
@@ -60,114 +53,93 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
     )
   }
 
+  <div class="tear" aria-hidden="true"></div>
+
   <p class="normalizer-note">
-    Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre
-    (esa parte del proyecto está en construcción) — cada fila es el producto tal como aparece en su tienda.
-    Compara por nombre y presentación.
+    Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre —
+    cada fila es el producto tal como aparece en su tienda. Compara por nombre y presentación.
   </p>
 
-  <div id="results"></div>
+  <div id="results" class="ledger"></div>
 
   <!-- AD SLOT: debajo de los resultados de búsqueda — ver Layout.astro para cómo activar -->
 </Layout>
 
 <style>
-  .hero {
-    text-align: center;
-    padding: 0.5rem 0 0.5rem;
+  .receipt-head {
+    padding-top: 0.25rem;
   }
-  h1 {
-    font-size: 1.85rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.4rem;
-  }
-  .subtitle {
-    color: var(--muted);
-    margin: 0 auto;
-    max-width: 46ch;
-    font-size: 0.98rem;
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin: 0 0 0.4rem;
   }
   .search-box {
     position: relative;
-    margin: 1.5rem auto 0.5rem;
-    max-width: 560px;
-  }
-  .search-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1rem;
-    opacity: 0.6;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
   }
   #search-input {
     width: 100%;
-    font-size: 1.1rem;
-    padding: 0.95rem 1rem 0.95rem 2.75rem;
-    border: 2px solid var(--border);
-    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.3rem 0;
+    border: none;
+    background: transparent;
     outline: none;
-    background: var(--card-bg);
-    box-shadow: var(--shadow-sm);
+    color: var(--ink);
   }
-  #search-input:focus {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md);
+  #search-input::placeholder {
+    color: var(--ink-faint);
+    font-weight: 400;
   }
   .stats {
-    color: var(--muted);
-    font-size: 0.85rem;
-    margin-top: 0.85rem;
+    color: var(--ink-muted);
+    font-size: 0.82rem;
+    margin: 0.85rem 0 0;
+    font-family: var(--font-mono);
   }
+  .stats .odometer {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
   .chips-section {
-    margin: 1.75rem 0 0.5rem;
-    text-align: center;
-  }
-  .chips-section h2 {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    margin: 0 0 0.6rem;
+    margin-top: 1.75rem;
   }
   .chips {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.5rem;
   }
   .chip {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    color: var(--accent-dark);
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.45rem 0.9rem;
-    border-radius: 999px;
+    background: var(--paper-raised);
+    border: 1px solid var(--ink-faint);
+    color: var(--ink);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
     text-decoration: none;
-    box-shadow: var(--shadow-sm);
-    transition: border-color 0.15s ease, transform 0.15s ease;
   }
   .chip:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
+    border-color: var(--stamp);
+    color: var(--stamp-dark);
   }
+
   .normalizer-note {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin: 1.5rem 0 1.25rem;
-    text-align: center;
-  }
-  #results {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    font-size: 0.76rem;
+    color: var(--ink-muted);
+    margin: 0 0 0.5rem;
   }
 </style>
 
 <script>
-  import { searchProducts, PHARMACY_LABELS, PHARMACY_COLORS, pharmacyInitials, type LatestPriceRow } from "../lib/supabase";
+  import { searchProducts, PHARMACY_LABELS, PHARMACY_LOGOS, type LatestPriceRow } from "../lib/supabase";
 
   const input = document.getElementById("search-input") as HTMLInputElement;
   const results = document.getElementById("results") as HTMLDivElement;
@@ -176,43 +148,47 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
   let requestSeq = 0;
 
   function formatPrice(value: number | null): string {
-    return value == null ? "—" : `$${value.toFixed(2)}`;
+    if (value == null) return "—";
+    const [whole, cents] = value.toFixed(2).split(".");
+    return `$${whole}<span class="cents">.${cents}</span>`;
   }
 
-  function renderCard(row: LatestPriceRow, isCheapest: boolean): string {
+  function renderRow(row: LatestPriceRow, index: number, animate: boolean): string {
     const pharmacyLabel = PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy;
-    const avatarColor = PHARMACY_COLORS[row.pharmacy] ?? "#667085";
-    const initials = pharmacyInitials(row.pharmacy);
+    const logo = PHARMACY_LOGOS[row.pharmacy];
     const stockLabel =
       row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada";
     const stockClass = row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted";
     const promo =
       row.precio_promocional != null && row.precio_promocional < (row.precio_usd ?? Infinity)
-        ? `<span class="promo">${formatPrice(row.precio_promocional)}</span>`
-        : "";
+        ? formatPrice(row.precio_promocional)
+        : null;
     // OJO: precio_techo_usd es por unidad (ver Boveda Farmacia/Conceptos/
     // Precio techo.md) y precio_usd es por presentación completa (caja) —
-    // NO son comparables directamente todavía (falta extraer unidades por
-    // presentación). No se muestra ningún aviso de sobreprecio aquí hasta
-    // resolver esa normalización, para no acusar de sobreprecio a una
-    // farmacia que en realidad cumple.
+    // NO son comparables directamente todavía. No se muestra ningún aviso
+    // de sobreprecio aquí, para no acusar de sobreprecio a una farmacia que
+    // en realidad cumple.
+    // Sin badge de "mejor precio" aquí: la búsqueda libre no agrupa por
+    // medicamento (ver .normalizer-note más abajo), así que un mínimo entre
+    // filas de productos distintos sería justo el tipo de comparación que
+    // este sitio se niega a inventar. El badge sí es válido en
+    // medicamento/[slug] y principio/[slug], donde todas las filas son el
+    // mismo producto o el mismo principio activo.
     const nombreHtml = row.drug_slug
       ? `<a href="/medicamento/${row.drug_slug}">${escapeHtml(row.nombre_en_tienda ?? "(sin nombre)")}</a>`
       : escapeHtml(row.nombre_en_tienda ?? "(sin nombre)");
+    const delay = animate ? Math.min(index * 45, 360) : 0;
     return `
-      <article class="price-card ${isCheapest ? "cheapest" : ""}">
-        ${isCheapest ? '<span class="price-card-badge">Precio más bajo</span>' : ""}
-        <div class="price-card-main">
-          <div class="pharmacy-avatar" style="background:${avatarColor}">${initials}</div>
-          <div class="price-card-text">
-            <h3>${nombreHtml}</h3>
-            <p class="pharmacy-name">${escapeHtml(pharmacyLabel)}</p>
-            <p class="stock ${stockClass}">${stockLabel}</p>
-          </div>
+      <article class="ledger-row ${animate ? "print-in" : ""}" style="animation-delay:${delay}ms">
+        <div class="ledger-mark">${logo ? `<img src="${logo}" alt="${escapeAttr(pharmacyLabel)}" loading="lazy" />` : ""}</div>
+        <div class="ledger-main">
+          <h3>${nombreHtml}</h3>
+          <p class="ledger-sub">${escapeHtml(pharmacyLabel)}</p>
+          <p class="ledger-stock ${stockClass}">${stockLabel}</p>
         </div>
-        <div class="price-card-side">
-          <p class="price">${promo || formatPrice(row.precio_usd)}${promo ? `<s class="price-old">${formatPrice(row.precio_usd)}</s>` : ""}</p>
-          ${row.url ? `<a class="cta" href="${escapeAttr(row.url)}" target="_blank" rel="noopener">Ver en tienda</a>` : ""}
+        <div class="ledger-side">
+          <p class="ledger-price"><span class="${animate ? "odometer roll-in" : ""}">${promo ? `${promo}<span class="ledger-price-old">${formatPrice(row.precio_usd)}</span>` : formatPrice(row.precio_usd)}</span></p>
+          ${row.url ? `<a class="ledger-cta" href="${escapeAttr(row.url)}" target="_blank" rel="noopener">Ver en tienda</a>` : ""}
         </div>
       </article>`;
   }
@@ -227,29 +203,37 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
     return text.replace(/"/g, "&quot;");
   }
 
+  // Se anima con el efecto "impreso" solo la primera vez que aparecen
+  // resultados en esta sesión de búsqueda; refinar una consulta ya en curso
+  // reemplaza las filas sin volver a animar la lista entera (evita el
+  // parpadeo de re-imprimir 20+ filas en cada tecla).
+  let hasShownResults = false;
+
   async function runSearch(term: string) {
     const seq = ++requestSeq;
     if (term.trim().length < 3) {
       results.innerHTML = "";
+      hasShownResults = false;
       return;
     }
-    results.innerHTML = `<p class="status">Buscando...</p>`;
+    if (!hasShownResults) {
+      results.innerHTML = `<p class="status">Imprimiendo resultados…</p>`;
+    }
     try {
       const rows = await searchProducts(term.trim());
       if (seq !== requestSeq) return; // respuesta obsoleta, ya se lanzó otra búsqueda
       if (rows.length === 0) {
         results.innerHTML = `<p class="status">Sin resultados para "${escapeHtml(term)}".</p>`;
+        hasShownResults = false;
         return;
       }
-      const pricedRows = rows.filter((r) => r.precio_usd != null);
-      const cheapestId =
-        pricedRows.length > 0
-          ? pricedRows.reduce((min, r) => ((r.precio_usd ?? Infinity) < (min.precio_usd ?? Infinity) ? r : min)).pharmacy_product_id
-          : null;
-      results.innerHTML = rows.map((row) => renderCard(row, row.pharmacy_product_id === cheapestId)).join("");
+      const animate = !hasShownResults;
+      results.innerHTML = rows.map((row, i) => renderRow(row, i, animate)).join("");
+      hasShownResults = true;
     } catch (err) {
       if (seq !== requestSeq) return;
       results.innerHTML = `<p class="status error">No se pudo conectar con la base de datos. Intenta de nuevo.</p>`;
+      hasShownResults = false;
       console.error(err);
     }
   }

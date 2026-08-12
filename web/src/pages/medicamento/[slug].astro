@@ -1,15 +1,15 @@
 ---
-// Página por medicamento, pre-generada en el build. Tabla comparativa de
-// las cadenas que lo venden, aviso de precio techo si aplica, link al
-// grupo de equivalentes por principio activo.
+// Página por medicamento, pre-generada en el build. Ledger comparativo de
+// las cadenas que lo venden, precio techo oficial mostrado como línea de
+// regulación aparte (nunca comparado contra el precio de farmacia), link
+// al grupo de equivalentes por principio activo.
 import Layout from "../../layouts/Layout.astro";
 import {
   getAllDrugs,
   getAllPricedProductsByDrug,
   slugifyPrincipio,
   PHARMACY_LABELS,
-  PHARMACY_COLORS,
-  pharmacyInitials,
+  PHARMACY_LOGOS,
   type Drug,
   type LatestPriceRow,
 } from "../../lib/supabase";
@@ -40,11 +40,16 @@ const cheapestId =
 // de forma confiable cuántas unidades trae cada presentación. Ver
 // Boveda Farmacia/Conceptos/Precio techo.md. Por eso NO se calcula ni
 // muestra un aviso de "sobreprecio": hacerlo sin normalizar por unidad
-// acusaría erróneamente a farmacias que en realidad cumplen.
+// acusaría erróneamente a farmacias que en realidad cumplen. Se muestra
+// como su propia línea de regulación, igual que el IVA aparece en una
+// factura real: presente, rotulado, nunca mezclado con el precio del
+// vendedor.
 const techo = drug.precio_techo_usd;
 
 function formatPrice(value: number | null): string {
-  return value == null ? "—" : `$${value.toFixed(2)}`;
+  if (value == null) return "—";
+  const [whole, cents] = value.toFixed(2).split(".");
+  return `$${whole}.${cents}`;
 }
 
 const MESES = [
@@ -87,7 +92,7 @@ const structuredData = {
 
 <Layout title={seoTitle} description={seoDescription} structuredData={structuredData}>
   <p class="breadcrumb">
-    <a href="/">Buscador</a> ·
+    <a href="/">Buscador</a> <span aria-hidden="true">·</span>
     <a href={`/principio/${slugifyPrincipio(drug.principio_activo)}`}>{drug.principio_activo}</a>
   </p>
   <h1>{nombre}</h1>
@@ -95,42 +100,47 @@ const structuredData = {
 
   <!-- AD SLOT: banner superior, debajo del título — ver Layout.astro para cómo activar -->
 
-
   {
     techo != null && (
-      <p class="techo-info">
-        Precio techo oficial (por unidad): <strong>{formatPrice(techo)}</strong>. Los precios de abajo son por
-        presentación completa (caja/frasco), así que no son directamente comparables contra este valor todavía.
-      </p>
+      <div class="reg-line">
+        <span class="reg-label">Precio techo oficial · Consejo Nacional de Fijación de Precios (por unidad)</span>
+        <span class="reg-value">{formatPrice(techo)}</span>
+        <p class="reg-note">
+          Los precios de abajo son por presentación completa (caja/frasco) — no son directamente comparables contra
+          este valor todavía.
+        </p>
+      </div>
     )
   }
+
+  <div class="tear" aria-hidden="true"></div>
 
   {
     prices.length === 0 ? (
       <p class="status">Todavía no tenemos precios registrados para este medicamento.</p>
     ) : (
-      <div class="price-list">
-        {prices.map((row) => {
+      <div class="ledger">
+        {prices.map((row, i) => {
           const isCheapest = row.pharmacy_product_id === cheapestId;
+          const logo = PHARMACY_LOGOS[row.pharmacy];
+          const delay = Math.min(i * 45, 360);
           return (
-            <article class={`price-card ${isCheapest ? "cheapest" : ""}`}>
-              {isCheapest && <span class="price-card-badge">Mejor precio</span>}
-              <div class="price-card-main">
-                <div class="pharmacy-avatar" style={`background:${PHARMACY_COLORS[row.pharmacy] ?? "#667085"}`}>
-                  {pharmacyInitials(row.pharmacy)}
-                </div>
-                <div class="price-card-text">
-                  <h3>{PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy}</h3>
-                  <p class="pharmacy-name">{row.nombre_en_tienda}</p>
-                  <p class={`stock ${row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted"}`}>
-                    {row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada"}
-                  </p>
-                </div>
+            <article class={`ledger-row print-in ${isCheapest ? "is-cheapest" : ""}`} style={`animation-delay:${delay}ms`}>
+              {isCheapest && <span class="stamp-badge">Mejor precio</span>}
+              <div class="ledger-mark">{logo && <img src={logo} alt={PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy} loading="lazy" />}</div>
+              <div class="ledger-main">
+                <p class="ledger-name">{PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy}</p>
+                <p class="ledger-sub">{row.nombre_en_tienda}</p>
+                <p class={`ledger-stock ${row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted"}`}>
+                  {row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada"}
+                </p>
               </div>
-              <div class="price-card-side">
-                <p class="price">{formatPrice(row.precio_usd)}</p>
+              <div class="ledger-side">
+                <p class="ledger-price">
+                  <span class="odometer roll-in">{formatPrice(row.precio_usd)}</span>
+                </p>
                 {row.url && (
-                  <a class="cta" href={row.url} target="_blank" rel="noopener">
+                  <a class="ledger-cta" href={row.url} target="_blank" rel="noopener">
                     Ver en tienda
                   </a>
                 )}
@@ -154,48 +164,72 @@ const structuredData = {
 
 <style>
   .breadcrumb {
-    font-size: 0.82rem;
-    color: var(--muted);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
   }
   .breadcrumb a {
-    color: var(--accent-dark);
+    color: var(--ink-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--ink-faint);
+    text-underline-offset: 3px;
+  }
+  .breadcrumb a:hover {
+    color: var(--stamp-dark);
   }
   h1 {
-    font-size: 1.5rem;
-    margin: 0.25rem 0 0.1rem;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0.3rem 0 0.15rem;
   }
   .subtitle {
-    color: var(--muted);
-    margin-top: 0;
+    color: var(--ink-muted);
+    margin: 0 0 0.5rem;
+    font-size: 0.92rem;
   }
-  .techo-info {
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-  .alert-techo {
-    background: var(--danger-bg);
-    color: var(--danger);
-    border: 1px solid #f3c6c2;
-    border-radius: 8px;
-    padding: 0.6rem 0.85rem;
-    font-size: 0.88rem;
-    margin: 0.75rem 0;
-  }
-  .price-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+
+  .reg-line {
     margin-top: 1rem;
+    border: 1px dashed var(--ink-faint);
+    border-radius: 3px;
+    padding: 0.75rem 0.95rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 0.4rem 0.75rem;
+    background: var(--paper-raised);
   }
+  .reg-label {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .reg-value {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--stamp-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .reg-note {
+    grid-column: 1 / -1;
+    margin: 0.15rem 0 0;
+    font-size: 0.74rem;
+    color: var(--ink-muted);
+  }
+
   .generic-note {
     margin-top: 1.5rem;
-    font-size: 0.82rem;
-    color: var(--muted);
-    background: #f0f4fa;
-    border-radius: 8px;
-    padding: 0.75rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    background: var(--paper-raised);
+    border: 1px solid var(--ink-faint);
+    border-radius: 3px;
+    padding: 0.8rem 0.95rem;
   }
   .generic-note a {
-    color: var(--accent-dark);
+    color: var(--stamp-dark);
   }
 </style>
