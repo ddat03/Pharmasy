@@ -75,6 +75,37 @@ export async function getPricesForDrug(drugId: string): Promise<LatestPriceRow[]
   });
 }
 
+// Trae TODOS los precios con drug_id asignado en una sola pasada (paginada,
+// PostgREST limita cada respuesta a 1000 filas por defecto). Se usa en
+// getStaticPaths para no disparar una petición HTTP por cada medicamento del
+// catálogo (con 800+ medicamentos eso satura las conexiones concurrentes del
+// build y el timeout falla).
+export async function getAllPricedProductsByDrug(): Promise<Map<string, LatestPriceRow[]>> {
+  const pageSize = 1000;
+  let offset = 0;
+  const all: LatestPriceRow[] = [];
+  for (;;) {
+    const page = await supabaseGet<LatestPriceRow[]>("latest_prices", {
+      select: LATEST_PRICE_COLUMNS,
+      drug_id: "not.is.null",
+      order: "drug_id.asc,precio_usd.asc",
+      limit: String(pageSize),
+      offset: String(offset),
+    });
+    all.push(...page);
+    if (page.length < pageSize) break;
+    offset += pageSize;
+  }
+  const byDrug = new Map<string, LatestPriceRow[]>();
+  for (const row of all) {
+    if (!row.drug_id) continue;
+    const list = byDrug.get(row.drug_id);
+    if (list) list.push(row);
+    else byDrug.set(row.drug_id, [row]);
+  }
+  return byDrug;
+}
+
 export function slugifyPrincipio(text: string): string {
   return text
     .normalize("NFKD")

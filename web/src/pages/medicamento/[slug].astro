@@ -5,7 +5,7 @@
 import Layout from "../../layouts/Layout.astro";
 import {
   getAllDrugs,
-  getPricesForDrug,
+  getAllPricedProductsByDrug,
   slugifyPrincipio,
   PHARMACY_LABELS,
   PHARMACY_COLORS,
@@ -15,13 +15,11 @@ import {
 } from "../../lib/supabase";
 
 export async function getStaticPaths() {
-  const drugs = await getAllDrugs();
-  return Promise.all(
-    drugs.map(async (drug) => ({
-      params: { slug: drug.slug },
-      props: { drug, prices: await getPricesForDrug(drug.id) },
-    })),
-  );
+  const [drugs, pricesByDrug] = await Promise.all([getAllDrugs(), getAllPricedProductsByDrug()]);
+  return drugs.map((drug) => ({
+    params: { slug: drug.slug },
+    props: { drug, prices: pricesByDrug.get(drug.id) ?? [] },
+  }));
 }
 
 interface Props {

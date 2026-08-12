@@ -3,32 +3,28 @@
 // registradas, marcando genérico vs. marca, con el precio más bajo
 // encontrado para cada una.
 import Layout from "../../layouts/Layout.astro";
-import { getAllDrugs, getPricesForDrug, slugifyPrincipio, type Drug } from "../../lib/supabase";
+import { getAllDrugs, getAllPricedProductsByDrug, slugifyPrincipio, type Drug } from "../../lib/supabase";
 
 export async function getStaticPaths() {
-  const drugs = await getAllDrugs();
+  const [drugs, pricesByDrug] = await Promise.all([getAllDrugs(), getAllPricedProductsByDrug()]);
   const bySlug = new Map<string, Drug[]>();
   for (const drug of drugs) {
     const slug = slugifyPrincipio(drug.principio_activo);
     if (!bySlug.has(slug)) bySlug.set(slug, []);
     bySlug.get(slug)!.push(drug);
   }
-  return Promise.all(
-    Array.from(bySlug.entries()).map(async ([slug, group]) => {
-      const withPrices = await Promise.all(
-        group.map(async (drug) => {
-          const prices = await getPricesForDrug(drug.id);
-          const priced = prices.filter((p) => p.precio_usd != null);
-          const min = priced.length > 0 ? Math.min(...priced.map((p) => p.precio_usd as number)) : null;
-          return { drug, precioMin: min, nFarmacias: prices.length };
-        }),
-      );
-      return {
-        params: { slug },
-        props: { principioActivo: group[0].principio_activo, items: withPrices },
-      };
-    }),
-  );
+  return Array.from(bySlug.entries()).map(([slug, group]) => {
+    const withPrices = group.map((drug) => {
+      const prices = pricesByDrug.get(drug.id) ?? [];
+      const priced = prices.filter((p) => p.precio_usd != null);
+      const min = priced.length > 0 ? Math.min(...priced.map((p) => p.precio_usd as number)) : null;
+      return { drug, precioMin: min, nFarmacias: prices.length };
+    });
+    return {
+      params: { slug },
+      props: { principioActivo: group[0].principio_activo, items: withPrices },
+    };
+  });
 }
 
 interface Item {
