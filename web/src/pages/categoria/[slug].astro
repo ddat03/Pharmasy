@@ -1,0 +1,166 @@
+---
+// Página por categoría terapéutica (hipertensión, diabetes, etc.) — usa la
+// clasificación real de db/seed_medicamentos.csv (ver web/src/lib/categorias.ts).
+// Agrupa por principio_activo dentro de la categoría, con el precio más
+// bajo encontrado (excluyendo precios por unidad, mismo criterio que
+// principio/[slug].astro).
+import Layout from "../../layouts/Layout.astro";
+import { getAllDrugs, getAllPricedProductsByDrug, slugifyPrincipio, type Drug } from "../../lib/supabase";
+import { CATEGORIAS, categoriaDe, type CategoriaMeta } from "../../lib/categorias";
+
+export async function getStaticPaths() {
+  const [drugs, pricesByDrug] = await Promise.all([getAllDrugs(), getAllPricedProductsByDrug()]);
+  const byCategoria = new Map<string, Drug[]>();
+  for (const d of drugs) {
+    const cat = categoriaDe(d.principio_activo);
+    if (!cat) continue;
+    if (!byCategoria.has(cat)) byCategoria.set(cat, []);
+    byCategoria.get(cat)!.push(d);
+  }
+
+  return CATEGORIAS.filter((c) => byCategoria.has(c.slug)).map((catMeta) => {
+    const group = byCategoria.get(catMeta.slug)!;
+    const byPrincipio = new Map<string, Drug[]>();
+    for (const d of group) {
+      const key = slugifyPrincipio(d.principio_activo);
+      if (!byPrincipio.has(key)) byPrincipio.set(key, []);
+      byPrincipio.get(key)!.push(d);
+    }
+    const items = Array.from(byPrincipio.entries()).map(([slug, drugsGroup]) => {
+      let min: number | null = null;
+      let nOfertas = 0;
+      for (const d of drugsGroup) {
+        const prices = (pricesByDrug.get(d.id) ?? []).filter((p) => p.precio_usd != null && !p.precio_por_unidad);
+        nOfertas += prices.length;
+        for (const p of prices) {
+          if (min == null || (p.precio_usd as number) < min) min = p.precio_usd as number;
+        }
+      }
+      return { slug, principioActivo: drugsGroup[0].principio_activo, precioMin: min, nOfertas };
+    });
+    items.sort((a, b) => (a.precioMin ?? Infinity) - (b.precioMin ?? Infinity));
+    return {
+      params: { slug: catMeta.slug },
+      props: { categoria: catMeta, items },
+    };
+  });
+}
+
+interface Item {
+  slug: string;
+  principioActivo: string;
+  precioMin: number | null;
+  nOfertas: number;
+}
+interface Props {
+  categoria: CategoriaMeta;
+  items: Item[];
+}
+const { categoria, items } = Astro.props;
+
+function formatPrice(value: number | null): string {
+  if (value == null) return "—";
+  const [whole, cents] = value.toFixed(2).split(".");
+  return `$${whole}.${cents}`;
+}
+
+const seoTitle = `${categoria.nombre}: medicamentos y precios en Ecuador | Farma Precios Ecuador`;
+const seoDescription = `Compara precios de medicamentos para ${categoria.nombre.toLowerCase()} en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas — el precio tal cual aparece en cada tienda.`;
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <div class="col">
+    <p class="breadcrumb"><a href="/">Buscador</a></p>
+    <h1 style={`--cat-color:${categoria.color}`}>{categoria.nombre}</h1>
+    <p class="subtitle">
+      {items.length} {items.length === 1 ? "principio activo" : "principios activos"} de esta categoría, con el
+      precio más bajo encontrado para cada uno.
+    </p>
+
+    <div class="tear" aria-hidden="true"></div>
+
+    <div class="ledger">
+      {
+        items.map(({ slug, principioActivo, precioMin, nOfertas }, i) => {
+          const delay = Math.min(i * 45, 360);
+          return (
+            <a class="ledger-row print-in presentation-row" href={`/principio/${slug}`} style={`animation-delay:${delay}ms`}>
+              <span class="cat-dot" style={`background:${categoria.color}`} aria-hidden="true" />
+              <div class="ledger-main">
+                <p class="ledger-name">{principioActivo}</p>
+              </div>
+              <div class="ledger-side">
+                <p class="ledger-price">
+                  {nOfertas > 0 ? (
+                    <>
+                      <span class="from">desde</span> <span class="odometer roll-in">{formatPrice(precioMin)}</span>
+                    </>
+                  ) : (
+                    "—"
+                  )}
+                </p>
+                <p class="ledger-stock muted">
+                  {nOfertas} {nOfertas === 1 ? "oferta" : "ofertas"}
+                </p>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+  }
+  .breadcrumb a {
+    color: var(--ink-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--ink-faint);
+    text-underline-offset: 3px;
+  }
+  .breadcrumb a:hover {
+    color: var(--stamp-dark);
+  }
+  h1 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0.3rem 0 0.15rem;
+    border-left: 4px solid var(--cat-color);
+    padding-left: 0.65rem;
+  }
+  .subtitle {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .presentation-row {
+    text-decoration: none;
+    color: inherit;
+    grid-template-columns: auto 1fr auto;
+  }
+  .presentation-row:hover .ledger-name {
+    border-bottom-color: var(--stamp);
+  }
+  .ledger-name {
+    border-bottom: 1px solid transparent;
+    display: inline-block;
+  }
+  .cat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .from {
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    font-family: var(--font-sans);
+  }
+</style>

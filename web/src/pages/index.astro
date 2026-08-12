@@ -1,51 +1,115 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getAllDrugs, slugifyPrincipio } from "../lib/supabase";
+import { getAllDrugs, getAllPricedProductsByDrug, slugifyPrincipio, PHARMACY_LABELS } from "../lib/supabase";
+import { CATEGORIAS, categoriaDe } from "../lib/categorias";
+import CategoryIcon from "../components/CategoryIcon.astro";
 
-const drugs = await getAllDrugs();
+const [drugs, pricesByDrug] = await Promise.all([getAllDrugs(), getAllPricedProductsByDrug()]);
+
 const seenPrincipios = new Map<string, string>();
+const byCategoria = new Map<string, typeof drugs>();
 for (const d of drugs) {
   const slug = slugifyPrincipio(d.principio_activo);
   if (!seenPrincipios.has(slug)) seenPrincipios.set(slug, d.principio_activo);
+  const cat = categoriaDe(d.principio_activo);
+  if (cat) {
+    if (!byCategoria.has(cat)) byCategoria.set(cat, []);
+    byCategoria.get(cat)!.push(d);
+  }
 }
 const totalProductos = drugs.length;
 const totalPrincipios = seenPrincipios.size;
 const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
+
+const categoriasConDatos = CATEGORIAS.map((c) => ({ ...c, count: byCategoria.get(c.slug)?.length ?? 0 })).filter(
+  (c) => c.count > 0,
+);
+
+// Carrusel: hasta 3 medicamentos con el precio más bajo por categoría (nunca
+// por unidad — mismo criterio que en medicamento/principio) para armar una
+// vitrina real y auto-deslizante, en vez de fotos de stock inventadas.
+type CarouselItem = {
+  nombre: string;
+  categoriaNombre: string;
+  color: string;
+  colorBg: string;
+  precioMin: number;
+  pharmacy: string;
+  slug: string;
+};
+const carouselItems: CarouselItem[] = [];
+for (const cat of CATEGORIAS) {
+  const enCategoria = byCategoria.get(cat.slug) ?? [];
+  const conPrecio = enCategoria
+    .map((d) => {
+      const prices = (pricesByDrug.get(d.id) ?? []).filter((p) => p.precio_usd != null && !p.precio_por_unidad);
+      if (prices.length === 0) return null;
+      const cheapest = prices.reduce((min, p) => ((p.precio_usd as number) < (min.precio_usd as number) ? p : min));
+      return { drug: d, cheapest };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null)
+    .sort((a, b) => (a.cheapest.precio_usd as number) - (b.cheapest.precio_usd as number))
+    .slice(0, 3);
+  for (const c of conPrecio) {
+    carouselItems.push({
+      nombre: [c.drug.principio_activo, c.drug.concentracion].filter(Boolean).join(" "),
+      categoriaNombre: cat.nombre,
+      color: cat.color,
+      colorBg: cat.colorBg,
+      precioMin: c.cheapest.precio_usd as number,
+      pharmacy: PHARMACY_LABELS[c.cheapest.pharmacy] ?? c.cheapest.pharmacy,
+      slug: c.drug.slug,
+    });
+  }
+}
+
+function formatPriceStatic(value: number): string {
+  const [whole, cents] = value.toFixed(2).split(".");
+  return `$${whole}.${cents}`;
+}
 ---
 
 <Layout
   title="Farma Precios Ecuador — Comparador de precios de medicamentos"
   description="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. El precio tal cual aparece en cada tienda, sin cálculos."
 >
-  <section class="receipt-head">
-    <p class="field-label">Buscar medicamento</p>
-    <div class="search-box">
-      <input
-        id="search-input"
-        type="search"
-        placeholder="Ej. Losartan, Metformina, Paracetamol..."
-        autocomplete="off"
-        autofocus
-      />
-    </div>
-    {
-      totalProductos > 0 && (
-        <p class="stats">
-          <span class="odometer roll-in">{totalProductos}</span> medicamentos catalogados ·{" "}
-          <span class="odometer roll-in">{totalPrincipios}</span> principios activos
-        </p>
-      )
-    }
-  </section>
+  <div class="col">
+    <section class="receipt-head">
+      <p class="field-label">Buscar medicamento</p>
+      <div class="search-box">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Ej. Losartan, Metformina, Paracetamol..."
+          autocomplete="off"
+          autofocus
+        />
+      </div>
+      {
+        totalProductos > 0 && (
+          <p class="stats">
+            <span class="odometer roll-in">{totalProductos}</span> medicamentos catalogados ·{" "}
+            <span class="odometer roll-in">{totalPrincipios}</span> principios activos
+          </p>
+        )
+      }
+    </section>
+  </div>
 
   {
-    categoriasPopulares.length > 0 && (
-      <section class="chips-section">
-        <p class="field-label">Búsquedas frecuentes</p>
-        <div class="chips">
-          {categoriasPopulares.map(([slug, nombre]) => (
-            <a class="chip" href={`/principio/${slug}`}>
-              {nombre}
+    categoriasConDatos.length > 0 && (
+      <section class="categories-section">
+        <p class="field-label section-label">Categorías</p>
+        <div class="category-grid">
+          {categoriasConDatos.map((c, i) => (
+            <a
+              class="category-tile"
+              href={`/categoria/${c.slug}`}
+              style={`--cat-color:${c.color};--cat-bg:${c.colorBg};animation-delay:${Math.min(i * 60, 400)}ms`}
+            >
+              <CategoryIcon name={c.icon} />
+              <span class="category-name">{c.nombre}</span>
+              <span class="category-count">{c.count} principios</span>
             </a>
           ))}
         </div>
@@ -53,16 +117,55 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
     )
   }
 
-  <div class="tear" aria-hidden="true"></div>
+  {
+    carouselItems.length > 0 && (
+      <section class="carousel-section">
+        <p class="field-label section-label">Precios más bajos por categoría</p>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            {[...carouselItems, ...carouselItems].map((item, i) => (
+              <a class="carousel-card" href={`/medicamento/${item.slug}`} style={`--cat-color:${item.color};--cat-bg:${item.colorBg}`} aria-hidden={i >= carouselItems.length ? "true" : undefined}>
+                <span class="carousel-cat">{item.categoriaNombre}</span>
+                <span class="carousel-name">{item.nombre}</span>
+                <span class="carousel-price">
+                  <span class="from">desde</span> {formatPriceStatic(item.precioMin)}
+                </span>
+                <span class="carousel-pharmacy">{item.pharmacy}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
-  <p class="normalizer-note">
-    Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre —
-    cada fila es el producto tal como aparece en su tienda. Compara por nombre y presentación.
-  </p>
+  <div class="col">
+    {
+      categoriasPopulares.length > 0 && (
+        <section class="chips-section">
+          <p class="field-label">Búsquedas frecuentes</p>
+          <div class="chips">
+            {categoriasPopulares.map(([slug, nombre]) => (
+              <a class="chip" href={`/principio/${slug}`}>
+                {nombre}
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
 
-  <div id="results" class="ledger"></div>
+    <div class="tear" aria-hidden="true"></div>
 
-  <!-- AD SLOT: debajo de los resultados de búsqueda — ver Layout.astro para cómo activar -->
+    <p class="normalizer-note">
+      Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre —
+      cada fila es el producto tal como aparece en su tienda. Compara por nombre y presentación.
+    </p>
+
+    <div id="results" class="ledger"></div>
+
+    <!-- AD SLOT: debajo de los resultados de búsqueda — ver Layout.astro para cómo activar -->
+  </div>
 </Layout>
 
 <style>
@@ -106,6 +209,138 @@ const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
   .stats .odometer {
     color: var(--ink);
     font-weight: 600;
+  }
+
+  /* ---------- categorías: cuadrícula ancha, a todo lo que da la página ---------- */
+  .categories-section {
+    margin-top: 2.5rem;
+  }
+  .section-label {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  .category-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background: var(--cat-bg);
+    border: 1px solid var(--ink-faint);
+    border-radius: 8px;
+    padding: 1rem 1.1rem 1.15rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition:
+      transform 160ms var(--ease-print),
+      box-shadow 160ms var(--ease-print);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .category-tile {
+      animation: print-in 380ms var(--ease-print) backwards;
+    }
+  }
+  .category-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(28, 27, 24, 0.14);
+  }
+  .category-tile :global(svg) {
+    width: 26px;
+    height: 26px;
+    stroke: var(--cat-color);
+  }
+  .category-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.25;
+  }
+  .category-count {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+  }
+
+  /* ---------- carrusel: vitrina real, auto-deslizante ---------- */
+  .carousel-section {
+    margin-top: 2.5rem;
+  }
+  .carousel-viewport {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  }
+  .carousel-track {
+    display: flex;
+    gap: 0.9rem;
+    width: max-content;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .carousel-track {
+      animation: carousel-scroll 42s linear infinite;
+    }
+    .carousel-viewport:hover .carousel-track {
+      animation-play-state: paused;
+    }
+  }
+  @keyframes carousel-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .carousel-card {
+    flex: 0 0 auto;
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--ink-faint);
+    border-top: 3px solid var(--cat-color);
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .carousel-card:hover {
+    border-color: var(--cat-color);
+  }
+  .carousel-cat {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--cat-color);
+    font-weight: 700;
+  }
+  .carousel-name {
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.25;
+    min-height: 2.2em;
+  }
+  .carousel-price {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .carousel-price .from {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: var(--ink-muted);
+  }
+  .carousel-pharmacy {
+    font-size: 0.72rem;
+    color: var(--ink-muted);
   }
 
   .chips-section {

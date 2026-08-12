@@ -1,0 +1,25 @@
+---
+// Íconos de trazo simple, dibujados a mano (sin librería externa), uno por
+// categoría terapéutica. Ver web/src/lib/categorias.ts para el mapeo.
+interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+
+const PATHS: Record<string, string> = {
+  heart: "M12 20.5s-7.5-4.6-9.8-9.3C.7 7.8 2.3 4.5 5.6 4c2-.3 3.7.7 4.9 2.4C11.7 4.7 13.4 3.7 15.4 4c3.3.5 4.9 3.8 3.4 7.2C16.5 15.9 12 20.5 12 20.5Z",
+  droplet: "M12 3s6.5 7.2 6.5 11.5a6.5 6.5 0 1 1-13 0C5.5 10.2 12 3 12 3Z",
+  shield: "M12 3l7 3v5.2c0 4.6-3 8.4-7 9.8-4-1.4-7-5.2-7-9.8V6l7-3Z M9 12l2 2 4-4",
+  bolt: "M13 2 4 14h6l-1 8 9-12h-6l1-8Z",
+  leaf: "M20 4C10 4 4 10 4 18c0 .6 0 1.2.1 1.9C11.6 20 20 14 20 4Z M4 20 14 10",
+  drop: "M12 3c2.8 3 5.5 6.5 5.5 10a5.5 5.5 0 1 1-11 0C6.5 9.5 9.2 6 12 3Z M9.5 15a2.5 2.5 0 0 0 2.5 2.5",
+  calendar: "M4 5h16v15H4V5Z M4 9h16 M8 3v3 M16 3v3 M9 13h2 M13 13h2 M9 16h2 M13 16h2",
+  target: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z",
+};
+
+const d = PATHS[name] ?? PATHS.target;
+---
+
+<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d={d} />
+</svg>

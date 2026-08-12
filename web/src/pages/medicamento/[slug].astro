@@ -98,6 +98,7 @@ const structuredData = {
 ---
 
 <Layout title={seoTitle} description={seoDescription} structuredData={structuredData}>
+  <div class="col">
   <p class="breadcrumb">
     <a href="/">Buscador</a> <span aria-hidden="true">·</span>
     <a href={`/principio/${slugifyPrincipio(drug.principio_activo)}`}>{drug.principio_activo}</a>
@@ -168,6 +169,7 @@ const structuredData = {
   </p>
 
   <!-- AD SLOT: debajo de la nota de equivalencia genérica — ver Layout.astro para cómo activar -->
+  </div>
 </Layout>
 
 <style>
