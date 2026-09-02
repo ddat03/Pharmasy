@@ -220,7 +220,22 @@ const esHome = Astro.url.pathname === "/";
     --font-mono:
       "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
     --ease-print: cubic-bezier(0.16, 1, 0.3, 1);
-    --page-w: 980px;
+    /* El sitio ocupaba ~68% de una pantalla de 1440 y se leia como una
+       columna de periodico. Es un comparador: la pantalla ancha es la
+       ventaja, porque deja ver mas filas y mas columnas de un vistazo.
+       La medida de lectura se sigue cuidando por bloque de prosa
+       (.prose, 62ch), no encogiendo la pagina entera. */
+    --page-w: 1320px;
+  }
+
+  /* En un monitor de 1920 el tope de 1320px volvia a dejar la pagina en
+     ~69% de la pantalla. Un segundo escalon la lleva a ~78% sin que las
+     filas del comparador se estiren tanto que dejen de leerse de un
+     vistazo. */
+  @media (min-width: 1700px) {
+    :root {
+      --page-w: 1500px;
+    }
   }
 
   * {

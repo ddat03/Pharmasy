@@ -177,6 +177,14 @@ const structuredData = {
 
   <!-- AD SLOT: banner superior, debajo del título — ver Layout.astro para cómo activar -->
 
+  {/* En pantalla ancha la comparacion y la navegacion van lado a lado. Una
+      sola columna a 1320px dejaba un hueco enorme entre el nombre de la
+      farmacia y su precio: la fila se estiraba sin tener con que llenarse.
+      Con el aside al costado, el ancho lo ocupa contenido real y la fila
+      vuelve a leerse de un vistazo. */}
+  <div class="med-layout">
+    <div class="med-main">
+
   {
     techo != null && (
       <div class="reg-line">
@@ -240,6 +248,9 @@ const structuredData = {
     mismo principio activo, consulte a su médico o farmacéutico antes de sustituir un medicamento.
   </p>
 
+    </div>
+
+    <aside class="med-aside">
   {
     presentaciones.length > 0 && (
       <section class="vecinos">
@@ -274,6 +285,9 @@ const structuredData = {
     )
   }
 
+    </aside>
+  </div>
+
   <!-- AD SLOT: debajo de la nota de equivalencia genérica — ver Layout.astro para cómo activar -->
   </div>
 </Layout>
@@ -305,14 +319,41 @@ const structuredData = {
     display: inline-block;
   }
 
+  .med-layout {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 1080px) {
+    .med-layout {
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 0 3.5rem;
+      align-items: start;
+    }
+    /* El aside se separa con una regla vertical, no con un fondo ni una
+       tarjeta: es el mismo recurso con el que el resto del sistema separa
+       cosas. */
+    .med-aside {
+      border-left: 1px solid var(--ink-faint);
+      padding-left: 3.5rem;
+    }
+    .med-aside .vecinos:first-child {
+      margin-top: 0;
+    }
+  }
+
   .vecinos {
     margin-top: 2.5rem;
   }
   .vecinos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 0 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 0 2.5rem;
     border-top: 1px solid var(--ink-faint);
+  }
+  /* Dentro del aside la lista es siempre de una columna, sin importar el
+     ancho disponible. */
+  .med-aside .vecinos-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
   .vecino {
     display: flex;
