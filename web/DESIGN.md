@@ -5,9 +5,9 @@ colors:
   paper: "#f7f3ea"
   paper-edge: "#e8e0cc"
   paper-raised: "#fffdf7"
-  ink: "#1c1b18"
-  ink-muted: "#746b57"
-  ink-faint: "rgba(28, 27, 24, 0.13)"
+  ink: "#17160f"
+  ink-muted: "#57503f"
+  ink-faint: "rgba(23, 22, 15, 0.2)"
   stamp: "#a6362a"
   stamp-dark: "#7c271e"
   stamp-bg: "#f3e2df"
@@ -17,6 +17,12 @@ colors:
   warn: "#6b4a15"
   warn-bg: "#f3e9d4"
 typography:
+  hero:
+    fontFamily: "IBM Plex Sans, system-ui, sans-serif"
+    fontSize: "clamp(2.1rem, 5.4vw, 3.35rem)"
+    fontWeight: 700
+    lineHeight: 1.04
+    letterSpacing: "-0.032em"
   display:
     fontFamily: "IBM Plex Sans, system-ui, sans-serif"
     fontSize: "1.55rem"
@@ -112,8 +118,8 @@ Warm, desaturated, paper-and-ink — one accent used with real restraint.
 - **Papel Elevado / Raised Paper** (`#fffdf7`): logo circles, chips, CTA text-on-dark — the "brighter sheet" surface.
 - **Papel Borde / Paper Edge** (`#e8e0cc`): chip and "MARCA" tag background.
 - **Tinta / Ink** (`#1c1b18`): primary text, primary CTA background.
-- **Tinta Tenue / Muted Ink** (`#746b57`): secondary text, timestamps, sub-labels.
-- **Tinta Fantasma / Faint Ink** (`rgba(28,27,24,0.13)`): all hairline borders and dividers.
+- **Tinta Tenue / Muted Ink** (`#57503f`): secondary text, timestamps, sub-labels. Raised from `#746b57` on 2026-09-02: the old value measured 4.0:1 on paper, under the 4.5:1 floor for body text, and was the single biggest reason the page read "washed out" rather than "serious".
+- **Tinta Fantasma / Faint Ink** (`rgba(23,22,15,0.2)`): all hairline borders and dividers. **Never used as a text color** — at 20% opacity it disappears. The search placeholder used to be set in this token and was effectively invisible.
 
 ### Named Rules
 **The One Stamp Rule.** Stamp red never fills a background larger than a badge or a border. If red is covering more than a small mark, it's being used wrong.
@@ -139,7 +145,7 @@ Warm, desaturated, paper-and-ink — one accent used with real restraint.
 
 ## Layout
 
-Single centered column, `max-width: 720px`, mobile-first — there is no multi-column desktop layout, deliberately: a factura is a vertical document, and widening it into a dashboard grid would undo the whole metaphor. Content padding is `1.1rem` horizontal on mobile, unchanged at desktop width since the column itself never exceeds 720px. Vertical rhythm runs on a small set of steps: `0.4rem` (tight label-to-control), `0.85rem` (row padding), `1.25rem` (section gaps), `1.75rem` (major section breaks, marked visually by the `.tear` perforation divider).
+One container, `--page-w: 980px`, mobile-first, and **everything hangs off its single left edge** — header, disclaimer text, hero, sections, footer. This replaced an arrangement where wide sections lived at 1180px and reading content in a 760px column centered inside it: two centered boxes of different widths share no edge, so on desktop nothing lined up with anything. Reading measure is now constrained per prose block (`.prose`, 62ch) instead of by narrowing the whole page, because ledger rows read better wide, with the price anchored to the right edge. Content padding is `1.1rem` horizontal on mobile, unchanged at desktop width since the column itself never exceeds 720px. Vertical rhythm runs on a small set of steps: `0.4rem` (tight label-to-control), `0.85rem` (row padding), `1.25rem` (section gaps), `1.75rem` (major section breaks, marked visually by the `.tear` perforation divider).
 
 Ledger rows use a 3-column CSS grid (`auto 1fr auto`): logo mark, name/detail block, price/CTA block — identical structure across the home search, medicamento, and principio-activo pages so the eye never has to relearn the row shape.
 
@@ -172,6 +178,15 @@ Pill-shaped, `--deal` green background, uppercase Plex Mono label ("Mejor precio
 ### Regulation Line (precio techo)
 A dashed-border box, separate from the ledger, always labeled "Precio techo oficial · Consejo Nacional de Fijación de Precios (por unidad)" with an explicit note that it is not directly comparable to the presentation prices below it. This component exists specifically so official/regulatory data is never visually or numerically merged with scraped farmacia prices — see [[Precio techo]] in the project bitácora for why that separation is non-negotiable.
 
+### Hero (home only)
+Headline at `typography.hero` — the one place the type scale goes to display scale — with the third line set in `--stamp`. Beside it on `>=900px` sits the **hero-meta** block: a `<dl>` of hairline rows (Medicamentos / Principios activos / Cadenas / Actualizado), right-aligned values in Plex Mono. It is the invoice's own upper-right metadata block, and it exists so the first viewport is answered by real data instead of white space.
+
+### Freshness Stamp (global header)
+Green dot plus "Precios del <fecha>" in Plex Mono, top-right of every page, fed by the newest `price_snapshots.fecha`. Non-negotiable: a price comparator that does not say *when* looks identical whether its data is from today or from three weeks ago. If the query fails the element is omitted — never a guessed date.
+
+### Category Row
+Categories are **ledger rows, not tiles**: a `auto 1fr auto` grid (icon in the category colour, name, count in Plex Mono) with a hairline under each, flowed into an `auto-fill` grid of ~255px columns. The earlier pastel rounded tiles violated this system's own No-Card Rule and were the main reason the home read as two visual languages arguing.
+
 ### Chips
 Búsquedas-frecuentes chips: `--paper-raised` background, `1px solid --ink-faint` border, `3px` radius, hover shifts border and text to `--stamp`/`--stamp-dark`.
 
@@ -191,6 +206,7 @@ Wordmark ("Farma Precios") in Plex Sans 700 next to a rotated mono "EC" stamp ba
 
 ### Don't:
 - **Don't** put a "cheapest" or "best price" badge on a result set that isn't guaranteed to be the same medicamento/presentación — an ungrouped free-text search result list must never claim a cross-product minimum as a fact.
-- **Don't** introduce rounded cards, drop shadows, or hover-lift; depth comes from paper-tone shifts and hairlines only.
+- **Don't** introduce rounded cards, drop shadows, or hover-lift; depth comes from paper-tone shifts and hairlines only. This has been violated twice by "make it friendlier" passes and reverted both times — friendliness comes from the headline's voice and from colour in the ledger, not from tiles.
+- **Don't** hard-code a count, total, or date into copy. The ticker once read "2,875 productos comparados" as a literal string and was quietly false within a day. Every figure on the page comes from the database or is omitted.
 - **Don't** use any icon system beyond real pharmacy-chain logos and the geometric "F" favicon — no emoji, no glyph icon font.
 - **Don't** reintroduce neon, glow, or saturated gradient treatments — explicitly rejected by the product owner as reading "not serious enough" for a medical-pricing tool.

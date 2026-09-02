@@ -7,6 +7,8 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "@fontsource/ibm-plex-mono/600.css";
 
+import { getResumen, formatFechaLarga } from "../lib/supabase";
+
 interface Props {
   title: string;
   description?: string;
@@ -17,6 +19,27 @@ const {
   description = "Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. El precio tal cual aparece en cada tienda, sin cálculos.",
   structuredData,
 } = Astro.props;
+
+// La fecha del dato vive en el header de todas las paginas: es lo que
+// separa un precio verificable de un numero cualquiera. Si la consulta
+// falla, el header simplemente no la muestra — nunca se inventa una fecha.
+// getResumen() esta cacheado a nivel de modulo: se consulta una vez por
+// build, no una vez por cada una de las 1231 paginas.
+const resumen = await getResumen().catch(() => ({ fecha: null, productosHoy: null, conPrecioTecho: null }));
+const ultimaActualizacion = resumen.fecha;
+
+// La franja superior decia "2,875 productos comparados" y "137 con precio
+// techo oficial verificado" con los numeros escritos a mano en el codigo.
+// Eran ciertos el dia que se escribieron y dejaron de serlo despues: una
+// cifra fija sobre datos que cambian todas las noches es una afirmacion
+// falsa esperando su turno. Ahora salen de la base, y el dato que no se
+// pueda confirmar simplemente no se muestra.
+const hechos = [
+  resumen.productosHoy != null ? `${resumen.productosHoy.toLocaleString("es-EC")} precios verificados hoy` : null,
+  resumen.conPrecioTecho != null ? `${resumen.conPrecioTecho} con precio techo oficial` : null,
+  "5 cadenas de farmacia, un solo lugar",
+  "nunca inventamos ni calculamos precios",
+].filter((h): h is string => h !== null);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -88,14 +111,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         {
           Array.from({ length: 2 }).map(() => (
             <>
-              <span>2,875 productos comparados</span>
-              <span class="ticker-dot">·</span>
-              <span>137 con precio techo oficial verificado</span>
-              <span class="ticker-dot">·</span>
-              <span>5 cadenas de farmacia, un solo lugar</span>
-              <span class="ticker-dot">·</span>
-              <span>nunca inventamos ni calculamos precios</span>
-              <span class="ticker-dot">·</span>
+              {hechos.map((hecho) => (
+                <>
+                  <span>{hecho}</span>
+                  <span class="ticker-dot">·</span>
+                </>
+              ))}
             </>
           ))
         }
@@ -107,11 +128,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <span class="brand-word">Farma Precios</span>
         <span class="brand-stamp">EC</span>
       </a>
-      <p class="tagline">Precios reales, tal cual los cobra cada farmacia</p>
+      {
+        ultimaActualizacion && (
+          <p class="freshness">
+            <span class="freshness-dot" aria-hidden="true" />
+            Precios del <strong>{formatFechaLarga(ultimaActualizacion)}</strong>
+          </p>
+        )
+      }
     </header>
 
     <div class="disclaimer">
-      Información referencial de precios. No constituye consejo médico. Consulte a su médico o farmacéutico.
+      <span>Información referencial de precios. No constituye consejo médico. Consulte a su médico o farmacéutico.</span>
     </div>
 
     <main>
@@ -125,6 +153,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         sin afiliación con ninguna cadena.
       </p>
       <p><a href="/politica-de-privacidad">Política de privacidad</a></p>
+      <p class="footer-sign">Creado por Diego Aleman</p>
     </footer>
   </body>
 </html>
@@ -134,10 +163,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     --paper: #f7f3ea;
     --paper-edge: #e8e0cc;
     --paper-raised: #fffdf7;
-    --ink: #1c1b18;
-    --ink-muted: #746b57;
-    --ink-faint: rgba(28, 27, 24, 0.13);
-    --ink-faint-2: rgba(28, 27, 24, 0.07);
+    --ink: #17160f;
+    /* #746b57 sobre el papel daba 4.0:1 — por debajo del minimo legible para
+       texto normal. Este mismo matiz, mas oscuro, llega a 5.9:1 sin salirse
+       del mundo de tinta sobre papel. */
+    --ink-muted: #57503f;
+    --ink-faint: rgba(23, 22, 15, 0.2);
+    --ink-faint-2: rgba(23, 22, 15, 0.08);
     --stamp: #a6362a;
     --stamp-dark: #7c271e;
     --stamp-bg: #f3e2df;
@@ -152,6 +184,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     --font-mono:
       "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
     --ease-print: cubic-bezier(0.16, 1, 0.3, 1);
+    --page-w: 980px;
   }
 
   * {
@@ -222,10 +255,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   }
 
   /* ---------- header ---------- */
+  /* Un solo ancho para toda la pagina. Antes el header y las secciones
+     anchas vivian en 1180px y el contenido de lectura en una columna de
+     760px centrada dentro de ese ancho: dos cajas centradas de distinto
+     tamano no comparten ningun borde, asi que en desktop nada alineaba con
+     nada. Ahora hay una sola caja y todo cuelga de su misma linea. */
   .site-header {
-    padding: 1.6rem 1.5rem 1.1rem;
-    max-width: 1180px;
+    padding: 1.9rem 1.5rem 1.3rem;
+    max-width: var(--page-w);
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 1.25rem;
   }
   .brand {
     display: inline-flex;
@@ -250,41 +293,72 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     padding: 0.1rem 0.32rem;
     transform: rotate(-3deg);
   }
-  .tagline {
-    margin: 0.35rem 0 0;
+  /* Sello de frescura: el dato que le dice al visitante si esto es de hoy.
+     Va en el header, no escondido en el pie, porque es la mitad de la
+     promesa del producto — la otra mitad es el precio. */
+  .freshness {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
     color: var(--ink-muted);
-    font-size: 0.86rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .freshness strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .freshness-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--deal);
+    flex-shrink: 0;
   }
 
+  /* Franja a todo el ancho, pero su texto arranca en la misma linea
+     vertical que el resto de la pagina: si no, es lo unico centrado en un
+     diseno alineado a la izquierda y se lee como una pieza suelta. */
   .disclaimer {
     background: var(--warn-bg);
     color: var(--warn);
     font-size: 0.78rem;
-    padding: 0.5rem 1.25rem;
-    text-align: center;
     border-top: 1px solid var(--ink-faint);
     border-bottom: 1px solid var(--ink-faint);
   }
-
-  main {
-    max-width: 1180px;
+  .disclaimer > span {
+    display: block;
+    max-width: var(--page-w);
     margin: 0 auto;
-    padding: 1.75rem 1.5rem 3rem;
+    padding: 0.55rem 1.5rem;
   }
 
-  /* columna angosta y legible para tablas comparativas dentro de main,
-     que ahora es ancho para dejar espacio a categorías/carrusel a los
-     lados en el home. */
-  .col {
-    max-width: 760px;
+  main {
+    max-width: var(--page-w);
     margin: 0 auto;
+    padding: 2rem 1.5rem 3.5rem;
+  }
+
+  /* `.col` ya no reduce el ancho: existe solo como agrupador semantico
+     heredado de las paginas. La medida de lectura se limita por bloque de
+     prosa (.prose), no encogiendo la pagina entera — las filas del libro
+     mayor se leen mejor anchas, con el precio anclado al borde derecho. */
+  .col {
+    max-width: 100%;
+  }
+
+  /* Medida de lectura para parrafos de prosa: ~68 caracteres. */
+  .prose {
+    max-width: 62ch;
   }
 
   /* ---------- footer ---------- */
   .site-footer {
-    max-width: 1180px;
+    max-width: var(--page-w);
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
     color: var(--ink-muted);
     font-size: 0.78rem;
     padding: 0 1.5rem 2.5rem;
@@ -296,6 +370,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     background-repeat: repeat-x;
     opacity: 0.4;
     margin-bottom: 1.5rem;
+  }
+  .footer-sign {
+    margin-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    opacity: 0.7;
   }
   .site-footer a {
     color: var(--ink-muted);

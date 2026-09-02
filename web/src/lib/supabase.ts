@@ -112,6 +112,78 @@ export async function getAllPricedProductsByDrug(): Promise<Map<string, LatestPr
   return byDrug;
 }
 
+// Cuenta filas sin traerlas: PostgREST devuelve el total en Content-Range
+// cuando se pide `count=exact` con un rango vacio.
+async function supabaseCount(table: string, params: Record<string, string> = {}): Promise<number | null> {
+  const qs = new URLSearchParams({ select: "id", ...params });
+  const resp = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${qs.toString()}`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      Range: "0-0",
+      Prefer: "count=exact",
+    },
+  });
+  if (!resp.ok) return null;
+  const total = resp.headers.get("content-range")?.split("/")[1];
+  const n = Number(total);
+  return Number.isFinite(n) ? n : null;
+}
+
+export type Resumen = {
+  fecha: string | null;
+  productosHoy: number | null;
+  conPrecioTecho: number | null;
+};
+
+// El layout corre una vez por pagina y el sitio genera 1231 paginas: sin
+// esta cache el build dispararia la misma consulta mas de mil veces. El
+// modulo vive lo que dura el build, asi que alcanza con memorizar la
+// promesa.
+let resumenPromise: Promise<Resumen> | null = null;
+
+export function getResumen(): Promise<Resumen> {
+  if (!resumenPromise) {
+    resumenPromise = (async () => {
+      const fecha = await getUltimaActualizacion().catch(() => null);
+      const [productosHoy, conPrecioTecho] = await Promise.all([
+        fecha ? supabaseCount("price_snapshots", { fecha: `eq.${fecha}` }).catch(() => null) : Promise.resolve(null),
+        supabaseCount("drugs", { precio_techo_usd: "not.is.null" }).catch(() => null),
+      ]);
+      return { fecha, productosHoy, conPrecioTecho };
+    })();
+  }
+  return resumenPromise;
+}
+
+// Fecha del snapshot de precios mas reciente. Es el unico dato que le dice
+// al visitante si lo que esta viendo es de hoy o de hace tres semanas — sin
+// esto, un catalogo congelado se ve identico a uno fresco, que es justo lo
+// que paso entre el 2026-08-11 y el 2026-09-02.
+export async function getUltimaActualizacion(): Promise<string | null> {
+  const rows = await supabaseGet<{ fecha: string }[]>("price_snapshots", {
+    select: "fecha",
+    order: "fecha.desc",
+    limit: "1",
+  });
+  return rows[0]?.fecha ?? null;
+}
+
+const MESES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+// "2026-09-02" -> "2 de septiembre". Se parsea a mano en vez de con Date()
+// porque `new Date("2026-09-02")` se interpreta como UTC y en Ecuador (UTC-5)
+// retrocede un dia: mostraria "1 de septiembre" para un dato de hoy.
+export function formatFechaLarga(fecha: string): string {
+  const [, mes, dia] = fecha.split("-").map(Number);
+  const nombreMes = MESES[mes - 1];
+  if (!nombreMes || !dia) return fecha;
+  return `${dia} de ${nombreMes}`;
+}
+
 export function slugifyPrincipio(text: string): string {
   return text
     .normalize("NFKD")
