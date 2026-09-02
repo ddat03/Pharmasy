@@ -210,6 +210,12 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
     params = {
         "select": "id,pharmacy,external_id,nombre_en_tienda",
         "drug_id": "is.null",
+        # es_medicamento = false son productos que ya se evaluaron y se
+        # descartaron por no ser medicamentos (panales, champu, biberones).
+        # Sin este filtro volvian a la cola todas las noches para siempre: el
+        # filtro por drug_id nulo no distingue "todavia sin procesar" de
+        # "procesado y descartado". Ver db/migracion_es_medicamento.sql.
+        "es_medicamento": "not.is.false",
         "pharmacy": f"eq.{pharmacy}",
     }
     if not run_all:
@@ -228,7 +234,22 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
 
         if not parsed.get("es_medicamento") or is_garbage_text(parsed.get("principio_activo")):
             no_medicamento += 1
-            print(f"[{i}/{len(products)}] {text[:60]!r} -> no es medicamento, se omite")
+            # Se deja constancia del descarte para no volver a preguntarlo.
+            # La respuesta no puede cambiar: `ai_cache` devuelve siempre la
+            # misma extraccion para el mismo nombre de producto.
+            supabase_upsert(
+                "pharmacy_products",
+                [
+                    {
+                        "pharmacy": prod["pharmacy"],
+                        "external_id": prod["external_id"],
+                        "nombre_en_tienda": prod["nombre_en_tienda"],
+                        "es_medicamento": False,
+                    }
+                ],
+                on_conflict="pharmacy,external_id",
+            )
+            print(f"[{i}/{len(products)}] {text[:60]!r} -> no es medicamento, se descarta")
             continue
 
         key = (
@@ -269,6 +290,7 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
                     "external_id": prod["external_id"],
                     "nombre_en_tienda": prod["nombre_en_tienda"],
                     "drug_id": drug_id,
+                    "es_medicamento": True,
                     "match_confidence": round(parsed["confidence"], 2),
                     "match_method": match_method,
                 }
@@ -279,7 +301,8 @@ def normalize_batch(pharmacy, limit=None, run_all=False):
 
     print(
         f"\nListo. {exact} emparejados a medicamentos existentes, {nuevos} medicamentos nuevos creados, "
-        f"{no_medicamento} omitidos por no ser medicamentos, {baja_confianza} con confidence < 0.85 "
+        f"{no_medicamento} descartados por no ser medicamentos (no vuelven a procesarse), "
+        f"{baja_confianza} con confidence < 0.85 "
         "(revisión manual pendiente)."
     )
 
