@@ -19,11 +19,11 @@ on:
   workflow_dispatch:
     inputs:
       solo_fuente:
-        description: "Correr una sola cadena (vacio = las 5)"
+        description: "Correr una sola cadena"
         required: false
         type: choice
-        options: ["", "fybeca", "pharmacys", "medicity", "cruzazul", "economicas"]
-        default: ""
+        options: ["todas", "fybeca", "pharmacys", "medicity", "cruzazul", "economicas"]
+        default: "todas"
       saltar_normalizacion:
         description: "Saltar el normalizador (no gasta API de OpenAI)"
         required: false
@@ -73,8 +73,11 @@ jobs:
 
       - name: Scrapear ${{ matrix.fuente }}
         # Se salta si el dispatch manual pidio una sola cadena distinta a esta.
+        # En una corrida programada `inputs` viene nulo, y en las expresiones
+        # de GitHub null == '' es verdadero: no hace falta un caso aparte.
         if: >-
           github.event.inputs.solo_fuente == ''
+          || github.event.inputs.solo_fuente == 'todas'
           || github.event.inputs.solo_fuente == matrix.fuente
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
