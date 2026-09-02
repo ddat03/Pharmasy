@@ -29,12 +29,20 @@ import csv
 import html
 import json
 import re
+import sys
 import time
 import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from base import BlockedError, get_html, rate_limit_sleep, save_raw, supabase_insert, supabase_upsert
+from base import (
+    BlockedError,
+    get_html,
+    rate_limit_sleep,
+    record_scrape_run,
+    save_raw,
+    supabase_upsert,
+)
 
 PHARMACY = "fybeca"
 BASE_URL = "https://www.fybeca.com"
@@ -140,7 +148,7 @@ def scrape(terms):
             rate_limit_sleep()
     if errores:
         print(f"\n{len(errores)} términos con error (omitidos, no bloquean la corrida): {[t for t, _ in errores]}")
-    return list(by_external_id.values())
+    return list(by_external_id.values()), len(errores)
 
 
 def ecuador_today():
@@ -195,12 +203,20 @@ def main():
             terms = terms[: args.limit or 10]
 
     start = time.monotonic()
-    errores = 0
     try:
-        products = scrape(terms)
+        products, errores = scrape(terms)
     except BlockedError as e:
+        # 403/429: no se evade nunca. Se registra la corrida caida (productos_ok
+        # = 0) y se sale con codigo != 0 para que el nocturno la marque fallida.
         print(f"BLOQUEADO: {e}. Marcar fybeca como blocked_from_ci y detener. No se evade.")
-        return
+        if not args.dry_run:
+            record_scrape_run(PHARMACY, 0, 1, time.monotonic() - start)
+        sys.exit(2)
+    except Exception as e:
+        print(f"FALLO la corrida de fybeca: {e}")
+        if not args.dry_run:
+            record_scrape_run(PHARMACY, 0, 1, time.monotonic() - start)
+        sys.exit(1)
 
     duracion = time.monotonic() - start
     print(f"\n{len(products)} productos únicos extraídos de {len(terms)} términos en {duracion:.1f}s")
@@ -214,17 +230,13 @@ def main():
     n_products, n_snapshots = load_to_supabase(products)
     print(f"Supabase: {n_products} pharmacy_products upsertados, {n_snapshots} price_snapshots guardados")
 
-    supabase_insert(
-        "scrape_runs",
-        [
-            {
-                "fuente": PHARMACY,
-                "productos_ok": len(products),
-                "errores": errores,
-                "duracion_segundos": round(duracion, 2),
-            }
-        ],
-    )
+    record_scrape_run(PHARMACY, len(products), errores, duracion)
+
+    # Sin productos = la fuente cambio de forma. Se sale con error para que el
+    # nocturno lo reporte en vez de dejar pasar una corrida vacia.
+    if not products:
+        print(f"ERROR: {PHARMACY} no devolvio ningun producto; probablemente cambio el sitio.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -1,24 +1,166 @@
 name: scrape-nightly
 
-# Corrida nocturna: scraping → normalización → alertas → trigger rebuild web.
+# Corrida nocturna: scraping -> normalizacion -> alertas -> rebuild de la web.
 # Horario: 07:00 UTC = 02:00 Ecuador (ventana 2:00-4:00 AM, ver
 # Boveda Farmacia/Conceptos/Scraping respetuoso.md).
 #
-# TODO (fase 2 en adelante del Orden de construcción):
-#   - checkout + setup Python 3.11
-#   - correr scrapers/*.py habilitados (excluir los blocked_from_ci)
-#   - correr pipeline/normalizer.py
-#   - correr pipeline/alerts.py
-#   - repository_dispatch hacia deploy-web.yml
+# Las 5 cadenas corren en paralelo y de forma independiente (fail-fast: false):
+# que una cadena se caiga o quede bloqueada no debe impedir que las otras 4
+# actualicen sus precios. Los pasos posteriores usan `if: always()` por la
+# misma razon: se publica con los datos que si se pudieron traer.
+#
+# El repo es publico, asi que los minutos de Actions son gratis e ilimitados;
+# el presupuesto de ~700 min/mes del documento maestro (seccion 4) solo aplica
+# a repos privados y no es una restriccion aca.
 
 on:
   schedule:
     - cron: "0 7 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      solo_fuente:
+        description: "Correr una sola cadena (vacio = las 5)"
+        required: false
+        type: choice
+        options: ["", "fybeca", "pharmacys", "medicity", "cruzazul", "economicas"]
+        default: ""
+      saltar_normalizacion:
+        description: "Saltar el normalizador (no gasta API de OpenAI)"
+        required: false
+        type: boolean
+        default: false
+
+# Una corrida a la vez: dos scrapeos simultaneos escribirian el snapshot del
+# mismo dia sobre si mismos y multiplicarian las peticiones a las farmacias.
+concurrency:
+  group: scrape-nightly
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   scrape:
+    name: scrape (${{ matrix.fuente }})
     runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # `--all` = los 194 terminos de la semilla. Economicas no toma ese
+          # flag: lee un set fijo de tiendas de Rappi (ver su docstring).
+          - fuente: fybeca
+            args: "--all"
+          - fuente: pharmacys
+            args: "--all"
+          - fuente: medicity
+            args: "--all"
+          - fuente: cruzazul
+            args: "--all"
+          - fuente: economicas
+            args: ""
     steps:
       - uses: actions/checkout@v4
-      - run: echo "TODO: implementar pipeline nocturno (fase 2+)"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Scrapear ${{ matrix.fuente }}
+        # Se salta si el dispatch manual pidio una sola cadena distinta a esta.
+        if: >-
+          github.event.inputs.solo_fuente == ''
+          || github.event.inputs.solo_fuente == matrix.fuente
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python scrapers/${{ matrix.fuente }}.py ${{ matrix.args }}
+
+      - name: Guardar respuestas crudas (depuracion, 7 dias)
+        # Se suben aunque el scraper falle: son justamente lo que hace falta
+        # para entender por que fallo. No se commitean al repo (pesan).
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-${{ matrix.fuente }}
+          path: raw/${{ matrix.fuente }}/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  normalize:
+    name: normalizar catalogo
+    needs: scrape
+    if: always() && github.event.inputs.saltar_normalizacion != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Emparejar productos nuevos al catalogo maestro
+        # Solo toca productos con drug_id nulo, y `ai_cache` evita pagarle dos
+        # veces a OpenAI por el mismo nombre: en una noche normal el gasto es
+        # el de los productos que aparecieron ese dia, no el del catalogo.
+        # `continue-on-error`: que falle el emparejamiento no debe impedir que
+        # se publiquen los precios nuevos, que es el dato que importa.
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          for fuente in fybeca pharmacys medicity cruzazul economicas; do
+            echo "::group::normalizando $fuente"
+            python pipeline/normalizer.py --pharmacy "$fuente" --all || echo "fallo $fuente, se sigue"
+            echo "::endgroup::"
+          done
+
+  alerts:
+    name: alertas y salud
+    needs: [scrape, normalize]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Diff de precios + reporte de salud
+        # Sale con codigo != 0 si alguna fuente esta caida o no dejo datos de
+        # hoy, para que la corrida quede en rojo y GitHub avise por mail
+        # aunque el bot de Telegram todavia no este configurado.
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_ADMIN_CHAT_ID: ${{ secrets.TELEGRAM_ADMIN_CHAT_ID }}
+        run: python pipeline/alerts.py
+
+  deploy:
+    name: republicar la web
+    needs: [scrape, normalize]
+    # Se republica aunque alguna cadena haya fallado: las que si trajeron
+    # datos deben llegar al sitio. No depende de `alerts` a proposito, para
+    # que una fuente caida no bloquee la publicacion del resto.
+    if: always()
+    uses: ./.github/workflows/deploy-web.yml
+    secrets: inherit

@@ -5,6 +5,11 @@ name: deploy-web
 # (cambios en web/), o manualmente.
 
 on:
+  # Llamado como workflow reutilizable desde scrape-nightly.yml. Se prefiere
+  # esto antes que repository_dispatch porque un dispatch firmado con el
+  # GITHUB_TOKEN por defecto no dispara otros workflows: haria falta crear y
+  # rotar un PAT solo para eso.
+  workflow_call: {}
   repository_dispatch:
     types: [rebuild-web]
   workflow_dispatch: {}

@@ -141,6 +141,30 @@ def supabase_delete(table, params, timeout=30):
     return resp.json() if resp.text else []
 
 
+def record_scrape_run(fuente, productos_ok, errores, duracion_segundos):
+    """Registra una corrida en `scrape_runs`, exitosa o no.
+
+    Antes solo se registraban las corridas que llegaban al final: un run
+    bloqueado (403/429) o caído no dejaba ninguna fila, así que la regla
+    "si una fuente falla 3 corridas seguidas -> alerta al admin" no tenía
+    con qué evaluarse. Una fuente caída se ve como productos_ok = 0.
+    """
+    try:
+        supabase_insert(
+            "scrape_runs",
+            [
+                {
+                    "fuente": fuente,
+                    "productos_ok": productos_ok,
+                    "errores": errores,
+                    "duracion_segundos": round(duracion_segundos, 2),
+                }
+            ],
+        )
+    except Exception as e:  # nunca tumbar la corrida por no poder anotar la bitácora
+        print(f"aviso: no se pudo registrar scrape_run de {fuente}: {e}")
+
+
 def supabase_insert(table, rows, timeout=30):
     if not rows:
         return []

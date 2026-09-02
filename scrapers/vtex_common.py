@@ -7,12 +7,20 @@ comparten esta base porque corren sobre plataformas distintas.
 
 import argparse
 import csv
+import sys
 import time
 import urllib.parse
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from base import BlockedError, get_json, rate_limit_sleep, save_raw, supabase_insert, supabase_upsert
+from base import (
+    BlockedError,
+    get_json,
+    rate_limit_sleep,
+    record_scrape_run,
+    save_raw,
+    supabase_upsert,
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SEED_CSV = BASE_DIR / "db" / "seed_medicamentos.csv"
@@ -112,7 +120,7 @@ def scrape(pharmacy, base_url, search_path, terms):
             rate_limit_sleep()
     if errores:
         print(f"\n{len(errores)} términos con error (omitidos, no bloquean la corrida): {[t for t, _ in errores]}")
-    return list(by_external_id.values())
+    return list(by_external_id.values()), len(errores)
 
 
 def ecuador_today():
@@ -168,12 +176,21 @@ def run_cli(pharmacy, base_url, search_path):
             terms = terms[: args.limit or 10]
 
     start = time.monotonic()
-    errores = 0
     try:
-        products = scrape(pharmacy, base_url, search_path, terms)
+        products, errores = scrape(pharmacy, base_url, search_path, terms)
     except BlockedError as e:
+        # 403/429: no se evade nunca. Se deja constancia en la bitacora (una
+        # corrida con productos_ok = 0) y se sale con codigo != 0 para que el
+        # workflow nocturno la marque como fallida en vez de pasar en silencio.
         print(f"BLOQUEADO: {e}. Marcar {pharmacy} como blocked_from_ci y detener. No se evade.")
-        return
+        if not args.dry_run:
+            record_scrape_run(pharmacy, 0, 1, time.monotonic() - start)
+        sys.exit(2)
+    except Exception as e:
+        print(f"FALLO la corrida de {pharmacy}: {e}")
+        if not args.dry_run:
+            record_scrape_run(pharmacy, 0, 1, time.monotonic() - start)
+        sys.exit(1)
 
     duracion = time.monotonic() - start
     print(f"\n{len(products)} productos únicos extraídos de {len(terms)} términos en {duracion:.1f}s")
@@ -187,14 +204,11 @@ def run_cli(pharmacy, base_url, search_path):
     n_products, n_snapshots = load_to_supabase(pharmacy, products)
     print(f"Supabase: {n_products} pharmacy_products upsertados, {n_snapshots} price_snapshots guardados")
 
-    supabase_insert(
-        "scrape_runs",
-        [
-            {
-                "fuente": pharmacy,
-                "productos_ok": len(products),
-                "errores": errores,
-                "duracion_segundos": round(duracion, 2),
-            }
-        ],
-    )
+    record_scrape_run(pharmacy, len(products), errores, duracion)
+
+    # Una corrida que termina sin ningun producto es tecnicamente "exitosa",
+    # pero en la practica significa que la fuente cambio de forma. Se sale con
+    # error para que el nocturno lo reporte en vez de dejar la tabla vacia.
+    if not products:
+        print(f"ERROR: {pharmacy} no devolvio ningun producto; probablemente cambio el sitio.")
+        sys.exit(1)
