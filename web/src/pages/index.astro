@@ -554,4 +554,15 @@ function formatPriceStatic(value: number): string {
     const term = input.value;
     debounceTimer = setTimeout(() => runSearch(term), 300);
   });
+
+  // El buscador del encabezado (presente en todas las paginas menos esta)
+  // es un formulario que apunta aca con ?q=. Se recoge al cargar para que
+  // buscar desde una pagina de medicamento funcione igual que buscar desde
+  // el inicio, sin duplicar la implementacion de la busqueda.
+  const termInicial = new URLSearchParams(window.location.search).get("q");
+  if (termInicial && termInicial.trim().length >= 3) {
+    input.value = termInicial;
+    runSearch(termInicial);
+    results.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 </script>

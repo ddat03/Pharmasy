@@ -7,26 +7,90 @@ import Layout from "../../layouts/Layout.astro";
 import {
   getAllDrugs,
   getAllPricedProductsByDrug,
+  getResumen,
+  formatFechaLarga,
   slugifyPrincipio,
   PHARMACY_LABELS,
   PHARMACY_LOGOS,
   type Drug,
   type LatestPriceRow,
 } from "../../lib/supabase";
+import { categoriaDe, categoriaMeta } from "../../lib/categorias";
+
+type Vecino = { slug: string; nombre: string; desde: number | null };
 
 export async function getStaticPaths() {
   const [drugs, pricesByDrug] = await Promise.all([getAllDrugs(), getAllPricedProductsByDrug()]);
-  return drugs.map((drug) => ({
-    params: { slug: drug.slug },
-    props: { drug, prices: pricesByDrug.get(drug.id) ?? [] },
-  }));
+
+  // Precio comparable mas bajo de cada medicamento, para poder mostrar
+  // "desde $X" en los enlaces de navegacion sin volver a consultar.
+  const desdePorDrug = new Map<string, number | null>();
+  for (const d of drugs) {
+    const comparables = (pricesByDrug.get(d.id) ?? []).filter((p) => p.precio_usd != null && !p.precio_por_unidad);
+    desdePorDrug.set(d.id, comparables.length ? Math.min(...comparables.map((p) => p.precio_usd as number)) : null);
+  }
+
+  const porPrincipio = new Map<string, Drug[]>();
+  const porCategoria = new Map<string, Drug[]>();
+  for (const d of drugs) {
+    const pk = slugifyPrincipio(d.principio_activo);
+    if (!porPrincipio.has(pk)) porPrincipio.set(pk, []);
+    porPrincipio.get(pk)!.push(d);
+    const cat = categoriaDe(d.principio_activo);
+    if (cat) {
+      if (!porCategoria.has(cat)) porCategoria.set(cat, []);
+      porCategoria.get(cat)!.push(d);
+    }
+  }
+
+  const aVecino = (d: Drug): Vecino => ({
+    slug: d.slug,
+    nombre: [d.principio_activo, d.concentracion, d.forma_farmaceutica].filter(Boolean).join(" "),
+    desde: desdePorDrug.get(d.id) ?? null,
+  });
+
+  return drugs.map((drug) => {
+    const catSlug = categoriaDe(drug.principio_activo);
+
+    // Mismo principio activo, otra concentracion o forma.
+    const presentaciones = (porPrincipio.get(slugifyPrincipio(drug.principio_activo)) ?? [])
+      .filter((d) => d.slug !== drug.slug)
+      .map(aVecino)
+      .sort((a, b) => a.nombre.localeCompare(b.nombre, "es"))
+      .slice(0, 8);
+
+    // Misma categoria, distinto principio activo, y solo los que tienen
+    // precio: un enlace a una pagina sin precios no le sirve a nadie.
+    const relacionados = (catSlug ? (porCategoria.get(catSlug) ?? []) : [])
+      .filter((d) => d.principio_activo !== drug.principio_activo)
+      .map(aVecino)
+      .filter((v) => v.desde != null)
+      .sort((a, b) => (a.desde as number) - (b.desde as number))
+      .slice(0, 8);
+
+    return {
+      params: { slug: drug.slug },
+      props: { drug, prices: pricesByDrug.get(drug.id) ?? [], presentaciones, relacionados, catSlug },
+    };
+  });
 }
 
 interface Props {
   drug: Drug;
   prices: LatestPriceRow[];
+  presentaciones: Vecino[];
+  relacionados: Vecino[];
+  catSlug: string | null;
 }
-const { drug, prices } = Astro.props;
+const { drug, prices, presentaciones, relacionados, catSlug } = Astro.props;
+const cat = catSlug ? categoriaMeta(catSlug) : undefined;
+
+// Fecha del ultimo scrapeo global. Una fila con fecha anterior es un precio
+// que no se pudo reconfirmar hoy (pasa con Farmacias Economicas, cuya
+// vitrina en Rappi rota que productos muestra): se rotula en la fila en vez
+// de dejarlo pasar por un precio de hoy.
+const resumen = await getResumen().catch(() => ({ fecha: null, productosHoy: null, conPrecioTecho: null }));
+const fechaGlobal = resumen.fecha;
 
 const nombre = [drug.principio_activo, drug.concentracion, drug.forma_farmaceutica].filter(Boolean).join(" ");
 const pricedRows = prices.filter((p) => p.precio_usd != null);
@@ -101,6 +165,11 @@ const structuredData = {
   <div class="col">
   <p class="breadcrumb">
     <a href="/">Buscador</a> <span aria-hidden="true">·</span>
+    {cat && (
+      <>
+        <a href={`/categoria/${cat.slug}`}>{cat.nombre}</a> <span aria-hidden="true">·</span>
+      </>
+    )}
     <a href={`/principio/${slugifyPrincipio(drug.principio_activo)}`}>{drug.principio_activo}</a>
   </p>
   <h1>{nombre}</h1>
@@ -148,6 +217,9 @@ const structuredData = {
                   <span class="odometer roll-in">{formatPrice(row.precio_usd)}</span>
                 </p>
                 {row.precio_por_unidad && <p class="ledger-unit-note">precio por unidad, no por caja</p>}
+                {fechaGlobal && row.fecha !== fechaGlobal && (
+                  <p class="ledger-stale">precio del {formatFechaLarga(row.fecha)}</p>
+                )}
                 {row.url && (
                   <a class="ledger-cta" href={row.url} target="_blank" rel="noopener">
                     Ver en tienda
@@ -168,11 +240,107 @@ const structuredData = {
     mismo principio activo, consulte a su médico o farmacéutico antes de sustituir un medicamento.
   </p>
 
+  {
+    presentaciones.length > 0 && (
+      <section class="vecinos">
+        <p class="field-label">Otras presentaciones de {drug.principio_activo}</p>
+        <div class="vecinos-grid">
+          {presentaciones.map((v) => (
+            <a class="vecino" href={`/medicamento/${v.slug}`}>
+              <span class="vecino-nombre">{v.nombre}</span>
+              <span class="vecino-precio">{v.desde != null ? `desde ${formatPrice(v.desde)}` : "sin precio"}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    relacionados.length > 0 && cat && (
+      <section class="vecinos">
+        <p class="field-label">
+          Más de {cat.nombre} · <a href={`/categoria/${cat.slug}`}>ver todo</a>
+        </p>
+        <div class="vecinos-grid">
+          {relacionados.map((v) => (
+            <a class="vecino" href={`/medicamento/${v.slug}`} style={`--cat-color:${cat.color}`}>
+              <span class="vecino-nombre">{v.nombre}</span>
+              <span class="vecino-precio">desde {formatPrice(v.desde)}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
   <!-- AD SLOT: debajo de la nota de equivalencia genérica — ver Layout.astro para cómo activar -->
   </div>
 </Layout>
 
 <style>
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin: 0 0 0.6rem;
+  }
+  .field-label a {
+    color: var(--stamp);
+  }
+
+  /* Precio que no se pudo reconfirmar en el ultimo scrapeo. Se rotula en la
+     fila: el encabezado dice "precios del <hoy>" y sin esto una fila vieja
+     se ve identica a una fresca. */
+  .ledger-stale {
+    margin: 0.2rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--warn);
+    background: var(--warn-bg);
+    padding: 0.08rem 0.35rem;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .vecinos {
+    margin-top: 2.5rem;
+  }
+  .vecinos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0 2rem;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .vecino {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 0.7rem 0.15rem;
+    border-bottom: 1px solid var(--ink-faint);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .vecino-nombre {
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.3;
+    border-bottom: 1px solid transparent;
+  }
+  .vecino:hover .vecino-nombre {
+    border-bottom-color: var(--cat-color, var(--ink));
+  }
+  .vecino-precio {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
   .breadcrumb {
     font-size: 0.8rem;
     color: var(--ink-muted);
