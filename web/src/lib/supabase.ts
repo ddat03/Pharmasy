@@ -74,13 +74,23 @@ export type Drug = {
   precio_techo_usd: number | null;
 };
 
-export async function getAllDrugs(): Promise<Drug[]> {
-  return supabaseGet<Drug[]>("drugs", {
-    select:
-      "id,slug,principio_activo,concentracion,forma_farmaceutica,presentacion,nombre_comercial,laboratorio,es_generico,precio_techo_usd",
-    order: "principio_activo.asc",
-    limit: "2000",
-  });
+// Cacheada a nivel de modulo: getStaticPaths() de medicamento/marca/
+// principio/categoria y ahora tambien el preview del header (ver
+// categoria-preview.ts) llaman esta funcion. Sin cache, cada uno dispara su
+// propia consulta del catalogo completo -- multiplicado por cada una de las
+// 2293 paginas del build si se llamara desde un layout compartido.
+let drugsPromise: Promise<Drug[]> | null = null;
+
+export function getAllDrugs(): Promise<Drug[]> {
+  if (!drugsPromise) {
+    drugsPromise = supabaseGet<Drug[]>("drugs", {
+      select:
+        "id,slug,principio_activo,concentracion,forma_farmaceutica,presentacion,nombre_comercial,laboratorio,es_generico,precio_techo_usd",
+      order: "principio_activo.asc",
+      limit: "2000",
+    });
+  }
+  return drugsPromise;
 }
 
 export async function getPricesForDrug(drugId: string): Promise<LatestPriceRow[]> {
@@ -96,7 +106,21 @@ export async function getPricesForDrug(drugId: string): Promise<LatestPriceRow[]
 // getStaticPaths para no disparar una petición HTTP por cada medicamento del
 // catálogo (con 800+ medicamentos eso satura las conexiones concurrentes del
 // build y el timeout falla).
-export async function getAllPricedProductsByDrug(): Promise<Map<string, LatestPriceRow[]>> {
+//
+// Cacheada a nivel de modulo, mismo motivo que getAllDrugs: es la consulta
+// mas pesada del sitio (pagina de a 1000 filas todo el catalogo de precios),
+// y sin cache cualquier llamador nuevo desde un layout compartido la
+// dispararia una vez por cada pagina del build.
+let pricedProductsPromise: Promise<Map<string, LatestPriceRow[]>> | null = null;
+
+export function getAllPricedProductsByDrug(): Promise<Map<string, LatestPriceRow[]>> {
+  if (!pricedProductsPromise) {
+    pricedProductsPromise = cargarPricedProductsByDrug();
+  }
+  return pricedProductsPromise;
+}
+
+async function cargarPricedProductsByDrug(): Promise<Map<string, LatestPriceRow[]>> {
   const pageSize = 1000;
   let offset = 0;
   const all: LatestPriceRow[] = [];

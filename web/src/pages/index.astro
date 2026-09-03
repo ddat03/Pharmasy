@@ -9,12 +9,14 @@ import {
   PHARMACY_LABELS,
 } from "../lib/supabase";
 import { CATEGORIAS, categoriaDe } from "../lib/categorias";
+import { getPreviewPorCategoria } from "../lib/categoria-preview";
 import CategoryIcon from "../components/CategoryIcon.astro";
 
-const [drugs, pricesByDrug, resumen] = await Promise.all([
+const [drugs, pricesByDrug, resumen, previewPorCategoria] = await Promise.all([
   getAllDrugs(),
   getAllPricedProductsByDrug(),
   getResumen().catch(() => ({ fecha: null, productosHoy: null, conPrecioTecho: null })),
+  getPreviewPorCategoria(),
 ]);
 
 const seenPrincipios = new Map<string, string>();
@@ -32,30 +34,14 @@ const totalProductos = drugs.length;
 const totalPrincipios = seenPrincipios.size;
 const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
 
-// Vista previa por categoria: hasta 8 medicamentos distintos con su precio
-// mas bajo comparable (mismo criterio de siempre: nunca por unidad suelta),
-// para el carrusel que se despliega al pasar el mouse. Sin esto habria que
-// cargar el catalogo completo en el cliente solo para mostrar un adelanto.
-type PreviewItem = { nombre: string; precio: number; slug: string };
-
-function previewDeCategoria(categoriaSlug: string): PreviewItem[] {
-  const enCategoria = byCategoria.get(categoriaSlug) ?? [];
-  return enCategoria
-    .map((d) => {
-      const prices = (pricesByDrug.get(d.id) ?? []).filter((p) => p.precio_usd != null && !p.precio_por_unidad);
-      if (prices.length === 0) return null;
-      const min = prices.reduce((a, b) => ((b.precio_usd as number) < (a.precio_usd as number) ? b : a));
-      return { nombre: [d.principio_activo, d.concentracion].filter(Boolean).join(" "), precio: min.precio_usd as number, slug: d.slug };
-    })
-    .filter((x): x is PreviewItem => x !== null)
-    .sort((a, b) => a.precio - b.precio)
-    .slice(0, 8);
-}
-
+// El calculo del adelanto vive en categoria-preview.ts, compartido con el
+// menu del header (Layout.astro) para que ambos usen exactamente la misma
+// logica de seleccion -- "hasta 8, nunca por unidad, mas baratos primero" --
+// y para no recalcularla dos veces sobre los mismos datos.
 const categoriasConDatos = CATEGORIAS.map((c) => ({
   ...c,
   count: byCategoria.get(c.slug)?.length ?? 0,
-  preview: previewDeCategoria(c.slug),
+  preview: previewPorCategoria.get(c.slug) ?? [],
 })).filter((c) => c.count > 0);
 
 // Hasta 3 medicamentos con el precio más bajo por categoría (nunca por

@@ -1,6 +1,7 @@
 // Carrusel de adelanto al pasar el mouse: usado en las categorias del
-// inicio y en las marcas de /marcas/. Nunca dispara con click -- el click
-// en la fila principal sigue yendo directo a la pagina completa, este
+// inicio, en las marcas de /marcas/, y en el menu de categorias del
+// encabezado (presente en todas las paginas). Nunca dispara con click -- el
+// click en la fila principal sigue yendo directo a la pagina completa, este
 // efecto es solo un adelanto mientras el mouse esta encima.
 //
 // Se calcula el desplazamiento real en JS (getBoundingClientRect) en vez de
@@ -8,7 +9,24 @@
 // distinta de productos y un ancho de contenido distinto -- una animacion
 // CSS con un porcentaje fijo se hubiera quedado corta o larga segun el caso.
 
-export function activarCarruselesPreview(selectorItem: string) {
+type Opciones = {
+  /**
+   * El panel pasa a `position: fixed` con top/left calculados en JS al
+   * activarse, en vez de depender de `position: absolute` respecto a su
+   * contenedor. Hace falta en el menu del encabezado por dos motivos que no
+   * existen en la seccion de categorias del inicio: 1) la barra tiene
+   * `overflow-x: auto` para poder deslizarse en pantallas angostas, y eso
+   * recorta verticalmente cualquier hijo `position:absolute` que se salga
+   * de su caja -- confirmado, no es teorico, se probo sin este flag y el
+   * panel quedaba invisible aunque el CSS `opacity` estuviera en 1. 2) cada
+   * link del menu es angosto (~80-140px), asi que un panel mas ancho
+   * alineado a la izquierda del ultimo item ("Marcas", "Tiroides") se
+   * saldria del viewport por la derecha sin este calculo.
+   */
+  posicionFija?: boolean;
+};
+
+export function activarCarruselesPreview(selectorItem: string, opciones: Opciones = {}) {
   const items = document.querySelectorAll<HTMLElement>(selectorItem);
   const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -19,8 +37,28 @@ export function activarCarruselesPreview(selectorItem: string) {
 
     let activo = false;
 
+    function posicionar() {
+      if (!opciones.posicionFija || !contenedor) return;
+      const triggerBox = item.getBoundingClientRect();
+      // Ancho real del panel: hay que medirlo ya posicionado (aunque sea
+      // invisible) porque su contenido define el ancho, no al reves.
+      const anchoPanel = contenedor.offsetWidth;
+      const margen = 12;
+      let left = triggerBox.left;
+      // Si alineado a la izquierda del link se saldria por la derecha de la
+      // ventana, se ancla por la derecha del link en su lugar.
+      if (left + anchoPanel > window.innerWidth - margen) {
+        left = Math.max(margen, triggerBox.right - anchoPanel);
+      }
+      contenedor.style.position = "fixed";
+      contenedor.style.top = `${triggerBox.bottom}px`;
+      contenedor.style.left = `${left}px`;
+      contenedor.style.right = "auto";
+    }
+
     function deslizar() {
       if (!contenedor || !track) return;
+      posicionar();
       // Se mide recien al activarse: si se midiera al cargar la pagina, un
       // reflow posterior (fuentes que terminan de cargar, etc.) dejaria el
       // calculo viejo. En touch (sin hover real) esto nunca se dispara.

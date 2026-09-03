@@ -9,6 +9,7 @@ import "@fontsource/ibm-plex-mono/600.css";
 
 import { getResumen, formatFechaLarga } from "../lib/supabase";
 import { CATEGORIAS } from "../lib/categorias";
+import { getPreviewPorCategoria } from "../lib/categoria-preview";
 
 interface Props {
   title: string;
@@ -28,6 +29,16 @@ const {
 // build, no una vez por cada una de las 1231 paginas.
 const resumen = await getResumen().catch(() => ({ fecha: null, productosHoy: null, conPrecioTecho: null }));
 const ultimaActualizacion = resumen.fecha;
+
+// Adelanto de productos por categoria para el menu del encabezado, cacheado
+// a nivel de modulo (ver categoria-preview.ts) -- sin eso, esta consulta se
+// dispararia una vez por cada una de las 2293 paginas del sitio.
+const previewPorCategoria = await getPreviewPorCategoria().catch(() => new Map());
+
+function formatPrecio(value: number): string {
+  const [whole, cents] = value.toFixed(2).split(".");
+  return `$${whole}.${cents}`;
+}
 
 // La franja superior decia "2,875 productos comparados" y "137 con precio
 // techo oficial verificado" con los numeros escritos a mano en el codigo.
@@ -160,11 +171,34 @@ const esHome = Astro.url.pathname === "/";
       <nav class="cat-nav" aria-label="Categorías">
         <ul>
           {
-            CATEGORIAS.map((c) => (
-              <li>
-                <a href={`/categoria/${c.slug}`}>{c.nombre}</a>
-              </li>
-            ))
+            CATEGORIAS.map((c) => {
+              const preview = previewPorCategoria.get(c.slug) ?? [];
+              return (
+                <li class="navcat-item">
+                  <a href={`/categoria/${c.slug}`}>{c.nombre}</a>
+                  {/* Al pasar el mouse (nunca al click) se desliza un
+                      adelanto de productos reales, terminando en "Ver
+                      todo" -- misma categoria a la que ya lleva el click
+                      en el nombre. Mismo patron que en /marcas/ y en la
+                      seccion de categorias del inicio. */}
+                  {preview.length > 0 && (
+                    <div class="navcat-preview" data-preview>
+                      <div class="navcat-preview-track" data-preview-track>
+                        {preview.map((item) => (
+                          <a class="navcat-cp-item" href={`/medicamento/${item.slug}/`}>
+                            <span class="navcat-cp-nombre">{item.nombre}</span>
+                            <span class="navcat-cp-precio">{formatPrecio(item.precio)}</span>
+                          </a>
+                        ))}
+                        <a class="navcat-cp-vermas" href={`/categoria/${c.slug}/`}>
+                          Ver todo <span aria-hidden="true">→</span>
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              );
+            })
           }
           <li class="nav-aparte">
             <a href="/marcas/">Marcas</a>
@@ -227,6 +261,18 @@ const esHome = Astro.url.pathname === "/";
     </footer>
   </body>
 </html>
+
+<script>
+  import { activarCarruselesPreview } from "../lib/preview-carousel";
+  // posicionFija: true porque .cat-nav ul tiene overflow-x:auto (necesario
+  // para poder deslizarse en pantallas angostas), y eso recorta cualquier
+  // hijo position:absolute que se salga de su caja -- confirmado al
+  // probarlo sin este flag, el panel quedaba invisible pese a que el CSS
+  // opacity estaba en 1. Con posicionFija, el JS calcula top/left reales al
+  // activarse y el panel pasa a position:fixed, fuera del alcance de ese
+  // overflow.
+  activarCarruselesPreview(".navcat-item", { posicionFija: true });
+</script>
 
 <style is:global>
   :root {
@@ -504,6 +550,103 @@ const esHome = Astro.url.pathname === "/";
     color: var(--paper-raised);
     border-bottom-color: var(--paper-raised);
   }
+
+  /* ---------- adelanto al pasar el mouse: nunca al click ----------
+     Mismos data-attrs (data-preview / data-preview-track) que usan
+     index.astro y marcas.astro, asi que el mismo script en
+     preview-carousel.ts los activa a los tres sin duplicar logica. Clases
+     propias (navcat-*) para no depender de los estilos scoped de esas
+     otras paginas -- este bloque es global (Layout.astro usa
+     <style is:global>), asi que un nombre compartido podria filtrarse a
+     paginas que no lo esperan. */
+  .navcat-item {
+    position: relative;
+  }
+  .navcat-preview {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    width: 300px;
+    overflow: hidden;
+    background: var(--paper-raised);
+    border: 1px solid var(--ink-faint);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 14px 28px rgba(23, 22, 15, 0.24);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms var(--ease-print);
+    pointer-events: none;
+  }
+  .navcat-item:hover .navcat-preview,
+  .navcat-item:focus-within .navcat-preview {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .navcat-preview-track {
+    display: flex;
+    width: max-content;
+    transition: transform 1200ms var(--ease-print);
+  }
+  .navcat-cp-item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    width: 132px;
+    padding: 0.6rem 0.7rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--ink-faint);
+    transition: background-color 120ms var(--ease-print);
+  }
+  .navcat-cp-item:hover {
+    background-color: rgba(23, 22, 15, 0.04);
+  }
+  .navcat-cp-nombre {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .navcat-cp-precio {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--stamp);
+    font-variant-numeric: tabular-nums;
+  }
+  .navcat-cp-vermas {
+    flex: 0 0 auto;
+    width: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--paper-raised);
+    background: var(--stamp);
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 140ms var(--ease-print);
+  }
+  .navcat-cp-vermas:hover {
+    background: var(--stamp-dark);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .navcat-preview-track {
+      transition: none;
+    }
+  }
+  /* En movil el menu del header entero se oculta (ver mas abajo), asi que
+     este panel nunca se activaria ahi -- no hace falta un breakpoint
+     propio. */
 
   .sr-only {
     position: absolute;
