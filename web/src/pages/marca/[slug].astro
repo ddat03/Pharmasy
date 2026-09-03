@@ -1,0 +1,270 @@
+---
+// Página por marca comercial. Misma estructura de libro mayor que la página
+// por medicamento, pero agrupando por nombre de marca en vez de por
+// principio activo — porque muchos productos no declaran su principio
+// activo y quedarían invisibles.
+import Layout from "../../layouts/Layout.astro";
+import { getMarcas, type Marca } from "../../lib/marcas";
+import { getResumen, formatFechaLarga, PHARMACY_LABELS, PHARMACY_LOGOS } from "../../lib/supabase";
+
+export async function getStaticPaths() {
+  const marcas = await getMarcas();
+  return marcas.map((marca) => ({
+    params: { slug: marca.slug },
+    props: { marca, relacionadas: marcas.filter((m) => m.slug !== marca.slug).slice(0, 8) },
+  }));
+}
+
+interface Props {
+  marca: Marca;
+  relacionadas: Marca[];
+}
+const { marca, relacionadas } = Astro.props;
+
+const resumen = await getResumen().catch(() => ({ fecha: null, productosHoy: null, conPrecioTecho: null }));
+const fechaGlobal = resumen.fecha;
+
+// A diferencia de la página por medicamento, acá las filas NO son el mismo
+// producto: una marca agrupa varias concentraciones y presentaciones
+// (Eurocor 1.25mg y Eurocor 2.5/6.25mg son cosas distintas). Un sello de
+// "mejor precio" sobre ese conjunto afirmaría un mínimo entre productos que
+// no son comparables — justo la comparación que este sitio se niega a
+// inventar, y el mismo motivo por el que el buscador libre tampoco lo pone.
+// El orden por precio se mantiene, pero sin declarar un ganador.
+
+function formatPrice(value: number | null): string {
+  if (value == null) return "—";
+  const [whole, cents] = value.toFixed(2).split(".");
+  return `$${whole}.${cents}`;
+}
+
+const MESES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+const now = new Date();
+const mesAnio = `${MESES[now.getMonth()]} ${now.getFullYear()}`;
+
+const seoTitle = `Precio de ${marca.nombre} en Ecuador — comparación ${mesAnio} | Farma Precios Ecuador`;
+const seoDescription =
+  marca.cadenas.length > 1
+    ? `Compara el precio de ${marca.nombre} en ${marca.cadenas.length} cadenas de farmacia de Ecuador${marca.desde != null ? `. Desde ${formatPrice(marca.desde)}` : ""}.`
+    : `Precio de ${marca.nombre} en farmacias de Ecuador${marca.desde != null ? `. Desde ${formatPrice(marca.desde)}` : ""}.`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: marca.nombre,
+  offers: marca.productos
+    .filter((p) => p.precio_usd != null)
+    .map((p) => ({
+      "@type": "Offer",
+      price: p.precio_usd,
+      priceCurrency: "USD",
+      availability:
+        p.en_stock === true
+          ? "https://schema.org/InStock"
+          : p.en_stock === false
+            ? "https://schema.org/OutOfStock"
+            : "https://schema.org/LimitedAvailability",
+      url: p.url ?? undefined,
+      seller: { "@type": "Organization", name: PHARMACY_LABELS[p.pharmacy] ?? p.pharmacy },
+    })),
+};
+---
+
+<Layout title={seoTitle} description={seoDescription} structuredData={structuredData}>
+  <div class="col">
+    <p class="breadcrumb">
+      <a href="/">Buscador</a> <span aria-hidden="true">·</span>
+      <a href="/marcas/">Marcas</a>
+    </p>
+    <h1>{marca.nombre}</h1>
+    <p class="subtitle">
+      {marca.productos.length} {marca.productos.length === 1 ? "presentación" : "presentaciones"} en{" "}
+      {marca.cadenas.length} {marca.cadenas.length === 1 ? "cadena" : "cadenas"}
+    </p>
+
+    <div class="med-layout">
+      <div class="med-main">
+        <div class="tear" aria-hidden="true"></div>
+
+        <div class="ledger">
+          {
+            marca.productos.map((row, i) => {
+              const logo = PHARMACY_LOGOS[row.pharmacy];
+              return (
+                <article class="ledger-row print-in" style={`animation-delay:${Math.min(i * 45, 360)}ms`}>
+                  <div class="ledger-mark">
+                    {logo && <img src={logo} alt={PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy} loading="lazy" />}
+                  </div>
+                  <div class="ledger-main">
+                    <p class="ledger-name">{PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy}</p>
+                    <p class="ledger-sub">{row.nombre_en_tienda}</p>
+                    <p
+                      class={`ledger-stock ${row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted"}`}
+                    >
+                      {row.en_stock === true
+                        ? "En stock"
+                        : row.en_stock === false
+                          ? "Sin stock"
+                          : "Disponibilidad no confirmada"}
+                    </p>
+                  </div>
+                  <div class="ledger-side">
+                    <p class="ledger-price">
+                      <span class="odometer roll-in">{formatPrice(row.precio_usd)}</span>
+                    </p>
+                    {row.precio_por_unidad && <p class="ledger-unit-note">precio por unidad, no por caja</p>}
+                    {fechaGlobal && row.fecha !== fechaGlobal && (
+                      <p class="ledger-stale">precio del {formatFechaLarga(row.fecha)}</p>
+                    )}
+                    {row.url && (
+                      <a class="ledger-cta" href={row.url} target="_blank" rel="noopener">
+                        Ver en tienda
+                      </a>
+                    )}
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+
+        <p class="nota">
+          Las filas están ordenadas por precio, pero <strong>no todas son la misma presentación</strong>: una marca
+          agrupa distintas concentraciones y tamaños de caja. Compara dentro de la misma presentación antes de
+          sacar conclusiones — por eso esta página no marca un «mejor precio».
+        </p>
+        <p class="nota">
+          Todavía no tenemos confirmado el principio activo de {marca.nombre}, así que esta página compara la marca
+          entre farmacias pero no la enlaza con sus equivalentes genéricos. Consulta a tu médico o farmacéutico
+          antes de sustituir un medicamento.
+        </p>
+      </div>
+
+      <aside class="med-aside">
+        {
+          relacionadas.length > 0 && (
+            <section class="vecinos">
+              <p class="field-label">
+                Otras marcas · <a href="/marcas/">ver todas</a>
+              </p>
+              <div class="vecinos-grid">
+                {relacionadas.map((m) => (
+                  <a class="vecino" href={`/marca/${m.slug}/`}>
+                    <span class="vecino-nombre">{m.nombre}</span>
+                    <span class="vecino-precio">
+                      {m.desde != null ? `desde ${formatPrice(m.desde)}` : `${m.cadenas.length} cadenas`}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )
+        }
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    margin-bottom: 0.4rem;
+  }
+  .breadcrumb a {
+    color: inherit;
+  }
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.3rem;
+  }
+  .subtitle {
+    margin: 0;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin: 0 0 0.6rem;
+  }
+  .field-label a {
+    color: var(--stamp);
+  }
+  .ledger-stale {
+    margin: 0.2rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--warn);
+    background: var(--warn-bg);
+    padding: 0.08rem 0.35rem;
+    border-radius: 3px;
+    display: inline-block;
+  }
+  .nota {
+    max-width: 62ch;
+    margin-top: 1.75rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    border: 1px dashed var(--ink-faint);
+    border-radius: 3px;
+    padding: 0.8rem 0.9rem;
+  }
+  .med-layout {
+    display: grid;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 1080px) {
+    .med-layout {
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 0 3.5rem;
+      align-items: start;
+    }
+    .med-aside {
+      border-left: 1px solid var(--ink-faint);
+      padding-left: 3.5rem;
+    }
+  }
+  .vecinos-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    border-top: 1px solid var(--ink-faint);
+  }
+  .vecino {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 0.7rem 0.15rem;
+    border-bottom: 1px solid var(--ink-faint);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .vecino-nombre {
+    font-size: 0.88rem;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+  }
+  .vecino:hover .vecino-nombre {
+    border-bottom-color: var(--ink);
+  }
+  .vecino-precio {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+// Índice de marcas. Sin esta página las de marca serían huérfanas: nada las
+// enlazaría y Google tardaría mucho más en encontrarlas.
+import Layout from "../layouts/Layout.astro";
+import { getMarcas } from "../lib/marcas";
+
+const marcas = await getMarcas();
+const comparables = marcas.filter((m) => m.cadenas.length > 1);
+const unaSola = marcas.filter((m) => m.cadenas.length === 1);
+
+function formatPrice(value: number | null): string {
+  if (value == null) return "—";
+  const [whole, cents] = value.toFixed(2).split(".");
+  return `$${whole}.${cents}`;
+}
+---
+
+<Layout
+  title="Medicamentos de marca — precios en farmacias de Ecuador"
+  description="Precios de medicamentos de marca comercial en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas."
+>
+  <div class="col">
+    <h1>Medicamentos de marca</h1>
+    <p class="lead prose">
+      Productos que se venden por su nombre comercial. Aparecen aparte del catálogo por principio activo porque su
+      nombre no declara qué contienen — así que se comparan entre farmacias, pero todavía no con sus equivalentes
+      genéricos.
+    </p>
+
+    {
+      comparables.length > 0 && (
+        <section>
+          <p class="field-label">En más de una farmacia · {comparables.length} marcas</p>
+          <div class="grid">
+            {comparables.map((m) => (
+              <a class="fila" href={`/marca/${m.slug}/`}>
+                <span class="nombre">{m.nombre}</span>
+                <span class="meta">
+                  <span class="cadenas">{m.cadenas.length} cadenas</span>
+                  {m.desde != null && <span class="precio">desde {formatPrice(m.desde)}</span>}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      unaSola.length > 0 && (
+        <section class="segunda">
+          <p class="field-label">En una sola farmacia · {unaSola.length} marcas</p>
+          <div class="grid">
+            {unaSola.map((m) => (
+              <a class="fila" href={`/marca/${m.slug}/`}>
+                <span class="nombre">{m.nombre}</span>
+                <span class="meta">
+                  {m.desde != null && <span class="precio">desde {formatPrice(m.desde)}</span>}
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .lead {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+    margin-bottom: 2.25rem;
+  }
+  .field-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin: 0 0 0.6rem;
+  }
+  .segunda {
+    margin-top: 3rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 0 2.5rem;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .fila {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.9rem;
+    padding: 0.7rem 0.15rem;
+    border-bottom: 1px solid var(--ink-faint);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nombre {
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+  }
+  .fila:hover .nombre {
+    border-bottom-color: var(--ink);
+  }
+  .meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .cadenas {
+    color: var(--deal-dark);
+  }
+  .precio {
+    color: var(--ink-muted);
+  }
+</style>

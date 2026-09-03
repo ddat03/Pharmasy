@@ -149,6 +149,9 @@ const esHome = Astro.url.pathname === "/";
               </li>
             ))
           }
+          <li class="nav-aparte">
+            <a href="/marcas/">Marcas</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -440,6 +443,13 @@ const esHome = Astro.url.pathname === "/";
   }
   .cat-nav ul::-webkit-scrollbar {
     display: none;
+  }
+  /* "Marcas" no es una categoría terapéutica: se separa con una regla para
+     que no se lea como una más de la lista. */
+  .nav-aparte {
+    border-left: 1px solid rgba(255, 253, 247, 0.3);
+    padding-left: 1.25rem;
+    margin-left: -0.25rem;
   }
   .cat-nav a {
     display: block;

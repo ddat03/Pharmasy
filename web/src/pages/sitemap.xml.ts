@@ -4,6 +4,7 @@
 // todas las páginas de medicamento/principio/categoría generadas desde `drugs`.
 import { getAllDrugs, slugifyPrincipio } from "../lib/supabase";
 import { CATEGORIAS } from "../lib/categorias";
+import { getMarcas } from "../lib/marcas";
 
 // Cloudflare Pages sirve cada página en su ruta con barra final y redirige
 // (308) la versión sin barra. Un sitemap que lista la versión sin barra le
@@ -23,17 +24,19 @@ export async function GET() {
     throw new Error("Falta `site` en astro.config.mjs: el sitemap necesita el dominio real.");
   }
 
-  const drugs = await getAllDrugs();
+  const [drugs, marcas] = await Promise.all([getAllDrugs(), getMarcas()]);
   const principios = new Set(drugs.map((d) => slugifyPrincipio(d.principio_activo)));
 
   const urls = [
     `${base}/`,
     `${base}/acerca`,
     `${base}/contacto`,
+    `${base}/marcas`,
     `${base}/politica-de-privacidad`,
     ...CATEGORIAS.map((c) => `${base}/categoria/${c.slug}`),
     ...drugs.map((d) => `${base}/medicamento/${d.slug}`),
     ...Array.from(principios).map((p) => `${base}/principio/${p}`),
+    ...marcas.map((m) => `${base}/marca/${m.slug}`),
   ].map(conBarraFinal);
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
