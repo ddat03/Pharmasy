@@ -1,3 +1,12 @@
+# --- verificacion de Google Search Console ---
+# Cloudflare Pages le saca la extension .html a todo y hace un 308 hacia la
+# version sin extension. Google pide su archivo de verificacion en la URL
+# exacta, con .html, asi que ese redirect le rompe la verificacion.
+# Esta regla con estado 200 es una reescritura, no un redirect: la URL con
+# .html devuelve el contenido directamente.
+/googled9cc5019dafc28e1.html  /googled9cc5019dafc28e1  200
+# --- fin verificacion ---
+
 # --- por que aca NO hay redirect entre hostnames ---
 # Se intento mandar la raiz y dark-star-3bb3.pages.dev a www con reglas de
 # URL absoluta. No funciona: Cloudflare Pages solo acepta una RUTA como
