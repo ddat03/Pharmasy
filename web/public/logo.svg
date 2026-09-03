@@ -1,0 +1,12 @@
+<!-- Marca de Farma Precios EC: una casilla marcada cuyo tilde se sale por la
+     esquina superior derecha. Redibujo en SVG del diseño generado con Gemini,
+     que vino en JPEG y por lo tanto sin transparencia real (el cuadriculado
+     gris de aquel archivo estaba pintado, no era transparente).
+     Usa currentColor a propósito: el mismo archivo sirve en rojo sobre papel
+     y en blanco sobre la banda de marca, sin duplicar el asset. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+     stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-label="Farma Precios EC">
+  <path d="M40 10 H18 A8 8 0 0 0 10 18 V46 A8 8 0 0 0 18 54 H46 A8 8 0 0 0 54 46 V31" />
+  <path d="M20 33 L30 43 L56 12" />
+</svg>

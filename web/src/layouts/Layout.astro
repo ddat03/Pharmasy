@@ -111,12 +111,37 @@ const esHome = Astro.url.pathname === "/";
     -->
   </head>
   <body>
+    {/* Misma franja de hechos que cierra la pagina, pero repetida arriba de
+        todo: lo primero que se ve al entrar, antes incluso del logo. */}
+    <div class="ticker ticker-top" aria-hidden="true">
+      <div class="ticker-track">
+        {
+          Array.from({ length: 2 }).map(() => (
+            <>
+              {hechos.map((hecho) => (
+                <>
+                  <span>{hecho}</span>
+                  <span class="ticker-dot">·</span>
+                </>
+              ))}
+            </>
+          ))
+        }
+      </div>
+    </div>
+
     <header class="site-header">
       <div class="header-bar">
         <a class="brand" href="/">
           <span class="brand-word">Farma Precios</span>
           <span class="brand-stamp">EC</span>
         </a>
+
+        {/* La fila quedaba vacia al lado del logo en toda pagina que no
+            fuera la home (donde no hay buscador de encabezado). Un tagline
+            corto le da peso sin competir por atencion -- se oculta en
+            movil, donde el espacio ya lo necesita el logo y el buscador. */}
+        <p class="brand-tagline">Comparador independiente de precios</p>
 
         {
           !esHome && (
@@ -215,9 +240,15 @@ const esHome = Astro.url.pathname === "/";
     --ink-muted: #57503f;
     --ink-faint: rgba(23, 22, 15, 0.2);
     --ink-faint-2: rgba(23, 22, 15, 0.08);
-    --stamp: #a6362a;
-    --stamp-dark: #7c271e;
-    --stamp-bg: #f3e2df;
+    /* Paleta de marca: pasa de rojo-ladrillo a azul petroleo profundo
+       (2026-09). El rojo se leia como "oferta/comercio" (el mismo tono que
+       usan las rebajas), que era justo la lectura que el usuario queria
+       evitar. El petroleo es una familia distinta de la del verde
+       "--deal" (mejor precio verificado) -- mas azulado, menos saturado --
+       para que las dos sigan siendo distinguibles entre si. */
+    --stamp: #244f59;
+    --stamp-dark: #16333a;
+    --stamp-bg: #dee9ea;
     --deal: #2f6b4f;
     --deal-dark: #1f4d38;
     --deal-bg: #e3ede6;
@@ -304,6 +335,12 @@ const esHome = Astro.url.pathname === "/";
     .ticker:hover .ticker-track {
       animation-play-state: paused;
     }
+    /* El ticker de arriba corre desfasado del de abajo: si los dos
+       arrancaran en el mismo punto se verian como un espejo mecanico
+       cuando ambos caben en pantalla a la vez. */
+    .ticker-top .ticker-track {
+      animation-delay: -16s;
+    }
   }
   @keyframes ticker-scroll {
     from {
@@ -338,7 +375,6 @@ const esHome = Astro.url.pathname === "/";
     align-items: center;
     gap: 0.55rem;
     text-decoration: none;
-    margin-right: auto;
   }
   .brand-word {
     font-size: 1.3rem;
@@ -356,6 +392,24 @@ const esHome = Astro.url.pathname === "/";
     border-radius: 3px;
     padding: 0.1rem 0.32rem;
     transform: rotate(-3deg);
+  }
+  /* Tagline junto al logo: llena la fila en las paginas sin buscador de
+     encabezado, con un separador de regla fina como en una factura. Se
+     empuja el resto (el buscador, si existe) al margin-right:auto de
+     este mismo elemento, no del logo, para que logo+tagline viajen juntos
+     pegados a la izquierda. */
+  .brand-tagline {
+    margin: 0 auto 0 0;
+    padding-left: 0.95rem;
+    border-left: 1px solid rgba(255, 253, 247, 0.3);
+    font-size: 0.82rem;
+    color: rgba(255, 253, 247, 0.78);
+    white-space: nowrap;
+  }
+  @media (max-width: 700px) {
+    .brand-tagline {
+      display: none;
+    }
   }
 
   /* Buscador de encabezado: sin el, alguien que llega a una pagina de
@@ -410,10 +464,16 @@ const esHome = Astro.url.pathname === "/";
   .cat-nav {
     background: var(--stamp-dark);
   }
+  /* El borde izquierdo se alinea con el logo (misma formula de padding que
+     usa .header-bar via su max-width+margin:auto centrado); el derecho ya
+     no esta limitado por --page-w, asi que la fila llega hasta el borde de
+     la ventana en vez de dejar un vacio despues del ultimo item en
+     pantallas anchas. */
   .cat-nav ul {
-    max-width: var(--page-w);
-    margin: 0 auto;
-    padding: 0 1.5rem;
+    max-width: none;
+    margin: 0;
+    padding-left: max(1.5rem, calc((100vw - var(--page-w)) / 2 + 1.5rem));
+    padding-right: 1.5rem;
     list-style: none;
     display: flex;
     gap: 1.25rem;
@@ -575,19 +635,36 @@ const esHome = Astro.url.pathname === "/";
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 0.9rem;
-    padding: 0.85rem 0;
+    padding: 0.85rem 0.75rem;
+    margin: 0 -0.75rem;
     border-bottom: 1px solid var(--ink-faint);
+    border-radius: 3px;
     position: relative;
+    transition:
+      background-color 140ms var(--ease-print),
+      box-shadow 140ms var(--ease-print);
   }
   .ledger-row:first-child {
     border-top: 1px solid var(--ink-faint);
   }
+  /* La fila entera reacciona al pasar el mouse, no solo el nombre: sin esto,
+     mover el cursor sobre el precio o el logo no daba ninguna señal de que
+     esa fila (y su boton "Ver en tienda") es la que esta en foco. */
+  .ledger-row:not(.is-cheapest):hover {
+    background-color: rgba(23, 22, 15, 0.035);
+  }
+  .ledger-row:hover .ledger-main h3 a,
+  .ledger-row:hover .ledger-main .ledger-name a {
+    border-bottom-color: var(--stamp);
+  }
   .ledger-row.is-cheapest {
     background: linear-gradient(90deg, var(--deal-bg), transparent 60%);
-    margin: 0 -0.75rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     border-radius: 3px;
+  }
+  .ledger-row.is-cheapest:hover {
+    box-shadow: inset 0 0 0 1px rgba(47, 107, 79, 0.25);
   }
   .ledger-mark {
     width: 34px;
@@ -598,6 +675,10 @@ const esHome = Astro.url.pathname === "/";
     padding: 5px;
     flex-shrink: 0;
     box-shadow: var(--shadow-sm);
+    transition: transform 140ms var(--ease-print);
+  }
+  .ledger-row:hover .ledger-mark {
+    transform: scale(1.06);
   }
   .ledger-mark img {
     width: 100%;
@@ -689,9 +770,16 @@ const esHome = Astro.url.pathname === "/";
     border-radius: 3px;
     text-decoration: none;
     letter-spacing: 0.01em;
+    transition:
+      background-color 140ms var(--ease-print),
+      transform 140ms var(--ease-print);
   }
   .ledger-cta:hover {
     background: var(--stamp-dark);
+    transform: translateY(-1px);
+  }
+  .ledger-cta:active {
+    transform: translateY(0);
   }
 
   /* En pantalla angosta la fila de tres columnas se rompe: `.ledger-main`

@@ -185,18 +185,13 @@ const structuredData = {
   <div class="med-layout">
     <div class="med-main">
 
-  {
-    techo != null && (
-      <div class="reg-line">
-        <span class="reg-label">Precio techo oficial · Consejo Nacional de Fijación de Precios (por unidad)</span>
-        <span class="reg-value">{formatPrice(techo)}</span>
-        <p class="reg-note">
-          Los precios de abajo son por presentación completa (caja/frasco) — no son directamente comparables contra
-          este valor todavía.
-        </p>
-      </div>
-    )
-  }
+  {/* El precio techo oficial se saco de aca (2026-09) a pedido del usuario:
+      un numero chico como "$0.15" al lado de precios de farmacia de "$1.40"
+      confundia -- la gente lo leia como "deberia costar esto" en vez de
+      "es por unidad, no por caja". El dato sigue disponible en la base
+      (drugs.precio_techo_usd) y explicado con contexto completo en /acerca;
+      solo se quito de esta pagina, que es adonde llega alguien que busco un
+      medicamento puntual y no el contexto regulatorio. */}
 
   <div class="tear" aria-hidden="true"></div>
 
@@ -406,37 +401,6 @@ const structuredData = {
     color: var(--ink-muted);
     margin: 0 0 0.5rem;
     font-size: 0.92rem;
-  }
-
-  .reg-line {
-    margin-top: 1rem;
-    border: 1px dashed var(--ink-faint);
-    border-radius: 3px;
-    padding: 0.75rem 0.95rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: baseline;
-    gap: 0.4rem 0.75rem;
-    background: var(--paper-raised);
-  }
-  .reg-label {
-    font-size: 0.72rem;
-    color: var(--ink-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-  .reg-value {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--stamp-dark);
-    font-variant-numeric: tabular-nums;
-  }
-  .reg-note {
-    grid-column: 1 / -1;
-    margin: 0.15rem 0 0;
-    font-size: 0.74rem;
-    color: var(--ink-muted);
   }
 
   .generic-note {

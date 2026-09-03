@@ -46,7 +46,17 @@ export async function searchProducts(term: string, limit = 30): Promise<LatestPr
   return supabaseGet<LatestPriceRow[]>("latest_prices", {
     select: LATEST_PRICE_COLUMNS,
     nombre_en_tienda: `ilike.*${term}*`,
-    order: "precio_usd.asc",
+    // Los precios por unidad suelta (Medicity los marca con precio_por_unidad
+    // = true) muestran numeros como "$0.08" que no son comparables contra el
+    // precio de caja de otra farmacia -- pero ordenar solo por precio los
+    // hacia flotar al tope y llenaban el LIMIT con una sola farmacia antes
+    // de que llegara ninguna comparacion real. `precio_por_unidad` es NULL
+    // en 2921 de los ~6000 productos (todo lo que no viene de Medicity), asi
+    // que hace falta `nullsfirst` explicito: sin eso, NULL se ordena AL
+    // FINAL por default en Postgres, quedando peor que `true`. Con
+    // nullsfirst, el orden real es: comparables (null o false) primero por
+    // precio, no-comparables (true) al final por precio.
+    order: "precio_por_unidad.asc.nullsfirst,precio_usd.asc",
     limit: String(limit),
   });
 }

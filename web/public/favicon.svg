@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="29" fill="#F7F3EA"/>
-  <circle cx="32" cy="32" r="26" fill="none" stroke="#A6362A" stroke-width="3"/>
-  <text x="32" y="42" font-family="IBM Plex Mono, monospace" font-size="30" font-weight="700"
-        fill="#A6362A" text-anchor="middle" transform="rotate(-4 32 32)">F</text>
+<!-- Favicon: la misma marca, con el color fijo (un favicon no hereda
+     currentColor) y sin margen, para que se lea a 16px en la pestaña. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none"
+     stroke="#244f59" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M40 10 H18 A8 8 0 0 0 10 18 V46 A8 8 0 0 0 18 54 H46 A8 8 0 0 0 54 46 V31" />
+  <path d="M20 33 L30 43 L56 12" />
 </svg>

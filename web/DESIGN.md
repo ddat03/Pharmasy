@@ -8,9 +8,9 @@ colors:
   ink: "#17160f"
   ink-muted: "#57503f"
   ink-faint: "rgba(23, 22, 15, 0.2)"
-  stamp: "#a6362a"
-  stamp-dark: "#7c271e"
-  stamp-bg: "#f3e2df"
+  stamp: "#244f59"
+  stamp-dark: "#16333a"
+  stamp-bg: "#dee9ea"
   deal: "#2f6b4f"
   deal-dark: "#1f4d38"
   deal-bg: "#e3ede6"
@@ -107,7 +107,7 @@ Confirmed visual anti-references: no rounded SaaS cards with soft drop shadows; 
 Warm, desaturated, paper-and-ink — one accent used with real restraint.
 
 ### Primary
-- **Sello Rojo / Stamp Red** (`#a6362a`, deep variant `#7c271e`, wash `#f3e2df`): the single accent. Used for the brand stamp badge, focus rings, link hover states, and the mono "EC" wordmark badge. Never used as a background fill for large areas.
+- **Petroleo / Deep Petrol Blue** (`#244f59`, deep variant `#16333a`, wash `#dee9ea`): the single accent. Was a brick red (`#a6362a`) until 2026-09 — changed because red read as "sale/e-commerce" to the product owner, the exact register the brand wants to avoid. Petrol blue keeps the same one-accent role: brand band, focus rings, link hover states, the mono "EC" wordmark badge, and price figures inside preview cards. A warm gold (`#dcae5c`) is used only as the em-accent inside the hero headline on the colored band, where the deep blue background needs a warm counterpoint rather than another cool tone.
 
 ### Secondary
 - **Verde Trato / Deal Green** (`#2f6b4f`, deep variant `#1f4d38`, wash `#e3ede6`): reserved exclusively for "this is the best price here" signals — the "Mejor precio" stamp badge and the generic-drug (GEN) tag. Its meaning is fixed: green only ever means a validated best-price or generic-equivalence signal, never decoration.
@@ -122,7 +122,7 @@ Warm, desaturated, paper-and-ink — one accent used with real restraint.
 - **Tinta Fantasma / Faint Ink** (`rgba(23,22,15,0.2)`): all hairline borders and dividers. **Never used as a text color** — at 20% opacity it disappears. The search placeholder used to be set in this token and was effectively invisible.
 
 ### Named Rules
-**The One Stamp Rule.** Stamp red never fills a background larger than a badge or a border. If red is covering more than a small mark, it's being used wrong.
+**The One Stamp Rule (revised).** The accent's original rule ("never fills a background larger than a badge") no longer holds since the header/footer became a full-width brand band — that was a deliberate later decision, documented in Layout section below, not a violation. What still holds: outside the brand band and its cards, the accent stays a small mark (focus rings, links, badges), never a large fill on the paper background itself.
 
 **The Green-Means-Verified Rule.** Deal green only appears next to a claim the data actually supports (lowest price within a genuinely comparable set, or a confirmed generic). It never decorates.
 
@@ -182,23 +182,26 @@ Pill-shaped, `--deal` green background, uppercase Plex Mono label ("Mejor precio
 ### Regulation Line (precio techo)
 A dashed-border box, separate from the ledger, always labeled "Precio techo oficial · Consejo Nacional de Fijación de Precios (por unidad)" with an explicit note that it is not directly comparable to the presentation prices below it. This component exists specifically so official/regulatory data is never visually or numerically merged with scraped farmacia prices — see [[Precio techo]] in the project bitácora for why that separation is non-negotiable.
 
-### Hero (home only)
-Headline at `typography.hero` — the one place the type scale goes to display scale — with the third line set in `--stamp`. Beside it on `>=900px` sits the **hero-meta** block: a `<dl>` of hairline rows (Medicamentos / Principios activos / Cadenas / Actualizado), right-aligned values in Plex Mono. It is the invoice's own upper-right metadata block, and it exists so the first viewport is answered by real data instead of white space.
+### Hero (home only, revised 2026-09)
+No longer a paper hero with a metadata sidebar. It is now a two-column band in `--stamp`: left is the headline ("Buscá. Comparás. **Ahorrás.**", the em set in warm gold `#dcae5c` since blue-on-blue had no contrast left to give) plus a one-line subhead with the live product count; right is a context photo (never a medicine box close enough to read — ARCSA restricts that) with a **floating example card** overlapping its bottom edge (`margin-bottom: -2.4rem` on `>=860px`), showing one real medicamento's price across up to three pharmacies, deduped by pharmacy so it can never show the same chain twice at different prices (that bug shipped once and was caught in review, not by luck). Below the band, outside it, sits the search field — a full-width pill, not the old bare-underline field — so it stays visible when `.hero-d` hides during an active search.
 
-### Freshness Stamp (global header)
-Green dot plus "Precios del <fecha>" in Plex Mono, top-right of every page, fed by the newest `price_snapshots.fecha`. Non-negotiable: a price comparator that does not say *when* looks identical whether its data is from today or from three weeks ago. If the query fails the element is omitted — never a guessed date.
+### Freshness (footer, not header)
+Moved out of the header (2026-09): it competed with the search bar and nav for first-glance attention. Now a plain line in `--ink-muted` at the top of the footer — "Precios actualizados el <fecha>" — still fed by the newest `price_snapshots.fecha`, still omitted rather than guessed if the query fails. The per-row staleness label (`.ledger-stale`, "precio del 5 de agosto") on comparison pages is the mechanism that actually protects against showing an old price as current; the header stamp was decoration on top of that, not the safeguard itself.
 
 ### Category Row
-Categories are **ledger rows, not tiles**: a `auto 1fr auto` grid (icon in the category colour, name, count in Plex Mono) with a hairline under each, flowed into an `auto-fill` grid of ~255px columns. The earlier pastel rounded tiles violated this system's own No-Card Rule and were the main reason the home read as two visual languages arguing.
+Categories are **ledger rows, not tiles**: a `auto 1fr auto` grid (icon in the category colour, name, count in Plex Mono) with a hairline under each, flowed into an `auto-fill` grid of ~240px columns. The earlier pastel rounded tiles violated this system's own No-Card Rule and were the main reason the home read as two visual languages arguing.
+
+### Preview Carousel (hover, never click)
+Every category row and every marca row carries a hidden panel (`position: absolute; top: 100%`, clipped to the row's own column width so it can never overflow the viewport) that reveals a horizontal strip of real products — name, price — ending in a `Ver todo →` card in `--stamp`. It never triggers on click, only on `:hover`/`:focus-within`; the row's own click target still goes straight to the full category or marca page, unchanged. The slide distance is measured in JS per-row (`preview-carousel.ts`), not approximated in CSS, because each category or marca has a different number of products and a fixed-percentage keyframe would over- or under-shoot depending on the case. Respects `prefers-reduced-motion` by jumping straight to the end state instead of animating.
 
 ### Chips
-Búsquedas-frecuentes chips: `--paper-raised` background, `1px solid --ink-faint` border, `3px` radius, hover shifts border and text to `--stamp`/`--stamp-dark`.
+Búsquedas-frecuentes chips: `--paper-raised` background, `1px solid --ink-faint` border, `3px` radius, hover shifts border and text to `--stamp`/`--stamp-dark`, plus a small lift (`translateY(-1px)`) and soft shadow.
 
-### Search Field
-No pill, no rounded input box — a bare underline (`2px solid var(--ink)`) beneath a mono field label, echoing a factura's ruled fill-in line rather than a search-engine search box.
+### Search Field (revised 2026-09)
+A full-width pill (`border-radius: 999px`), not the bare-underline field from the original factura direction — the underline read as too quiet once the search field had to work as the hero's main call to action rather than a quiet detail beneath a headline. `--paper-raised` background, hairline border that shifts to `--stamp` on focus, a solid `Comparar` button in `--ink` on the trailing edge.
 
-### Navigation / Header
-Wordmark ("Farma Precios") in Plex Sans 700 next to a rotated mono "EC" stamp badge outlined in stamp red. No nav menu — the product is single-purpose (search), so there is nothing to navigate to beyond the logo-as-home-link.
+### Navigation / Header (revised 2026-09)
+Two-row brand band: top row is the wordmark plus the rotated mono "EC" stamp badge, a hairline-divided tagline ("Comparador independiente de precios", hidden below 700px), and — on every page except the home, where the hero's own search field already owns that job — a compact header search field. Second row, one shade darker (`--stamp-dark`), is the categories nav: it no longer stops at `--page-w` on its right edge, only its left edge is pinned to that measure (matching the wordmark above it) — the row itself runs to the true edge of the viewport, same principle as the wide-page decision below. A duplicate of the footer's fact ticker runs above the whole band, offset in its loop timing from the footer copy so the two never look like a synchronized mirror when both are in view.
 
 ## Do's and Don'ts
 

@@ -32,9 +32,31 @@ const totalProductos = drugs.length;
 const totalPrincipios = seenPrincipios.size;
 const categoriasPopulares = Array.from(seenPrincipios.entries()).slice(0, 10);
 
-const categoriasConDatos = CATEGORIAS.map((c) => ({ ...c, count: byCategoria.get(c.slug)?.length ?? 0 })).filter(
-  (c) => c.count > 0,
-);
+// Vista previa por categoria: hasta 8 medicamentos distintos con su precio
+// mas bajo comparable (mismo criterio de siempre: nunca por unidad suelta),
+// para el carrusel que se despliega al pasar el mouse. Sin esto habria que
+// cargar el catalogo completo en el cliente solo para mostrar un adelanto.
+type PreviewItem = { nombre: string; precio: number; slug: string };
+
+function previewDeCategoria(categoriaSlug: string): PreviewItem[] {
+  const enCategoria = byCategoria.get(categoriaSlug) ?? [];
+  return enCategoria
+    .map((d) => {
+      const prices = (pricesByDrug.get(d.id) ?? []).filter((p) => p.precio_usd != null && !p.precio_por_unidad);
+      if (prices.length === 0) return null;
+      const min = prices.reduce((a, b) => ((b.precio_usd as number) < (a.precio_usd as number) ? b : a));
+      return { nombre: [d.principio_activo, d.concentracion].filter(Boolean).join(" "), precio: min.precio_usd as number, slug: d.slug };
+    })
+    .filter((x): x is PreviewItem => x !== null)
+    .sort((a, b) => a.precio - b.precio)
+    .slice(0, 8);
+}
+
+const categoriasConDatos = CATEGORIAS.map((c) => ({
+  ...c,
+  count: byCategoria.get(c.slug)?.length ?? 0,
+  preview: previewDeCategoria(c.slug),
+})).filter((c) => c.count > 0);
 
 // Hasta 3 medicamentos con el precio más bajo por categoría (nunca por
 // unidad — mismo criterio que en medicamento/principio): una vitrina de
@@ -72,6 +94,45 @@ for (const cat of CATEGORIAS) {
   }
 }
 
+type FilaDestacada = { pharmacy: string; precio: number };
+type Destacado = { nombre: string; slug: string; filas: FilaDestacada[] };
+
+// El medicamento con mas farmacias comparables (nunca por unidad, mismo
+// criterio que el resto del sitio) es el que mejor demuestra en un vistazo
+// que hay algo real para comparar -- no una foto de stock, un precio real.
+let destacado: Destacado | null = null;
+{
+  let mejor: { drug: (typeof drugs)[number]; filas: FilaDestacada[]; cadenas: number } | null = null;
+  for (const d of drugs) {
+    // Una fila por farmacia (la mas barata de esa cadena para este
+    // medicamento) -- sin este agrupamiento, un medicamento con dos cajas
+    // distintas en la misma cadena mostraba esa cadena dos veces en la
+    // tarjeta (visto en vivo: "Pharmacys $2.60" y "Pharmacys $12.00" juntas,
+    // exactamente la comparacion enganosa que el sitio se niega a mostrar).
+    const porCadena = new Map<string, number>();
+    for (const p of pricesByDrug.get(d.id) ?? []) {
+      if (p.precio_usd == null || p.precio_por_unidad) continue;
+      const actual = porCadena.get(p.pharmacy);
+      if (actual == null || p.precio_usd < actual) porCadena.set(p.pharmacy, p.precio_usd);
+    }
+    if (porCadena.size < 3) continue;
+    const filas = Array.from(porCadena.entries())
+      .sort((a, b) => a[1] - b[1])
+      .slice(0, 3)
+      .map(([pharmacy, precio]) => ({ pharmacy: PHARMACY_LABELS[pharmacy] ?? pharmacy, precio }));
+    if (!mejor || porCadena.size > mejor.cadenas) {
+      mejor = { drug: d, filas, cadenas: porCadena.size };
+    }
+  }
+  if (mejor) {
+    destacado = {
+      nombre: [mejor.drug.principio_activo, mejor.drug.concentracion].filter(Boolean).join(" "),
+      slug: mejor.drug.slug,
+      filas: mejor.filas,
+    };
+  }
+}
+
 function formatPriceStatic(value: number): string {
   const [whole, cents] = value.toFixed(2).split(".");
   return `$${whole}.${cents}`;
@@ -82,56 +143,56 @@ function formatPriceStatic(value: number): string {
   title="Farma Precios Ecuador — Comparador de precios de medicamentos"
   description="Compara precios de medicamentos en Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. El precio tal cual aparece en cada tienda, sin cálculos."
 >
+  <section class="hero-d">
+    <div class="hero-d-txt">
+      <span class="hero-chip">
+        <span class="hero-chip-dot" aria-hidden="true"></span>
+        Independiente y gratis
+      </span>
+      <h1 class="hero-title">
+        Buscá.<br />Comparás.<br /><em>Ahorrás.</em>
+      </h1>
+      <p class="hero-sub">
+        Compará el precio de {totalProductos} medicamentos en las cinco cadenas más grandes del Ecuador
+        {resumen.fecha && <> — actualizado el {formatFechaLarga(resumen.fecha)}</>}.
+      </p>
+    </div>
+
+    {/* La foto de contexto (nunca un medicamento identificable, ARCSA
+        prohíbe mostrarlos) con la tarjeta de un medicamento real flotando
+        encima, como apoyada en el mostrador de la propia foto: demuestra
+        en un vistazo que hay algo real para comparar, no una promesa. */}
+    <div class="hero-d-foto">
+      {
+        destacado && (
+          <a class="hero-card" href={`/medicamento/${destacado.slug}/`}>
+            <p class="hero-card-cab">Ejemplo real · hoy</p>
+            <h2 class="hero-card-nombre">{destacado.nombre}</h2>
+            {destacado.filas.map((f, i) => (
+              <div class={`hero-card-fila ${i === 0 ? "best" : ""}`}>
+                <span>{f.pharmacy}</span>
+                <span class="p">{formatPriceStatic(f.precio)}</span>
+              </div>
+            ))}
+          </a>
+        )
+      }
+    </div>
+  </section>
+
   <div class="col">
-    <section class="receipt-head">
-      <div class="hero-main">
-        <h1 class="hero-title">
-          La misma pastilla<br />no cuesta lo mismo<br /><em>en cada farmacia.</em>
-        </h1>
-        <p class="hero-sub prose">
-          Busca tu medicamento y compara lo que cobra hoy cada una de las cinco cadenas más grandes del Ecuador. El
-          precio que ves es el que publica la farmacia: no lo calculamos ni lo estimamos.
-        </p>
-
-        <p class="field-label">Buscar medicamento</p>
-        <div class="search-box">
-          <input
-            id="search-input"
-            type="search"
-            placeholder="Ej. Losartan, Metformina, Paracetamol..."
-            autocomplete="off"
-            autofocus
-          />
-        </div>
+    <div class="hero-d-busca">
+      <div class="search-box">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Buscá tu medicamento… ej. Losartán, Metformina, Paracetamol"
+          autocomplete="off"
+          autofocus
+        />
+        <button type="button" class="search-box-btn" aria-label="Comparar">Comparar</button>
       </div>
-
-      {/* Recuadro de datos arriba a la derecha, como el bloque de N.º y
-          fecha de una factura real: llena el vacío del hero con la única
-          cosa que corresponde ahí, que es de qué está hecha esta edición. */}
-      <aside class="hero-meta">
-        <p class="field-label">Esta edición</p>
-        <dl>
-          <div>
-            <dt>Medicamentos</dt>
-            <dd class="odometer roll-in">{totalProductos}</dd>
-          </div>
-          <div>
-            <dt>Principios activos</dt>
-            <dd class="odometer roll-in">{totalPrincipios}</dd>
-          </div>
-          <div>
-            <dt>Cadenas</dt>
-            <dd>5</dd>
-          </div>
-          {resumen.fecha && (
-            <div>
-              <dt>Actualizado</dt>
-              <dd class="is-date">{formatFechaLarga(resumen.fecha)}</dd>
-            </div>
-          )}
-        </dl>
-      </aside>
-    </section>
+    </div>
 
     {/* Los resultados van pegados al buscador, no al final de la pagina. */}
     <section id="search-panel" class="search-panel" hidden>
@@ -149,15 +210,36 @@ function formatPriceStatic(value: number): string {
         <p class="field-label section-label">Categorías</p>
         <div class="category-grid">
           {categoriasConDatos.map((c, i) => (
-            <a
-              class="category-row"
-              href={`/categoria/${c.slug}`}
-              style={`--cat-color:${c.color};animation-delay:${Math.min(i * 55, 380)}ms`}
-            >
-              <CategoryIcon name={c.icon} />
-              <span class="category-name">{c.nombre}</span>
-              <span class="category-count">{c.count}</span>
-            </a>
+            <div class="category-item">
+              <a
+                class="category-row"
+                href={`/categoria/${c.slug}`}
+                style={`--cat-color:${c.color};animation-delay:${Math.min(i * 55, 380)}ms`}
+              >
+                <CategoryIcon name={c.icon} />
+                <span class="category-name">{c.nombre}</span>
+                <span class="category-count">{c.count}</span>
+              </a>
+              {/* Al pasar el mouse (nunca al click, que sigue yendo directo
+                  a la categoria via .category-row) se desliza un adelanto
+                  de productos reales, terminando en "Ver todo" -- misma
+                  categoria a la que ya lleva el click en el nombre. */}
+              {c.preview.length > 0 && (
+                <div class="category-preview" data-preview>
+                  <div class="category-preview-track" data-preview-track>
+                    {c.preview.map((item) => (
+                      <a class="cp-item" href={`/medicamento/${item.slug}/`}>
+                        <span class="cp-nombre">{item.nombre}</span>
+                        <span class="cp-precio">{formatPriceStatic(item.precio)}</span>
+                      </a>
+                    ))}
+                    <a class="cp-vermas" href={`/categoria/${c.slug}/`}>
+                      Ver todo <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </section>
@@ -207,72 +289,193 @@ function formatPriceStatic(value: number): string {
 </Layout>
 
 <style>
-  .receipt-head {
-    padding-top: 0.5rem;
+  /* ---------- hero: panel de marca + foto + tarjeta flotante ---------- */
+  .hero-d {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--stamp);
   }
-  @media (min-width: 900px) {
-    .receipt-head {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 260px;
-      gap: 0 4rem;
-      align-items: start;
+  @media (min-width: 860px) {
+    .hero-d {
+      grid-template-columns: 1fr 1fr;
+      min-height: 400px;
     }
   }
-  .hero-meta {
-    margin: 2rem 0 0;
-  }
-  @media (min-width: 900px) {
-    .hero-meta {
-      margin-top: 0.65rem;
-    }
-  }
-  .hero-meta dl {
-    margin: 0;
-    border-top: 1px solid var(--ink-faint);
-  }
-  .hero-meta dl > div {
+  .hero-d-txt {
+    color: var(--paper-raised);
+    padding: 2.75rem 1.5rem 2.25rem;
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.5rem 0.1rem;
-    border-bottom: 1px solid var(--ink-faint);
+    flex-direction: column;
+    justify-content: center;
   }
-  .hero-meta dt {
-    font-size: 0.78rem;
-    color: var(--ink-muted);
+  @media (min-width: 860px) {
+    .hero-d-txt {
+      padding: 3rem calc((100% - var(--page-w) + 3rem) / 2) 3rem 1.5rem;
+      padding-left: max(1.5rem, calc((100vw - var(--page-w)) / 2 + 1.5rem));
+    }
   }
-  .hero-meta dd {
-    margin: 0;
+  .hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    align-self: flex-start;
+    border: 1px solid rgba(255, 253, 247, 0.45);
+    border-radius: 999px;
+    padding: 0.3rem 0.8rem 0.3rem 0.65rem;
     font-family: var(--font-mono);
-    font-size: 0.88rem;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.1rem;
   }
-  .hero-meta dd.is-date {
-    font-size: 0.78rem;
-    color: var(--deal-dark);
+  .hero-chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8fd3ac;
   }
   /* El titular es el unico lugar donde la tipografia sube a escala de
      display: es lo que faltaba para que la primera pantalla diga algo en
      vez de ofrecer un campo de busqueda desnudo. */
   .hero-title {
     margin: 0 0 1rem;
-    font-size: clamp(2.1rem, 5.4vw, 3.35rem);
+    font-size: clamp(2.1rem, 5.4vw, 3.1rem);
     font-weight: 700;
-    line-height: 1.04;
+    line-height: 1.05;
     letter-spacing: -0.032em;
-    text-wrap: balance;
+    color: var(--paper-raised);
   }
   .hero-title em {
+    /* Dorado calido sobre el azul petroleo: la combinacion clasica de
+       "confianza + calidez" en vez del rosa salmon pensado para el rojo
+       viejo, que quedaba apagado contra el azul nuevo. */
     font-style: normal;
-    color: var(--stamp);
+    color: #dcae5c;
   }
   .hero-sub {
-    margin: 0 0 2.25rem;
+    margin: 0;
+    max-width: 42ch;
     font-size: 1rem;
     line-height: 1.6;
+    color: rgba(255, 253, 247, 0.86);
+  }
+  .hero-d-foto {
+    position: relative;
+    background: url("/farmacia.webp") center/cover;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    min-height: 220px;
+  }
+  .hero-card {
+    display: block;
+    width: 100%;
+    background: var(--paper-raised);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem 1.25rem;
+    box-shadow: 0 14px 36px rgba(23, 22, 15, 0.24);
+    text-decoration: none;
+    color: var(--ink);
+    transition:
+      transform 180ms var(--ease-print),
+      box-shadow 180ms var(--ease-print);
+  }
+  @media (min-width: 860px) {
+    .hero-card {
+      margin-bottom: -2.4rem;
+    }
+  }
+  .hero-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 44px rgba(23, 22, 15, 0.3);
+  }
+  .hero-card-cab {
+    margin: 0 0 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--ink-muted);
+  }
+  .hero-card-nombre {
+    margin: 0 0 0.7rem;
+    font-size: 1.02rem;
+    font-weight: 700;
+  }
+  .hero-card-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--ink-faint);
+    font-size: 0.88rem;
+  }
+  .hero-card-fila .p {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-card-fila.best {
+    color: var(--deal-dark);
+    font-weight: 600;
+  }
+  .hero-card-fila.best .p {
+    color: var(--deal-dark);
+  }
+
+  /* ---------- buscador: pildora ancha, separada del hero ---------- */
+  .hero-d-busca {
+    margin: 2.75rem 0 0;
+  }
+  @media (min-width: 860px) {
+    .hero-d-busca {
+      margin-top: 3.25rem;
+    }
+  }
+  .search-box {
+    display: flex;
+    align-items: stretch;
+    background: var(--paper-raised);
+    border-radius: 999px;
+    border: 1px solid var(--ink-faint);
+    box-shadow: 0 2px 12px rgba(23, 22, 15, 0.08);
+    overflow: hidden;
+    transition:
+      border-color 160ms var(--ease-print),
+      box-shadow 160ms var(--ease-print);
+  }
+  .search-box:focus-within {
+    border-color: var(--stamp);
+    box-shadow: 0 4px 18px rgba(166, 54, 42, 0.18);
+  }
+  #search-input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    padding: 1rem 1.4rem;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: var(--ink);
+  }
+  #search-input::placeholder {
+    color: var(--ink-muted);
+    opacity: 0.75;
+  }
+  .search-box-btn {
+    flex-shrink: 0;
+    border: none;
+    background: var(--ink);
+    color: var(--paper-raised);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 0 1.9rem;
+    cursor: pointer;
+    transition: background-color 140ms var(--ease-print);
+  }
+  .search-box-btn:hover {
+    background: var(--stamp-dark);
   }
   .field-label {
     font-family: var(--font-mono);
@@ -282,33 +485,7 @@ function formatPriceStatic(value: number): string {
     color: var(--ink-muted);
     margin: 0 0 0.4rem;
   }
-  .search-box {
-    position: relative;
-    border-bottom: 2.5px solid var(--ink);
-    padding-bottom: 0.55rem;
-    transition: border-color 160ms var(--ease-print);
-  }
-  .search-box:focus-within {
-    border-bottom-color: var(--stamp);
-  }
-  #search-input {
-    width: 100%;
-    font-family: var(--font-sans);
-    font-size: 1.3rem;
-    font-weight: 500;
-    padding: 0.3rem 0;
-    border: none;
-    background: transparent;
-    outline: none;
-    color: var(--ink);
-  }
-  #search-input::placeholder {
-    /* Antes usaba --ink-faint, que es el token de las reglas de 1px: como
-       texto quedaba practicamente invisible sobre el papel. */
-    color: var(--ink-muted);
-    opacity: 0.75;
-    font-weight: 400;
-  }
+
   /* ---------- categorías: filas de índice, no tarjetas ---------- */
   .categories-section {
     margin-top: 3rem;
@@ -324,20 +501,30 @@ function formatPriceStatic(value: number): string {
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 0.7rem;
-    padding: 0.8rem 0.15rem;
+    padding: 0.8rem 0.65rem;
+    margin: 0 -0.65rem;
+    border-radius: 3px;
     border-bottom: 1px solid var(--ink-faint);
     text-decoration: none;
     color: var(--ink);
+    transition: background-color 140ms var(--ease-print);
   }
   @media (prefers-reduced-motion: no-preference) {
     .category-row {
       animation: print-in 380ms var(--ease-print) backwards;
     }
   }
+  .category-row:hover {
+    background-color: rgba(23, 22, 15, 0.035);
+  }
   .category-row :global(svg) {
     width: 20px;
     height: 20px;
     stroke: var(--cat-color);
+    transition: transform 140ms var(--ease-print);
+  }
+  .category-row:hover :global(svg) {
+    transform: scale(1.12);
   }
   .category-name {
     font-weight: 600;
@@ -352,6 +539,97 @@ function formatPriceStatic(value: number): string {
     font-size: 0.78rem;
     color: var(--ink-muted);
     font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- adelanto al pasar el mouse: nunca al click ---------- */
+  .category-item {
+    position: relative;
+  }
+  .category-preview {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 6;
+    overflow: hidden;
+    background: var(--paper-raised);
+    border: 1px solid var(--ink-faint);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 14px 28px rgba(23, 22, 15, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms var(--ease-print);
+    pointer-events: none;
+  }
+  .category-item:hover .category-preview,
+  .category-item:focus-within .category-preview {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .category-preview-track {
+    display: flex;
+    width: max-content;
+    /* La duracion la fija el JS segun cuanto haya que recorrer, para que la
+       velocidad se sienta pareja sin importar si la categoria tiene 3 o 8
+       productos -- ver el script mas abajo. */
+    transition: transform 1200ms var(--ease-print);
+  }
+  .cp-item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    width: 132px;
+    padding: 0.6rem 0.7rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--ink-faint);
+    transition: background-color 120ms var(--ease-print);
+  }
+  .cp-item:hover {
+    background-color: rgba(23, 22, 15, 0.04);
+  }
+  .cp-nombre {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .cp-precio {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--stamp);
+    font-variant-numeric: tabular-nums;
+  }
+  .cp-vermas {
+    flex: 0 0 auto;
+    width: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--paper-raised);
+    background: var(--stamp);
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 140ms var(--ease-print);
+  }
+  .cp-vermas:hover {
+    background: var(--stamp-dark);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .category-preview-track {
+      transition: none;
+    }
   }
 
   /* ---------- los más baratos: mismo libro mayor, en tres columnas ---------- */
@@ -373,10 +651,16 @@ function formatPriceStatic(value: number): string {
     align-items: baseline;
     column-gap: 0.9rem;
     row-gap: 0.15rem;
-    padding: 0.75rem 0.15rem;
+    padding: 0.75rem 0.65rem;
+    margin: 0 -0.65rem;
+    border-radius: 3px;
     border-bottom: 1px solid var(--ink-faint);
     text-decoration: none;
     color: var(--ink);
+    transition: background-color 140ms var(--ease-print);
+  }
+  .lowest-row:hover {
+    background-color: rgba(23, 22, 15, 0.035);
   }
   @media (prefers-reduced-motion: no-preference) {
     .lowest-row {
@@ -435,10 +719,17 @@ function formatPriceStatic(value: number): string {
     padding: 0.4rem 0.8rem;
     border-radius: 3px;
     text-decoration: none;
+    transition:
+      border-color 140ms var(--ease-print),
+      color 140ms var(--ease-print),
+      transform 140ms var(--ease-print),
+      box-shadow 140ms var(--ease-print);
   }
   .chip:hover {
     border-color: var(--stamp);
     color: var(--stamp-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(23, 22, 15, 0.08);
   }
 
   .normalizer-note {
@@ -453,20 +744,27 @@ function formatPriceStatic(value: number): string {
   /* Mientras hay una busqueda en curso, las secciones de exploracion se
      ocultan: son para cuando no sabes que buscar, y con resultados en
      pantalla solo empujan lo que importa fuera de la vista. */
+  /* El buscador vive fuera de .hero-d a proposito (ver el markup): asi
+     sigue visible aunque el panel de color se oculte durante una busqueda. */
   :global(body.buscando) .categories-section,
   :global(body.buscando) .lowest-section,
   :global(body.buscando) .chips-section,
-  :global(body.buscando) .hero-title,
-  :global(body.buscando) .hero-sub,
-  :global(body.buscando) .hero-meta {
+  :global(body.buscando) .hero-d {
     display: none;
+  }
+  :global(body.buscando) .hero-d-busca {
+    margin-top: 0;
   }
 </style>
 
 <script>
   import { searchProducts, PHARMACY_LABELS, PHARMACY_LOGOS, type LatestPriceRow } from "../lib/supabase";
+  import { activarCarruselesPreview } from "../lib/preview-carousel";
+
+  activarCarruselesPreview(".category-item");
 
   const input = document.getElementById("search-input") as HTMLInputElement;
+  const boton = document.querySelector(".search-box-btn") as HTMLButtonElement | null;
   const results = document.getElementById("results") as HTMLDivElement;
   const panel = document.getElementById("search-panel") as HTMLElement;
 
@@ -587,6 +885,13 @@ function formatPriceStatic(value: number): string {
     e.preventDefault();
     clearTimeout(debounceTimer);
     input.blur();
+    runSearch(input.value);
+  });
+
+  // El boton "Comparar" del hero dispara lo mismo que Enter: mismo flujo,
+  // sin duplicar la logica de busqueda.
+  boton?.addEventListener("click", () => {
+    clearTimeout(debounceTimer);
     runSearch(input.value);
   });
 

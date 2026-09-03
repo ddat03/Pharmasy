@@ -13,6 +13,17 @@ function formatPrice(value: number | null): string {
   const [whole, cents] = value.toFixed(2).split(".");
   return `$${whole}.${cents}`;
 }
+
+// Adelanto al pasar el mouse: hasta 6 presentaciones reales de la marca
+// (getMarcas() ya las deja ordenadas por precio). No hay pagina individual
+// por producto, asi que cada item del adelanto lleva a la misma pagina de
+// la marca que el "Ver todo" -- es informativo, no un destino distinto.
+function previewDeMarca(m: (typeof marcas)[number]) {
+  return m.productos.slice(0, 6).map((p) => ({
+    nombre: p.nombre_en_tienda ?? m.nombre,
+    precio: p.precio_usd,
+  }));
+}
 ---
 
 <Layout
@@ -33,13 +44,28 @@ function formatPrice(value: number | null): string {
           <p class="field-label">En más de una farmacia · {comparables.length} marcas</p>
           <div class="grid">
             {comparables.map((m) => (
-              <a class="fila" href={`/marca/${m.slug}/`}>
-                <span class="nombre">{m.nombre}</span>
-                <span class="meta">
-                  <span class="cadenas">{m.cadenas.length} cadenas</span>
-                  {m.desde != null && <span class="precio">desde {formatPrice(m.desde)}</span>}
-                </span>
-              </a>
+              <div class="marca-item">
+                <a class="fila" href={`/marca/${m.slug}/`}>
+                  <span class="nombre">{m.nombre}</span>
+                  <span class="meta">
+                    <span class="cadenas">{m.cadenas.length} cadenas</span>
+                    {m.desde != null && <span class="precio">desde {formatPrice(m.desde)}</span>}
+                  </span>
+                </a>
+                <div class="category-preview" data-preview>
+                  <div class="category-preview-track" data-preview-track>
+                    {previewDeMarca(m).map((item) => (
+                      <a class="cp-item" href={`/marca/${m.slug}/`}>
+                        <span class="cp-nombre">{item.nombre}</span>
+                        <span class="cp-precio">{formatPrice(item.precio)}</span>
+                      </a>
+                    ))}
+                    <a class="cp-vermas" href={`/marca/${m.slug}/`}>
+                      Ver todo <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </section>
@@ -52,12 +78,27 @@ function formatPrice(value: number | null): string {
           <p class="field-label">En una sola farmacia · {unaSola.length} marcas</p>
           <div class="grid">
             {unaSola.map((m) => (
-              <a class="fila" href={`/marca/${m.slug}/`}>
-                <span class="nombre">{m.nombre}</span>
-                <span class="meta">
-                  {m.desde != null && <span class="precio">desde {formatPrice(m.desde)}</span>}
-                </span>
-              </a>
+              <div class="marca-item">
+                <a class="fila" href={`/marca/${m.slug}/`}>
+                  <span class="nombre">{m.nombre}</span>
+                  <span class="meta">
+                    {m.desde != null && <span class="precio">desde {formatPrice(m.desde)}</span>}
+                  </span>
+                </a>
+                <div class="category-preview" data-preview>
+                  <div class="category-preview-track" data-preview-track>
+                    {previewDeMarca(m).map((item) => (
+                      <a class="cp-item" href={`/marca/${m.slug}/`}>
+                        <span class="cp-nombre">{item.nombre}</span>
+                        <span class="cp-precio">{formatPrice(item.precio)}</span>
+                      </a>
+                    ))}
+                    <a class="cp-vermas" href={`/marca/${m.slug}/`}>
+                      Ver todo <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </section>
@@ -96,6 +137,9 @@ function formatPrice(value: number | null): string {
     gap: 0 2.5rem;
     border-top: 1px solid var(--ink-faint);
   }
+  .marca-item {
+    position: relative;
+  }
   .fila {
     display: flex;
     align-items: baseline;
@@ -129,4 +173,94 @@ function formatPrice(value: number | null): string {
   .precio {
     color: var(--ink-muted);
   }
+
+  /* ---------- adelanto al pasar el mouse: mismo patron que en el inicio ---------- */
+  .category-preview {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 6;
+    overflow: hidden;
+    background: var(--paper-raised);
+    border: 1px solid var(--ink-faint);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 14px 28px rgba(23, 22, 15, 0.18);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 160ms var(--ease-print);
+    pointer-events: none;
+  }
+  .marca-item:hover .category-preview,
+  .marca-item:focus-within .category-preview {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .category-preview-track {
+    display: flex;
+    width: max-content;
+    transition: transform 1200ms var(--ease-print);
+  }
+  .cp-item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    width: 132px;
+    padding: 0.6rem 0.7rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--ink-faint);
+    transition: background-color 120ms var(--ease-print);
+  }
+  .cp-item:hover {
+    background-color: rgba(23, 22, 15, 0.04);
+  }
+  .cp-nombre {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .cp-precio {
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--stamp);
+    font-variant-numeric: tabular-nums;
+  }
+  .cp-vermas {
+    flex: 0 0 auto;
+    width: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--paper-raised);
+    background: var(--stamp);
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 140ms var(--ease-print);
+  }
+  .cp-vermas:hover {
+    background: var(--stamp-dark);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .category-preview-track {
+      transition: none;
+    }
+  }
 </style>
+
+<script>
+  import { activarCarruselesPreview } from "../lib/preview-carousel";
+  activarCarruselesPreview(".marca-item");
+</script>
