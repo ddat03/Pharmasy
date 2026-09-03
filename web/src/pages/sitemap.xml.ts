@@ -28,6 +28,8 @@ export async function GET() {
 
   const urls = [
     `${base}/`,
+    `${base}/acerca`,
+    `${base}/contacto`,
     `${base}/politica-de-privacidad`,
     ...CATEGORIAS.map((c) => `${base}/categoria/${c.slug}`),
     ...drugs.map((d) => `${base}/medicamento/${d.slug}`),

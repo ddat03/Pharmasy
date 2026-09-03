@@ -1,0 +1,167 @@
+---
+// Página de contacto. Sin formulario a propósito: el sitio es estático y no
+// tiene backend propio, y un formulario que no envía nada es peor que no
+// tenerlo. Los datos de contacto van directos y visibles.
+import Layout from "../layouts/Layout.astro";
+
+const EMAIL = "diegodavi0312@gmail.com";
+const TELEFONO = "0967056934";
+const TELEFONO_INTL = "593967056934";
+---
+
+<Layout
+  title="Contacto | Farma Precios Ecuador"
+  description="Escríbenos para reportar un precio equivocado, sugerir una farmacia o consultar sobre el proyecto."
+>
+  <div class="col">
+    <h1>Contacto</h1>
+
+    <div class="texto-layout">
+      <div class="texto-main">
+    <p class="lead prose">
+      Proyecto independiente, sin afiliación con ninguna cadena de farmacias ni con Rappi. Escribe por cualquiera
+      de estas vías.
+    </p>
+
+    <h2>Para qué escribir</h2>
+    <ul class="motivos">
+      <li>
+        <strong>Un precio está equivocado.</strong> Indica el medicamento y la farmacia. Se corrige en la
+        siguiente actualización.
+      </li>
+      <li>
+        <strong>Falta una cadena de farmacias.</strong> Antes de agregar una se revisa si su catálogo online
+        realmente cubre medicamentos; ya se descartó una por vender casi solo productos de conveniencia.
+      </li>
+      <li>
+        <strong>Eres una de las cadenas comparadas.</strong> Si algo de lo publicado sobre tu tienda es
+        incorrecto, o quieres que dejemos de mostrarla, escríbenos y se resuelve.
+      </li>
+    </ul>
+
+    <h2>Para qué no</h2>
+    <p class="prose">
+      Este sitio no da consejo médico ni responde consultas de salud. No podemos indicarte qué medicamento tomar,
+      en qué dosis, ni si uno puede reemplazar a otro. Para eso consulta a tu médico o farmacéutico.
+    </p>
+
+    <p class="prose ver-mas">
+      ¿Quieres saber de dónde salen los precios y cada cuánto se actualizan? Está explicado en
+      <a href="/acerca/">cómo funciona</a>.
+    </p>
+      </div>
+
+      <aside class="texto-aside">
+        <h2 class="aside-titulo">Escríbenos</h2>
+    <dl class="datos">
+      <div>
+        <dt>Correo</dt>
+        <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+      </div>
+      <div>
+        <dt>Teléfono / WhatsApp</dt>
+        <dd><a href={`https://wa.me/${TELEFONO_INTL}`} target="_blank" rel="noopener">{TELEFONO}</a></dd>
+      </div>
+      <div>
+        <dt>País</dt>
+        <dd>Ecuador</dd>
+      </div>
+    </dl>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Las paginas de texto mantienen la medida de lectura (62ch), pero en
+     pantalla ancha eso dejaba media pagina vacia. El bloque de cifras se
+     muda al costado — mismo recurso que el aside de la pagina de
+     medicamento y que el recuadro de datos del inicio. */
+  .texto-layout {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 1080px) {
+    .texto-layout {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 0 3.5rem;
+      align-items: start;
+    }
+    .texto-aside {
+      border-left: 1px solid var(--ink-faint);
+      padding-left: 3.5rem;
+      position: sticky;
+      top: 2rem;
+    }
+    .texto-aside h2 {
+      margin-top: 0;
+    }
+  }
+
+  .aside-titulo {
+    margin-top: 0;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .lead {
+    font-size: 1.02rem;
+    color: var(--ink-muted);
+  }
+  .datos {
+    max-width: 62ch;
+    margin: 1.5rem 0 0;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .datos > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0.1rem;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  .datos dt {
+    color: var(--ink-muted);
+    font-size: 0.88rem;
+  }
+  .datos dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+  }
+  .motivos {
+    max-width: 62ch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .motivos li {
+    padding: 0.65rem 0.1rem;
+    border-bottom: 1px solid var(--ink-faint);
+    line-height: 1.6;
+  }
+  .ver-mas {
+    margin-top: 2rem;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+  }
+  a {
+    color: var(--stamp);
+  }
+</style>

@@ -1,0 +1,213 @@
+---
+// Página "Acerca de". Requisito de hecho para AdSense, pero sobre todo es
+// donde se explica de dónde sale cada número — que es lo que separa a un
+// comparador confiable de una lista de precios sin origen.
+import Layout from "../layouts/Layout.astro";
+import { getResumen, formatFechaLarga, getAllDrugs } from "../lib/supabase";
+
+const [resumen, drugs] = await Promise.all([
+  getResumen().catch(() => ({ fecha: null, productosHoy: null, conPrecioTecho: null })),
+  getAllDrugs().catch(() => []),
+]);
+---
+
+<Layout
+  title="Cómo funciona Farma Precios Ecuador — de dónde salen los precios"
+  description="De dónde se obtienen los precios, cada cuánto se actualizan, y qué hace y qué no hace este comparador de medicamentos."
+>
+  <div class="col">
+    <h1>Cómo funciona</h1>
+
+    <div class="texto-layout">
+      <div class="texto-main">
+    <p class="lead prose">
+      Este sitio compara el precio de un mismo medicamento entre las cinco cadenas de farmacia más grandes del
+      Ecuador. Es un proyecto independiente: no pertenece a ninguna cadena, no vende medicamentos y no recibe pago
+      de las farmacias que compara.
+    </p>
+
+    <h2>De dónde salen los precios</h2>
+    <p class="prose">
+      De los catálogos públicos de cada cadena, leídos automáticamente todas las noches:
+    </p>
+    <ul class="fuentes">
+      <li><strong>Fybeca</strong> — página pública de búsqueda de su tienda</li>
+      <li><strong>Pharmacys</strong> — catálogo público de su tienda</li>
+      <li><strong>Medicity</strong> — catálogo público de su tienda</li>
+      <li><strong>Cruz Azul</strong> — catálogo público de su tienda</li>
+      <li><strong>Farmacias Económicas</strong> — su vitrina pública en Rappi</li>
+    </ul>
+
+    <h2>Cada cuánto se actualiza</h2>
+    <p class="prose">
+      Una vez al día, entre las 2:00 y las 4:00 de la mañana, hora de Ecuador. Cada cadena se consulta por
+      separado y a un ritmo lento y deliberado — una petición cada 5 a 10 segundos — para no cargar sus
+      servidores. Si una cadena falla, las otras se actualizan igual.
+    </p>
+    <p class="prose">
+      La fecha del último dato está siempre arriba, en el encabezado
+      {resumen.fecha && <> — hoy dice <strong>{formatFechaLarga(resumen.fecha)}</strong></>}. Cuando un producto
+      puntual no se pudo volver a confirmar ese día, su fila lo dice: aparece marcada con la fecha real de ese
+      precio, en vez de hacerla pasar por actual.
+    </p>
+
+    <h2>La regla que no se rompe</h2>
+    <p class="prose">
+      <strong>Nunca calculamos ni deducimos un precio.</strong> Se publica exactamente el número que muestra la
+      farmacia en su propia página. Si una cadena publica el precio por unidad suelta en vez de por la caja
+      completa, se rotula como tal y no se multiplica para «estimar» el precio de la caja. Un dato que no se
+      puede confirmar se deja vacío antes que inventarlo.
+    </p>
+    <p class="prose">
+      Por eso tampoco verás avisos de «sobreprecio»: el precio techo oficial que fija el Consejo Nacional de
+      Fijación de Precios es <em>por unidad</em>, y los precios de farmacia son por presentación completa. Se
+      muestran juntos, en líneas separadas, para que puedas mirarlos — nunca restados uno del otro, porque esa
+      comparación acusaría de sobreprecio a farmacias que en realidad cumplen.
+    </p>
+
+    <h2>Qué este sitio no hace</h2>
+    <ul class="limites">
+      <li>
+        <strong>No da consejo médico.</strong> Compara precios y disponibilidad. Ni sugiere tratamientos, ni dosis,
+        ni sustituir un medicamento por otro. Eso lo decide tu médico o tu farmacéutico.
+      </li>
+      <li>
+        <strong>No garantiza el precio final.</strong> Los precios cambian y pueden diferir de lo que cobra el
+        local físico. Verifica siempre antes de pagar.
+      </li>
+      <li>
+        <strong>No cubre todo el catálogo de cada cadena.</strong> De Farmacias Económicas solo se ve lo que
+        muestra su vitrina en Rappi, que es una parte de su inventario. Y ninguna cadena publica online todo lo
+        que vende en mostrador.
+      </li>
+      <li>
+        <strong>No agrupa todavía los genéricos equivalentes</strong> en la búsqueda libre. Para eso están las
+        páginas por principio activo, que sí reúnen las presentaciones equivalentes.
+      </li>
+    </ul>
+
+    <h2>Corrección de datos</h2>
+    <p class="prose">
+      Si encuentras un precio equivocado, escribe a <a href="/contacto/">contacto</a> indicando el medicamento y
+      la farmacia. Los errores se corrigen en la siguiente actualización.
+    </p>
+      </div>
+
+      <aside class="texto-aside">
+    <h2>Qué hay adentro</h2>
+    <dl class="cifras">
+      {drugs.length > 0 && (
+        <div>
+          <dt>Medicamentos en catálogo</dt>
+          <dd>{drugs.length}</dd>
+        </div>
+      )}
+      {resumen.productosHoy != null && (
+        <div>
+          <dt>Precios verificados en la última corrida</dt>
+          <dd>{resumen.productosHoy.toLocaleString("es-EC")}</dd>
+        </div>
+      )}
+      {resumen.conPrecioTecho != null && (
+        <div>
+          <dt>Con precio techo oficial cargado</dt>
+          <dd>{resumen.conPrecioTecho}</dd>
+        </div>
+      )}
+      <div>
+        <dt>Cadenas comparadas</dt>
+        <dd>5</dd>
+      </div>
+    </dl>
+      </aside>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Las paginas de texto mantienen la medida de lectura (62ch), pero en
+     pantalla ancha eso dejaba media pagina vacia. El bloque de cifras se
+     muda al costado — mismo recurso que el aside de la pagina de
+     medicamento y que el recuadro de datos del inicio. */
+  .texto-layout {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 1080px) {
+    .texto-layout {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 0 3.5rem;
+      align-items: start;
+    }
+    .texto-aside {
+      border-left: 1px solid var(--ink-faint);
+      padding-left: 3.5rem;
+      position: sticky;
+      top: 2rem;
+    }
+    .texto-aside h2 {
+      margin-top: 0;
+    }
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 2.25rem;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  .lead {
+    font-size: 1.02rem;
+    color: var(--ink-muted);
+  }
+  .fuentes,
+  .limites {
+    max-width: 62ch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .fuentes li,
+  .limites li {
+    padding: 0.65rem 0.1rem;
+    border-bottom: 1px solid var(--ink-faint);
+    line-height: 1.6;
+  }
+  .cifras {
+    max-width: 62ch;
+    margin: 0.75rem 0 0;
+    border-top: 1px solid var(--ink-faint);
+  }
+  .cifras > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0.1rem;
+    border-bottom: 1px solid var(--ink-faint);
+  }
+  .cifras dt {
+    color: var(--ink-muted);
+    font-size: 0.88rem;
+  }
+  .cifras dd {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  a {
+    color: var(--stamp);
+  }
+</style>

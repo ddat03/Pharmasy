@@ -188,7 +188,11 @@ const esHome = Astro.url.pathname === "/";
         Datos recopilados de Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. Proyecto independiente,
         sin afiliación con ninguna cadena.
       </p>
-      <p><a href="/politica-de-privacidad">Política de privacidad</a></p>
+      <p class="footer-links">
+        <a href="/acerca/">Cómo funciona</a>
+        <a href="/contacto/">Contacto</a>
+        <a href="/politica-de-privacidad/">Política de privacidad</a>
+      </p>
       <p class="footer-sign">Creado por Diego Aleman</p>
     </footer>
   </body>
@@ -519,6 +523,11 @@ const esHome = Astro.url.pathname === "/";
   }
   .footer-perf {
     display: none;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
   }
   .footer-sign {
     margin-top: 1.25rem;
