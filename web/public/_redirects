@@ -1,14 +1,15 @@
-# --- una sola direccion oficial ---
-# Tres hostnames sirven el mismo sitio: www, la raiz y el subdominio viejo de
-# Pages. Sin estas reglas Google reparte la señal entre los tres y ninguno
-# rankea bien. Todo converge en www, que es el canonical que declara
-# astro.config.mjs.
+# --- por que aca NO hay redirect entre hostnames ---
+# Se intento mandar la raiz y dark-star-3bb3.pages.dev a www con reglas de
+# URL absoluta. No funciona: Cloudflare Pages solo acepta una RUTA como
+# origen en este archivo, nunca un hostname distinto — comprobado, el
+# subdominio seguia devolviendo 200 en vez de 301.
 #
-# La regla de la raiz queda inerte hasta que su ALIAS resuelva en Porkbun;
-# no molesta mientras tanto y empieza a funcionar sola cuando lo haga.
-https://farmapreciosec.com/*       https://www.farmapreciosec.com/:splat  301
-https://dark-star-3bb3.pages.dev/* https://www.farmapreciosec.com/:splat  301
-# --- fin direccion oficial ---
+# El duplicado lo resuelve el <link rel="canonical"> que emite Layout.astro,
+# que en las 1557 paginas apunta a www.farmapreciosec.com. Google consolida
+# por canonical, asi que las tres direcciones acumulan en una sola.
+#
+# El redirect de verdad para la raiz se hace en Porkbun con URL Forwarding
+# 301 hacia https://www.farmapreciosec.com (ver bitacora).
 
 # --- fusiones de catálogo (generado por pipeline/fusion_catalogo.py) ---
 /medicamento/acetaminofen-500mg-tableta/  /medicamento/paracetamol-500mg-tableta/  301
