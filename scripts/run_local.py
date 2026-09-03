@@ -23,6 +23,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from publicar import publicar  # noqa: E402
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Económicas no acepta --all: lee un set fijo de tiendas de Rappi.
@@ -50,6 +53,11 @@ def main():
     parser.add_argument("--sin-normalizar", action="store_true", help="No correr el normalizador (no gasta OpenAI)")
     parser.add_argument("--sin-alertas", action="store_true", help="No correr el diff de precios ni el reporte de salud")
     parser.add_argument("--dry-run", action="store_true", help="No escribir nada a Supabase")
+    parser.add_argument(
+        "--sin-publicar",
+        action="store_true",
+        help="No reconstruir el sitio al terminar (los datos quedan en Supabase pero la web no los muestra)",
+    )
     args = parser.parse_args()
 
     if not args.fuente and not args.todas:
@@ -79,14 +87,25 @@ def main():
     if not args.sin_alertas:
         correr("Alertas y salud", ["pipeline/alerts.py"])
 
+    # Publicar es el paso que se olvidaba: el sitio es estatico y se genera
+    # leyendo Supabase en el build, asi que scrapear a mano actualiza la base
+    # pero deja la web mostrando la foto anterior hasta el proximo nocturno.
+    # Se publica aunque alguna cadena haya fallado: las que si trajeron datos
+    # merecen llegar al sitio.
+    if not args.sin_publicar and len(fallidas) < len(fuentes):
+        publicar()
+    elif args.sin_publicar:
+        print("")
+        print("--sin-publicar: los datos estan en Supabase pero la web todavia no los muestra.")
+        print("Para publicarlos: python scripts/publicar.py")
+
     if fallidas:
-        print(f"\nCadenas que fallaron: {', '.join(fallidas)}")
+        print("")
+        print(f"Cadenas que fallaron: {', '.join(fallidas)}")
         sys.exit(1)
 
-    print(
-        "\nListo. Los datos ya están en Supabase. La web se republica sola en la próxima "
-        "corrida nocturna; para publicarla ahora: gh workflow run deploy-web.yml"
-    )
+    print("")
+    print("Listo.")
 
 
 if __name__ == "__main__":
