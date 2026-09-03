@@ -573,12 +573,12 @@ const esHome = Astro.url.pathname === "/";
   .footer-perf {
     display: none;
   }
-  /* Las categorias tambien viven en el pie. En movil son la unica via de
-     acceso, porque alli la barra del encabezado se oculta: metida entre la
-     marca y el buscador, empujaba los resultados fuera de la primera
-     pantalla y lo primero que veias al buscar no eran los medicamentos.
-     Un menu repetido entre encabezado y pie es practica normal; lo que no
-     es normal es que la navegacion tape el contenido que fuiste a buscar. */
+  /* Las categorias tambien viven en el pie, pero SOLO en movil: ahi son la
+     unica via de acceso, porque el menu del encabezado se oculta (ver el
+     @media de .cat-nav mas abajo) -- metido entre la marca y el buscador,
+     empujaba los resultados fuera de la primera pantalla. En desktop el
+     menu del header ya esta visible, asi que repetirlo aca abajo era pura
+     duplicacion sin ningun proposito -- se oculta ahi. */
   .footer-cats {
     display: flex;
     flex-wrap: wrap;
@@ -586,6 +586,11 @@ const esHome = Astro.url.pathname === "/";
     margin-bottom: 1.1rem;
     padding-bottom: 1.1rem;
     border-bottom: 1px solid rgba(255, 253, 247, 0.25);
+  }
+  @media (min-width: 621px) {
+    .footer-cats {
+      display: none;
+    }
   }
   .footer-cats a {
     font-size: 0.82rem;
