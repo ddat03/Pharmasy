@@ -83,14 +83,39 @@ let drugsPromise: Promise<Drug[]> | null = null;
 
 export function getAllDrugs(): Promise<Drug[]> {
   if (!drugsPromise) {
-    drugsPromise = supabaseGet<Drug[]>("drugs", {
+    drugsPromise = cargarTodosLosDrugs();
+  }
+  return drugsPromise;
+}
+
+// Bug real encontrado el 2026-09-03 verificando por que "Tiroides" no
+// mostraba productos: `limit: "2000"` nunca trajo mas de 1000 filas -- no
+// es un limite propio, es el maximo por defecto que PostgREST aplica del
+// lado del servidor (db-max-rows), que un `limit` mas alto en la query NO
+// puede superar. Con 1909 medicamentos reales ordenados alfabeticamente,
+// todo lo que cae despues del corte (confirmado: "Levotiroxina" y todo lo
+// que sigue) quedaba invisible para getAllDrugs() en TODO el sitio, no solo
+// en el preview del header -- incluye getStaticPaths() de medicamento,
+// principio y categoria, y el sitemap. No era un bug de hoy: estaba desde
+// que se escribio esta funcion, sencillamente nadie habia notado que
+// faltaban paginas para la segunda mitad del alfabeto.
+async function cargarTodosLosDrugs(): Promise<Drug[]> {
+  const pageSize = 1000;
+  let offset = 0;
+  const all: Drug[] = [];
+  for (;;) {
+    const page = await supabaseGet<Drug[]>("drugs", {
       select:
         "id,slug,principio_activo,concentracion,forma_farmaceutica,presentacion,nombre_comercial,laboratorio,es_generico,precio_techo_usd",
       order: "principio_activo.asc",
-      limit: "2000",
+      limit: String(pageSize),
+      offset: String(offset),
     });
+    all.push(...page);
+    if (page.length < pageSize) break;
+    offset += pageSize;
   }
-  return drugsPromise;
+  return all;
 }
 
 export async function getPricesForDrug(drugId: string): Promise<LatestPriceRow[]> {

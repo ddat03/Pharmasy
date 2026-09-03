@@ -10,6 +10,7 @@ import "@fontsource/ibm-plex-mono/600.css";
 import { getResumen, formatFechaLarga } from "../lib/supabase";
 import { CATEGORIAS } from "../lib/categorias";
 import { getPreviewPorCategoria } from "../lib/categoria-preview";
+import { getMarcas } from "../lib/marcas";
 
 interface Props {
   title: string;
@@ -34,6 +35,19 @@ const ultimaActualizacion = resumen.fecha;
 // a nivel de modulo (ver categoria-preview.ts) -- sin eso, esta consulta se
 // dispararia una vez por cada una de las 2293 paginas del sitio.
 const previewPorCategoria = await getPreviewPorCategoria().catch(() => new Map());
+
+// Adelanto de marcas para el item "Marcas" del mismo menu, mismo mecanismo
+// que las categorias. getMarcas() ya esta cacheada a nivel de modulo (ver
+// marcas.ts), asi que agregarla aca no dispara una consulta nueva por
+// pagina.
+const previewMarcas = await getMarcas()
+  .then((marcas) =>
+    marcas
+      .filter((m) => m.desde != null)
+      .sort((a, b) => b.cadenas.length - a.cadenas.length)
+      .slice(0, 8),
+  )
+  .catch(() => []);
 
 function formatPrecio(value: number): string {
   const [whole, cents] = value.toFixed(2).split(".");
@@ -207,8 +221,31 @@ const esHome = Astro.url.pathname === "/";
               );
             })
           }
-          <li class="nav-aparte">
+          <li class="nav-aparte navcat-item">
             <a href="/marcas/">Marcas</a>
+            {previewMarcas.length > 0 && (
+              <div class="navcat-preview" data-preview>
+                <div class="navcat-preview-track" data-preview-track>
+                  {previewMarcas.map((m, i) => (
+                    <a
+                      class="navcat-cp-item"
+                      href={`/marca/${m.slug}/`}
+                      style={`animation-delay:${i * 45}ms`}
+                    >
+                      <span class="navcat-cp-nombre">{m.nombre}</span>
+                      <span class="navcat-cp-precio">desde {formatPrecio(m.desde as number)}</span>
+                    </a>
+                  ))}
+                  <a
+                    class="navcat-cp-vermas"
+                    href="/marcas/"
+                    style={`animation-delay:${previewMarcas.length * 45}ms`}
+                  >
+                    Ver todo <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            )}
           </li>
         </ul>
       </nav>
@@ -532,6 +569,13 @@ const esHome = Astro.url.pathname === "/";
     padding-right: 1.5rem;
     list-style: none;
     display: flex;
+    /* El contenedor ya llegaba hasta el borde de la ventana, pero el
+       contenido seguia agrupado a la izquierda con un vacio enorme
+       despues de "Marcas" en pantallas anchas -- quitar el max-width no
+       alcanzaba, hacia falta ademas que los items se repartan el espacio
+       sobrante. En pantallas angostas (donde se activa el scroll) esto no
+       tiene efecto: ahi no sobra espacio para repartir. */
+    justify-content: space-between;
     gap: 1.25rem;
     overflow-x: auto;
     scrollbar-width: none;
@@ -619,6 +663,11 @@ const esHome = Astro.url.pathname === "/";
     color: var(--ink);
     border-bottom: 1px solid var(--ink-faint);
     transition: background-color 120ms var(--ease-print);
+    /* Sin min-width:0 un nombre largo ("etinilestradiol/drospirenona
+       30mcg/3mg") no se encoge ni envuelve -- empuja el precio fuera del
+       panel en vez de compartir el espacio con el (confirmado en vivo: el
+       precio quedaba a 44px fuera del borde derecho de la fila). */
+  }
     /* Estado de reposo: invisible y corrida hacia arriba, lista para caer.
        El :hover del padre dispara la animacion de entrada de cada fila,
        escalonada por su propio animation-delay (ver el markup). */
@@ -651,10 +700,19 @@ const esHome = Astro.url.pathname === "/";
     background-color: rgba(23, 22, 15, 0.04);
   }
   .navcat-cp-nombre {
+    flex: 1 1 auto;
+    min-width: 0;
     color: var(--ink);
     font-size: 0.78rem;
     font-weight: 600;
     line-height: 1.3;
+    /* En vez de una sola linea que fuerza a la fila a ensancharse, el
+       nombre envuelve hasta 2 lineas dentro de su espacio disponible; el
+       precio (flex-shrink:0 mas abajo) nunca pierde su lugar. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .navcat-cp-precio {
     flex-shrink: 0;
