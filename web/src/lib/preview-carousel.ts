@@ -1,13 +1,19 @@
-// Carrusel de adelanto al pasar el mouse: usado en las categorias del
+// Adelanto de productos al pasar el mouse: usado en las categorias del
 // inicio, en las marcas de /marcas/, y en el menu de categorias del
 // encabezado (presente en todas las paginas). Nunca dispara con click -- el
 // click en la fila principal sigue yendo directo a la pagina completa, este
 // efecto es solo un adelanto mientras el mouse esta encima.
 //
-// Se calcula el desplazamiento real en JS (getBoundingClientRect) en vez de
-// aproximarlo en CSS puro, porque cada categoria/marca tiene una cantidad
-// distinta de productos y un ancho de contenido distinto -- una animacion
-// CSS con un porcentaje fijo se hubiera quedado corta o larga segun el caso.
+// Dos modos de animacion, elegidos por contexto: en el home/marcas el panel
+// es una fila horizontal angosta y el contenido se desliza en X (calculado
+// en JS via getBoundingClientRect, porque cada categoria/marca tiene una
+// cantidad distinta de productos y un porcentaje fijo en CSS se hubiera
+// quedado corto o largo segun el caso). En el menu del encabezado el panel
+// es una lista vertical -- a pedido del usuario, que la primera version
+// (el mismo deslizamiento horizontal, en miniatura) no era lo que queria
+// ahi -- y la animacion de entrada de cada fila la resuelve el CSS puro
+// (@keyframes navcat-cae en Layout.astro, disparado por :hover), asi que
+// este modulo solo necesita posicionar el panel, no animar nada.
 
 type Opciones = {
   /**
@@ -24,11 +30,20 @@ type Opciones = {
    * saldria del viewport por la derecha sin este calculo.
    */
   posicionFija?: boolean;
+  /**
+   * Si el contenido del panel se desliza horizontalmente en JS
+   * (`transform: translateX`). Por defecto true (home, marcas). En el menu
+   * del encabezado es false: ahi el panel es una columna vertical y la
+   * caida de cada fila es una animacion CSS pura disparada por :hover, sin
+   * ningun transform que este modulo necesite calcular o aplicar.
+   */
+  desplazamientoHorizontal?: boolean;
 };
 
 export function activarCarruselesPreview(selectorItem: string, opciones: Opciones = {}) {
   const items = document.querySelectorAll<HTMLElement>(selectorItem);
   const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const conDesplazamiento = opciones.desplazamientoHorizontal ?? true;
 
   items.forEach((item) => {
     const contenedor = item.querySelector<HTMLElement>("[data-preview]");
@@ -56,9 +71,10 @@ export function activarCarruselesPreview(selectorItem: string, opciones: Opcione
       contenedor.style.right = "auto";
     }
 
-    function deslizar() {
+    function activar() {
       if (!contenedor || !track) return;
       posicionar();
+      if (!conDesplazamiento) return; // header: la caida de cada fila la anima el CSS solo
       // Se mide recien al activarse: si se midiera al cargar la pagina, un
       // reflow posterior (fuentes que terminan de cargar, etc.) dejaria el
       // calculo viejo. En touch (sin hover real) esto nunca se dispara.
@@ -77,25 +93,25 @@ export function activarCarruselesPreview(selectorItem: string, opciones: Opcione
     }
 
     function resetear() {
-      if (!track) return;
+      if (!track || !conDesplazamiento) return;
       track.style.transitionDuration = "220ms";
       track.style.transform = "translateX(0)";
     }
 
     item.addEventListener("mouseenter", () => {
       activo = true;
-      deslizar();
+      activar();
     });
     item.addEventListener("mouseleave", () => {
       activo = false;
       resetear();
     });
     // Teclado: :focus-within ya muestra el panel (ver CSS); esto ademas
-    // dispara el deslizamiento al tabular hasta un item del preview.
+    // dispara la animacion al tabular hasta un item del preview.
     item.addEventListener("focusin", () => {
       if (!activo) {
         activo = true;
-        deslizar();
+        activar();
       }
     });
     item.addEventListener("focusout", (e) => {

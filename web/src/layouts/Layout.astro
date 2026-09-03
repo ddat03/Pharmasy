@@ -176,21 +176,28 @@ const esHome = Astro.url.pathname === "/";
               return (
                 <li class="navcat-item">
                   <a href={`/categoria/${c.slug}`}>{c.nombre}</a>
-                  {/* Al pasar el mouse (nunca al click) se desliza un
-                      adelanto de productos reales, terminando en "Ver
-                      todo" -- misma categoria a la que ya lleva el click
-                      en el nombre. Mismo patron que en /marcas/ y en la
-                      seccion de categorias del inicio. */}
+                  {/* Al pasar el mouse (nunca al click) cae una lista de
+                      productos reales, cada uno un poco despues del
+                      anterior, terminando en "Ver todo" -- misma categoria
+                      a la que ya lleva el click en el nombre. */}
                   {preview.length > 0 && (
                     <div class="navcat-preview" data-preview>
                       <div class="navcat-preview-track" data-preview-track>
-                        {preview.map((item) => (
-                          <a class="navcat-cp-item" href={`/medicamento/${item.slug}/`}>
+                        {preview.map((item, i) => (
+                          <a
+                            class="navcat-cp-item"
+                            href={`/medicamento/${item.slug}/`}
+                            style={`animation-delay:${i * 45}ms`}
+                          >
                             <span class="navcat-cp-nombre">{item.nombre}</span>
                             <span class="navcat-cp-precio">{formatPrecio(item.precio)}</span>
                           </a>
                         ))}
-                        <a class="navcat-cp-vermas" href={`/categoria/${c.slug}/`}>
+                        <a
+                          class="navcat-cp-vermas"
+                          href={`/categoria/${c.slug}/`}
+                          style={`animation-delay:${preview.length * 45}ms`}
+                        >
                           Ver todo <span aria-hidden="true">→</span>
                         </a>
                       </div>
@@ -271,7 +278,10 @@ const esHome = Astro.url.pathname === "/";
   // opacity estaba en 1. Con posicionFija, el JS calcula top/left reales al
   // activarse y el panel pasa a position:fixed, fuera del alcance de ese
   // overflow.
-  activarCarruselesPreview(".navcat-item", { posicionFija: true });
+  // desplazamientoHorizontal: false porque aca el panel es una lista
+  // vertical -- la caida escalonada de cada fila es un @keyframes CSS puro
+  // (navcat-cae, mas abajo), no algo que este script necesite animar.
+  activarCarruselesPreview(".navcat-item", { posicionFija: true, desplazamientoHorizontal: false });
 </script>
 
 <style is:global>
@@ -567,7 +577,7 @@ const esHome = Astro.url.pathname === "/";
     top: 100%;
     left: 0;
     z-index: 20;
-    width: 300px;
+    width: 270px;
     overflow: hidden;
     background: var(--paper-raised);
     border: 1px solid var(--ink-faint);
@@ -584,36 +594,70 @@ const esHome = Astro.url.pathname === "/";
     visibility: visible;
     pointer-events: auto;
   }
+  /* Columna, no fila: cada producto baja como su propia linea, en vez de
+     desplazarse horizontalmente dentro de un cajon angosto -- ese
+     deslizamiento en X funciona bien en el home/marcas, donde el panel
+     tiene margen para respirar, pero aca la barra es angosta y el usuario
+     lo pidio explicitamente distinto: que se despliegue hacia abajo. */
   .navcat-preview-track {
     display: flex;
-    width: max-content;
-    transition: transform 1200ms var(--ease-print);
-  }
-  .navcat-cp-item {
-    flex: 0 0 auto;
-    display: flex;
     flex-direction: column;
-    gap: 0.15rem;
-    width: 132px;
-    padding: 0.6rem 0.7rem;
+  }
+  /* Especificidad extra a proposito (dos clases, no una): .cat-nav a mas
+     abajo en este mismo archivo fija el color blanco de los links de la
+     barra oscura, y .navcat-cp-item TAMBIEN es un <a> dentro de .cat-nav
+     -- sin este refuerzo esa regla ganaba y el nombre del producto
+     quedaba en texto casi blanco sobre el fondo casi blanco del panel,
+     invisible. Confirmado midiendo el color real en el navegador. */
+  .navcat-preview .navcat-cp-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.7rem;
+    padding: 0.55rem 0.85rem;
     text-decoration: none;
     color: var(--ink);
-    border-right: 1px solid var(--ink-faint);
+    border-bottom: 1px solid var(--ink-faint);
     transition: background-color 120ms var(--ease-print);
+    /* Estado de reposo: invisible y corrida hacia arriba, lista para caer.
+       El :hover del padre dispara la animacion de entrada de cada fila,
+       escalonada por su propio animation-delay (ver el markup). */
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .navcat-item:hover .navcat-cp-item,
+    .navcat-item:focus-within .navcat-cp-item {
+      animation: navcat-cae 320ms var(--ease-print) forwards;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .navcat-cp-item {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes navcat-cae {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   .navcat-cp-item:hover {
     background-color: rgba(23, 22, 15, 0.04);
   }
   .navcat-cp-nombre {
-    font-size: 0.75rem;
+    color: var(--ink);
+    font-size: 0.78rem;
     font-weight: 600;
-    line-height: 1.25;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    line-height: 1.3;
   }
   .navcat-cp-precio {
+    flex-shrink: 0;
     font-family: var(--font-mono);
     font-size: 0.84rem;
     font-weight: 600;
@@ -621,28 +665,37 @@ const esHome = Astro.url.pathname === "/";
     font-variant-numeric: tabular-nums;
   }
   .navcat-cp-vermas {
-    flex: 0 0 auto;
-    width: 108px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;
-    padding: 0.6rem 0.7rem;
+    padding: 0.6rem 0.85rem;
     font-size: 0.78rem;
     font-weight: 700;
     color: var(--paper-raised);
     background: var(--stamp);
     text-decoration: none;
     text-align: center;
+    /* Mismo mecanismo de caida que los productos, un paso mas tarde: cierra
+       la lista en vez de aparecer de golpe. */
+    opacity: 0;
+    transform: translateY(-8px);
     transition: background-color 140ms var(--ease-print);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .navcat-item:hover .navcat-cp-vermas,
+    .navcat-item:focus-within .navcat-cp-vermas {
+      animation: navcat-cae 320ms var(--ease-print) forwards;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .navcat-cp-vermas {
+      opacity: 1;
+      transform: none;
+    }
   }
   .navcat-cp-vermas:hover {
     background: var(--stamp-dark);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .navcat-preview-track {
-      transition: none;
-    }
   }
   /* En movil el menu del header entero se oculta (ver mas abajo), asi que
      este panel nunca se activaria ahi -- no hace falta un breakpoint
