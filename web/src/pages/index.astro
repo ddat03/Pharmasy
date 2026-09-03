@@ -754,6 +754,14 @@ function formatPriceStatic(value: number): string {
   const results = document.getElementById("results") as HTMLDivElement;
   const panel = document.getElementById("search-panel") as HTMLElement;
 
+  // Evitar scroll al hacer autofocus en el input (el navegador salta al input)
+  if (input) {
+    input.addEventListener("focus", () => {
+      if (window.scrollY === 0) return;
+      window.scrollTo(0, 0);
+    }, { once: true });
+  }
+
   // Alterna entre "explorar" y "buscar". Sin esto los resultados quedaban
   // debajo de todo el contenido de exploracion y no se veian.
   function mostrarPanel(visible: boolean) {
