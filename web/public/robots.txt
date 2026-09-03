@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dark-star-3bb3.pages.dev/sitemap.xml
+Sitemap: https://www.farmapreciosec.com/sitemap.xml

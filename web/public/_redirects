@@ -1,3 +1,15 @@
+# --- una sola direccion oficial ---
+# Tres hostnames sirven el mismo sitio: www, la raiz y el subdominio viejo de
+# Pages. Sin estas reglas Google reparte la señal entre los tres y ninguno
+# rankea bien. Todo converge en www, que es el canonical que declara
+# astro.config.mjs.
+#
+# La regla de la raiz queda inerte hasta que su ALIAS resuelva en Porkbun;
+# no molesta mientras tanto y empieza a funcionar sola cuando lo haga.
+https://farmapreciosec.com/*       https://www.farmapreciosec.com/:splat  301
+https://dark-star-3bb3.pages.dev/* https://www.farmapreciosec.com/:splat  301
+# --- fin direccion oficial ---
+
 # --- fusiones de catálogo (generado por pipeline/fusion_catalogo.py) ---
 /medicamento/acetaminofen-500mg-tableta/  /medicamento/paracetamol-500mg-tableta/  301
 /medicamento/acido-acetilsalicilico-81mg-tableta/  /medicamento/aspirina-81mg-tableta/  301
