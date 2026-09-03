@@ -1,0 +1,812 @@
+[
+  {
+    "clave": "atorvastatina | (('mg', 10.0),) | tableta",
+    "canonico": {
+      "id": "9b96c2ce-7c92-4440-8135-57258658339d",
+      "slug": "atorvastatina-10mg-tableta",
+      "nombre": "Atorvastatina 10mg tableta",
+      "productos": 5
+    },
+    "absorbidos": [
+      {
+        "id": "0eca7506-a581-4baa-b868-cfbddda6d88b",
+        "slug": "atorvastatina-10mg",
+        "nombre": "Atorvastatina 10mg",
+        "productos": 2
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "drospirenona/etinilestradiol | (('mg', 3.0), ('mg', 0.03)) | tableta",
+    "canonico": {
+      "id": "c95fe078-8e25-4464-8c81-2727954dcc8e",
+      "slug": "drospirenona-etinilestradiol-3mg-0-03mg-tableta",
+      "nombre": "Drospirenona/Etinilestradiol 3mg/0.03mg tableta",
+      "productos": 4
+    },
+    "absorbidos": [
+      {
+        "id": "5fb66864-c9b4-4ed5-b454-c2d469332519",
+        "slug": "drospirenona-etinilestradiol-3-0-03mg-tableta",
+        "nombre": "Drospirenona/Etinilestradiol 3/0.03mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "insulina lispro | (('ui', 100.0),) | inyectable",
+    "canonico": {
+      "id": "0ecc6659-9888-4a03-afe9-9743547ccd51",
+      "slug": "insulina-lispro-100ui-ml-inyectable",
+      "nombre": "Insulina lispro 100UI/mL inyectable",
+      "productos": 3
+    },
+    "absorbidos": [
+      {
+        "id": "6311815d-f1cb-4699-99c9-df101943eaf7",
+        "slug": "insulina-lispro-100ui-inyectable",
+        "nombre": "Insulina lispro 100UI inyectable",
+        "productos": 2
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "telmisartan/hidroclorotiazida | (('mg', 80.0), ('mg', 12.5)) | tableta",
+    "canonico": {
+      "id": "1f6d9cdb-aeb9-46b9-9c50-971ae1cee308",
+      "slug": "telmisartan-hidroclorotiazida-80-12-5mg-tableta",
+      "nombre": "Telmisartan/Hidroclorotiazida 80/12.5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "d9b1a223-5ceb-487c-916c-4cd300ae4b83",
+        "slug": "telmisartan-hidroclorotiazida-80mg-12-5mg-tableta",
+        "nombre": "Telmisartán / Hidroclorotiazida 80mg/12.5mg tableta",
+        "productos": 2
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "irbesartan/hidroclorotiazida | (('mg', 150.0), ('mg', 12.5)) | tableta",
+    "canonico": {
+      "id": "37773c95-b450-4643-94e1-0de544221e3d",
+      "slug": "irbesartan-hidroclorotiazida-150-12-5mg-tableta",
+      "nombre": "Irbesartán + Hidroclorotiazida 150/12.5mg tableta",
+      "productos": 3
+    },
+    "absorbidos": [
+      {
+        "id": "57542470-7140-4054-8ede-7397eb28fcb7",
+        "slug": "irbesartan-hidroclorotiazida-150mg-12-5mg-tableta",
+        "nombre": "Irbesartán/Hidroclorotiazida 150mg+12.5mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "valsartan/amlodipino | (('mg', 160.0), ('mg', 5.0)) | tableta",
+    "canonico": {
+      "id": "71cab0d1-8107-4baf-96b0-f095d7184a81",
+      "slug": "valsartan-amlodipino-160-5mg-tableta",
+      "nombre": "Valsartán + Amlodipino 160/5mg tableta",
+      "productos": 3
+    },
+    "absorbidos": [
+      {
+        "id": "48c4aea5-b464-4d3e-afbb-c557b62f5062",
+        "slug": "valsartan-amlodipino-160mg-5mg-tableta",
+        "nombre": "Valsartán + Amlodipino 160mg+5mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "telmisartan/amlodipino | (('mg', 80.0), ('mg', 10.0)) | tableta",
+    "canonico": {
+      "id": "071ae154-578c-4ad2-8bbd-3dc59477dc66",
+      "slug": "telmisartan-amlodipino-80-10mg-tableta",
+      "nombre": "Telmisartán / Amlodipino 80/10mg tableta",
+      "productos": 3
+    },
+    "absorbidos": [
+      {
+        "id": "0a0b86e2-e28a-4607-9c2f-164e3b8f4252",
+        "slug": "telmisartan-amlodipino-80mg-10mg-tableta",
+        "nombre": "Telmisartan/Amlodipino 80mg/10mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "metformina/glibenclamida | (('mg', 500.0), ('mg', 5.0)) | tableta",
+    "canonico": {
+      "id": "ce9880df-c3b1-47a6-8414-cebe71d5ee5e",
+      "slug": "metformina-glibenclamida-500-5mg-tableta",
+      "nombre": "Metformina / Glibenclamida 500/5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "3093d8db-d28d-4573-9a95-477082a90ddd",
+        "slug": "metformina-glibenclamida-500mg-5mg-tableta",
+        "nombre": "Metformina + Glibenclamida 500mg+5mg tableta",
+        "productos": 2
+      }
+    ],
+    "precio_techo_rescatado": 0.29
+  },
+  {
+    "clave": "perindopril/amlodipino | (('mg', 10.0), ('mg', 5.0)) | tableta",
+    "canonico": {
+      "id": "180fc392-6095-4c9a-9357-bf81ffa9bd46",
+      "slug": "perindopril-amlodipino-10-5mg-tableta",
+      "nombre": "Perindopril/Amlodipino 10/5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "eb05fb4b-dbfb-42cf-ad88-a706961c8a53",
+        "slug": "perindopril-amlodipino-10-mg-5-mg-comprimido",
+        "nombre": "Perindopril + Amlodipino 10 mg / 5 mg comprimido",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "perindopril/amlodipino | (('mg', 5.0), ('mg', 5.0)) | tableta",
+    "canonico": {
+      "id": "7a100182-1885-4e84-be4b-1862a819d078",
+      "slug": "perindopril-amlodipino-5-5mg-tableta",
+      "nombre": "Perindopril/Amlodipino 5/5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "8a810a36-75bf-4567-8582-71878e8565e5",
+        "slug": "perindopril-amlodipino-5-mg-5-mg-comprimido",
+        "nombre": "Perindopril + Amlodipino 5 mg/5 mg comprimido",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "perindopril/indapamida | (('mg', 10.0), ('mg', 2.5)) | tableta",
+    "canonico": {
+      "id": "b5fa7efc-cf66-40d9-bcab-533e2d773517",
+      "slug": "perindopril-indapamida-10-2-5mg-tableta",
+      "nombre": "Perindopril/Indapamida 10/2.5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "01a6be5a-2451-498c-b574-75ae9920d7ef",
+        "slug": "perindopril-indapamida-10-mg-2-5-mg-comprimido",
+        "nombre": "Perindopril / Indapamida 10 mg / 2.5 mg comprimido",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "ampicilina | (('mg', 1000.0),) | tableta",
+    "canonico": {
+      "id": "cf1231d4-6268-42e8-8b8d-2b4153c1d77d",
+      "slug": "ampicilina-1gr-tableta",
+      "nombre": "Ampicilina 1gr tableta",
+      "productos": 3
+    },
+    "absorbidos": [
+      {
+        "id": "5f9af352-ccfd-461b-8dde-620b99f9c926",
+        "slug": "ampicilina-1g-tableta",
+        "nombre": "Ampicilina 1g tableta",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": 1.51
+  },
+  {
+    "clave": "amoxicilina | (('mg', 1000.0),) | tableta",
+    "canonico": {
+      "id": "82cf44e8-92ea-4f64-9be1-8c59e9670407",
+      "slug": "amoxicilina-1g-tableta",
+      "nombre": "Amoxicilina 1g tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "154667e0-f868-4ef9-b429-f2d7ac574274",
+        "slug": "amoxicilina-1gr-tableta",
+        "nombre": "Amoxicilina 1gr tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "valsartan/amlodipino | (('mg', 160.0), ('mg', 10.0)) | tableta",
+    "canonico": {
+      "id": "4c067848-3176-403b-85b7-8d65669c7d08",
+      "slug": "valsartan-amlodipino-160-10mg-tableta",
+      "nombre": "Valsartan/Amlodipino 160/10mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "9da176cd-1bd4-494f-94af-ea4cd898767e",
+        "slug": "valsartan-amlodipino-160mg-10mg-tableta",
+        "nombre": "Valsartán + Amlodipino 160mg+10mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "sitagliptina/metformina | (('mg', 50.0), ('mg', 850.0)) | tableta",
+    "canonico": {
+      "id": "673068a7-c9e3-4e9f-80bb-85a691f954cd",
+      "slug": "sitagliptina-metformina-50mg-850mg-tableta",
+      "nombre": "Sitagliptina/Metformina 50mg/850mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "9b4ff9e5-202c-4972-9742-6fabe3bd31f3",
+        "slug": "sitagliptina-metformina-50-850mg-tableta",
+        "nombre": "Sitagliptina/Metformina 50/850mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "irbesartan/hidroclorotiazida | (('mg', 300.0), ('mg', 12.5)) | tableta",
+    "canonico": {
+      "id": "903c0788-417e-434e-bce3-22841f82e481",
+      "slug": "irbesartan-hidroclorotiazida-300-12-5mg-tableta",
+      "nombre": "Irbesartán/Hidroclorotiazida 300/12.5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "4d8b7f85-d3e5-404c-8a5b-7bb61a2f81f8",
+        "slug": "irbesartan-hidroclorotiazida-300mg-12-5mg-tableta",
+        "nombre": "Irbesartán/Hidroclorotiazida 300mg/12.5mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "losartan/hidroclorotiazida | (('mg', 50.0), ('mg', 12.5)) | tableta",
+    "canonico": {
+      "id": "979d57f9-ec1d-4db3-91f9-64a2987c962d",
+      "slug": "losartan-hidroclorotiazida-50-12-5mg-tableta",
+      "nombre": "Losartan + Hidroclorotiazida 50/12.5mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "e26dee85-e6b7-4784-9728-2557414bcb00",
+        "slug": "losartan-hidroclorotiazida-50mg-12-5mg-tableta",
+        "nombre": "Losartan/Hidroclorotiazida 50mg/12.5mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "levotiroxina | (('mg', 0.1),) | tableta",
+    "canonico": {
+      "id": "e885cf1b-ea02-4e20-8854-8bdd7d7b7683",
+      "slug": "levotiroxina-100mcg-tableta",
+      "nombre": "Levotiroxina 100mcg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "f177c57b-b0de-49cf-bedd-80d3d6752200",
+        "slug": "levotiroxina-0-1mg-tableta",
+        "nombre": "Levotiroxina 0.1mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "enalapril/hidroclorotiazida | (('mg', 100.0), ('mg', 25.0)) | tableta",
+    "canonico": {
+      "id": "30983057-5d50-4613-98ff-e7a77a1c3204",
+      "slug": "enalapril-hidroclorotiazida-100-25mg-tableta",
+      "nombre": "Enalapril/Hidroclorotiazida 100/25mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "d0813f5f-0041-45f5-95dd-afac45c2cd50",
+        "slug": "enalapril-hidroclorotiazida-100mg-25mg-tableta",
+        "nombre": "Enalapril + Hidroclorotiazida 100mg+25mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "levotiroxina sodica | (('mg', 0.05),) | tableta",
+    "canonico": {
+      "id": "302a003d-bd84-4956-aa73-4e6f07c67cc6",
+      "slug": "levotiroxina-sodica-50mcg-tableta",
+      "nombre": "Levotiroxina sódica 50mcg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "6b4b8a70-3bac-4964-b042-7713825b41fe",
+        "slug": "levotiroxina-sodica-0-050mg-tableta",
+        "nombre": "Levotiroxina sódica 0.050mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "enalapril/hidroclorotiazida | (('mg', 20.0), ('mg', 12.5)) | tableta",
+    "canonico": {
+      "id": "0083fb5c-d117-45c7-941e-7b7155b1e0e6",
+      "slug": "enalapril-hidroclorotiazida-20-12-5mg-tableta",
+      "nombre": "Enalapril/Hidroclorotiazida 20/12.5mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "59bf3d75-6f79-489b-918b-8033b4301aaf",
+        "slug": "enalapril-hidroclorotiazida-20-12-5mg-comprimidos",
+        "nombre": "Enalapril + Hidroclorotiazida 20/12.5mg comprimidos",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "aspirina | (('mg', 100.0),) | tableta",
+    "canonico": {
+      "id": "c30e3ae1-c90d-46fc-b234-f0d276607897",
+      "slug": "acido-acetilsalicilico-100mg-tableta",
+      "nombre": "Ácido acetilsalicílico 100mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "30e7fb01-b089-4dcf-b9d5-41b692c3aa1c",
+        "slug": "aspirina-100mg-tableta",
+        "nombre": "Aspirina 100mg tableta",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "ampicilina | (('mg', 1000.0),) | inyectable",
+    "canonico": {
+      "id": "b461d86d-34e7-447e-ac37-c637225b6e80",
+      "slug": "ampicilina-1gr-inyectable",
+      "nombre": "Ampicilina 1gr inyectable",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "36efd46a-3e97-4034-be7e-f1af643433f1",
+        "slug": "ampicilina-1g-inyectable",
+        "nombre": "Ampicilina 1g inyectable",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": 1.51
+  },
+  {
+    "clave": "paracetamol | (('mg', 100.0),) | gotas",
+    "canonico": {
+      "id": "6825dc3c-27ab-49c7-bf45-de2549932d9c",
+      "slug": "paracetamol-100mg-gotas",
+      "nombre": "Paracetamol 100mg gotas",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "c65948f5-25ed-43da-a7fd-223765d2c7d3",
+        "slug": "paracetamol-100mg",
+        "nombre": "Paracetamol 100mg",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "amoxicilina/acido clavulanico | (('mg', 875.0), ('mg', 125.0)) | tableta",
+    "canonico": {
+      "id": "c1e03334-b96e-484a-ba04-1204f5094d1b",
+      "slug": "amoxicilina-acido-clavulanico-875-125mg-tableta",
+      "nombre": "Amoxicilina/Ácido clavulánico 875/125mg tableta",
+      "productos": 2
+    },
+    "absorbidos": [
+      {
+        "id": "d422b545-ce60-4119-80d7-89270f3b9bc0",
+        "slug": "amoxicilina-acido-clavulanico-875mg-125mg-tableta",
+        "nombre": "Amoxicilina/Ácido clavulánico 875mg/125mg tableta",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "amoxicilina/acido clavulanico | (('mg', 500.0), ('mg', 125.0)) | tableta",
+    "canonico": {
+      "id": "56175cee-be06-494e-9459-a882b75ba1e6",
+      "slug": "amoxicilina-acido-clavulanico-500mg-125mg-tableta",
+      "nombre": "Amoxicilina/Ácido clavulánico 500mg/125mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "2c7b1575-8fe0-42f1-8519-e7dc58a6b956",
+        "slug": "amoxicilina-acido-clavulanico-500-125mg-tableta",
+        "nombre": "Amoxicilina/Ácido clavulánico 500/125mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "telmisartan/hidroclorotiazida | (('mg', 80.0), ('mg', 25.0)) | tableta",
+    "canonico": {
+      "id": "baf8f7ad-d0c9-4523-8f6f-8dca8465b2b2",
+      "slug": "telmisartan-hidroclorotiazida-80mg-25mg-tableta",
+      "nombre": "Telmisartán / Hidroclorotiazida 80mg/25mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "a0d90c3c-28ba-4293-9cce-b108b1544a64",
+        "slug": "telmisartan-hidroclorotiazida-80-25mg-tableta",
+        "nombre": "Telmisartan/Hidroclorotiazida 80/25mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "sitagliptina/metformina | (('mg', 50.0), ('mg', 1000.0)) | tableta",
+    "canonico": {
+      "id": "1d6c423b-6cf1-450c-bd1e-8e815235b5b2",
+      "slug": "sitagliptina-metformina-50mg-1000mg-tableta",
+      "nombre": "Sitagliptina/Metformina 50mg/1000mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "57204cc0-eaae-4dcd-9419-227ab8abd45c",
+        "slug": "sitagliptina-metformina-50-1000mg-tableta",
+        "nombre": "Sitagliptina/Metformina 50/1000mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "glimepirida/metformina | (('mg', 4.0), ('mg', 1000.0)) | tableta",
+    "canonico": {
+      "id": "ead6dd2a-a098-4049-87d2-b8080d835814",
+      "slug": "glimepirida-metformina-4-1000mg-tableta",
+      "nombre": "Glimepirida/Metformina 4/1000mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "7933d444-ccc9-4015-b479-1616fb7a8f57",
+        "slug": "glimepirida-metformina-4mg-1000mg-tableta",
+        "nombre": "Glimepirida / Metformina 4mg/1000mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "amoxicilina/acido clavulanico | (('mg', 1000.0),) | tableta",
+    "canonico": {
+      "id": "83db9686-b0ba-4321-a9eb-f105b3e01f66",
+      "slug": "amoxicilina-acido-clavulanico-1g-tableta",
+      "nombre": "Amoxicilina + Ácido clavulánico 1g tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "4b5b2aa2-561c-40b9-9219-bf11cc8f49ff",
+        "slug": "amoxicilina-acido-clavulanico-1000mg-tableta",
+        "nombre": "Amoxicilina/Ácido clavulánico 1000mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "candesartan cilexetilo/hidroclorotiazida | (('mg', 16.0), ('mg', 12.5)) | tableta",
+    "canonico": {
+      "id": "0a34554f-9002-4a94-a620-843d73e3bad4",
+      "slug": "candesartan-cilexetilo-hidroclorotiazida-16mg-12-5mg-tableta",
+      "nombre": "Candesartán cilexetilo / Hidroclorotiazida 16mg/12.5mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "1a5f0fd7-bc8e-41ac-94f9-f1af62995ae2",
+        "slug": "candesartan-cilexetilo-hidroclorotiazida-16-12-5mg-tableta",
+        "nombre": "Candesartán cilexetilo / Hidroclorotiazida 16/12.5mg tableta",
+        "productos": 1
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "paracetamol | (('mg', 500.0),) | tableta",
+    "canonico": {
+      "id": "f1fc9133-81e5-4962-b4c1-85a293ee82ca",
+      "slug": "paracetamol-500mg-tableta",
+      "nombre": "Paracetamol 500mg tableta",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "a8d906ee-27f7-4424-979d-d7f346114b6b",
+        "slug": "acetaminofen-500mg-tableta",
+        "nombre": "Acetaminofén 500mg tableta",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "amoxicilina/acido clavulanico | (('mg', 400.0), ('mg', 57.0)) | suspension",
+    "canonico": {
+      "id": "1e5aa0c1-286d-468c-8ef8-3e90c19bdfea",
+      "slug": "amoxicilina-acido-clavulanico-400-57mg-suspension",
+      "nombre": "Amoxicilina/Ácido clavulánico 400/57mg suspension",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "f8a49369-72b3-4b33-9bcd-50cc54091fe7",
+        "slug": "amoxicilina-acido-clavulanico-400mg-57mg-suspension",
+        "nombre": "Amoxicilina + Ácido clavulánico 400mg/57mg suspension",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "racecadotrilo | (('mg', 10.0),) | polvo",
+    "canonico": {
+      "id": "e2d7b2e1-01f2-48f6-a1ee-77505076ae62",
+      "slug": "racecadotrilo-10mg-g-polvo",
+      "nombre": "Racecadotrilo 10mg/g polvo",
+      "productos": 1
+    },
+    "absorbidos": [
+      {
+        "id": "65739cc1-cafa-4abf-85ef-104eca2cdd64",
+        "slug": "racecadotrilo-10mg-polvo",
+        "nombre": "Racecadotrilo 10mg polvo",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "aspirina | (('mg', 81.0),) | tableta",
+    "canonico": {
+      "id": "c2e3e303-9500-468f-ba0b-bd13cdcd4cf5",
+      "slug": "aspirina-81mg-tableta",
+      "nombre": "Aspirina 81mg tableta",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "7a7b8944-5ed3-4a71-bce3-ec920d381398",
+        "slug": "acido-acetilsalicilico-81mg-tableta",
+        "nombre": "Ácido acetilsalicílico 81mg tableta",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "sales de rehidratacion oral | (('otro', '45meq'),) | jarabe",
+    "canonico": {
+      "id": "d9d17f33-37d1-4e75-af19-9e3c0dcb6997",
+      "slug": "sales-de-rehidratacion-oral-45meq-jarabe",
+      "nombre": "Sales de rehidratación oral 45meq jarabe",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "6e86cf72-c622-461a-aa5e-59b3647c4058",
+        "slug": "sales-de-rehidratacion-oral-45meq",
+        "nombre": "Sales de rehidratación oral 45meq",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "ibuprofeno | (('mg', 400.0),) | tableta",
+    "canonico": {
+      "id": "095a1482-c5a5-4892-9910-9982e7ab688c",
+      "slug": "ibuprofeno-400mg-tableta",
+      "nombre": "Ibuprofeno 400mg tableta",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "63883a78-0b88-4496-8800-6f5dc5e5727d",
+        "slug": "ibuprofeno-400mg",
+        "nombre": "Ibuprofeno 400mg",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "amikacina | (('mg', 1000.0),) | inyectable",
+    "canonico": {
+      "id": "4d217777-054d-489b-a223-fab55211591d",
+      "slug": "amikacina-1gr-inyectable",
+      "nombre": "Amikacina 1gr inyectable",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "7c5e13cb-dba9-44ca-86a1-af954ca175ee",
+        "slug": "amikacina-1g-inyectable",
+        "nombre": "Amikacina 1g inyectable",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": 12.18
+  },
+  {
+    "clave": "levofloxacino | (('mg', 750.0),) | tableta",
+    "canonico": {
+      "id": "a42b1391-ac2b-4665-8139-3e99f3db4626",
+      "slug": "levofloxacino-750mg-tableta",
+      "nombre": "Levofloxacino 750mg tableta",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "befa0952-bf1f-41d0-af70-addb83ea9eab",
+        "slug": "levofloxacino-750mg",
+        "nombre": "Levofloxacino 750mg",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "ibuprofeno | (('mg', 200.0),) | tableta",
+    "canonico": {
+      "id": "75ec2ada-1eab-4273-a57e-08819962d77e",
+      "slug": "ibuprofeno-200mg-tableta",
+      "nombre": "Ibuprofeno 200mg tableta",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "de0e48ea-ebef-4e60-876e-f39bf9ee6c1b",
+        "slug": "ibuprofeno-200mg",
+        "nombre": "Ibuprofeno 200mg",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "paracetamol | (('mg', 1000.0),) | tableta",
+    "canonico": {
+      "id": "a71cb556-e2b9-4528-8a05-5273a2f0d6d7",
+      "slug": "paracetamol-1g-tableta",
+      "nombre": "Paracetamol 1g tableta",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "48b1a82d-00f3-4d94-a1a9-1b766e0bd3fa",
+        "slug": "paracetamol-1gr-tableta",
+        "nombre": "Paracetamol 1gr tableta",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "lactulosa | (('%', 66.7),) | jarabe",
+    "canonico": {
+      "id": "2b40bcd9-39c7-403f-a443-ec9640f9233f",
+      "slug": "lactulosa-66-7-jarabe",
+      "nombre": "Lactulosa 66.7% jarabe",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "d74bc9e2-c605-4d73-90a9-fbf76cae8065",
+        "slug": "lactulosa-66-70-jarabe",
+        "nombre": "Lactulosa 66.70% jarabe",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "magaldrato/simeticona | (('mg', 800.0), ('mg', 60.0)) | suspension",
+    "canonico": {
+      "id": "22521e52-100b-4b51-bc21-052b42f763fc",
+      "slug": "magaldrato-simeticona-800-60mg-suspension",
+      "nombre": "Magaldrato+Simeticona 800/60mg suspension",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "87be6fb2-7e6e-43d4-9cc5-bb19d59f0ebe",
+        "slug": "magaldrato-simeticona-800-60mg",
+        "nombre": "Magaldrato + Simeticona 800/60mg",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "pancreatina | () | capsula",
+    "canonico": {
+      "id": "34a7a6b3-3cab-4c84-94d8-5821509a7f88",
+      "slug": "pancreatina-capsula",
+      "nombre": "Pancreatina capsula",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "1c075ee6-9ade-4162-8d8e-09914e68e987",
+        "slug": "pancreatina",
+        "nombre": "Pancreatina",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  },
+  {
+    "clave": "cefuroxima | (('mg', 500.0),) | tableta",
+    "canonico": {
+      "id": "88ebd416-40a5-4e97-9776-5f8287c717c3",
+      "slug": "cefuroxima-500mg-tableta",
+      "nombre": "Cefuroxima 500mg tableta",
+      "productos": 0
+    },
+    "absorbidos": [
+      {
+        "id": "cd924f28-1108-41b2-bace-cfd3063daf8b",
+        "slug": "cefuroxima-500mg",
+        "nombre": "Cefuroxima 500mg",
+        "productos": 0
+      }
+    ],
+    "precio_techo_rescatado": null
+  }
+]
