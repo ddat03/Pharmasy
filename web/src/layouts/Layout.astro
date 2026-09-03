@@ -188,6 +188,11 @@ const esHome = Astro.url.pathname === "/";
           <p class="footer-fecha">Precios actualizados el {formatFechaLarga(ultimaActualizacion)}.</p>
         )
       }
+      <nav class="footer-cats" aria-label="Categorías">
+        {CATEGORIAS.map((c) => <a href={`/categoria/${c.slug}`}>{c.nombre}</a>)}
+        <a href="/marcas/">Marcas</a>
+      </nav>
+
       <p class="footer-links">
         <a href="/acerca/">Cómo funciona</a>
         <a href="/contacto/">Contacto</a>
@@ -508,6 +513,34 @@ const esHome = Astro.url.pathname === "/";
   .footer-perf {
     display: none;
   }
+  /* Las categorias tambien viven en el pie. En movil son la unica via de
+     acceso, porque alli la barra del encabezado se oculta: metida entre la
+     marca y el buscador, empujaba los resultados fuera de la primera
+     pantalla y lo primero que veias al buscar no eran los medicamentos.
+     Un menu repetido entre encabezado y pie es practica normal; lo que no
+     es normal es que la navegacion tape el contenido que fuiste a buscar. */
+  .footer-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 1.1rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(255, 253, 247, 0.25);
+  }
+  .footer-cats a {
+    font-size: 0.82rem;
+    text-decoration: none;
+  }
+  .footer-cats a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 620px) {
+    .cat-nav {
+      display: none;
+    }
+  }
+
   .footer-links {
     display: flex;
     flex-wrap: wrap;
