@@ -130,14 +130,6 @@ const esHome = Astro.url.pathname === "/";
           )
         }
 
-        {
-          ultimaActualizacion && (
-            <p class="freshness">
-              <span class="freshness-dot" aria-hidden="true" />
-              Precios del <strong>{formatFechaLarga(ultimaActualizacion)}</strong>
-            </p>
-          )
-        }
       </div>
 
       <nav class="cat-nav" aria-label="Categorías">
@@ -191,12 +183,17 @@ const esHome = Astro.url.pathname === "/";
         Datos recopilados de Fybeca, Pharmacys, Medicity, Cruz Azul y Farmacias Económicas. Proyecto independiente,
         sin afiliación con ninguna cadena.
       </p>
+      {
+        ultimaActualizacion && (
+          <p class="footer-fecha">Precios actualizados el {formatFechaLarga(ultimaActualizacion)}.</p>
+        )
+      }
       <p class="footer-links">
         <a href="/acerca/">Cómo funciona</a>
         <a href="/contacto/">Contacto</a>
         <a href="/politica-de-privacidad/">Política de privacidad</a>
       </p>
-      <p class="footer-sign">Creado por Diego Aleman</p>
+      <p class="footer-sign"><a href="mailto:diegodavi0312@gmail.com">diegodavi0312@gmail.com</a></p>
     </footer>
   </body>
 </html>
@@ -403,29 +400,6 @@ const esHome = Astro.url.pathname === "/";
     background: var(--stamp-dark);
   }
 
-  .freshness {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.02em;
-    color: rgba(255, 253, 247, 0.82);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    white-space: nowrap;
-  }
-  .freshness strong {
-    color: var(--paper-raised);
-    font-weight: 600;
-  }
-  .freshness-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #8fd3ac;
-    flex-shrink: 0;
-  }
-
   /* Segunda linea de la banda, mas oscura: el menu de categorias, presente
      en todas las paginas. */
   .cat-nav {
@@ -539,11 +513,16 @@ const esHome = Astro.url.pathname === "/";
     flex-wrap: wrap;
     gap: 0.4rem 1.5rem;
   }
+  .footer-fecha {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(255, 253, 247, 0.78);
+  }
   .footer-sign {
     margin-top: 1.25rem;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
     color: rgba(255, 253, 247, 0.78);
   }
   .site-footer a {
