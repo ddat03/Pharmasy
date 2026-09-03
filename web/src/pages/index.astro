@@ -132,6 +132,15 @@ function formatPriceStatic(value: number): string {
         </dl>
       </aside>
     </section>
+
+    {/* Los resultados van pegados al buscador, no al final de la pagina. */}
+    <section id="search-panel" class="search-panel" hidden>
+      <div id="results" class="ledger"></div>
+      <p class="normalizer-note prose">
+        Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre —
+        cada fila es el producto tal como aparece en su tienda. Compara por nombre y presentación.
+      </p>
+    </section>
   </div>
 
   {
@@ -192,15 +201,6 @@ function formatPriceStatic(value: number): string {
         </section>
       )
     }
-
-    <div class="tear" aria-hidden="true"></div>
-
-    <p class="normalizer-note prose">
-      Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre —
-      cada fila es el producto tal como aparece en su tienda. Compara por nombre y presentación.
-    </p>
-
-    <div id="results" class="ledger"></div>
 
     <!-- AD SLOT: debajo de los resultados de búsqueda — ver Layout.astro para cómo activar -->
   </div>
@@ -444,7 +444,22 @@ function formatPriceStatic(value: number): string {
   .normalizer-note {
     font-size: 0.78rem;
     color: var(--ink-muted);
-    margin: 0 0 0.75rem;
+    margin: 1rem 0 0;
+  }
+
+  .search-panel {
+    margin-top: 2rem;
+  }
+  /* Mientras hay una busqueda en curso, las secciones de exploracion se
+     ocultan: son para cuando no sabes que buscar, y con resultados en
+     pantalla solo empujan lo que importa fuera de la vista. */
+  :global(body.buscando) .categories-section,
+  :global(body.buscando) .lowest-section,
+  :global(body.buscando) .chips-section,
+  :global(body.buscando) .hero-title,
+  :global(body.buscando) .hero-sub,
+  :global(body.buscando) .hero-meta {
+    display: none;
   }
 </style>
 
@@ -453,6 +468,14 @@ function formatPriceStatic(value: number): string {
 
   const input = document.getElementById("search-input") as HTMLInputElement;
   const results = document.getElementById("results") as HTMLDivElement;
+  const panel = document.getElementById("search-panel") as HTMLElement;
+
+  // Alterna entre "explorar" y "buscar". Sin esto los resultados quedaban
+  // debajo de todo el contenido de exploracion y no se veian.
+  function mostrarPanel(visible: boolean) {
+    panel.hidden = !visible;
+    document.body.classList.toggle("buscando", visible);
+  }
 
   let debounceTimer: ReturnType<typeof setTimeout>;
   let requestSeq = 0;
@@ -525,8 +548,10 @@ function formatPriceStatic(value: number): string {
     if (term.trim().length < 3) {
       results.innerHTML = "";
       hasShownResults = false;
+      mostrarPanel(false);
       return;
     }
+    mostrarPanel(true);
     if (!hasShownResults) {
       results.innerHTML = `<p class="status">Imprimiendo resultados…</p>`;
     }
@@ -553,6 +578,16 @@ function formatPriceStatic(value: number): string {
     clearTimeout(debounceTimer);
     const term = input.value;
     debounceTimer = setTimeout(() => runSearch(term), 300);
+  });
+
+  // Enter busca ya, sin esperar el debounce, y cierra el teclado en mobile —
+  // que es lo que tapaba los resultados apenas aparecian.
+  input.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    clearTimeout(debounceTimer);
+    input.blur();
+    runSearch(input.value);
   });
 
   // El buscador del encabezado (presente en todas las paginas menos esta)

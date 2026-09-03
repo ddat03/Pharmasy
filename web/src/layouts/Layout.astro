@@ -661,6 +661,44 @@ const esHome = Astro.url.pathname === "/";
     background: var(--stamp-dark);
   }
 
+  /* En pantalla angosta la fila de tres columnas se rompe: `.ledger-main`
+     tiene min-width 0 y puede encogerse hasta cero, mientras la columna del
+     precio (auto = ancho del contenido) se queda con todo el espacio. El
+     resultado medido a 390px era `34px 0px 279px`: el nombre del producto
+     colapsado y partido una letra por linea.
+     Debajo de 620px la fila se apila — marca y nombre arriba, precio y boton
+     abajo — que ademas es como se leen las listas de producto en movil. */
+  @media (max-width: 620px) {
+    .ledger-row {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-areas:
+        "mark main"
+        "side side";
+      row-gap: 0.6rem;
+    }
+    .ledger-mark {
+      grid-area: mark;
+    }
+    .ledger-main {
+      grid-area: main;
+    }
+    .ledger-side {
+      grid-area: side;
+      text-align: left;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.7rem;
+    }
+    .ledger-side .ledger-price {
+      order: -1;
+    }
+    .ledger-cta {
+      margin-top: 0;
+      margin-left: auto;
+    }
+  }
+
   /* stamp badge: precio más bajo / mejor oferta */
   .stamp-badge {
     position: absolute;
