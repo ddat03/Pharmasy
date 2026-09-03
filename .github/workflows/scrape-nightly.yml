@@ -147,6 +147,19 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Recortar el historial a 90 dias
+        # Cada corrida agrega ~2.900 filas a price_snapshots. Sin recorte son
+        # ~1.060.000 al anio sobre un plan gratuito de 500 MB: el proyecto se
+        # rompe solo en ano y medio, y en silencio. La ventana coincide con
+        # los 90 dias de historial que muestra la web, asi que no recorta
+        # ninguna funcionalidad. `continue-on-error`: no poder limpiar no
+        # justifica marcar en rojo una corrida que si trajo precios.
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python pipeline/limpiar_snapshots.py
+
       - name: Diff de precios + reporte de salud
         # Sale con codigo != 0 si alguna fuente esta caida o no dejo datos de
         # hoy, para que la corrida quede en rojo y GitHub avise por mail

@@ -17,7 +17,11 @@
 // de verdad justifica un comparador: "buscabas Apronax a $8, el mismo
 // naproxeno genérico está $2".
 
-import { SUPABASE_URL, SUPABASE_ANON_KEY, type LatestPriceRow } from "./supabase";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, getAllDrugs, slugifyPrincipio, type LatestPriceRow } from "./supabase";
+// Mapa marca -> principios activos del registro sanitario oficial de ARCSA.
+// Generado por pipeline/arcsa_catalog.py; se versiona porque el reporte
+// original pesa 43 MB y no tiene sentido bajarlo en cada build.
+import arcsaMarcas from "../../../db/arcsa_marcas.json";
 
 // Un nombre con dosis es, casi siempre, un fármaco. Sin esta señal entran
 // pañales, preservativos y bebidas hidratantes — que no son lo que este
@@ -65,13 +69,24 @@ export function slugMarca(marca: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+export type PrincipioDeMarca = { nombre: string; slug: string };
+
 export type Marca = {
   slug: string;
   nombre: string;
   productos: LatestPriceRow[];
   cadenas: string[];
   desde: number | null;
+  /** Principios activos declarados en el registro sanitario de ARCSA, ya
+   *  cruzados contra nuestro propio catálogo. */
+  principios: PrincipioDeMarca[];
 };
+
+type EntradaArcsa = { marca: string; principios: string[] };
+
+function molecula(texto: string): string {
+  return sinTildes(texto).toLowerCase().trim().split(/\s+/)[0] ?? "";
+}
 
 const COLUMNAS =
   "pharmacy_product_id,pharmacy,nombre_en_tienda,url,drug_id,drug_slug,precio_techo_usd,precio_usd,precio_promocional,en_stock,fecha,precio_por_unidad";
@@ -130,6 +145,24 @@ async function cargarMarcas(): Promise<Marca[]> {
     }
   }
 
+  // Índice de las moléculas que este sitio ya conoce. Sirve de filtro: el
+  // campo de ARCSA es texto libre escrito por cada fabricante, así que trae
+  // frases sueltas de la fórmula ("varia con la pesada inicial") mezcladas
+  // con los principios de verdad. En vez de perseguir cada caso raro con más
+  // reglas, se publica solo lo que además existe en nuestro catálogo — así
+  // el ruido se descarta solo, y lo que queda es justamente lo que se puede
+  // enlazar a una página de principio activo.
+  const drugs = await getAllDrugs();
+  const nuestrasMoleculas = new Map<string, string>();
+  for (const d of drugs) {
+    const clave = molecula(d.principio_activo);
+    if (clave.length >= 4 && !nuestrasMoleculas.has(clave)) {
+      nuestrasMoleculas.set(clave, d.principio_activo);
+    }
+  }
+
+  const arcsa = arcsaMarcas as Record<string, EntradaArcsa>;
+
   const marcas: Marca[] = [];
   for (const marca of porSlug.values()) {
     marca.productos.sort((a, b) => (a.precio_usd ?? Infinity) - (b.precio_usd ?? Infinity));
@@ -138,6 +171,18 @@ async function cargarMarcas(): Promise<Marca[]> {
     // es comparable con el de una caja, así que no puede ser el "desde".
     const comparables = marca.productos.filter((p) => !p.precio_por_unidad && p.precio_usd != null);
     marca.desde = comparables.length ? Math.min(...comparables.map((p) => p.precio_usd as number)) : null;
+
+    const entrada = arcsa[sinTildes(marca.nombre).toLowerCase().replace(/\s+/g, " ").trim()];
+    const vistos = new Set<string>();
+    marca.principios = [];
+    for (const bruto of entrada?.principios ?? []) {
+      const clave = molecula(bruto);
+      const nuestro = nuestrasMoleculas.get(clave);
+      if (!nuestro || vistos.has(clave)) continue;
+      vistos.add(clave);
+      marca.principios.push({ nombre: nuestro, slug: slugifyPrincipio(nuestro) });
+    }
+
     marcas.push(marca);
   }
 

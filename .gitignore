@@ -8,3 +8,8 @@ web/.impeccable/
 .env
 *.log
 raw/
+
+# Reporte crudo de ARCSA (~43 MB). Se regenera con:
+#   python pipeline/arcsa_catalog.py --descargar
+# El derivado db/arcsa_marcas.json (1.5 MB) si se versiona.
+db/arcsa_registros.html

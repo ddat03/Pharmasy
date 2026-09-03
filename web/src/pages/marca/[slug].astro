@@ -85,6 +85,21 @@ const structuredData = {
       {marca.cadenas.length} {marca.cadenas.length === 1 ? "cadena" : "cadenas"}
     </p>
 
+    {
+      marca.principios.length > 0 && (
+        <p class="principios">
+          Principio activo:{" "}
+          {marca.principios.map((pa, i) => (
+            <>
+              {i > 0 && <span aria-hidden="true"> · </span>}
+              <a href={`/principio/${pa.slug}`}>{pa.nombre}</a>
+            </>
+          ))}
+          <span class="fuente">según el registro sanitario de ARCSA</span>
+        </p>
+      )
+    }
+
     <div class="med-layout">
       <div class="med-main">
         <div class="tear" aria-hidden="true"></div>
@@ -136,11 +151,27 @@ const structuredData = {
           agrupa distintas concentraciones y tamaños de caja. Compara dentro de la misma presentación antes de
           sacar conclusiones — por eso esta página no marca un «mejor precio».
         </p>
-        <p class="nota">
-          Todavía no tenemos confirmado el principio activo de {marca.nombre}, así que esta página compara la marca
-          entre farmacias pero no la enlaza con sus equivalentes genéricos. Consulta a tu médico o farmacéutico
-          antes de sustituir un medicamento.
-        </p>
+        {
+          marca.principios.length > 0 ? (
+            <p class="nota">
+              El principio activo sale del registro sanitario oficial de ARCSA. Si buscas alternativas más
+              económicas, mira la página de{" "}
+              {marca.principios.map((pa, i) => (
+                <>
+                  {i > 0 && ", "}
+                  <a href={`/principio/${pa.slug}`}>{pa.nombre}</a>
+                </>
+              ))}{" "}
+              — mismo principio activo, consulta a tu médico o farmacéutico antes de sustituir un medicamento.
+            </p>
+          ) : (
+            <p class="nota">
+              Todavía no tenemos confirmado el principio activo de {marca.nombre}, así que esta página compara la
+              marca entre farmacias pero no la enlaza con sus equivalentes genéricos. Consulta a tu médico o
+              farmacéutico antes de sustituir un medicamento.
+            </p>
+          )
+        }
       </div>
 
       <aside class="med-aside">
@@ -189,6 +220,24 @@ const structuredData = {
     color: var(--ink-muted);
     font-family: var(--font-mono);
     font-size: 0.82rem;
+  }
+  .principios {
+    margin: 0.55rem 0 0;
+    font-size: 0.92rem;
+  }
+  .principios a {
+    color: var(--stamp);
+    font-weight: 600;
+  }
+  .principios .fuente {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+  }
+  .nota a {
+    color: var(--stamp);
   }
   .field-label {
     font-family: var(--font-mono);
