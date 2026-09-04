@@ -40,7 +40,21 @@ TELEGRAM_API = "https://api.telegram.org/bot{token}/sendMessage"
 # considera caída (sección 6 del documento maestro).
 CORRIDAS_FALLIDAS_PARA_ALERTAR = 3
 
-FUENTES = ["fybeca", "pharmacys", "medicity", "cruzazul", "economicas"]
+FUENTES = [
+    "fybeca",
+    "pharmacys",
+    "medicity",
+    "cruzazul",
+    "economicas",
+    # Cola larga por sitemap (ver scrapers/cola_larga.py): un fuente propio
+    # para no mezclar su salud con la búsqueda por término -- si una fuente
+    # de cola larga trae 0 productos 3 noches seguidas, es señal real de que
+    # el sitemap cambió de formato o el sitio empezó a bloquearla, no ruido.
+    "fybeca_cola_larga",
+    "pharmacys_cola_larga",
+    "medicity_cola_larga",
+    "cruzazul_cola_larga",
+]
 
 
 def ecuador_today():

@@ -55,6 +55,11 @@ GTM_RE = re.compile(r'data-gtm="(.*?)"')
 JSONLD_RE = re.compile(r'<script type="application/ld\+json">\s*(\{.*?"ItemList".*?\})\s*</script>', re.S)
 ECFY_ID_RE = re.compile(r"(ECFY_[0-9]+)\.html")
 
+# Para cola_larga.py: la página de un producto puntual (a diferencia de la
+# de búsqueda) trae un bloque schema.org/Product con precio y sku -- no hace
+# falta cruzar JSON-LD con data-gtm como en la búsqueda.
+PRODUCT_JSONLD_RE = re.compile(r'<script type="application/ld\+json">\s*(\{.*?"@type":"Product".*?\})\s*</script>', re.S)
+
 
 def load_terms():
     terms = []
@@ -125,6 +130,48 @@ def normalize(page_html):
             }
         )
     return rows
+
+
+def fetch_product_page(url):
+    page_html = get_html(url)
+    save_raw(PHARMACY, url.rstrip("/").rsplit("/", 1)[-1][:60], {"html_len": len(page_html)})
+    return page_html
+
+
+def normalize_product_page(page_html, url):
+    """Para cola_larga.py: una página de producto puntual (sacada del
+    sitemap del sitio, no adivinada por término). Devuelve None si no se
+    pudo extraer el bloque Product -- nunca inventa datos."""
+    m = PRODUCT_JSONLD_RE.search(page_html)
+    if not m:
+        return None
+    try:
+        data = json.loads(m.group(1))
+    except ValueError:
+        return None
+
+    external_id = data.get("sku")
+    if not external_id:
+        return None
+
+    offers = data.get("offers") or {}
+    price = offers.get("price")
+    try:
+        precio_usd = float(price) if price is not None else None
+    except (TypeError, ValueError):
+        precio_usd = None
+
+    availability = offers.get("availability") or ""
+    en_stock = True if "InStock" in availability else (False if availability else None)
+
+    return {
+        "external_id": external_id,
+        "nombre_en_tienda": data.get("name"),
+        "url": url,
+        "precio_usd": precio_usd,
+        "precio_promocional": None,  # no distinguible del precio regular en esta pagina
+        "en_stock": en_stock,
+    }
 
 
 def scrape(terms):

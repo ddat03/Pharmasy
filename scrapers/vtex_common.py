@@ -48,6 +48,19 @@ def fetch(pharmacy, base_url, search_path, term):
     return data
 
 
+def fetch_by_product_url(pharmacy, base_url, product_url):
+    """Para `cola_larga.py`: pide el mismo JSON de catálogo que una búsqueda
+    por término, pero para una URL de producto puntual (sacada del sitemap
+    del sitio, no adivinada). Confirmado a mano: pedir la misma ruta bajo
+    `/api/catalog_system/pub/products/search{ruta}` devuelve el mismo shape
+    que `?ft=término`, así que `normalize()` no cambia."""
+    path = product_url[len(base_url) :] if product_url.startswith(base_url) else product_url
+    url = f"{base_url}/api/catalog_system/pub/products/search{path}"
+    data = get_json(url)
+    save_raw(pharmacy, path.strip("/").replace("/", "_")[:60], data)
+    return data
+
+
 def normalize(raw_products):
     """Convierte productos crudos de VTEX en filas para pharmacy_products +
     price_snapshots. Campo no extraído = None, nunca inventado."""

@@ -29,6 +29,11 @@ on:
         required: false
         type: boolean
         default: false
+      saltar_cola_larga:
+        description: "Saltar la cola larga por sitemap (Fybeca/Pharmacys/Medicity/Cruz Azul)"
+        required: false
+        type: boolean
+        default: false
 
 # Una corrida a la vez: dos scrapeos simultaneos escribirian el snapshot del
 # mismo dia sobre si mismos y multiplicarian las peticiones a las farmacias.
@@ -245,6 +250,116 @@ jobs:
       )
     uses: ./.github/workflows/deploy-web.yml
     secrets: inherit
+
+  # --- Cola larga del catalogo (descubierto por sitemap, no por termino) ---
+  #
+  # scrapers/cola_larga.py lee el sitemap.xml que cada sitio ya publica para
+  # ser rastreado y visita una tanda de productos reales que el buscador por
+  # termino (--all, 557 de db/seed_medicamentos.csv) nunca encuentra --
+  # medido el 2026-09-04: ~40,600 productos reales entre las 4 cadenas y solo
+  # ~5,840 en la base (~14%). A 1 peticion cada 5-10s una vuelta completa
+  # tarda semanas, no una noche, asi que rota por lo mas viejo (ver
+  # db/migracion_catalog_urls.sql y Boveda Farmacia/Conceptos/Cola larga del
+  # catalogo.md). `needs: scrape` asegura que arranque recien cuando la
+  # busqueda por termino de esa misma cadena ya termino -- nunca dos
+  # peticiones nuestras al mismo sitio a la vez. `--budget-minutos` deja
+  # margen dentro de la ventana 2:00-4:00 AM sin importar cuanto haya tardado
+  # la busqueda de esa noche.
+  cola_larga_medicity:
+    name: cola larga (medicity)
+    needs: scrape
+    if: >-
+      github.event.inputs.saltar_cola_larga != 'true' && (
+        github.event.inputs.solo_fuente == ''
+        || github.event.inputs.solo_fuente == 'todas'
+        || github.event.inputs.solo_fuente == 'medicity'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python scrapers/cola_larga.py --pharmacy medicity --budget-minutos 55
+
+  cola_larga_cruzazul:
+    name: cola larga (cruzazul)
+    needs: scrape
+    if: >-
+      github.event.inputs.saltar_cola_larga != 'true' && (
+        github.event.inputs.solo_fuente == ''
+        || github.event.inputs.solo_fuente == 'todas'
+        || github.event.inputs.solo_fuente == 'cruzazul'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python scrapers/cola_larga.py --pharmacy cruzazul --budget-minutos 55
+
+  cola_larga_pharmacys:
+    name: cola larga (pharmacys)
+    needs: scrape
+    if: >-
+      github.event.inputs.saltar_cola_larga != 'true' && (
+        github.event.inputs.solo_fuente == ''
+        || github.event.inputs.solo_fuente == 'todas'
+        || github.event.inputs.solo_fuente == 'pharmacys'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python scrapers/cola_larga.py --pharmacy pharmacys --budget-minutos 50
+
+  cola_larga_fybeca:
+    name: cola larga (fybeca)
+    needs: scrape
+    if: >-
+      github.event.inputs.saltar_cola_larga != 'true' && (
+        github.event.inputs.solo_fuente == ''
+        || github.event.inputs.solo_fuente == 'todas'
+        || github.event.inputs.solo_fuente == 'fybeca'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python scrapers/cola_larga.py --pharmacy fybeca --budget-minutos 35
 
   normalize:
     name: normalizar catalogo

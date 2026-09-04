@@ -130,6 +130,24 @@ create table if not exists outbound_clicks (
 
 create index if not exists idx_outbound_clicks_drug_pharmacy on outbound_clicks (drug_id, pharmacy);
 
+-- Catálogo completo descubierto por sitemap (más allá de los ~557 términos
+-- de la semilla). `scrapers/cola_larga.py` sincroniza acá qué URLs de
+-- producto existen en cada sitio y cuándo se visitó cada una por última
+-- vez, para poder rotar de a tandas por noche en vez de recorrer todo el
+-- catálogo de una sola vez (ver Boveda Farmacia/Conceptos/Cola larga del
+-- catálogo.md). `last_scraped` nulo = nunca visitada -> máxima prioridad.
+create table if not exists catalog_urls (
+  id uuid primary key default uuid_generate_v4(),
+  pharmacy text not null,
+  url text not null,
+  first_seen timestamptz not null default now(),
+  last_seen_in_sitemap timestamptz not null default now(),
+  last_scraped timestamptz,
+  unique (pharmacy, url)
+);
+
+create index if not exists idx_catalog_urls_pharmacy_last_scraped on catalog_urls (pharmacy, last_scraped nulls first);
+
 -- Row Level Security: lectura pública solo en drugs, pharmacy_products,
 -- price_snapshots. Escritura únicamente con service key (que hace bypass de RLS).
 alter table drugs enable row level security;
@@ -139,6 +157,7 @@ alter table subscriptions enable row level security;
 alter table scrape_runs enable row level security;
 alter table ai_cache enable row level security;
 alter table outbound_clicks enable row level security;
+alter table catalog_urls enable row level security;
 
 drop policy if exists "lectura publica drugs" on drugs;
 create policy "lectura publica drugs" on drugs for select using (true);
@@ -149,8 +168,8 @@ create policy "lectura publica pharmacy_products" on pharmacy_products for selec
 drop policy if exists "lectura publica price_snapshots" on price_snapshots;
 create policy "lectura publica price_snapshots" on price_snapshots for select using (true);
 
--- subscriptions, scrape_runs, ai_cache y outbound_clicks: sin política de
--- select pública -> solo accesibles con la service key.
+-- subscriptions, scrape_runs, ai_cache, outbound_clicks y catalog_urls: sin
+-- política de select pública -> solo accesibles con la service key.
 
 -- Búsqueda tolerante a errores de tipeo sobre el nombre tal como aparece
 -- en cada tienda (mientras drugs/pharmacy_products.drug_id no está
