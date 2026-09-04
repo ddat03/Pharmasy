@@ -43,7 +43,15 @@ const LATEST_PRICE_COLUMNS =
   "pharmacy_product_id,pharmacy,nombre_en_tienda,url,drug_id,drug_slug,precio_techo_usd,precio_usd,precio_promocional,en_stock,fecha,precio_por_unidad";
 
 export async function searchProducts(term: string, limit = 30): Promise<LatestPriceRow[]> {
-  return supabaseGet<LatestPriceRow[]>("latest_prices", {
+  // Se pide de mas (limit * 5) y se deduplica aca abajo por (farmacia +
+  // nombre exacto) antes de cortar al limit real. Sin esto, una cadena que
+  // lista el mismo producto en varias sucursales (ej. Económicas via Rappi,
+  // 4 sucursales) lo repite 2-4 veces en los resultados -- y como se repite
+  // en el tramo mas barato, esas copias llenaban el LIMIT antes de que
+  // aparecieran otros productos o farmacias. Genérico a propósito: qué
+  // producto se repite y cuantas copias tiene cambia cada noche con cada
+  // corrida de scraping, no se puede resolver para un caso puntual.
+  const raw = await supabaseGet<LatestPriceRow[]>("latest_prices", {
     select: LATEST_PRICE_COLUMNS,
     nombre_en_tienda: `ilike.*${term}*`,
     // Los precios por unidad suelta (Medicity los marca con precio_por_unidad
@@ -57,8 +65,19 @@ export async function searchProducts(term: string, limit = 30): Promise<LatestPr
     // nullsfirst, el orden real es: comparables (null o false) primero por
     // precio, no-comparables (true) al final por precio.
     order: "precio_por_unidad.asc.nullsfirst,precio_usd.asc",
-    limit: String(limit),
+    limit: String(limit * 5),
   });
+
+  const vistos = new Set<string>();
+  const deduplicado: LatestPriceRow[] = [];
+  for (const row of raw) {
+    const clave = `${row.pharmacy}::${row.nombre_en_tienda}`;
+    if (vistos.has(clave)) continue;
+    vistos.add(clave);
+    deduplicado.push(row);
+    if (deduplicado.length >= limit) break;
+  }
+  return deduplicado;
 }
 
 export type Drug = {

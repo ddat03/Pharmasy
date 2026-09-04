@@ -83,12 +83,18 @@ for (const cat of CATEGORIAS) {
 type FilaDestacada = { pharmacy: string; precio: number };
 type Destacado = { nombre: string; slug: string; filas: FilaDestacada[] };
 
-// El medicamento con mas farmacias comparables (nunca por unidad, mismo
-// criterio que el resto del sitio) es el que mejor demuestra en un vistazo
-// que hay algo real para comparar -- no una foto de stock, un precio real.
+// Cualquier medicamento comparable en al menos 3 cadenas (nunca por unidad,
+// mismo criterio que el resto del sitio) demuestra en un vistazo que hay
+// algo real para comparar -- no una foto de stock, un precio real. Se
+// juntan TODOS los que cumplen ese piso y se elige uno al azar en cada
+// build: quedarse siempre con "el de mas cadenas" resolvia casi siempre al
+// mismo medicamento (esa cobertura casi no cambia noche a noche), y la
+// tarjeta dice "hoy" -- el sitio es estatico y se reconstruye una vez por
+// noche, asi que un sorteo por build ya alcanza para que varie dia a dia
+// sin quedar inestable dentro del mismo dia.
 let destacado: Destacado | null = null;
 {
-  let mejor: { drug: (typeof drugs)[number]; filas: FilaDestacada[]; cadenas: number } | null = null;
+  const candidatos: { drug: (typeof drugs)[number]; filas: FilaDestacada[] }[] = [];
   for (const d of drugs) {
     // Una fila por farmacia (la mas barata de esa cadena para este
     // medicamento) -- sin este agrupamiento, un medicamento con dos cajas
@@ -106,15 +112,14 @@ let destacado: Destacado | null = null;
       .sort((a, b) => a[1] - b[1])
       .slice(0, 3)
       .map(([pharmacy, precio]) => ({ pharmacy: PHARMACY_LABELS[pharmacy] ?? pharmacy, precio }));
-    if (!mejor || porCadena.size > mejor.cadenas) {
-      mejor = { drug: d, filas, cadenas: porCadena.size };
-    }
+    candidatos.push({ drug: d, filas });
   }
-  if (mejor) {
+  if (candidatos.length > 0) {
+    const elegido = candidatos[Math.floor(Math.random() * candidatos.length)];
     destacado = {
-      nombre: [mejor.drug.principio_activo, mejor.drug.concentracion].filter(Boolean).join(" "),
-      slug: mejor.drug.slug,
-      filas: mejor.filas,
+      nombre: [elegido.drug.principio_activo, elegido.drug.concentracion].filter(Boolean).join(" "),
+      slug: elegido.drug.slug,
+      filas: elegido.filas,
     };
   }
 }
