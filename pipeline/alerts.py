@@ -32,7 +32,7 @@ from pathlib import Path
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scrapers"))
-from base import supabase_select  # noqa: E402
+from base import supabase_count, supabase_select  # noqa: E402
 
 TELEGRAM_API = "https://api.telegram.org/bot{token}/sendMessage"
 
@@ -196,6 +196,40 @@ def alertas_de_usuario(hoy, dry_run=False):
 # --- 2. Salud del scraping ------------------------------------------------
 
 
+# Cadenas con sitio propio y sitemap: son las que alimentan `catalog_urls` y
+# la cola larga (Económicas corre vía Rappi, no tiene catálogo que recorrer).
+CADENAS_CON_CATALOGO = ["fybeca", "pharmacys", "medicity", "cruzazul"]
+
+
+def cobertura_catalogo():
+    """Bloque de texto: qué porcentaje del catálogo real de cada cadena ya
+    tiene precio en la base, y cuánto de la primera pasada del crawler de
+    cola larga (scrapers/cola_larga.py) va recorrido. Devuelve None si la
+    tabla `catalog_urls` todavía no existe o no responde -- el resumen de
+    salud no debe caerse por esto."""
+    try:
+        lineas = ["", "📚 <b>Cobertura del catálogo</b> (con precio / total del sitemap)"]
+        for ph in CADENAS_CON_CATALOGO:
+            total = supabase_count("catalog_urls", {"pharmacy": f"eq.{ph}"})
+            if not total:
+                lineas.append(f"• {ph}: sin catálogo descubierto todavía")
+                continue
+            con_precio = supabase_count("pharmacy_products", {"pharmacy": f"eq.{ph}"}) or 0
+            visitadas = supabase_count("catalog_urls", {"pharmacy": f"eq.{ph}", "last_scraped": "not.is.null"}) or 0
+            pct_precio = round(100 * con_precio / total)
+            pct_pasada = round(100 * visitadas / total)
+            lineas.append(
+                f"• {ph}: {con_precio:,} / {total:,} ({pct_precio}%) · 1ª pasada {pct_pasada}%"
+            )
+        eco = supabase_count("pharmacy_products", {"pharmacy": "eq.economicas"})
+        if eco is not None:
+            lineas.append(f"• economicas: {eco:,} productos (vía Rappi, sin catálogo total)")
+        return "\n".join(lineas)
+    except Exception as e:
+        print(f"aviso: no se pudo calcular la cobertura del catálogo: {e}")
+        return None
+
+
 def revisar_salud(hoy, dry_run=False):
     """Resumen de la corrida de hoy + aviso si una fuente lleva N corridas
     seguidas sin traer nada. Devuelve la lista de fuentes caídas."""
@@ -235,6 +269,9 @@ def revisar_salud(hoy, dry_run=False):
 
     admin = os.environ.get("TELEGRAM_ADMIN_CHAT_ID")
     cuerpo = f"<b>farma-precios · {hoy.isoformat()}</b>\n\n" + "\n".join(resumen)
+    cobertura = cobertura_catalogo()
+    if cobertura:
+        cuerpo += "\n" + cobertura
     if sin_correr:
         cuerpo += f"\n\n🟠 <b>Sin datos de hoy</b>: {', '.join(sin_correr)}"
     if caidas:

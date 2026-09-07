@@ -120,6 +120,24 @@ def supabase_select(table, params, timeout=30):
     return resp.json()
 
 
+def supabase_count(table, params=None, timeout=30):
+    """Cuenta filas sin traerlas: PostgREST devuelve el total en la cabecera
+    Content-Range cuando se pide `count=exact` con un rango vacío. Sirve para
+    tablas grandes (catalog_urls tiene decenas de miles de filas) donde
+    `len(supabase_select(...))` daría un número equivocado -- PostgREST corta
+    cada respuesta en 1000 filas por defecto."""
+    base_url = os.environ["SUPABASE_URL"]
+    url = f"{base_url}/rest/v1/{table}"
+    headers = _supabase_headers({"Prefer": "count=exact", "Range": "0-0", "Range-Unit": "items"})
+    resp = requests.get(url, headers=headers, params={"select": "id", **(params or {})}, timeout=timeout)
+    resp.raise_for_status()
+    total = resp.headers.get("content-range", "").split("/")[-1]
+    try:
+        return int(total)
+    except (TypeError, ValueError):
+        return None
+
+
 def supabase_patch(table, params, patch, timeout=30):
     """UPDATE parcial vía PostgREST, filtrado por `params` (ej.
     {"slug": "eq.<slug>"}). A diferencia de supabase_upsert, no requiere
