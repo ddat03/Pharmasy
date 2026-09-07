@@ -186,6 +186,53 @@ function formatPriceStatic(value: number): string {
 
     {/* Los resultados van pegados al buscador, no al final de la pagina. */}
     <section id="search-panel" class="search-panel" hidden>
+      {/* El panel de filtros aparece recien cuando hay resultados y arranca
+          sin ningun filtro aplicado: todas las cadenas, orden por precio
+          ascendente, sin tope de precio. Filtra y ordena en el navegador
+          sobre los resultados ya traidos -- no dispara consultas nuevas. */}
+      <div id="filtros" class="filtros" hidden>
+        <div class="filtros-grid">
+          <div class="filtro-bloque">
+            <span class="filtro-label">Farmacias</span>
+            <div class="filtro-chips" id="filtro-farmacias"></div>
+          </div>
+          <div class="filtro-bloque">
+            <span class="filtro-label">Orden</span>
+            <div class="filtro-seg" id="filtro-orden">
+              <button type="button" data-orden="asc" class="is-on">Más barato</button>
+              <button type="button" data-orden="desc">Más caro</button>
+            </div>
+          </div>
+          <div class="filtro-bloque">
+            <span class="filtro-label">Precio (US$)</span>
+            <div class="filtro-precio">
+              <input
+                type="number"
+                id="precio-min"
+                min="0"
+                step="1"
+                inputmode="decimal"
+                placeholder="mín"
+                aria-label="Precio mínimo en dólares"
+              />
+              <span class="filtro-precio-sep" aria-hidden="true">–</span>
+              <input
+                type="number"
+                id="precio-max"
+                min="0"
+                step="1"
+                inputmode="decimal"
+                placeholder="máx"
+                aria-label="Precio máximo en dólares"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="filtros-foot">
+          <span id="filtros-conteo" class="filtros-conteo"></span>
+          <button type="button" id="filtros-limpiar" class="filtros-limpiar" hidden>Limpiar filtros</button>
+        </div>
+      </div>
       <div id="results" class="ledger"></div>
       <p class="normalizer-note prose">
         Nota: todavía no agrupamos genéricos equivalentes por principio activo en los resultados de búsqueda libre —
@@ -747,6 +794,158 @@ function formatPriceStatic(value: number): string {
   }
 </style>
 
+{/* Global: las cajitas de farmacia y el botón "Limpiar" inline se inyectan
+    por JS con innerHTML, así que no reciben el atributo de scope de Astro —
+    sus estilos tienen que vivir en un bloque global (mismo motivo por el que
+    .ledger-* vive en el <style is:global> de Layout.astro). */}
+<style is:global>
+  .filtros {
+    border: 1px solid var(--ink-faint);
+    border-radius: 6px;
+    background: var(--paper-raised);
+    padding: 0.9rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .filtros:not([hidden]) {
+      animation: print-in 320ms var(--ease-print) backwards;
+    }
+  }
+  .filtros-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem 1.6rem;
+  }
+  .filtro-bloque {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .filtro-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+  }
+  .filtro-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  /* Cajita de filtro: activa = pintada, con "×" para quitarla (como el
+     ejemplo de referencia). Inactiva = contorno punteado, con "+" para
+     volver a sumarla. */
+  .filtro-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--stamp);
+    background: var(--stamp);
+    color: var(--paper-raised);
+    cursor: pointer;
+    transition:
+      background-color 140ms var(--ease-print),
+      color 140ms var(--ease-print),
+      border-color 140ms var(--ease-print);
+  }
+  .filtro-chip .filtro-chip-x {
+    font-size: 0.95rem;
+    line-height: 1;
+    opacity: 0.85;
+  }
+  .filtro-chip[aria-pressed="false"] {
+    background: transparent;
+    color: var(--ink-muted);
+    border-color: var(--ink-faint);
+    border-style: dashed;
+  }
+  .filtro-seg {
+    display: inline-flex;
+    border: 1px solid var(--ink-faint);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .filtro-seg button {
+    border: none;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.32rem 0.75rem;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition:
+      background-color 140ms var(--ease-print),
+      color 140ms var(--ease-print);
+  }
+  .filtro-seg button.is-on {
+    background: var(--ink);
+    color: var(--paper-raised);
+  }
+  .filtro-precio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .filtro-precio input {
+    width: 4.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.32rem 0.45rem;
+    border: 1px solid var(--ink-faint);
+    border-radius: 4px;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .filtro-precio input:focus {
+    outline: 2px solid var(--stamp);
+    outline-offset: 1px;
+  }
+  .filtro-precio-sep {
+    color: var(--ink-muted);
+  }
+  .filtros-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.85rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--ink-faint-2);
+  }
+  .filtros-conteo {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+  }
+  .filtros-limpiar {
+    border: none;
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--stamp);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    padding: 0;
+  }
+  @media (max-width: 620px) {
+    .filtros-grid {
+      gap: 0.9rem 1.2rem;
+    }
+    .filtro-bloque {
+      width: 100%;
+    }
+  }
+</style>
+
 <script>
   import { searchProducts, PHARMACY_LABELS, PHARMACY_LOGOS, type LatestPriceRow } from "../lib/supabase";
   import { activarCarruselesPreview } from "../lib/preview-carousel";
@@ -831,11 +1030,160 @@ function formatPriceStatic(value: number): string {
   // parpadeo de re-imprimir 20+ filas en cada tecla).
   let hasShownResults = false;
 
+  // ---------- filtros (todo del lado del cliente) ----------
+  // El panel filtra y ordena sobre `resultadosCrudos` -- lo que ya trajo la
+  // última búsqueda -- sin disparar consultas nuevas. Los filtros persisten
+  // entre búsquedas dentro de la misma visita (el usuario los va ajustando);
+  // "Limpiar filtros" los devuelve al estado por defecto: todas las cadenas,
+  // más barato primero, sin tope de precio.
+  const filtrosPanel = document.getElementById("filtros") as HTMLElement;
+  const chipsBox = document.getElementById("filtro-farmacias") as HTMLElement;
+  const ordenBox = document.getElementById("filtro-orden") as HTMLElement;
+  const precioMinInput = document.getElementById("precio-min") as HTMLInputElement;
+  const precioMaxInput = document.getElementById("precio-max") as HTMLInputElement;
+  const conteoEl = document.getElementById("filtros-conteo") as HTMLElement;
+  const limpiarBtn = document.getElementById("filtros-limpiar") as HTMLButtonElement;
+
+  // Orden fijo de las cadenas en las cajitas, para que no bailen de lugar
+  // entre una búsqueda y otra según qué farmacia haya quedado más barata.
+  const ORDEN_CADENAS = ["fybeca", "pharmacys", "medicity", "cruzazul", "economicas"];
+
+  let resultadosCrudos: LatestPriceRow[] = [];
+  const filtros = {
+    cadenasOff: new Set<string>(),
+    orden: "asc" as "asc" | "desc",
+    precioMin: null as number | null,
+    precioMax: null as number | null,
+  };
+
+  // El precio que la persona realmente ve/paga: el promocional si es menor.
+  function precioEfectivo(row: LatestPriceRow): number | null {
+    const promo = row.precio_promocional;
+    if (promo != null && promo < (row.precio_usd ?? Infinity)) return promo;
+    return row.precio_usd;
+  }
+
+  function hayFiltroActivo(): boolean {
+    return (
+      filtros.cadenasOff.size > 0 ||
+      filtros.orden !== "asc" ||
+      filtros.precioMin != null ||
+      filtros.precioMax != null
+    );
+  }
+
+  function construirChips() {
+    const presentes = ORDEN_CADENAS.filter((ph) => resultadosCrudos.some((r) => r.pharmacy === ph));
+    // Si una cadena que el usuario había desactivado ya no aparece en esta
+    // búsqueda, se la saca del set: así no arrastra un filtro invisible.
+    for (const off of [...filtros.cadenasOff]) {
+      if (!presentes.includes(off)) filtros.cadenasOff.delete(off);
+    }
+    chipsBox.innerHTML = presentes
+      .map((ph) => {
+        const activa = !filtros.cadenasOff.has(ph);
+        const label = PHARMACY_LABELS[ph] ?? ph;
+        const marca = activa ? "×" : "+";
+        return `<button type="button" class="filtro-chip" data-pharmacy="${ph}" aria-pressed="${activa}">
+          ${escapeHtml(label)}<span class="filtro-chip-x" aria-hidden="true">${marca}</span>
+        </button>`;
+      })
+      .join("");
+  }
+
+  function sincronizarControles() {
+    ordenBox.querySelectorAll("button").forEach((b) => {
+      b.classList.toggle("is-on", b.dataset.orden === filtros.orden);
+    });
+    limpiarBtn.hidden = !hayFiltroActivo();
+  }
+
+  function pintarResultados(animar: boolean) {
+    const filas = resultadosCrudos
+      .filter((r) => {
+        if (filtros.cadenasOff.has(r.pharmacy)) return false;
+        const p = precioEfectivo(r);
+        if (filtros.precioMin != null && (p == null || p < filtros.precioMin)) return false;
+        if (filtros.precioMax != null && (p == null || p > filtros.precioMax)) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        // Los precios por unidad suelta nunca son comparables con el de la
+        // caja: van siempre al final, pase lo que pase con el orden elegido.
+        const ua = a.precio_por_unidad ? 1 : 0;
+        const ub = b.precio_por_unidad ? 1 : 0;
+        if (ua !== ub) return ua - ub;
+        const pa = precioEfectivo(a);
+        const pb = precioEfectivo(b);
+        if (pa == null && pb == null) return 0;
+        if (pa == null) return 1;
+        if (pb == null) return -1;
+        return filtros.orden === "asc" ? pa - pb : pb - pa;
+      });
+
+    if (filas.length === 0) {
+      results.innerHTML = `<p class="status">Ningún resultado con estos filtros. <button type="button" class="filtros-limpiar" id="limpiar-inline">Limpiar filtros</button></p>`;
+      document.getElementById("limpiar-inline")?.addEventListener("click", limpiarFiltros);
+    } else {
+      results.innerHTML = filas.map((row, i) => renderRow(row, i, animar)).join("");
+    }
+
+    const total = resultadosCrudos.length;
+    conteoEl.textContent =
+      filas.length === total ? `${total} resultado${total === 1 ? "" : "s"}` : `${filas.length} de ${total}`;
+    sincronizarControles();
+  }
+
+  function limpiarFiltros() {
+    filtros.cadenasOff.clear();
+    filtros.orden = "asc";
+    filtros.precioMin = null;
+    filtros.precioMax = null;
+    precioMinInput.value = "";
+    precioMaxInput.value = "";
+    construirChips();
+    pintarResultados(false);
+  }
+
+  chipsBox.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("button[data-pharmacy]") as HTMLButtonElement | null;
+    if (!btn) return;
+    const ph = btn.dataset.pharmacy!;
+    if (filtros.cadenasOff.has(ph)) filtros.cadenasOff.delete(ph);
+    else filtros.cadenasOff.add(ph);
+    construirChips();
+    pintarResultados(false);
+  });
+
+  ordenBox.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("button[data-orden]") as HTMLButtonElement | null;
+    if (!btn) return;
+    filtros.orden = btn.dataset.orden === "desc" ? "desc" : "asc";
+    pintarResultados(false);
+  });
+
+  let precioDebounce: ReturnType<typeof setTimeout>;
+  function leerPrecios() {
+    clearTimeout(precioDebounce);
+    precioDebounce = setTimeout(() => {
+      const min = parseFloat(precioMinInput.value);
+      const max = parseFloat(precioMaxInput.value);
+      filtros.precioMin = Number.isFinite(min) && min >= 0 ? min : null;
+      filtros.precioMax = Number.isFinite(max) && max >= 0 ? max : null;
+      pintarResultados(false);
+    }, 250);
+  }
+  precioMinInput.addEventListener("input", leerPrecios);
+  precioMaxInput.addEventListener("input", leerPrecios);
+  limpiarBtn.addEventListener("click", limpiarFiltros);
+
   async function runSearch(term: string) {
     const seq = ++requestSeq;
     if (term.trim().length < 3) {
       results.innerHTML = "";
       hasShownResults = false;
+      resultadosCrudos = [];
+      filtrosPanel.hidden = true;
       mostrarPanel(false);
       return;
     }
@@ -844,20 +1192,26 @@ function formatPriceStatic(value: number): string {
       results.innerHTML = `<p class="status">Imprimiendo resultados…</p>`;
     }
     try {
-      const rows = await searchProducts(term.trim());
+      const rows = await searchProducts(term.trim(), 60);
       if (seq !== requestSeq) return; // respuesta obsoleta, ya se lanzó otra búsqueda
       if (rows.length === 0) {
         results.innerHTML = `<p class="status">Sin resultados para "${escapeHtml(term)}".</p>`;
         hasShownResults = false;
+        resultadosCrudos = [];
+        filtrosPanel.hidden = true;
         return;
       }
-      const animate = !hasShownResults;
-      results.innerHTML = rows.map((row, i) => renderRow(row, i, animate)).join("");
+      resultadosCrudos = rows;
+      filtrosPanel.hidden = false;
+      construirChips();
+      pintarResultados(!hasShownResults);
       hasShownResults = true;
     } catch (err) {
       if (seq !== requestSeq) return;
       results.innerHTML = `<p class="status error">No se pudo conectar con la base de datos. Intenta de nuevo.</p>`;
       hasShownResults = false;
+      resultadosCrudos = [];
+      filtrosPanel.hidden = true;
       console.error(err);
     }
   }
