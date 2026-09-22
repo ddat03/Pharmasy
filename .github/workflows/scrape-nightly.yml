@@ -398,7 +398,15 @@ jobs:
 
   alerts:
     name: alertas y salud
-    needs: [scrape, normalize]
+    # Los 4 jobs de cola_larga_* no bloquean a nadie mas (deploy sigue sin
+    # esperarlos, ver comentario en ese job) pero alerts.py si consulta su
+    # scrape_runs de HOY -- sin esperarlos aca, alerts arrancaba en cuanto
+    # normalize terminaba (~15 min) mientras cola_larga_* seguia corriendo
+    # otra hora mas, y siempre encontraba "sin datos de hoy" para las 4
+    # fuentes de cola larga. Bug real, no cosmetico: mando esa falsa alarma
+    # por Telegram TODAS las noches desde que se agrego cola larga
+    # (2026-09-05), aunque las 4 fuentes si estaban trayendo productos.
+    needs: [scrape, normalize, cola_larga_medicity, cola_larga_cruzazul, cola_larga_pharmacys, cola_larga_fybeca]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 20
