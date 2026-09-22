@@ -69,6 +69,13 @@ const hechos = [
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
+// Google Analytics (GA4), propiedad "Farma Precios" creada por el usuario
+// el 2026-09-22. Solo en build de produccion (import.meta.env.PROD): sin
+// esto, cada `astro dev`/`astro build` local mandaria visitas falsas y
+// ensuciaria los numeros reales -- mismo criterio que el resto del sitio de
+// no mostrar/registrar un dato que no es real.
+const GA_MEASUREMENT_ID = "G-LPFQGY6YZT";
+
 // El buscador del encabezado no se repite en la home, donde el campo grande
 // del hero ya es el elemento principal de la pagina.
 const esHome = Astro.url.pathname === "/";
@@ -122,6 +129,22 @@ const esHome = Astro.url.pathname === "/";
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+
+    {
+      import.meta.env.PROD && (
+        <>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+          <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", GA_MEASUREMENT_ID);
+          </script>
+        </>
+      )
+    }
 
     <!--
       Slot de anuncios (Google AdSense) — preparado, sin activar todavía.
