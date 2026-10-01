@@ -12,6 +12,7 @@ import {
   slugifyPrincipio,
   PHARMACY_LABELS,
   PHARMACY_LOGOS,
+  PHARMACY_COLORS,
   type Drug,
   type LatestPriceRow,
 } from "../../lib/supabase";
@@ -104,6 +105,14 @@ const cheapestId =
   comparableRows.length > 0
     ? comparableRows.reduce((min, r) => ((r.precio_usd ?? Infinity) < (min.precio_usd ?? Infinity) ? r : min)).pharmacy_product_id
     : null;
+// Barra comparativa: solo tiene sentido con 2+ filas comparables del MISMO
+// producto (por eso vive acá y no en principio/[slug], donde cada fila es
+// una presentación distinta -- comparar sus barras sería la misma
+// comparación inventada que el sitio se niega a mostrar). El ancho es
+// relativo al más caro del grupo; precio_por_unidad queda afuera, igual
+// que en el resto de los cálculos de esta página.
+const maxComparable =
+  comparableRows.length > 1 ? Math.max(...comparableRows.map((r) => r.precio_usd as number)) : null;
 // OJO: precio_techo_usd es por unidad (fijado así por el Consejo Nacional
 // de Fijación de Precios) y precio_usd es por presentación completa (caja
 // / frasco) — todavía no son comparables directamente porque no extraemos
@@ -204,8 +213,19 @@ const structuredData = {
           const isCheapest = row.pharmacy_product_id === cheapestId;
           const logo = PHARMACY_LOGOS[row.pharmacy];
           const delay = Math.min(i * 45, 360);
+          const phColor = PHARMACY_COLORS[row.pharmacy];
+          // Ancho relativo al mas caro del grupo (ver maxComparable arriba);
+          // minimo 6% para que hasta el mas barato se vea como una barra,
+          // no como una raya invisible.
+          const barraPct =
+            maxComparable && !row.precio_por_unidad && row.precio_usd != null
+              ? Math.max(6, (row.precio_usd / maxComparable) * 100)
+              : null;
           return (
-            <article class={`ledger-row print-in ${isCheapest ? "is-cheapest" : ""}`} style={`animation-delay:${delay}ms`}>
+            <article
+              class={`ledger-row print-in ${isCheapest ? "is-cheapest" : ""}`}
+              style={`animation-delay:${delay}ms${phColor ? `;--ph-color:${phColor}` : ""}`}
+            >
               {isCheapest && <span class="stamp-badge">Mejor precio</span>}
               <div class="ledger-mark">{logo && <img src={logo} alt={PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy} loading="lazy" />}</div>
               <div class="ledger-main">
@@ -214,6 +234,12 @@ const structuredData = {
                 <p class={`ledger-stock ${row.en_stock === true ? "ok" : row.en_stock === false ? "danger" : "muted"}`}>
                   {row.en_stock === true ? "En stock" : row.en_stock === false ? "Sin stock" : "Disponibilidad no confirmada"}
                 </p>
+                {barraPct != null && (
+                  <div class="ledger-bar" role="presentation">
+                    <div class={`ledger-bar-fill ${isCheapest ? "is-cheapest" : ""}`} style={`width:${barraPct}%`} />
+                  </div>
+                )}
+                <span class="ledger-spark" data-pp-id={row.pharmacy_product_id} />
               </div>
               <div class="ledger-side">
                 <p class="ledger-price">
@@ -415,4 +441,44 @@ const structuredData = {
   .generic-note a {
     color: var(--stamp-dark);
   }
+
+  /* Barra comparativa: solo en esta pagina, donde toda fila es el MISMO
+     producto en otra farmacia -- ver comentario de maxComparable arriba
+     sobre por que no existe en principio/[slug] ni categoria/[slug]. */
+  .ledger-bar {
+    margin-top: 0.4rem;
+    width: 100%;
+    max-width: 220px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--ink-faint);
+    overflow: hidden;
+  }
+  .ledger-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--stamp);
+  }
+  .ledger-bar-fill.is-cheapest {
+    background: var(--deal);
+  }
 </style>
+
+<script>
+  import { historialPrecios, renderSparklineSVG } from "../../lib/sparkline";
+
+  // Un solo lote para todas las filas de la pagina (casi siempre 2-5
+  // farmacias, nunca mas de las 5 cadenas), no una consulta por fila.
+  const ids = Array.from(document.querySelectorAll<HTMLElement>(".ledger-spark[data-pp-id]")).map(
+    (el) => el.dataset.ppId!,
+  );
+  if (ids.length > 0) {
+    historialPrecios(ids).then((historial) => {
+      document.querySelectorAll<HTMLElement>(".ledger-spark[data-pp-id]").forEach((el) => {
+        const puntos = historial.get(el.dataset.ppId!) ?? [];
+        const svg = renderSparklineSVG(puntos);
+        if (svg) el.innerHTML = svg;
+      });
+    });
+  }
+</script>

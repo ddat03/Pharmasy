@@ -289,3 +289,16 @@ export const PHARMACY_LOGOS: Record<string, string> = {
   cruzazul: "/logos/cruzazul.png",
   economicas: "/logos/economicas.png",
 };
+
+// Color de acento por cadena (hilo de 3px al borde de cada fila), además
+// del logo -- un segundo recurso visual que no depende de que la imagen
+// cargue, y que se reconoce de reojo bajando por la lista. Tonos propios
+// del sitio, sueltos a propósito de la paleta de categorías (otro
+// contexto) para no mezclar los dos códigos de color.
+export const PHARMACY_COLORS: Record<string, string> = {
+  fybeca: "#c0395a",
+  pharmacys: "#4a5fa8",
+  medicity: "#2f8a6e",
+  cruzazul: "#1f6f8a",
+  economicas: "#a8692f",
+};

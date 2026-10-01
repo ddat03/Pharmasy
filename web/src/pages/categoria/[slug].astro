@@ -7,6 +7,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getAllDrugs, getAllPricedProductsByDrug, slugifyPrincipio, type Drug } from "../../lib/supabase";
 import { CATEGORIAS, categoriaDe, type CategoriaMeta } from "../../lib/categorias";
+import CategoryIcon from "../../components/CategoryIcon.astro";
 
 export async function getStaticPaths() {
   const [drugs, pricesByDrug] = await Promise.all([getAllDrugs(), getAllPricedProductsByDrug()]);
@@ -71,11 +72,22 @@ const seoDescription = `Compara precios de medicamentos para ${categoria.nombre.
 <Layout title={seoTitle} description={seoDescription}>
   <div class="col">
     <p class="breadcrumb"><a href="/">Buscador</a></p>
-    <h1 style={`--cat-color:${categoria.color}`}>{categoria.nombre}</h1>
-    <p class="subtitle">
-      {items.length} {items.length === 1 ? "principio activo" : "principios activos"} de esta categoría, con el
-      precio más bajo encontrado para cada uno.
-    </p>
+    <div class="cat-hero" style={`--cat-color:${categoria.color};--cat-color-bg:${categoria.colorBg}`}>
+      {/* Mismo ícono de trazo que la cuadrícula del inicio, solo que más
+          grande: decora la página sin recurrir a una foto -- ARCSA prohíbe
+          mostrar medicamentos identificables, así que el trazo abstracto es
+          la pieza visual que sí se puede usar libremente aquí. */}
+      <span class="cat-hero-icon" aria-hidden="true">
+        <CategoryIcon name={categoria.icon} />
+      </span>
+      <div>
+        <h1>{categoria.nombre}</h1>
+        <p class="subtitle">
+          {items.length} {items.length === 1 ? "principio activo" : "principios activos"} de esta categoría, con el
+          precio más bajo encontrado para cada uno.
+        </p>
+      </div>
+    </div>
 
     <div class="tear" aria-hidden="true"></div>
 
@@ -126,18 +138,39 @@ const seoDescription = `Compara precios de medicamentos para ${categoria.nombre.
   .breadcrumb a:hover {
     color: var(--stamp-dark);
   }
+  .cat-hero {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0 0.75rem;
+  }
+  .cat-hero-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--cat-color-bg);
+  }
+  .cat-hero-icon :global(svg) {
+    width: 30px;
+    height: 30px;
+    stroke: var(--cat-color);
+  }
   h1 {
     font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: -0.015em;
-    margin: 0.3rem 0 0.15rem;
+    margin: 0 0 0.15rem;
     border-left: 4px solid var(--cat-color);
     padding-left: 0.65rem;
   }
   .subtitle {
     color: var(--ink-muted);
     font-size: 0.9rem;
-    margin: 0;
+    margin: 0 0 0 0.75rem;
   }
 
   .presentation-row {

@@ -929,6 +929,21 @@ const esHome = Astro.url.pathname === "/";
   .ledger-row:first-child {
     border-top: 1px solid var(--ink-faint);
   }
+  /* Hilo de color por cadena (--ph-color, ver PHARMACY_COLORS en
+     supabase.ts): un segundo identificador ademas del logo, que no
+     depende de que la imagen cargue. Sin la variable seteada (paginas de
+     principio activo/categoria, que no son una fila por farmacia) el
+     fondo queda transparente y no cambia nada. */
+  .ledger-row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.45rem;
+    bottom: 0.45rem;
+    width: 3px;
+    border-radius: 0 2px 2px 0;
+    background: var(--ph-color, transparent);
+  }
   /* La fila entera reacciona al pasar el mouse, no solo el nombre: sin esto,
      mover el cursor sobre el precio o el logo no daba ninguna señal de que
      esa fila (y su boton "Ver en tienda") es la que esta en foco. */
@@ -1158,6 +1173,35 @@ const esHome = Astro.url.pathname === "/";
   }
   .status.error {
     color: var(--stamp-dark);
+  }
+  /* Estado "sin resultados": una lupa de línea en vez de puro texto, para
+     que no se sienta como una pantalla rota -- mismo trazo simple que el
+     resto de los íconos del sitio, sin fotos (ver nota de ARCSA en
+     categoria/[slug].astro). */
+  .status-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 2.5rem 0 2rem;
+  }
+  .status-empty .empty-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--ink-faint-2, var(--ink-faint));
+  }
+
+  /* ---------- sparkline de tendencia de precio (21 dias) ---------- */
+  .ledger-spark {
+    display: block;
+    margin-top: 0.3rem;
+    line-height: 0;
+  }
+  .ledger-spark:empty {
+    display: none;
+  }
+  .spark-svg {
+    display: block;
   }
 
   /* entrada "impresa" por fila, activada con la clase .is-printing vía JS/scroll */

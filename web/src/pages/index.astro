@@ -998,8 +998,9 @@ function formatPriceStatic(value: number): string {
 </style>
 
 <script>
-  import { searchProducts, PHARMACY_LABELS, PHARMACY_LOGOS, type LatestPriceRow } from "../lib/supabase";
+  import { searchProducts, PHARMACY_LABELS, PHARMACY_LOGOS, PHARMACY_COLORS, type LatestPriceRow } from "../lib/supabase";
   import { activarCarruselesPreview } from "../lib/preview-carousel";
+  import { historialPrecios, renderSparklineSVG, type PuntoPrecio } from "../lib/sparkline";
 
   activarCarruselesPreview(".category-item");
 
@@ -1023,6 +1024,13 @@ function formatPriceStatic(value: number): string {
     const [whole, cents] = value.toFixed(2).split(".");
     return `$${whole}<span class="cents">.${cents}</span>`;
   }
+
+  // Lupa de trazo simple para los estados vacíos -- mismo lenguaje visual
+  // que los íconos de categoría (ver CategoryIcon.astro), sin librería.
+  const LUPA_VACIA =
+    '<svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<circle cx="10.5" cy="10.5" r="6.5" /><path d="m20 20-4.3-4.3" /></svg>';
 
   function renderRow(row: LatestPriceRow, index: number, animate: boolean): string {
     const pharmacyLabel = PHARMACY_LABELS[row.pharmacy] ?? row.pharmacy;
@@ -1049,13 +1057,16 @@ function formatPriceStatic(value: number): string {
       ? `<a href="/medicamento/${row.drug_slug}">${escapeHtml(row.nombre_en_tienda ?? "(sin nombre)")}</a>`
       : escapeHtml(row.nombre_en_tienda ?? "(sin nombre)");
     const delay = animate ? Math.min(index * 45, 360) : 0;
+    const phColor = PHARMACY_COLORS[row.pharmacy];
+    const estilo = `animation-delay:${delay}ms${phColor ? `;--ph-color:${phColor}` : ""}`;
     return `
-      <article class="ledger-row ${animate ? "print-in" : ""}" style="animation-delay:${delay}ms">
+      <article class="ledger-row ${animate ? "print-in" : ""}" style="${estilo}">
         <div class="ledger-mark">${logo ? `<img src="${logo}" alt="${escapeAttr(pharmacyLabel)}" loading="lazy" />` : ""}</div>
         <div class="ledger-main">
           <h3>${nombreHtml}</h3>
           <p class="ledger-sub">${escapeHtml(pharmacyLabel)}</p>
           <p class="ledger-stock ${stockClass}">${stockLabel}</p>
+          <span class="ledger-spark" data-pp-id="${row.pharmacy_product_id}"></span>
         </div>
         <div class="ledger-side">
           <p class="ledger-price"><span class="${animate ? "odometer roll-in" : ""}">${promo ? `${promo}<span class="ledger-price-old">${formatPrice(row.precio_usd)}</span>` : formatPrice(row.precio_usd)}</span></p>
@@ -1063,6 +1074,33 @@ function formatPriceStatic(value: number): string {
           ${row.url ? `<a class="ledger-cta" href="${escapeAttr(row.url)}" target="_blank" rel="noopener">Ver en tienda</a>` : ""}
         </div>
       </article>`;
+  }
+
+  // ---------- sparkline de tendencia (21 dias), cacheado por sesion de busqueda ----------
+  // Un lote por busqueda (hasta 60 ids, los que trajo searchProducts), nunca
+  // uno por fila: cambiar un filtro no vuelve a pedir nada, solo reinyecta
+  // desde el cache lo que ya esta en memoria.
+  const sparkCache = new Map<string, PuntoPrecio[]>();
+
+  function inyectarSparklines() {
+    results.querySelectorAll<HTMLElement>(".ledger-spark[data-pp-id]").forEach((el) => {
+      const id = el.dataset.ppId!;
+      const puntos = sparkCache.get(id);
+      if (!puntos) return;
+      const svg = renderSparklineSVG(puntos);
+      if (svg) el.innerHTML = svg;
+    });
+  }
+
+  async function cargarSparklines(rows: LatestPriceRow[]) {
+    const idsFaltantes = rows.map((r) => r.pharmacy_product_id).filter((id) => !sparkCache.has(id));
+    if (idsFaltantes.length === 0) {
+      inyectarSparklines();
+      return;
+    }
+    const historial = await historialPrecios(idsFaltantes);
+    for (const id of idsFaltantes) sparkCache.set(id, historial.get(id) ?? []);
+    inyectarSparklines();
   }
 
   function escapeHtml(text: string): string {
@@ -1173,10 +1211,15 @@ function formatPriceStatic(value: number): string {
       });
 
     if (filas.length === 0) {
-      results.innerHTML = `<p class="status">Ningún resultado con estos filtros. <button type="button" class="filtros-limpiar" id="limpiar-inline">Limpiar filtros</button></p>`;
+      results.innerHTML = `<p class="status status-empty">${LUPA_VACIA}Ningún resultado con estos filtros. <button type="button" class="filtros-limpiar" id="limpiar-inline">Limpiar filtros</button></p>`;
       document.getElementById("limpiar-inline")?.addEventListener("click", limpiarFiltros);
     } else {
       results.innerHTML = filas.map((row, i) => renderRow(row, i, animar)).join("");
+      // Reinyecta desde el cache lo que ya se sabe (ej. al tocar un filtro,
+      // que vuelve a armar el HTML de cada fila desde cero). cargarSparklines
+      // ya se encarga de pedir lo que falte la primera vez que llega esta
+      // busqueda -- ver runSearch.
+      inyectarSparklines();
     }
 
     const total = resultadosCrudos.length;
@@ -1246,7 +1289,7 @@ function formatPriceStatic(value: number): string {
       const rows = await searchProducts(term.trim(), 60);
       if (seq !== requestSeq) return; // respuesta obsoleta, ya se lanzó otra búsqueda
       if (rows.length === 0) {
-        results.innerHTML = `<p class="status">Sin resultados para "${escapeHtml(term)}".</p>`;
+        results.innerHTML = `<p class="status status-empty">${LUPA_VACIA}Sin resultados para "${escapeHtml(term)}".</p>`;
         hasShownResults = false;
         resultadosCrudos = [];
         filtrosPanel.hidden = true;
@@ -1257,6 +1300,7 @@ function formatPriceStatic(value: number): string {
       construirChips();
       pintarResultados(!hasShownResults);
       hasShownResults = true;
+      cargarSparklines(rows);
     } catch (err) {
       if (seq !== requestSeq) return;
       results.innerHTML = `<p class="status error">No se pudo conectar con la base de datos. Intenta de nuevo.</p>`;
