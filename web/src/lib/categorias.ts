@@ -200,6 +200,54 @@ const PRINCIPIO_A_CATEGORIA: Record<string, string> = {
   lactulosa: "gastritis",
   trimebutina: "gastritis",
   dimenhidrinato: "gastritis",
+
+  // Respiratorio: tos, alergia, asma/EPOC y congestión. Nombres tal cual
+  // aparecen hoy en `drugs.principio_activo` (confirmado contra la base real
+  // el 2026-10-01, no adivinado) -- por eso varias combinaciones repetidas
+  // con el orden de los componentes invertido: cada cadena las publica con
+  // su propio orden y el catálogo las guarda tal cual llegan.
+  ambroxol: "respiratorio",
+  "ambroxol + dextrometorfano + clorfenamina": "respiratorio",
+  bromhexina: "respiratorio",
+  "bromuro de ipratropio": "respiratorio",
+  budesonida: "respiratorio",
+  "budesonida/formoterol": "respiratorio",
+  "formoterol/budesonida": "respiratorio",
+  cetirizina: "respiratorio",
+  "cetirizina / dextrometorfano": "respiratorio",
+  "clorfenamina + dextrometorfano": "respiratorio",
+  desloratadina: "respiratorio",
+  dextrometorfano: "respiratorio",
+  "dextrometorfano / bromexina": "respiratorio",
+  "dextrometorfano / clorfeniramina": "respiratorio",
+  "dextrometorfano / fenilefrina / guaifenesina": "respiratorio",
+  "dextrometorfano / guaifenesina / fenilefrina": "respiratorio",
+  "dextrometorfano/clorfenamina": "respiratorio",
+  "dextrometorfano/clorfeniramina": "respiratorio",
+  "dextrometorfano/hifenoxil": "respiratorio",
+  "dextrometorfano/hioscina/guaifenesina": "respiratorio",
+  fexofenadina: "respiratorio",
+  fluticasona: "respiratorio",
+  "fluticasona + salmeterol": "respiratorio",
+  "fluticasona / salmeterol": "respiratorio",
+  "fluticasona furoato": "respiratorio",
+  "fluticasona furoato / vilanterol": "respiratorio",
+  "fluticasona propionato": "respiratorio",
+  "fluticasona/salmeterol": "respiratorio",
+  ipratropio: "respiratorio",
+  "ipratropio bromuro / salbutamol": "respiratorio",
+  levocetirizina: "respiratorio",
+  loratadina: "respiratorio",
+  "loratadina + ambroxol": "respiratorio",
+  "loratadina + montelukast": "respiratorio",
+  "loratadina + pseudoefedrina": "respiratorio",
+  montelukast: "respiratorio",
+  oximetazolina: "respiratorio",
+  "pseudoefedrina / difenhidramina": "respiratorio",
+  salbutamol: "respiratorio",
+  "salmeterol / fluticasona": "respiratorio",
+  "salmeterol y fluticasona": "respiratorio",
+  "salmeterol/fluticasona": "respiratorio",
 };
 
 export type CategoriaMeta = {
@@ -221,6 +269,7 @@ export const CATEGORIAS: CategoriaMeta[] = [
   { slug: "colesterol", nombre: "Colesterol", color: "#6b3f8a", colorBg: "#ecdff1", icon: "drop" },
   { slug: "anticonceptivo", nombre: "Anticonceptivos", color: "#a8386b", colorBg: "#f4dfe9", icon: "calendar" },
   { slug: "tiroides", nombre: "Tiroides", color: "#1f7a94", colorBg: "#dcedf1", icon: "target" },
+  { slug: "respiratorio", nombre: "Respiratorio y Alergias", color: "#a8503a", colorBg: "#f3e2db", icon: "lungs" },
 ];
 
 export function categoriaDe(principioActivo: string): string | null {
