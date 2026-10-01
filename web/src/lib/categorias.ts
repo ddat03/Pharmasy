@@ -177,6 +177,11 @@ const PRINCIPIO_A_CATEGORIA: Record<string, string> = {
   linestrenol: "anticonceptivo",
   "etinilestradiol/dienogest": "anticonceptivo",
   "noretisterona enantato/estradiol valerato": "anticonceptivo",
+  // Mismo principio que "medroxiprogesterona" de arriba, pero asi aparece
+  // publicado en algunas tiendas -- PRINCIPIO_A_CATEGORIA hace match exacto
+  // de string, asi que cada variante de nombre necesita su propia entrada.
+  "acetato de medroxiprogesterona": "anticonceptivo",
+  "mesigyna (medroxiprogesterona + estrógeno)": "anticonceptivo",
   omeprazol: "gastritis",
   esomeprazol: "gastritis",
   pantoprazol: "gastritis",
@@ -248,6 +253,94 @@ const PRINCIPIO_A_CATEGORIA: Record<string, string> = {
   "salmeterol / fluticasona": "respiratorio",
   "salmeterol y fluticasona": "respiratorio",
   "salmeterol/fluticasona": "respiratorio",
+
+  // Dermatológico: antifúngicos y antibióticos tópicos, corticoides de piel,
+  // acné, caída de cabello. Se excluyen a propósito los combos de
+  // metronidazol/clindamicina + miconazol/clotrimazol: son óvulos vaginales,
+  // no cremas de piel -- van a "salud_femenina" más abajo, no acá.
+  adapaleno: "dermatologico",
+  "adapaleno + peróxido de benzoilo": "dermatologico",
+  betametasona: "dermatologico",
+  "betametasona + clioquinol": "dermatologico",
+  "betametasona + clotrimazol + gentamicina": "dermatologico",
+  "betametasona + clotrimazol + neomicina": "dermatologico",
+  "betametasona + dexametasona": "dermatologico",
+  "betametasona + gentamicina": "dermatologico",
+  "betametasona + ácido salicílico": "dermatologico",
+  clobetasol: "dermatologico",
+  "clobetasol propionato + clotrimazol": "dermatologico",
+  clotrimazol: "dermatologico",
+  "clotrimazol + betametasona": "dermatologico",
+  dexpantenol: "dermatologico",
+  hidrocortisona: "dermatologico",
+  ketoconazol: "dermatologico",
+  "lamicil (terbinafina)": "dermatologico",
+  "mebo (mezcla de beta-sitosterol, urea, aceite de hígado de bacalao y otros)": "dermatologico",
+  minoxidil: "dermatologico",
+  mupirocina: "dermatologico",
+  "mupirocina + hidrocortisona": "dermatologico",
+  terbinafina: "dermatologico",
+  "ácido fusídico + betametasona": "dermatologico",
+
+  // Salud femenina: óvulos antifúngicos/antibacterianos y antifúngicos
+  // orales para candidiasis vaginal -- el combo clásico de mostrador en
+  // Ecuador. Deliberadamente NO incluye anticonceptivos (ya tienen su
+  // propia categoría) ni "Progesterona" sola (de uso clínico más amplio,
+  // no específico de esto).
+  fluconazol: "salud_femenina",
+  "fluconazol + itraconazol": "salud_femenina",
+  "clindamicina + clotrimazol": "salud_femenina",
+  "gluconato de miconazol / metronidazol": "salud_femenina",
+  "metronidazol + clotrimazol": "salud_femenina",
+  "metronidazol + miconazol": "salud_femenina",
+  "metronidazol / clotrimazol": "salud_femenina",
+  "metronidazol / miconazol": "salud_femenina",
+  "miconazol + metronidazol": "salud_femenina",
+  "miconazol / tinidazol": "salud_femenina",
+
+  // Vitaminas y Suplementos: calcio, hierro, complejo B, vitamina C/D,
+  // magnesio, multivitamínicos. Se excluyen a propósito los antiácidos de
+  // magnesio/aluminio (son de "gastritis", no suplementos) y los combos de
+  // dolor con vitamina B (el uso principal ahí es analgésico).
+  "benfotiamina + piridoxina + cianocobalamina": "vitaminas_suplementos",
+  calcio: "vitaminas_suplementos",
+  "calcio + colecalciferol": "vitaminas_suplementos",
+  "calcio + vitamina d": "vitaminas_suplementos",
+  "calcio carbonato + vitamina d": "vitaminas_suplementos",
+  "calcio colecalciferol": "vitaminas_suplementos",
+  "calcio elemental": "vitaminas_suplementos",
+  "calcio; vitamina d3": "vitaminas_suplementos",
+  "carbonato de calcio": "vitaminas_suplementos",
+  cianocobalamina: "vitaminas_suplementos",
+  "cistina + pantenol + tiamina + paraaminobenzoico": "vitaminas_suplementos",
+  "citrato de calcio / colecalciferol / ácido fólico / hierro (sulfato ferroso)": "vitaminas_suplementos",
+  colecalciferol: "vitaminas_suplementos",
+  "complejo b": "vitaminas_suplementos",
+  "complejo b;ácido fólico": "vitaminas_suplementos",
+  "ginseng panax + multivitamínicos": "vitaminas_suplementos",
+  "gluconato de calcio": "vitaminas_suplementos",
+  hierro: "vitaminas_suplementos",
+  "hierro (carboximaltosa férrica)": "vitaminas_suplementos",
+  "hierro (sacarato férrico)": "vitaminas_suplementos",
+  "hierro (sulfato ferroso)": "vitaminas_suplementos",
+  "hierro + ácido fólico": "vitaminas_suplementos",
+  "hierro dextrano + ácido fólico + cianocobalamina": "vitaminas_suplementos",
+  "hierro elemental": "vitaminas_suplementos",
+  "hierro elemental + ácido fólico": "vitaminas_suplementos",
+  "hierro sucroso": "vitaminas_suplementos",
+  magnesio: "vitaminas_suplementos",
+  "melatonina;piridoxina": "vitaminas_suplementos",
+  "sacarato de hierro": "vitaminas_suplementos",
+  "silimarina + complejo b": "vitaminas_suplementos",
+  "silimarina + vitamina c": "vitaminas_suplementos",
+  "sulfato ferroso": "vitaminas_suplementos",
+  "sulfato ferroso + ácido fólico": "vitaminas_suplementos",
+  "vitamina c": "vitaminas_suplementos",
+  "vitamina d (colecalciferol)": "vitaminas_suplementos",
+  "vitamina d3": "vitaminas_suplementos",
+  zinc: "vitaminas_suplementos",
+  "zinc?": "vitaminas_suplementos",
+  zincovit: "vitaminas_suplementos",
 };
 
 export type CategoriaMeta = {
@@ -270,6 +363,9 @@ export const CATEGORIAS: CategoriaMeta[] = [
   { slug: "anticonceptivo", nombre: "Anticonceptivos", color: "#a8386b", colorBg: "#f4dfe9", icon: "calendar" },
   { slug: "tiroides", nombre: "Tiroides", color: "#1f7a94", colorBg: "#dcedf1", icon: "target" },
   { slug: "respiratorio", nombre: "Respiratorio y Alergias", color: "#a8503a", colorBg: "#f3e2db", icon: "lungs" },
+  { slug: "dermatologico", nombre: "Dermatológico", color: "#8a5a2d", colorBg: "#f0e5d8", icon: "patch" },
+  { slug: "salud_femenina", nombre: "Salud Femenina", color: "#8a3f6b", colorBg: "#f1dfea", icon: "venus" },
+  { slug: "vitaminas_suplementos", nombre: "Vitaminas y Suplementos", color: "#4d8a3a", colorBg: "#e3eedb", icon: "pill" },
 ];
 
 export function categoriaDe(principioActivo: string): string | null {

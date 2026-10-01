@@ -16,6 +16,17 @@ const PATHS: Record<string, string> = {
   calendar: "M4 5h16v15H4V5Z M4 9h16 M8 3v3 M16 3v3 M9 13h2 M13 13h2 M9 16h2 M13 16h2",
   target: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 16.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Z M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z",
   lungs: "M12 3v7 M12 10c-.8-3.3-3.6-3.6-5-2-1.6 1.8-1.4 8 .2 9.8 1 1.1 3 .7 3.6-1.4.4-1.4.3-4 1.2-6.4 M12 10c.8-3.3 3.6-3.6 5-2 1.6 1.8 1.4 8-.2 9.8-1 1.1-3 .7-3.6-1.4-.4-1.4-.3-4-1.2-6.4",
+  // Parche/curita: capsula diagonal con dos "agujeros" -- distingue a simple
+  // vista del icono de pildora (linea diagonal en vez de puntos).
+  patch:
+    "M4.93 4.93a6 6 0 0 1 8.48 0l5.66 5.66a6 6 0 0 1-8.48 8.48l-5.66-5.66a6 6 0 0 1 0-8.48Z M9.5 9.5h.01 M14.5 14.5h.01",
+  // Simbolo de Venus: icono estandar de salud femenina en farmacias
+  // ecuatorianas reales (Fybeca/Pharmacys lo usan igual) -- no es un
+  // estereotipo nuestro, es la convencion del rubro.
+  venus: "M12 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z M12 13v8 M9 18h6",
+  // Capsula/pildora: misma capsula diagonal que "patch" pero con la linea
+  // divisoria de una pildora real en vez de puntos.
+  pill: "M6.34 17.66a6 6 0 0 1 0-8.49l2.83-2.83a6 6 0 0 1 8.49 8.49l-2.83 2.83a6 6 0 0 1-8.49 0Z M9.17 9.17l5.66 5.66",
 };
 
 const d = PATHS[name] ?? PATHS.target;
