@@ -15,19 +15,19 @@ import { CATEGORIAS } from "../lib/categorias";
 
 <Layout
   title="Página no encontrada | Farma Precios Ecuador"
-  description="Esta página no existe o cambió de dirección. Buscá tu medicamento o volvé al inicio."
+  description="Esta página no existe o cambió de dirección. Busca tu medicamento o vuelve al inicio."
 >
   <div class="col">
     <p class="codigo">404</p>
     <h1>Esta página no existe</h1>
     <p class="prose lead">
       El enlace puede estar roto o el medicamento cambió de dirección — a veces pasa cuando fusionamos dos fichas
-      del mismo producto. Probá buscarlo de nuevo o volvé al inicio.
+      del mismo producto. Prueba buscarlo de nuevo o vuelve al inicio.
     </p>
 
     <a class="cta" href="/">Ir al buscador</a>
 
-    <p class="field-label">O explorá por categoría</p>
+    <p class="field-label">O explora por categoría</p>
     <div class="grid">
       {
         CATEGORIAS.map((c) => (
@@ -74,10 +74,16 @@ import { CATEGORIAS } from "../lib/categorias";
     border-radius: 999px;
     text-decoration: none;
     margin-bottom: 2.75rem;
-    transition: background-color 140ms var(--ease-print);
+    transition:
+      background-color 140ms var(--ease-print),
+      transform 140ms var(--ease-print);
   }
   .cta:hover {
     background: var(--stamp-dark);
+    transform: scale(1.06);
+  }
+  .cta:active {
+    transform: scale(0.97);
   }
   .field-label {
     font-family: var(--font-mono);

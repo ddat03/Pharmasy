@@ -1057,11 +1057,11 @@ const esHome = Astro.url.pathname === "/";
       transform 140ms var(--ease-print);
   }
   .ledger-cta:hover {
-    background: var(--stamp-dark);
-    transform: translateY(-1px);
+    background: var(--stamp);
+    transform: translateY(-1px) scale(1.07);
   }
   .ledger-cta:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.96);
   }
 
   /* En pantalla angosta la fila de tres columnas se rompe: `.ledger-main`

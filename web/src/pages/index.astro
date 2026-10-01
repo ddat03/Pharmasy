@@ -141,10 +141,10 @@ function formatPriceStatic(value: number): string {
         Independiente y gratis
       </span>
       <h1 class="hero-title">
-        Buscá.<br />Comparás.<br /><em>Ahorrás.</em>
+        Busca.<br />Compara.<br /><em>Ahorra.</em>
       </h1>
       <p class="hero-sub">
-        Compará el precio de {totalProductos} medicamentos en las cinco cadenas más grandes del Ecuador
+        Compara el precio de {totalProductos} medicamentos en las cinco cadenas más grandes del Ecuador
         {resumen.fecha && <> — actualizado el {formatFechaLarga(resumen.fecha)}</>}.
       </p>
     </div>
@@ -177,7 +177,7 @@ function formatPriceStatic(value: number): string {
         <input
           id="search-input"
           type="search"
-          placeholder="Buscá tu medicamento… ej. Losartán, Metformina, Paracetamol"
+          placeholder="Busca tu medicamento… ej. Losartán, Metformina, Paracetamol"
           autocomplete="off"
         />
         <button type="button" class="search-box-btn" aria-label="Comparar">Comparar</button>
@@ -509,10 +509,38 @@ function formatPriceStatic(value: number): string {
     font-size: 0.92rem;
     padding: 0 1.9rem;
     cursor: pointer;
-    transition: background-color 140ms var(--ease-print);
+    transition:
+      background-color 140ms var(--ease-print),
+      transform 140ms var(--ease-print);
   }
   .search-box-btn:hover {
     background: var(--stamp-dark);
+    transform: scale(1.06);
+  }
+  .search-box-btn:active {
+    transform: scale(0.97);
+  }
+  /* Latido suave en el botón principal mientras nadie escribió nada
+     todavía -- invita al primer click sin ser un banner. Se apaga solo (ni
+     reduced-motion ni una búsqueda en curso lo necesitan: con texto en el
+     campo o resultados en pantalla ya quedó claro qué hacer). */
+  @media (prefers-reduced-motion: no-preference) {
+    .search-box-btn {
+      animation: latido 2.6s var(--ease-print) infinite;
+    }
+    .search-box:focus-within .search-box-btn,
+    :global(body.buscando) .search-box-btn {
+      animation: none;
+    }
+  }
+  @keyframes latido {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(36, 79, 89, 0.38);
+    }
+    50% {
+      box-shadow: 0 0 0 9px rgba(36, 79, 89, 0);
+    }
   }
   .field-label {
     font-family: var(--font-mono);
@@ -758,15 +786,17 @@ function formatPriceStatic(value: number): string {
     text-decoration: none;
     transition:
       border-color 140ms var(--ease-print),
+      background-color 140ms var(--ease-print),
       color 140ms var(--ease-print),
       transform 140ms var(--ease-print),
       box-shadow 140ms var(--ease-print);
   }
   .chip:hover {
     border-color: var(--stamp);
+    background: var(--stamp-bg);
     color: var(--stamp-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(23, 22, 15, 0.08);
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 3px 8px rgba(23, 22, 15, 0.1);
   }
 
   .normalizer-note {
@@ -852,7 +882,15 @@ function formatPriceStatic(value: number): string {
     transition:
       background-color 140ms var(--ease-print),
       color 140ms var(--ease-print),
-      border-color 140ms var(--ease-print);
+      border-color 140ms var(--ease-print),
+      transform 140ms var(--ease-print),
+      box-shadow 140ms var(--ease-print);
+  }
+  .filtro-chip:hover {
+    background: var(--stamp-dark);
+    border-color: var(--stamp-dark);
+    transform: scale(1.08);
+    box-shadow: 0 3px 8px rgba(23, 22, 15, 0.16);
   }
   .filtro-chip .filtro-chip-x {
     font-size: 0.95rem;
@@ -864,6 +902,12 @@ function formatPriceStatic(value: number): string {
     color: var(--ink-muted);
     border-color: var(--ink-faint);
     border-style: dashed;
+  }
+  .filtro-chip[aria-pressed="false"]:hover {
+    background: var(--stamp-bg);
+    color: var(--stamp-dark);
+    border-color: var(--stamp);
+    border-style: solid;
   }
   .filtro-seg {
     display: inline-flex;
@@ -884,9 +928,16 @@ function formatPriceStatic(value: number): string {
       background-color 140ms var(--ease-print),
       color 140ms var(--ease-print);
   }
+  .filtro-seg button:hover:not(.is-on) {
+    background: var(--stamp-bg);
+    color: var(--stamp-dark);
+  }
   .filtro-seg button.is-on {
     background: var(--ink);
     color: var(--paper-raised);
+  }
+  .filtro-seg button.is-on:hover {
+    background: var(--stamp-dark);
   }
   .filtro-precio {
     display: inline-flex;
